@@ -16,9 +16,9 @@ Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-ragtag'
 Bundle 'tpope/vim-speeddating'
 Bundle 'tpope/vim-surround'
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+"Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 "Bundle 'ervandew/supertab'
-Bundle 'Shougo/neocomplcache'
+"Bundle 'Shougo/neocomplcache'
 " Line handling
 Bundle 'YankRing.vim'
 " External Commands
@@ -35,8 +35,12 @@ Bundle 'LStinson/TagmaTasks'
 "Bundle 'Rainbow-Parenthesis'
 " Syntax
 Bundle 'scrooloose/syntastic'
+"Bundle 'chrisbra/csv.vim' " does not work so nice in putty
 " Visual
+Bundle 'roman/golden-ratio'
 Bundle 'gregsexton/MatchTag'
+"Bundle 'altercation/vim-colors-solarized'
+"Bundle 'skammer/vim-css-color' " slow as...
 Bundle 'darookee/vim-statline'
 "Bundle 'millermedeiros/vim-statline'
 
@@ -174,7 +178,7 @@ nnoremap <silent> <Leader>o o<Esc>
 nnoremap <silent> <Leader>O O<Esc>
 
 " Split line (oposite of S-J)
-nnoremap <silent> <C-J> gEa<CR><ESC>ew
+nnoremap <silent> <leader>j gEa<CR><ESC>ew
 
 " Press ,W to remove trailing whitespace
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>:nohl<CR>
@@ -184,6 +188,7 @@ nnoremap <leader>v V`]
 
 " escape with jj
 inoremap jj <ESC>
+inoremap <leader>ll <CR><ESC>O
 
 " split window settings
 nnoremap <leader>w <C-w>v<C-w>l
@@ -207,6 +212,7 @@ nnoremap <C-u> :GundoToggle<CR>
 
 " NERDTree
 nnoremap <C-e> :NERDTreeToggle<CR>
+nnoremap <leader><C-e> :NERDTreeFind<CR>
 
 " PHP Specific bindings
 " create getter and setter of protected var
@@ -225,6 +231,7 @@ inoremap <silent> <F3> <ESC>:YRShow<cr>
 " CtrlP
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_extensions = ['line']
+let g:ctrlp_root_markers = ['templates/','engine/']
 
 " statline
 let g:statline_filename_relative = 1
@@ -232,8 +239,8 @@ let g:statline_show_filepath = 1
 let g:statline_show_savetime = 1
 
 " sparkup
-let g:sparkupExecuteMapping='<leader>s'
-let g:sparkupNextMapping='<leader>n'
+"let g:sparkupExecuteMapping='<leader>s'
+"let g:sparkupNextMapping='<leader>n'
 
 " smartword
 noremap ,w  w
@@ -246,40 +253,41 @@ map e  <Plug>(smartword-e)
 map ge  <Plug>(smartword-ge)
 
 " neocomplcache
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_smart_case = 1 " Use smartcase.
-let g:neocomplcache_enable_camel_case_completion = 1 " Use camel case completion.
-let g:neocomplcache_enable_underbar_completion = 1 " Use underbar completion.
-let g:neocomplcache_min_syntax_length = 3 " Set minimum syntax keyword length.
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-" Plugin key-mappings.
-imap <C-k>     <Plug>(neocomplcache_snippets_expand)
-smap <C-k>     <Plug>(neocomplcache_snippets_expand)
-inoremap <expr><C-g>     neocomplcache#undo_completion()
-inoremap <expr><C-l>     neocomplcache#complete_common_string()
-inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>" " <TAB>: completion.
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplcache#close_popup()
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
+"let g:neocomplcache_enable_at_startup = 1
+"let g:neocomplcache_enable_smart_case = 1 " Use smartcase.
+"let g:neocomplcache_enable_camel_case_completion = 1 " Use camel case completion.
+"let g:neocomplcache_enable_underbar_completion = 1 " Use underbar completion.
+"let g:neocomplcache_min_syntax_length = 3 " Set minimum syntax keyword length.
+"let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+"" Plugin key-mappings.
+"imap <C-k>     <Plug>(neocomplcache_snippets_expand)
+"smap <C-k>     <Plug>(neocomplcache_snippets_expand)
+"inoremap <expr><C-g>     neocomplcache#undo_completion()
+"inoremap <expr><C-l>     neocomplcache#complete_common_string()
+"inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>" " <TAB>: completion.
+"" <C-h>, <BS>: close popup and delete backword char.
+"inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+"inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+"inoremap <expr><C-y>  neocomplcache#close_popup()
+"inoremap <expr><C-e>  neocomplcache#cancel_popup()
 
 " Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTagsu
+"autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+"autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTagsu
 
-if !exists('g:neocomplcache_omni_patterns')
-    let g:neocomplcache_omni_patterns = {}
-endif
+"if !exists('g:neocomplcache_omni_patterns')
+    "let g:neocomplcache_omni_patterns = {}
+"endif
 
-let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 
 " misc filehandling stuff
-au FileType javascript nnoremap <silent> <leader>m :call JSminify()<CR>
+"au FileType javascript nnoremap <silent> <leader>m :call JSminify()<CR>
+au FileType javascript nnoremap <silent> <leader>mm :call JSminify()<CR>
 au FileType scss nnoremap <silent> <leader>m :call SCSStocss()<CR>
 au FileType scss nnoremap <silent> <leader>mm :call SCSStocssmin()<CR>
 au FileType smarty call RagtagInit()
@@ -290,6 +298,7 @@ if !exists('*SCSStocss')
     function! SCSStocss()
         if match(bufname('%'), "_" ) != 0
             let dst = substitute( bufname('%'),'.scss','.css','g' )
+            lcd %:p:h
             silent execute "w ! sass --scss --style expanded -s " . dst . " &> /dev/null"
         endif
     endfunction
@@ -300,6 +309,7 @@ if !exists('*SCSStocssmin')
         if match(bufname('%'), "_" ) != 0
             let dst = substitute( bufname('%'),'.scss','.css','g' )
             let mindst = substitute( dst, '.css', '.min.css', 'g' )
+            lcd %:p:h
             silent execute "w ! sass --scss --style compressed -s " . mindst . " &> /dev/null"
         endif
     endfunction
@@ -308,6 +318,7 @@ endif
 if !exists('*JSminify')
     function! JSminify()
         let dst = substitute( bufname('%'),'.js','.min.js','g' )
+        lcd %:p:h
         silent execute "w ! yuicompressor --type js -o " . dst . " &> /dev/null"
     endfunction
 endif
