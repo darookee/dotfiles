@@ -4,3 +4,6 @@
 [submodule "deploydots"]
 	path = deploydots
 	url = https://github.com/darookee/deploydots
+[submodule "oh-my-zsh"]
+	path = oh-my-zsh
+	url = git://github.com/darookee/oh-my-zsh.git
