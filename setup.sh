@@ -21,7 +21,7 @@ do
 
     SYMLINK="${HOME}/${PREFIX}${DOTFILE}"
     BACKUPTIME=`date +%s`
-    BACKUPDIR="${PWD}/${PREFIX}dotfiles-bak/${BACKUPTIME}"
+    BACKUPDIR="${HOME}/${PREFIX}dotfiles-bak/${BACKUPTIME}"
 
     if [ ! -d ${BACKUPDIR} ]
     then
