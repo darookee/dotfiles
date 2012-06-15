@@ -7,3 +7,9 @@
 [submodule "bin/tmux-extra"]
 	path = bin/tmux-extra
 	url = https://github.com/brandur/tmux-extra.git
+[submodule "bin/yuicompressor-git"]
+	path = bin/yuicompressor-git
+	url = https://github.com/yui/yuicompressor.git
+[submodule "bin/tree-gist"]
+	path = bin/tree-gist
+	url = git://gist.github.com/896397.git
