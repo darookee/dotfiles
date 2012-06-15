@@ -28,7 +28,7 @@ do
         mkdir -p ${BACKUPDIR}
     fi
 
-    if [ -f ${SYMLINK} ]
+    if [ -e ${SYMLINK} ]
     then
         mv -f ${SYMLINK} ${BACKUPDIR}
     fi
@@ -39,4 +39,4 @@ done
 
 vim +BundleInstall +qa\!
 
-chmod +x .bin/*
+chmod +x ${HOME}/.bin/*
