@@ -63,4 +63,4 @@ ZSH_HIGHLIGHT_PATTERNS+=('git *' 'fg=yellow')
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
 ZSH_HIGHLIGHT_STYLES[path]='underline'
 
-export PATH=$HOME/.bin:$PATH
+export PATH=$HOME/.bin.untracked:$HOME/.bin:$PATH
