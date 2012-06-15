@@ -38,3 +38,5 @@ do
 done
 
 vim +BundleInstall +qa\!
+
+chmod +x .bin/*
