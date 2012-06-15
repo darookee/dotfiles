@@ -1,0 +1,17 @@
+#!/bin/sh
+
+if which prj; then
+    DIR=`~/.bin/prj info ${1}`
+else
+    DIR=${1}
+fi
+
+if [ -d ${DIR} ]; then
+    tmux set-option default-path ${DIR}
+    tmux split-window -p 15
+    tmux split-window -p 10 -h
+    tmux select-pane -t 0
+    tmux set-option default-path ${HOME}
+    cd ${DIR}
+    vi +CtrlPMixed
+fi
