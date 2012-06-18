@@ -32,6 +32,7 @@ Bundle 'kana/vim-smartword'
 Bundle 'IndexedSearch'
 Bundle 'camelcasemotion'
 Bundle 'LStinson/TagmaTasks'
+Bundle 'AndrewRadev/splitjoin.vim'
 "Bundle 'Rainbow-Parenthesis'
 " Syntax
 Bundle 'scrooloose/syntastic'
@@ -251,6 +252,10 @@ map w  <Plug>(smartword-w)
 map b  <Plug>(smartword-b)
 map e  <Plug>(smartword-e)
 map ge  <Plug>(smartword-ge)
+
+" splitjoin
+nmap <Leader>sj :SplitjoinSplit<cr>
+nmap <Leader>sk :SplitjoinJoin<cr>
 
 " neocomplcache
 "let g:neocomplcache_enable_at_startup = 1
