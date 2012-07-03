@@ -6,7 +6,11 @@ else
     DIR=${1}
 fi
 
-if [ -d ${DIR} ]; then
+if ([ ! -d "${DIR}" ] && [ -d "${1}" ]); then
+    DIR=${1}
+fi
+
+if [ -d "${DIR}" ]; then
     tmux set-option default-path ${DIR}
     tmux split-window -p 15
     tmux split-window -p 10 -h
