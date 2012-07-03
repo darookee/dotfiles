@@ -130,6 +130,12 @@ set showcmd
 set shortmess=atI
 set cursorline
 
+" Remove menu bar
+set guioptions-=m
+
+" Remove toolbar
+set guioptions-=T
+
 " Filetypes
 au BufRead,BufNewFile {*.md,*.mkd,*.markdown} set ft=markdown
 au BufRead,BufNewFile {COMMIT_EDITMSG} set ft=gitcommit
