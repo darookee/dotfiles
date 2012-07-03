@@ -77,6 +77,13 @@ set laststatus=2
 set relativenumber
 set pastetoggle=<F10>
 
+if version >= 703
+  set undodir=~/.vim/undodir
+  set undofile
+  set undoreload=10000
+endif
+set undolevels=1000
+
 " commenting
 set fo+=o " insert on o
 set fo-=r " don't insert on enter
@@ -226,6 +233,7 @@ nnoremap <Leader>coc :s#_\(\l\)#\u\1#g<CR>
 " YankRing
 let g:yankring_replace_n_pkey='<C-M>'
 let g:yankring_manual_clipboard_check = 0
+let g:yankring_history_file = '.vim.yankring'
 nnoremap <silent> <F3> :YRShow<cr>
 inoremap <silent> <F3> <ESC>:YRShow<cr>
 
