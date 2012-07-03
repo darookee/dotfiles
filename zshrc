@@ -45,8 +45,10 @@ zstyle ':omz:load' omodule \
   'syntax-highlighting' \
   'archive' \
   'history-substring-search' \
+  'git-escape-magic' \
   'rpass'
 
+  #'gentoo' \
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
