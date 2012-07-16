@@ -33,6 +33,7 @@ Bundle 'IndexedSearch'
 Bundle 'camelcasemotion'
 Bundle 'LStinson/TagmaTasks'
 Bundle 'AndrewRadev/splitjoin.vim'
+Bundle 'jakobwesthoff/argumentrewrap'
 "Bundle 'Rainbow-Parenthesis'
 " Syntax
 Bundle 'scrooloose/syntastic'
@@ -213,6 +214,9 @@ nnoremap <C-l> <C-w>l
 
 " Ack
 "noremap <leader>a :Ack
+
+" Argumentwrap
+nnoremap <silent> <leader>aw :call argumentrewrap#RewrapArguments()<CR>
 
 " syntactics
 let g:syntastic_phpcs_disable = 1
