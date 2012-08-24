@@ -66,5 +66,5 @@ ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
 ZSH_HIGHLIGHT_STYLES[path]='underline'
 
 export PATH=$HOME/.bin.untracked:$HOME/.bin:$PATH
-export TMUXIFIER_LAYOUT_PATH="$HOME/.tmux-layouts"
+export TMUXIFIER_LAYOUT_PATH="$HOME/.tmux-layouts/"
 [[ -s "$HOME/.tmuxifier/init.sh" ]] && source "$HOME/.tmuxifier/init.sh"
