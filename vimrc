@@ -108,7 +108,8 @@ set smartindent
 set joinspaces
 
 " setup yankstack
-call yankstack#setup()
+"call yankstack#setup()
+" breaks smartword
 
 " searching
 nnoremap / /\v
