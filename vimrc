@@ -20,7 +20,8 @@ Bundle 'tpope/vim-surround'
 "Bundle 'ervandew/supertab'
 "Bundle 'Shougo/neocomplcache'
 " Line handling
-Bundle 'YankRing.vim'
+"Bundle 'YankRing.vim'
+Bundle 'maxbrunsfeld/vim-yankstack'
 " External Commands
 "Bundle 'mattn/gist-vim'
 Bundle 'tpope/vim-fugitive'
@@ -105,6 +106,9 @@ set cinoptions=:s,ps,ts,cs
 set cinwords=if,else,while,do,for,switch,case
 set smartindent
 set joinspaces
+
+" setup yankstack
+call yankstack#setup()
 
 " searching
 nnoremap / /\v
@@ -241,11 +245,15 @@ nnoremap <Leader>n :s/\['\(.\{-}\)'\]/->\1/gc<CR>
 nnoremap <Leader>coc :s#_\(\l\)#\u\1#g<CR>
 
 " YankRing
-let g:yankring_replace_n_pkey='<C-M>'
-let g:yankring_manual_clipboard_check = 0
-let g:yankring_history_file = '.vim.yankring'
-nnoremap <silent> <F3> :YRShow<cr>
-inoremap <silent> <F3> <ESC>:YRShow<cr>
+"let g:yankring_replace_n_pkey='<C-M>'
+"let g:yankring_manual_clipboard_check = 0
+"let g:yankring_history_file = '.vim.yankring'
+"nnoremap <silent> <Leader>ys :YRShow<cr>
+"inoremap <silent> <Leader>ys <ESC>:YRShow<cr>
+
+" YankStack
+nmap <C-N> <Plug>yankstack_substitute_older_paste
+nmap <C-M> <Plug>yankstack_substitute_newer_paste
 
 " CtrlP
 let g:ctrlp_cmd = 'CtrlPMixed'
