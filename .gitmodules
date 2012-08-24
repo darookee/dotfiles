@@ -13,3 +13,6 @@
 [submodule "bin/tree-gist"]
 	path = bin/tree-gist
 	url = git://gist.github.com/896397.git
+[submodule "tmuxifier"]
+	path = tmuxifier
+	url = https://github.com/jimeh/tmuxifier.git
