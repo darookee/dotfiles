@@ -42,6 +42,7 @@ zstyle ':omz:load' omodule \
   'node' \
   'rsync' \
   'tmux' \
+  'tmuxifier' \
   'syntax-highlighting' \
   'archive' \
   'history-substring-search' \
