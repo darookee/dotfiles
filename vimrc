@@ -20,7 +20,6 @@ Bundle 'tpope/vim-surround'
 "Bundle 'ervandew/supertab'
 "Bundle 'Shougo/neocomplcache'
 " Line handling
-"Bundle 'YankRing.vim'
 Bundle 'maxbrunsfeld/vim-yankstack'
 " External Commands
 "Bundle 'mattn/gist-vim'
@@ -35,15 +34,12 @@ Bundle 'camelcasemotion'
 Bundle 'LStinson/TagmaTasks'
 Bundle 'AndrewRadev/splitjoin.vim'
 Bundle 'jakobwesthoff/argumentrewrap'
-"Bundle 'Rainbow-Parenthesis'
 " Syntax
 Bundle 'scrooloose/syntastic'
 "Bundle 'chrisbra/csv.vim' " does not work so nice in putty
 " Visual
 Bundle 'roman/golden-ratio'
 Bundle 'gregsexton/MatchTag'
-"Bundle 'altercation/vim-colors-solarized'
-"Bundle 'skammer/vim-css-color' " slow as...
 Bundle 'darookee/vim-statline'
 "Bundle 'millermedeiros/vim-statline'
 
@@ -207,6 +203,8 @@ nnoremap <leader>v V`]
 
 " escape with jj
 inoremap jj <ESC>
+
+" insert new row (into brackets for example)
 inoremap <leader>ll <CR><ESC>O
 
 " split window settings
@@ -243,13 +241,6 @@ nnoremap <Leader>pc mC:s/\(\(\w\)\(\w\+\)\).*/protected $\1;\r\rpublic function 
 nnoremap <Leader>n :s/\['\(.\{-}\)'\]/->\1/gc<CR>
 " convert snake_case to camelCase
 nnoremap <Leader>coc :s#_\(\l\)#\u\1#g<CR>
-
-" YankRing
-"let g:yankring_replace_n_pkey='<C-M>'
-"let g:yankring_manual_clipboard_check = 0
-"let g:yankring_history_file = '.vim.yankring'
-"nnoremap <silent> <Leader>ys :YRShow<cr>
-"inoremap <silent> <Leader>ys <ESC>:YRShow<cr>
 
 " YankStack
 nmap <C-N> <Plug>yankstack_substitute_older_paste
