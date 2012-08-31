@@ -109,7 +109,6 @@ set joinspaces
 
 " setup yankstack
 call yankstack#setup()
-" breaks smartword
 
 " searching
 nnoremap / /\v
@@ -271,14 +270,11 @@ let g:statline_show_savetime = 1
 "let g:sparkupNextMapping='<leader>n'
 
 " smartword
-noremap ,w  w
-noremap ,b  b
-noremap ,e  e
-noremap ,ge  ge
-map w  <Plug>(smartword-w)
-map b  <Plug>(smartword-b)
-map e  <Plug>(smartword-e)
-map ge  <Plug>(smartword-ge)
+map ww  <Plug>(smartword-w)
+map bb  <Plug>(smartword-b)
+map ee  <Plug>(smartword-e)
+map gge  <Plug>(smartword-ge)
+" use camelcase default keys
 
 " splitjoin
 nmap <Leader>sj :SplitjoinSplit<cr>
