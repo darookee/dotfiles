@@ -38,7 +38,8 @@ Bundle 'jakobwesthoff/argumentrewrap'
 Bundle 'scrooloose/syntastic'
 "Bundle 'chrisbra/csv.vim' " does not work so nice in putty
 " Visual
-Bundle 'roman/golden-ratio'
+"Bundle 'roman/golden-ratio'
+Bundle 'spolu/dwm.vim'
 Bundle 'gregsexton/MatchTag'
 Bundle 'darookee/vim-statline'
 "Bundle 'millermedeiros/vim-statline'
@@ -245,6 +246,12 @@ nnoremap <Leader>coc :s#_\(\l\)#\u\1#g<CR>
 " YankStack
 nmap <C-N> <Plug>yankstack_substitute_older_paste
 nmap <C-M> <Plug>yankstack_substitute_newer_paste
+
+" dwm
+let g:dwm_master_pane_width = 95
+let g:dwm_map_keys = 0
+map <C-m>m :call DWM_Focus()<CR>
+map <C-n>n :call DWM_Full()<CR>
 
 " CtrlP
 let g:ctrlp_cmd = 'CtrlPMixed'
