@@ -6,7 +6,8 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 " File handling
-Bundle 'sjl/gundo.vim'
+"Bundle 'sjl/gundo.vim'
+Bundle 'mbbill/undotree'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
 " Autoinsert
@@ -229,7 +230,10 @@ let g:syntastic_enable_highlighting = 1
 let g:syntastic_javascript_checker = 'jslint'
 
 " Gundo
-nnoremap <C-u> :GundoToggle<CR>
+"nnoremap <C-u> :GundoToggle<CR>
+
+" Undotree
+nnoremap <C-u> :UndotreeToggle<CR>
 
 " NERDTree
 nnoremap <C-e> :NERDTreeToggle<CR>
