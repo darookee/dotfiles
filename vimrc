@@ -252,10 +252,9 @@ nmap <C-N> <Plug>yankstack_substitute_older_paste
 nmap <C-M> <Plug>yankstack_substitute_newer_paste
 
 " dwm
-let g:dwm_master_pane_width = 95
+let g:dwm_master_pane_width = 125
 let g:dwm_map_keys = 0
-map <C-m>m :call DWM_Focus()<CR>
-map <C-n>n :call DWM_Full()<CR>
+map <silent> <C-f> :call DWM_Focus()<CR>
 
 " CtrlP
 let g:ctrlp_cmd = 'CtrlPMixed'
