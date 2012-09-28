@@ -41,6 +41,7 @@ Bundle 'scrooloose/syntastic'
 " Visual
 Bundle 'roman/golden-ratio'
 Bundle 'spolu/dwm.vim'
+Bundle 'troydm/easybuffer.vim'
 Bundle 'gregsexton/MatchTag'
 Bundle 'darookee/vim-statline'
 "Bundle 'millermedeiros/vim-statline'
@@ -256,8 +257,10 @@ let g:dwm_master_pane_width = 125
 let g:dwm_map_keys = 0
 map <silent> <C-f> :call DWM_Focus()<CR>
 
+" easybuffer
+map <leader>bb :EasyBuffer<CR>
+
 " CtrlP
-let g:ctrlp_map = '<leader><c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_extensions = ['line']
 let g:ctrlp_root_markers = ['templates/','engine/']
@@ -267,7 +270,7 @@ let g:ctrlp_switch_buffer = 'EtVH'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard | grep -v -P "\.jpg$|\.png$|\.gif$"', 'find %s -type f| grep -v -P "\.jpg$|\.png$|\.gif$"']
 let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_mruf_relative = 1
-map <C-p> :CtrlPBuffer<CR>
+map <leader><C-p> :CtrlPBuffer<CR>
 
 " statline
 let g:statline_filename_relative = 1
