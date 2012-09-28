@@ -39,7 +39,7 @@ Bundle 'jakobwesthoff/argumentrewrap'
 Bundle 'scrooloose/syntastic'
 "Bundle 'chrisbra/csv.vim' " does not work so nice in putty
 " Visual
-"Bundle 'roman/golden-ratio'
+Bundle 'roman/golden-ratio'
 Bundle 'spolu/dwm.vim'
 Bundle 'gregsexton/MatchTag'
 Bundle 'darookee/vim-statline'

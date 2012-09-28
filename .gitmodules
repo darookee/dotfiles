@@ -16,3 +16,6 @@
 [submodule "tmuxifier"]
 	path = tmuxifier
 	url = https://github.com/darookee/tmuxifier.git
+[submodule "zprezto"]
+	path = zprezto
+	url = https://github.com/darookee/prezto.git
