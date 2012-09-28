@@ -229,6 +229,11 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_auto_jump = 1
 let g:syntastic_enable_highlighting = 1
 let g:syntastic_javascript_checker = 'jslint'
+let g:syntastic_mode_map = { 'mode': 'passive',
+            \ 'active_filetypes': ['ruby', 'php', 'python'],
+            \ 'passive_filetypes': [] }
+
+map <leader>sc :SyntasticCheck<CR>
 
 " Gundo
 "nnoremap <C-u> :GundoToggle<CR>
