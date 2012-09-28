@@ -256,6 +256,7 @@ nnoremap <Leader>coc :s#_\(\l\)#\u\1#g<CR>
 " YankStack
 nmap <C-N> <Plug>yankstack_substitute_older_paste
 nmap <C-M> <Plug>yankstack_substitute_newer_paste
+nnoremap <leader>p p`[v`]=
 
 " dwm
 let g:dwm_master_pane_width = 125
