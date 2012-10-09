@@ -258,13 +258,14 @@ nnoremap <C-u> :UndotreeToggle<CR>
 
 " NERDTree
 nnoremap <C-e> :NERDTreeToggle<CR>
-nnoremap <leader><C-e> :NERDTreeFind<CR>
+nnoremap <localleader><C-e> :NERDTreeFind<CR>
 
 " PHP Specific bindings
 " create getter and setter of protected var
-nnoremap <Leader>pc mC:s/\(\(\w\)\(\w\+\)\).*/protected $\1;\r\rpublic function get\u\2\3(){\r\treturn \$this->\1;\r}\r\rpublic function set\u\2\3(\$\1){\r\t\$this->\1 = \$\1;\r\treturn $this;\r}/<CR>:nohl<CR>:retab<CR>mE`CV`E==
+"nnoremap <LocalLeader>pc mC:s/\(\(\w\)\(\w\+\)\).*/protected $\1;\r\rpublic function get\u\2\3(){\r\treturn \$this->\1;\r}\r\rpublic function set\u\2\3(\$\1){\r\t\$this->\1 = \$\1;\r\treturn $this;\r}/<CR>:nohl<CR>:retab<CR>mE`CV`E==
+" using php_getset (-p, -s, -g, -b)
 " convert array to object
-nnoremap <Leader>n :s/\['\(.\{-}\)'\]/->\1/gc<CR>
+nnoremap <LocalLeader>n :s/\['\(.\{-}\)'\]/->\1/gc<CR>
 " convert snake_case to camelCase
 nnoremap <LocalLeader>cc :s#_\(\l\)#\u\1#g<CR>
 
