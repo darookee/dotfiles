@@ -8,6 +8,7 @@ Bundle 'gmarik/vundle'
 " File handling
 "Bundle 'sjl/gundo.vim'
 Bundle 'mbbill/undotree'
+" <c-u>
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
 " Autoinsert
@@ -17,13 +18,21 @@ Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-ragtag'
 Bundle 'tpope/vim-speeddating'
 Bundle 'tpope/vim-surround'
+Bundle 'EvanDotPro/php_getset.vim'
+Bundle 'darookee/phpdoc.vim'
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle 'garbas/vim-snipmate'
+Bundle 'darookee/snipmate-snippets'
 "Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 "Bundle 'ervandew/supertab'
 "Bundle 'Shougo/neocomplcache'
 " Line handling
 Bundle 'maxbrunsfeld/vim-yankstack'
+" <c-n> <c-m>
 " External Commands
-"Bundle 'mattn/gist-vim'
+Bundle 'mattn/webapi-vim'
+Bundle 'mattn/gist-vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-eunuch'
 Bundle 'kchmck/vim-coffee-script'
@@ -34,14 +43,20 @@ Bundle 'IndexedSearch'
 Bundle 'camelcasemotion'
 Bundle 'LStinson/TagmaTasks'
 Bundle 'AndrewRadev/splitjoin.vim'
+" ,sj ,sk
 Bundle 'jakobwesthoff/argumentrewrap'
 " Syntax
 Bundle 'scrooloose/syntastic'
 "Bundle 'chrisbra/csv.vim' " does not work so nice in putty
 " Visual
 Bundle 'roman/golden-ratio'
-Bundle 'spolu/dwm.vim'
+"Bundle 'spolu/dwm.vim'
+Bundle 'vim-scripts/ZoomWin'
+" <c-w>o
 Bundle 'troydm/easybuffer.vim'
+" ,bb
+Bundle 'chrisbra/NrrwRgn'
+" :<range>NR[!]
 Bundle 'gregsexton/MatchTag'
 Bundle 'darookee/vim-statline'
 "Bundle 'millermedeiros/vim-statline'
@@ -251,7 +266,13 @@ nnoremap <Leader>pc mC:s/\(\(\w\)\(\w\+\)\).*/protected $\1;\r\rpublic function 
 " convert array to object
 nnoremap <Leader>n :s/\['\(.\{-}\)'\]/->\1/gc<CR>
 " convert snake_case to camelCase
-nnoremap <Leader>coc :s#_\(\l\)#\u\1#g<CR>
+nnoremap <LocalLeader>cc :s#_\(\l\)#\u\1#g<CR>
+
+" phpDoc
+imap <C-o> :set paste<CR>:exe PhpDoc()<CR>:set nopaste<CR>i
+let g:pdv_cfg_Author = "Nils Uliczka <nils.uliczka@darookee.net>"
+let g:pdv_cfg_Copyright = "2012 Nils Uliczka"
+let g:pdv_cfg_License = ""
 
 " YankStack
 nmap <C-N> <Plug>yankstack_substitute_older_paste
@@ -259,9 +280,10 @@ nmap <C-M> <Plug>yankstack_substitute_newer_paste
 nnoremap <leader>p p`[v`]=
 
 " dwm
-let g:dwm_master_pane_width = 125
-let g:dwm_map_keys = 0
-map <silent> <C-f> :call DWM_Focus()<CR>
+"let g:dwm_master_pane_width = 125
+"let g:dwm_map_keys = 0
+"map <silent> <C-f> :call DWM_Focus()<CR>
+" <c-w>o
 
 " easybuffer
 map <leader>bb :EasyBuffer<CR>
@@ -297,6 +319,28 @@ map gge  <Plug>(smartword-ge)
 " splitjoin
 nmap <Leader>sj :SplitjoinSplit<cr>
 nmap <Leader>sk :SplitjoinJoin<cr>
+
+" php_getset
+let b:phpgetset_getterTemplate = 
+          \ "\n" .
+          \ "/**\n" .
+          \ " * Get %varname%.\n" .
+          \ "\n" .
+          \ " * @return %varname%\n" .
+          \ " */\n" .
+          \ "function %funcname%() {\n" .
+          \ "   return $this->%varname%;\n" .
+          \ "}"
+let b:phpgetset_setterTemplate = 
+          \ "\n" .
+          \ "/**\n" .
+          \ " * Set %varname%.\n" .
+          \ "\n" .
+          \ " * @return %varname%\n" .
+          \ " */\n" .
+          \ "function %funcname%($%varname%) {\n" .
+          \ "   $this->%varname% = $%varname%;\n" .
+          \ "}"
 
 " neocomplcache
 "let g:neocomplcache_enable_at_startup = 1
