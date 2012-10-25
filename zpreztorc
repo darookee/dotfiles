@@ -81,7 +81,7 @@ zstyle ':prezto:module:git:ignore' submodule 'all'
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
-zstyle ':prezto:module:prompt' theme 'minimal'
+zstyle ':prezto:module:prompt' theme 'minimo'
 
 #
 # Screen
