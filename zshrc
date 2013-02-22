@@ -5,6 +5,8 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+export PATH=$HOME/.bin.untracked:$HOME/.bin:$PATH
+
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
@@ -17,5 +19,3 @@ ZSH_HIGHLIGHT_PATTERNS+=('git rm *' 'fg=white,bold,bg=red')
 ZSH_HIGHLIGHT_PATTERNS+=('git *' 'fg=yellow')
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
 ZSH_HIGHLIGHT_STYLES[path]='underline'
-
-export PATH=$HOME/.bin.untracked:$HOME/.bin:$PATH

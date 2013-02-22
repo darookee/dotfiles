@@ -32,7 +32,7 @@ zstyle ':prezto:load' pmodule \
   'spectrum' \
   'utility' \
   'completion' \
-  'prompt' \
+  'fasd' \
   'git' \
   'rsync' \
   'archive' \
@@ -41,7 +41,8 @@ zstyle ':prezto:load' pmodule \
   'syntax-highlighting' \
   'history-substring-search' \
   'git-escape-magic' \
-  'rpass'
+  'rpass' \
+  'prompt'
 
 #
 # Editor
@@ -58,7 +59,7 @@ zstyle ':prezto:module:editor' dot-expansion 'yes'
 #
 
 # Ignore submodules when they are 'dirty', 'untracked', 'all', or 'none'.
-zstyle ':prezto:module:git:ignore' submodule 'all'
+zstyle ':prezto:module:git:ignore' submodule 'none'
 
 #
 # GNU Utility
@@ -81,7 +82,7 @@ zstyle ':prezto:module:git:ignore' submodule 'all'
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
-zstyle ':prezto:module:prompt' theme 'minimo'
+zstyle ':prezto:module:prompt' theme 'minimal'
 
 #
 # Screen
