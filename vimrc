@@ -6,8 +6,8 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 " File handling
-"Bundle 'sjl/gundo.vim'
-Bundle 'mbbill/undotree'
+Bundle 'sjl/gundo.vim'
+"Bundle 'mbbill/undotree'
 " <c-u>
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
@@ -219,6 +219,8 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>:nohl<CR>
 " ,V to highlight pasted text
 nnoremap <leader>v V`]
 
+nnoremap <silent> <localleader><c-f> :redir @a<CR>:g//<CR>:redir END<CR>:new<CR>:put! a<CR>
+
 " escape with jj
 inoremap jj <ESC>
 
@@ -226,7 +228,7 @@ inoremap jj <ESC>
 inoremap <leader>ll <CR><ESC>O
 
 " split window settings
-nnoremap <leader>w <C-w>v<C-w>l
+nnoremap <localleader>w <C-w>v<C-w>l
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -240,6 +242,7 @@ nnoremap <silent> <leader>aw :call argumentrewrap#RewrapArguments()<CR>
 
 " syntactics
 let g:syntastic_phpcs_disable = 1
+let g:syntastic_phpmd_disable = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_auto_jump = 1
 let g:syntastic_enable_highlighting = 1
@@ -251,10 +254,10 @@ let g:syntastic_mode_map = { 'mode': 'passive',
 map <leader>sc :SyntasticCheck<CR>
 
 " Gundo
-"nnoremap <C-u> :GundoToggle<CR>
+nnoremap <leader><C-u> :GundoToggle<CR>
 
 " Undotree
-nnoremap <C-u> :UndotreeToggle<CR>
+"nnoremap <C-u> :UndotreeToggle<CR>
 
 " NERDTree
 nnoremap <C-e> :NERDTreeToggle<CR>
@@ -265,9 +268,9 @@ nnoremap <localleader><C-e> :NERDTreeFind<CR>
 "nnoremap <LocalLeader>pc mC:s/\(\(\w\)\(\w\+\)\).*/protected $\1;\r\rpublic function get\u\2\3(){\r\treturn \$this->\1;\r}\r\rpublic function set\u\2\3(\$\1){\r\t\$this->\1 = \$\1;\r\treturn $this;\r}/<CR>:nohl<CR>:retab<CR>mE`CV`E==
 " using php_getset (-p, -s, -g, -b)
 " convert array to object
-nnoremap <LocalLeader>n :s/\['\(.\{-}\)'\]/->\1/gc<CR>
+nnoremap <localLeader>n :s/\['\(.\{-}\)'\]/->\1/gc<CR>
 " convert snake_case to camelCase
-nnoremap <LocalLeader>cc :s#_\(\l\)#\u\1#g<CR>
+nnoremap <localLeader>cc :s#_\(\l\)#\u\1#g<CR>
 
 " phpDoc
 imap <C-o> :set paste<CR>:exe PhpDoc()<CR>:set nopaste<CR>i
@@ -276,8 +279,8 @@ let g:pdv_cfg_Copyright = "2012 Nils Uliczka"
 let g:pdv_cfg_License = ""
 
 " YankStack
-nmap <C-N> <Plug>yankstack_substitute_older_paste
-nmap <C-M> <Plug>yankstack_substitute_newer_paste
+nmap <C-M> <Plug>yankstack_substitute_older_paste
+nmap <localleader><C-M> <Plug>yankstack_substitute_newer_paste
 nnoremap <leader>p p`[v`]=
 
 " dwm
@@ -332,6 +335,7 @@ let b:phpgetset_getterTemplate =
           \ "function %funcname%() {\n" .
           \ "   return $this->%varname%;\n" .
           \ "}"
+
 let b:phpgetset_setterTemplate = 
           \ "\n" .
           \ "/**\n" .
