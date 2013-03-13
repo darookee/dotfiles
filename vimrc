@@ -36,6 +36,7 @@ Bundle 'mattn/gist-vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-eunuch'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'airblade/vim-gitgutter'
 " Motion and search
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'kana/vim-smartword'
