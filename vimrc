@@ -242,12 +242,11 @@ nnoremap <C-l> <C-w>l
 nnoremap <silent> <leader>aw :call argumentrewrap#RewrapArguments()<CR>
 
 " syntactics
-let g:syntastic_phpcs_disable = 1
-let g:syntastic_phpmd_disable = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_auto_jump = 1
 let g:syntastic_enable_highlighting = 1
-let g:syntastic_javascript_checker = 'jslint'
+let g:syntastic_javascript_checkers=['jslint']
+let g:syntastic_php_checkers=['php']
 let g:syntastic_mode_map = { 'mode': 'passive',
             \ 'active_filetypes': ['ruby', 'php', 'python'],
             \ 'passive_filetypes': [] }
@@ -278,6 +277,9 @@ imap <C-o> :set paste<CR>:exe PhpDoc()<CR>:set nopaste<CR>i
 let g:pdv_cfg_Author = "Nils Uliczka <nils.uliczka@darookee.net>"
 let g:pdv_cfg_Copyright = "2012 Nils Uliczka"
 let g:pdv_cfg_License = ""
+
+" Gist
+let g:gist_detect_filetype = 1
 
 " YankStack
 nmap <C-M> <Plug>yankstack_substitute_older_paste
