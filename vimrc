@@ -18,6 +18,7 @@ Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-ragtag'
 Bundle 'tpope/vim-speeddating'
 Bundle 'tpope/vim-surround'
+"Bundle 'tpope/vim-endwise'
 Bundle 'EvanDotPro/php_getset.vim'
 Bundle 'darookee/phpdoc.vim'
 Bundle "MarcWeber/vim-addon-mw-utils"
@@ -44,23 +45,37 @@ Bundle 'IndexedSearch'
 Bundle 'camelcasemotion'
 Bundle 'LStinson/TagmaTasks'
 Bundle 'AndrewRadev/splitjoin.vim'
+" move in vars (PHP, js, rb)
+"Bundle 'robmiller/vim-movar'
+"Bundle 'AndrewRadev/multichange.vim';
+"Bundle 'hlissner/vim-multiedit'
 " ,sj ,sk
 Bundle 'jakobwesthoff/argumentrewrap'
 " Syntax
 Bundle 'scrooloose/syntastic'
+"
+" JavaScript Libraries
+"Bundle 'othree/javascript-libraries-syntax.vim'
+"
+"Bundle 'vim-scripts/SQLUtilities'
+"Bundle 'vim-scripts/Align'
 "Bundle 'chrisbra/csv.vim' " does not work so nice in putty
 " Visual
 Bundle 'roman/golden-ratio'
 "Bundle 'spolu/dwm.vim'
 Bundle 'vim-scripts/ZoomWin'
 " <c-w>o
-Bundle 'troydm/easybuffer.vim'
+"Bundle 'justincampbell/vim-eighties'
+"Bundle 'mitnk/thwins'
+"Bundle 'troydm/easybuffer.vim'
 " ,bb
 Bundle 'chrisbra/NrrwRgn'
 " :<range>NR[!]
 Bundle 'gregsexton/MatchTag'
 Bundle 'darookee/vim-statline'
 "Bundle 'millermedeiros/vim-statline'
+"Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+"Bundle 'altercation/vim-colors-solarized'
 
 colorscheme zellner
 
@@ -294,7 +309,12 @@ nnoremap <leader>p p`[v`]=
 " <c-w>o
 
 " easybuffer
-map <leader>bb :EasyBuffer<CR>
+"map <leader>bb :EasyBuffer<CR>
+
+"let g:eighties_enabled = 1
+"let g:eighties_minimum_width = 120
+"let g:eighties_extra_width = 0 " Increase this if you want some extra room
+"let g:eighties_compute = 1 " Disable this if you just want the minimum + extra
 
 " CtrlP
 let g:ctrlp_cmd = 'CtrlP'
