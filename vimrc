@@ -77,7 +77,10 @@ Bundle 'darookee/vim-statline'
 "Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 "Bundle 'altercation/vim-colors-solarized'
 
-colorscheme zellner
+Bundle 'mrtazz/simplenote.vim'
+
+"set background=dark
+colorscheme neon
 
 set modelines=5
 set nowritebackup
@@ -444,3 +447,10 @@ if !exists('*JSminify')
         silent execute "w ! yuicompressor --type js -o " . dst . " &> /dev/null"
     endfunction
 endif
+
+" Source simplenote vimrc {{{
+let s:simplenoterc = expand($HOME . '/.simplenoterc')
+if filereadable(s:simplenoterc)
+    exec ':so ' . s:simplenoterc
+endif
+" }}}
