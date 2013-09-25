@@ -64,7 +64,8 @@ Bundle 'scrooloose/syntastic'
 Bundle 'roman/golden-ratio'
 Bundle 'vim-scripts/ZoomWin'
 " <c-w>o
-"Bundle 'troydm/easybuffer.vim'
+"
+Bundle 'troydm/easybuffer.vim'
 " ,bb
 "
 Bundle 'chrisbra/NrrwRgn'
@@ -297,7 +298,7 @@ nmap <localleader><C-M> <Plug>yankstack_substitute_newer_paste
 nnoremap <leader>p p`[v`]=
 
 " easybuffer
-"map <leader>bb :EasyBuffer<CR>
+map <leader>bb :EasyBuffer<CR>
 
 " CtrlP
 let g:ctrlp_cmd = 'CtrlP'
