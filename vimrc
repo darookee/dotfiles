@@ -251,6 +251,12 @@ inoremap jj <ESC>
 " insert new row (into brackets for example)
 inoremap <leader>ll <CR><ESC>O
 
+" expand %% to current filepath in commandline
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+
+" highlight or don't highlight
+nmap <leader>h :set hlsearch! hlsearch? <CR>
+
 " split window settings
 nnoremap <localleader>w <C-w>v<C-w>l
 nnoremap <C-h> <C-w>h
