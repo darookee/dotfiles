@@ -71,9 +71,8 @@ Bundle 'chrisbra/NrrwRgn'
 " :<range>NR[!]
 "
 Bundle 'gregsexton/MatchTag'
+Bundle 'altercation/vim-colors-solarized'
 
-"set background=dark
-colorscheme neon
 " Source statusline vimrc {{{
 let s:statusline = expand($HOME . '/.vim/statusline.vim')
 if filereadable(s:statusline)
@@ -81,6 +80,8 @@ if filereadable(s:statusline)
 endif
 " }}}
 "
+set background=dark
+colorscheme solarized
 
 set modelines=5
 set nowritebackup
