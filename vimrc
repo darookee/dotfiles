@@ -71,10 +71,16 @@ Bundle 'chrisbra/NrrwRgn'
 " :<range>NR[!]
 "
 Bundle 'gregsexton/MatchTag'
-Bundle 'darookee/vim-statline'
 
 "set background=dark
 colorscheme neon
+" Source statusline vimrc {{{
+let s:statusline = expand($HOME . '/.vim/statusline.vim')
+if filereadable(s:statusline)
+    exec ':so ' . s:statusline
+endif
+" }}}
+"
 
 set modelines=5
 set nowritebackup
@@ -304,13 +310,6 @@ let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_mruf_relative = 1
 map <leader><C-p> :CtrlPBuffer<CR>
 
-" statline
-let g:statline_filename_relative = 1
-let g:statline_show_filepath = 1
-let g:statline_show_savetime = 1
-let g:statline_fugitive = 1
-let g:statline_show_n_buffers = 0
-let g:statline_show_charcode = 1
 " smartword
 map ww  <Plug>(smartword-w)
 map bb  <Plug>(smartword-b)
