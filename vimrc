@@ -29,6 +29,8 @@ Bundle 'tpope/vim-surround'
 Bundle 'EvanDotPro/php_getset.vim'
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
+Bundle "SirVer/ultisnips"
+Bundle 'darookee/vim-snippets'
 "
 " Line handling
 Bundle 'maxbrunsfeld/vim-yankstack'
@@ -41,6 +43,8 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-eunuch'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'airblade/vim-gitgutter'
+Bundle 'mrtazz/simplenote.vim'
+
 " Motion and search
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'kana/vim-smartword'
@@ -317,6 +321,12 @@ map gge  <Plug>(smartword-ge)
 " splitjoin
 nmap <Leader>sj :SplitjoinSplit<cr>
 nmap <Leader>sk :SplitjoinJoin<cr>
+
+" UltiSnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsListSnippets="<s-q>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " PHP Specific bindings
 " create getter and setter of protected var
