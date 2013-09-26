@@ -29,8 +29,9 @@ Bundle 'tpope/vim-surround'
 Bundle 'EvanDotPro/php_getset.vim'
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
-Bundle "SirVer/ultisnips"
-Bundle 'darookee/vim-snippets'
+Bundle "darookee/ultisnips"
+"Bundle 'MarcWeber/ultisnips'
+"Bundle 'darookee/vim-snippets'
 "
 " Line handling
 Bundle 'maxbrunsfeld/vim-yankstack'
@@ -294,9 +295,6 @@ let g:pdv_cfg_Author = "Nils Uliczka <nils.uliczka@darookee.net>"
 let g:pdv_cfg_Copyright = "2012 Nils Uliczka"
 let g:pdv_cfg_License = ""
 
-" snipmate
-let g:snips_author = "Nils Uliczka"
-
 " Gist
 let g:gist_detect_filetype = 1
 
@@ -333,9 +331,25 @@ nmap <Leader>sk :SplitjoinJoin<cr>
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsListSnippets="<s-q>"
+let g:UltiSnipsListSnippets="<right>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+let g:snips_author = "Nils Uliczka"
+
+fun! SnippetFilename(...)
+  let template = get(a:000, 0, "$1")
+  let arg2 = get(a:000, 1, "")
+
+  let basename = expand('%:t:r')
+
+  if basename == ''
+    return arg2
+  else
+    return substitute(template, '$1', basename, 'g')
+  endif
+endf
+
 
 " PHP Specific bindings
 " create getter and setter of protected var
