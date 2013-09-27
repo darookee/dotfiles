@@ -15,9 +15,11 @@ Bundle 'sjl/gundo.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
 " <c-e>
-"
+
+Bundle 'bling/vim-airline'
+
 Bundle 'editorconfig/editorconfig-vim'
-"
+
 " Autoinsert
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'Raimondi/delimitMate'
@@ -387,6 +389,101 @@ let b:phpgetset_setterTemplate =
           \ "function %funcname%($%varname%) {\n" .
           \ "   $this->%varname% = $%varname%;\n" .
           \ "}"
+
+" airline
+let g:airline#extensions#hunks#non_zero_only = 1
+let g:airline#extensions#csv#column_display = 'Name'
+
+" airline custom parts
+call airline#parts#define_function('lline', 'StatuslineLongLineWarning')
+call airline#parts#define_minwidth('lline', 100)
+
+call airline#parts#define_function('ch', 'StatuslineCurrentHighlight')
+call airline#parts#define_minwidth('ch', 120)
+
+" airline sections
+let g:airline_section_c = airline#section#create([
+            \ '%<',
+            \ 'file',
+            \ g:airline_symbols.space,
+            \ '(%{strftime("%c",getftime(expand("%:p")))})',
+            \ g:airline_symbols.space,
+            \ 'readonly'
+            \ ])
+let g:airline_section_gutter = airline#section#create([
+            \ '%=',
+            \ 'ch',
+            \ g:airline_symbols.space,
+            \ 'lline'
+            \ ])
+let g:airline_section_z = airline#section#create(
+            \ ['%3P'.g:airline_symbols.space,
+            \ '%#__accent_bold#%3l%#__restore__#/%3L:%2c']
+            \ )
+
+" functions for airline parts
+" return the syntax highlight group under the cursor ''
+function! StatuslineCurrentHighlight()
+    let name = synIDattr(synID(line('.'),col('.'),1),'name')
+    if name == ''
+        return ''
+    else
+        return '[' . name . ']'
+    endif
+endfunction
+
+"recalculate the long line warning when idle and after saving
+autocmd cursorhold,bufwritepost * unlet! b:statusline_long_line_warning
+
+"return a warning for "long lines" where "long" is either &textwidth or 80 (if
+"no &textwidth is set)
+"
+"return '' if no long lines
+"return '[#x,my,$z] if long lines are found, were x is the number of long
+"lines, y is the median length of the long lines and z is the length of the
+"longest line
+function! StatuslineLongLineWarning()
+    if !exists("b:statusline_long_line_warning")
+
+        if !&modifiable
+            let b:statusline_long_line_warning = ''
+            return b:statusline_long_line_warning
+        endif
+
+        let long_line_lens = s:LongLines()
+
+        if len(long_line_lens) > 0
+            let b:statusline_long_line_warning = "[" .
+                        \ '#' . len(long_line_lens) . "," .
+                        \ 'm' . s:Median(long_line_lens) . "," .
+                        \ '$' . max(long_line_lens) . "]"
+        else
+            let b:statusline_long_line_warning = ""
+        endif
+    endif
+    return b:statusline_long_line_warning
+endfunction
+
+"return a list containing the lengths of the long lines in this buffer
+function! s:LongLines()
+    let threshold = (&tw ? &tw : 80)
+    let spaces = repeat(" ", &ts)
+    let line_lens = map(getline(1,'$'), 'len(substitute(v:val, "\\t", spaces, "g"))')
+    return filter(line_lens, 'v:val > threshold')
+endfunction
+
+"find the median of the given array of numbers
+function! s:Median(nums)
+    let nums = sort(a:nums)
+    let l = len(nums)
+
+    if l % 2 == 1
+        let i = (l-1) / 2
+        return nums[i]
+    else
+        return (nums[l/2] + nums[(l/2)-1]) / 2
+    endif
+endfunction
 
 
 " Source simplenote vimrc {{{
