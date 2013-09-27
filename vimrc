@@ -62,6 +62,7 @@ Bundle 'jakobwesthoff/argumentrewrap'
 "
 " Syntax
 Bundle 'scrooloose/syntastic'
+Bundle 'chrisbra/csv.vim'
 "
 " Visual
 Bundle 'roman/golden-ratio'
