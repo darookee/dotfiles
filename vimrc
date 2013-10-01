@@ -402,12 +402,15 @@ call airline#parts#define_minwidth('lline', 100)
 call airline#parts#define_function('ch', 'StatuslineCurrentHighlight')
 call airline#parts#define_minwidth('ch', 120)
 
+call airline#parts#define_function('mtime', 'FileMTime')
+call airline#parts#define_minwidth('mtime', 180)
+
 " airline sections
 let g:airline_section_c = airline#section#create([
             \ '%<',
             \ 'file',
             \ g:airline_symbols.space,
-            \ '(%{strftime("%c",getftime(expand("%:p")))})',
+            \ 'mtime',
             \ g:airline_symbols.space,
             \ 'readonly'
             \ ])
@@ -418,9 +421,18 @@ let g:airline_section_gutter = airline#section#create([
             \ 'lline'
             \ ])
 let g:airline_section_z = airline#section#create(
-            \ ['%3P'.g:airline_symbols.space,
-            \ '%#__accent_bold#%3l%#__restore__#/%3L:%2c']
+            \ [
+            \ '%3P',
+            \ g:airline_symbols.space,
+            \ '%#__accent_bold#%3l%#__restore__#/%3L:%2c'
+            \ ]
             \ )
+
+" function for mtime
+function! FileMTime()
+    let file = expand("%:p")
+    return '('.strftime("%c", getftime(file)).')'
+endfunction
 
 " functions for airline parts
 " return the syntax highlight group under the cursor ''
