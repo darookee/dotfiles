@@ -177,6 +177,8 @@ set guioptions-=T
 
 " spellfile
 set spellfile=~/.vim/spell/de_local.utf-8.add
+setlocal spelllang=de
+nmap <silent> <leader>s :set spell!<CR>
 
 " Filetypes
 au BufRead,BufNewFile {*.md,*.mkd,*.markdown} set ft=markdown
