@@ -63,6 +63,9 @@ Bundle 'jakobwesthoff/argumentrewrap'
 " Syntax
 Bundle 'scrooloose/syntastic'
 Bundle 'chrisbra/csv.vim'
+Bundle 'jelera/vim-javascript-syntax'
+Bundle 'vim-scripts/JavaScript-Indent'
+
 "
 " Visual
 Bundle 'roman/golden-ratio'
@@ -185,6 +188,8 @@ au BufRead,BufNewFile *.json set ft=javascript " highlight json like javascript
 au FileType smarty call RagtagInit()
 au FileType smarty runtime! ftplugin/html.vim
 au FileType smarty set fileencoding=latin1
+au Filetype smarty exec('set dictionary=/home/user/.vim/syntax/smarty.vim')
+au Filetype smarty set complete+=k
 
 " mail filetype
 au FileType mail setlocal fo=aw
