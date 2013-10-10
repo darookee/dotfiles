@@ -37,12 +37,13 @@ zstyle ':prezto:load' pmodule \
   'rsync' \
   'archive' \
   'tmux' \
-  'tmuxifier' \
   'syntax-highlighting' \
   'history-substring-search' \
   'git-escape-magic' \
   'rpass' \
+  'pacman' \
   'gpg' \
+  'ssh' \
   'prompt'
 
 #
