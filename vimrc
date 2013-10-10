@@ -47,7 +47,6 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-eunuch'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'airblade/vim-gitgutter'
-Bundle 'mrtazz/simplenote.vim'
 
 " Motion and search
 Bundle 'Lokaltog/vim-easymotion'
