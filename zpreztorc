@@ -43,8 +43,10 @@ zstyle ':prezto:load' pmodule \
   'rpass' \
   'pacman' \
   'gpg' \
+  'urlhttp' \
   'ssh' \
   'prompt'
+
 
 #
 # Editor
@@ -84,7 +86,10 @@ zstyle ':prezto:module:git:ignore' submodule 'none'
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
-zstyle ':prezto:module:prompt' theme 'minimal'
+zstyle ':prezto:module:prompt' theme 'rookee'
+
+zstyle ':prompt:rookee' hide-user 'true'
+zstyle ':prompt:rookee:hosts:mirinda' host-color 'magenta'
 
 #
 # Screen
