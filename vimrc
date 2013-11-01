@@ -47,6 +47,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-eunuch'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'airblade/vim-gitgutter'
+Bundle 'mileszs/ack.vim'
 
 " Motion and search
 Bundle 'Lokaltog/vim-easymotion'
@@ -345,6 +346,9 @@ map bb  <Plug>(smartword-b)
 map ee  <Plug>(smartword-e)
 map gge  <Plug>(smartword-ge)
 " use camelcase default keys
+
+" ack
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " splitjoin
 nmap <Leader>sj :SplitjoinSplit<cr>
