@@ -51,6 +51,7 @@ Bundle 'mileszs/ack.vim'
 
 " Motion and search
 Bundle 'Lokaltog/vim-easymotion'
+Bundle 'justinmk/vim-sneak'
 Bundle 'kana/vim-smartword'
 Bundle 'IndexedSearch'
 Bundle 'camelcasemotion'
@@ -72,6 +73,7 @@ Bundle 'vim-scripts/JavaScript-Indent'
 Bundle 'roman/golden-ratio'
 Bundle 'vim-scripts/ZoomWin'
 " <c-w>o
+Bundle 'Valloric/MatchTagAlways'
 "
 Bundle 'troydm/easybuffer.vim'
 " ,bb
