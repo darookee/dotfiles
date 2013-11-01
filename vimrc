@@ -37,7 +37,7 @@ Bundle "darookee/ultisnips"
 "Bundle 'darookee/vim-snippets'
 "
 " Line handling
-Bundle 'maxbrunsfeld/vim-yankstack'
+" Bundle 'maxbrunsfeld/vim-yankstack'
 " <c-m> <localleader><c-m>
 "
 " External Commands
@@ -142,7 +142,7 @@ set smartindent
 set joinspaces
 
 " setup yankstack
-call yankstack#setup()
+" call yankstack#setup()
 
 " searching
 nnoremap / /\v
@@ -315,9 +315,9 @@ let g:pdv_cfg_License = ""
 let g:gist_detect_filetype = 1
 
 " YankStack
-nmap <C-M> <Plug>yankstack_substitute_older_paste
-nmap <localleader><C-M> <Plug>yankstack_substitute_newer_paste
-nnoremap <leader>p p`[v`]=
+" nmap <C-M> <Plug>yankstack_substitute_older_paste
+" nmap <localleader><C-M> <Plug>yankstack_substitute_newer_paste
+" nnoremap <leader>p p`[v`]=
 
 " easybuffer
 map <leader>bb :EasyBuffer<CR>
