@@ -67,6 +67,7 @@ Bundle 'scrooloose/syntastic'
 Bundle 'chrisbra/csv.vim'
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'vim-scripts/JavaScript-Indent'
+Bundle 'othree/xml.vim'
 
 "
 " Visual
