@@ -86,7 +86,8 @@ Bundle 'gregsexton/MatchTag'
 Bundle 'altercation/vim-colors-solarized'
 
 set background=light
-colorscheme Tomorrow-Night
+" colorscheme Tomorrow-Night
+colorscheme bubblegum
 
 set modelines=5
 set nowritebackup
@@ -135,7 +136,7 @@ set backspace=indent,eol,start " powerfull backspace
 set wrap
 set textwidth=79
 set formatoptions=qrn1
-set colorcolumn=85
+set colorcolumn=80
 
 " indentation
 set autoindent
