@@ -158,7 +158,7 @@ setlocal spelllang=de
 nmap <silent> <localleader>s :set spell!<CR>
 
 " Filetypes
-au BufRead,BufNewFile {*.md,*.mkd,*.markdown} set ft=markdown
+au BufRead,BufNewFile {*.md,*.mkd,*.markdown} set ft=ghmarkdown
 au BufRead,BufNewFile {COMMIT_EDITMSG} set ft=gitcommit
 au BufRead,BufNewFile *.json set ft=javascript " highlight json like javascript
 au BufRead,BufNewFile *.phtml set ft=phtml
@@ -230,7 +230,7 @@ nnoremap <silent> <leader>j gEa<CR><ESC>ew
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>:nohl<CR>
 
 " ,V to highlight pasted text
-nnoremap <leader>V V`]
+nnoremap gp `[v`]
 
 " redirect last search matching lines to new buffer
 nnoremap <silent> <localleader>f
@@ -500,4 +500,3 @@ let delimitMate_balance_matchpairs = 1
 let delimitMate_excluded_ft = "mail,txt"
 au FileType html let b:delimitMate_quotes = "\" '"
 au FileType phtml,html,smarty let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
-au FileType c,perl,php let b:delimitMate_eol_marker = ";"
