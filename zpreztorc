@@ -42,9 +42,9 @@ zstyle ':prezto:load' pmodule \
   'git-escape-magic' \
   'rpass' \
   'pacman' \
+  'ssh' \
   'gpg' \
   'urlhttp' \
-  'ssh' \
   'serve' \
   'prompt'
 
@@ -101,10 +101,10 @@ zstyle ':prezto:module:prompt' theme 'minimo'
 #
 
 # Enable ssh-agent forwarding.
-# zstyle ':prezto:module:ssh-agent' forwarding 'yes'
+zstyle ':prezto:module:ssh-agent' forwarding 'yes'
 
 # Set ssh-agent identities to load.
-# zstyle ':prezto:module:ssh-agent' identities 'id_rsa' 'id_rsa2' 'id_github'
+zstyle ':prezto:module:ssh-agent' identities 'id_rsa' 'id_rsa.gitolite' 'id_rsa.ssh'
 
 #
 # Syntax Highlighting
