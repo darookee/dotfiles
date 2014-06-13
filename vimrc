@@ -17,7 +17,6 @@ Bundle "kien/ctrlp.vim"
 Bundle "scrooloose/nerdtree"
 " Filebrowser
 " <c-e>
-" Bundle 'tpope/vim-vinegar'
 Bundle "dhruvasagar/vim-vinegar"
 " Use Nerdtree in current window
 
@@ -25,11 +24,9 @@ Bundle "bling/vim-airline"
 " Statusline
 
 " Autoinsert
-" Bundle 'vim-scripts/tComment'
 Bundle "scrooloose/nerdcommenter"
 " Toggle comments
 Bundle "Raimondi/delimitMate"
-" Bundle "jiangmiao/auto-pairs"
 " Autoinsert closing brackets
 Bundle "tpope/vim-ragtag"
 " HTML-Hotkeys
@@ -37,17 +34,13 @@ Bundle 'tpope/vim-speeddating'
 " In- and decrement dates
 Bundle "tpope/vim-surround"
 " ysw( -> (hallo)
-" Bundle "MarcWeber/vim-addon-mw-utils"
-" Bundle "tomtom/tlib_vim"
 Bundle "SirVer/ultisnips"
 Bundle "darookee/vim-snippets"
 " Snippets
-" Bundle 'terryma/vim-multiple-cursors'
 
 " External Commands
-" Bundle 'mattn/webapi-vim'
-" Bundle 'mattn/gist-vim'
 Bundle "tpope/vim-fugitive"
+" use git in vim
 Bundle "tpope/vim-eunuch"
 " Rename and Move files
 Bundle "airblade/vim-gitgutter"
@@ -57,9 +50,9 @@ Bundle "mileszs/ack.vim"
 
 " Motion and search
 Bundle "Lokaltog/vim-easymotion"
-"Bundle 'justinmk/vim-sneak'
-" find in upcomming text
-" Bundle 'camelcasemotion'
+" move by find
+Bundle 'camelcasemotion'
+" move by camelcase
 Bundle "IndexedSearch"
 " Display searchresultcount
 Bundle "kshenoy/vim-signature"
@@ -70,29 +63,15 @@ Bundle "AndrewRadev/splitjoin.vim"
 Bundle "jakobwesthoff/argumentrewrap"
 " Split arguments
 " ,aw
-" Bundle 'godlygeek/tabular'
-" Align on =
 Bundle "tommcdo/vim-lion"
-" Bundle 'tpope/vim-jdaddy'
-" Bundle 'gcmt/wildfire.vim'
+" Align on =
 
 " Syntax
 Bundle "scrooloose/syntastic"
 " Check syntax
 
-"Bundle 'chrisbra/csv.vim'
-" Work with CSV-Files
-
-"Bundle 'tpope/vim-markdown'
-" Markdown-syntax
-" Bundle 'othree/html5.vim' " HTML5-Syntax
 Bundle "othree/xml.vim"
 " XML-Syntax + tools
-"Bundle 'jtratner/vim-flavored-markdown'
-" Git-Markdown
-" Bundle 'othree/javascript-libraries-syntax.vim'
-" Bundle 'othree/vim-javascript-syntax'
-" Bundle 'vim-scripts/JavaScript-Indent'
 Bundle "Valloric/MatchTagAlways"
 " Display matching xml + html tags
 Bundle "sheerun/vim-polyglot"
@@ -101,9 +80,6 @@ Bundle "sheerun/vim-polyglot"
 " Visual
 Bundle "roman/golden-ratio"
 " Change windowsize on selection change
-" Bundle 'vim-scripts/ZoomWin'
-" <c-w>o
-" Bundle 'chrisbra/NrrwRgn'
 Bundle "Shougo/neocomplete.vim"
 
 Bundle "arecarn/crunch"
@@ -574,6 +550,10 @@ map <leader><leader>k <Plug>(easymotion-k)
 " AutoPairs {{{
 "let g:AutoPairsFlyMode = 1
 "let g:AutoPairsShortcutBackInsert = '<leader><BS>'
+" }}}
+" Crunch {{{
+map <unique> <localleader>cl <Plug>CrunchEvalLine
+map <unique> <localleader>cb <Plug>CrunchEvalBlock
 " }}}
 " }}}
 " Misc {{{
