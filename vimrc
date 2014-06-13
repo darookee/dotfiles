@@ -314,9 +314,6 @@ nnoremap <leader><C-e> :NERDTreeFind<CR>
 " netrw
 " let g:netrw_liststyle = 3
 " }}}
-" Gist {{{
-" let g:gist_detect_filetype = 1
-" }}}
 " CtrlP {{{
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_extensions = ['line']
@@ -483,10 +480,6 @@ if filereadable(s:simplenoterc)
     exec ':so ' . s:simplenoterc
 endif
 " }}}
-" multiple-cursors {{{
-" highlight multiple_cursors_cursor ctermfg=182 ctermbg=bg cterm=underline guifg=#D7AFd7 guibg=bg gui=underline
-" highlight multiple_cursors_visual ctermfg=bg ctermbg=182 cterm=underline guifg=bg guibg=#D7AFD7 gui=underline
-" }}}
 " delimitMAte {{{
 let delimitMate_expand_cr = 2
 let delimitMate_expand_space = 0
@@ -547,16 +540,39 @@ map <leader><leader>j <Plug>(easymotion-j)
 map <leader><leader>k <Plug>(easymotion-k)
 
 " }}}
-" AutoPairs {{{
-"let g:AutoPairsFlyMode = 1
-"let g:AutoPairsShortcutBackInsert = '<leader><BS>'
-" }}}
 " Crunch {{{
 map <unique> <localleader>cl <Plug>CrunchEvalLine
 map <unique> <localleader>cb <Plug>CrunchEvalBlock
 " }}}
 " }}}
 " Misc {{{
+" Useful from http://www.askapache.com/linux/fast-vimrc.html
+" FUNCTION - AppendModeline {{{3
+" Append modeline after last line in buffer.
+" Use substitute() instead of printf() to handle '%%s' modeline
+function! AppendModeline()
+    let l:modeline = printf(
+                \ " vim: set ft=%s ts=%d sw=%d tw=%d foldmethod=%s :",
+                \ &filetype,
+                \ &tabstop,
+                \ &shiftwidth,
+                \ &textwidth,
+                \ &foldmethod
+                \ )
+    let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
+    call append(line("$"), l:modeline)
+endfunction
+
+" FUNCTION - LastModNow {{{3
+function! LastModNow()
+    let l:updateline = printf(
+                \ ' Updated: %s by %s ',
+                \ strftime("%c"),
+                \ expand("$USER")
+                \ )
+    let l:updateline = substitute(&commentstring, "%s", l:updateline, "")
+    let @d = l:updateline
+endfunction
 
 map <silent> <localLeader>ml :call AppendModeline()<cr>
 map <silent> <localLeader>mn :call LastModNow()<cr>
