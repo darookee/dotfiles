@@ -1,90 +1,125 @@
+" vim:fdm=marker
+
+" Bundles {{{
 set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-Bundle 'gmarik/vundle'
+Bundle "gmarik/vundle"
 
 " File handling
-Bundle 'sjl/gundo.vim'
-Bundle 'kien/ctrlp.vim'
-Bundle 'scrooloose/nerdtree'
+Bundle "sjl/gundo.vim"
+" Undoviewer
+Bundle "kien/ctrlp.vim"
+" Fuzzyfinder
+Bundle "scrooloose/nerdtree"
+" Filebrowser
 " <c-e>
+" Bundle 'tpope/vim-vinegar'
+Bundle "dhruvasagar/vim-vinegar"
+" Use Nerdtree in current window
 
-Bundle 'bling/vim-airline'
+Bundle "bling/vim-airline"
+" Statusline
 
 " Autoinsert
-Bundle 'vim-scripts/tComment'
-Bundle 'Raimondi/delimitMate'
-Bundle 'tpope/vim-ragtag'
+" Bundle 'vim-scripts/tComment'
+Bundle "scrooloose/nerdcommenter"
+" Toggle comments
+Bundle "Raimondi/delimitMate"
+" Bundle "jiangmiao/auto-pairs"
+" Autoinsert closing brackets
+Bundle "tpope/vim-ragtag"
+" HTML-Hotkeys
 Bundle 'tpope/vim-speeddating'
-Bundle 'tpope/vim-surround'
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "darookee/ultisnips"
-Bundle 'terryma/vim-multiple-cursors'
+" In- and decrement dates
+Bundle "tpope/vim-surround"
+" ysw( -> (hallo)
+" Bundle "MarcWeber/vim-addon-mw-utils"
+" Bundle "tomtom/tlib_vim"
+Bundle "SirVer/ultisnips"
+Bundle "darookee/vim-snippets"
+" Snippets
+" Bundle 'terryma/vim-multiple-cursors'
 
 " External Commands
-Bundle 'mattn/webapi-vim'
-Bundle 'mattn/gist-vim'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-eunuch'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'mileszs/ack.vim'
+" Bundle 'mattn/webapi-vim'
+" Bundle 'mattn/gist-vim'
+Bundle "tpope/vim-fugitive"
+Bundle "tpope/vim-eunuch"
+" Rename and Move files
+Bundle "airblade/vim-gitgutter"
+" Display git diff signs in sign col
+Bundle "mileszs/ack.vim"
+" Use ack for filecontent finding
 
 " Motion and search
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'justinmk/vim-sneak'
-Bundle 'camelcasemotion'
-Bundle 'IndexedSearch'
-Bundle 'kshenoy/vim-signature'
-Bundle 'AndrewRadev/splitjoin.vim'
-Bundle 'jakobwesthoff/argumentrewrap'
+Bundle "Lokaltog/vim-easymotion"
+"Bundle 'justinmk/vim-sneak'
+" find in upcomming text
+" Bundle 'camelcasemotion'
+Bundle "IndexedSearch"
+" Display searchresultcount
+Bundle "kshenoy/vim-signature"
+" Use marks
+
+Bundle "AndrewRadev/splitjoin.vim"
+" Split and join lines and arguments
+Bundle "jakobwesthoff/argumentrewrap"
+" Split arguments
 " ,aw
-Bundle 'godlygeek/tabular'
+" Bundle 'godlygeek/tabular'
+" Align on =
+Bundle "tommcdo/vim-lion"
+" Bundle 'tpope/vim-jdaddy'
+" Bundle 'gcmt/wildfire.vim'
 
 " Syntax
-Bundle 'scrooloose/syntastic'
-Bundle 'chrisbra/csv.vim'
-Bundle 'tpope/vim-markdown'
-Bundle 'othree/html5.vim'
-Bundle 'othree/xml.vim'
-Bundle 'jtratner/vim-flavored-markdown'
-Bundle 'othree/javascript-libraries-syntax.vim'
-Bundle 'othree/vim-javascript-syntax'
-Bundle 'vim-scripts/JavaScript-Indent'
-Bundle 'Valloric/MatchTagAlways'
+Bundle "scrooloose/syntastic"
+" Check syntax
+
+"Bundle 'chrisbra/csv.vim'
+" Work with CSV-Files
+
+"Bundle 'tpope/vim-markdown'
+" Markdown-syntax
+" Bundle 'othree/html5.vim' " HTML5-Syntax
+Bundle "othree/xml.vim"
+" XML-Syntax + tools
+"Bundle 'jtratner/vim-flavored-markdown'
+" Git-Markdown
+" Bundle 'othree/javascript-libraries-syntax.vim'
+" Bundle 'othree/vim-javascript-syntax'
+" Bundle 'vim-scripts/JavaScript-Indent'
+Bundle "Valloric/MatchTagAlways"
+" Display matching xml + html tags
+Bundle "sheerun/vim-polyglot"
+" multiple language syntax and indent configuration
 
 " Visual
-Bundle 'roman/golden-ratio'
+Bundle "roman/golden-ratio"
+" Change windowsize on selection change
 " Bundle 'vim-scripts/ZoomWin'
 " <c-w>o
+" Bundle 'chrisbra/NrrwRgn'
+Bundle "Shougo/neocomplete.vim"
 
-set background=light
-colorscheme bubblegum
+Bundle "arecarn/crunch"
 
-set modelines=5
-set nowritebackup
-set nobackup
-set noswapfile
-set hidden
-
-" Tabstops
-set shiftwidth=4
-set tabstop=4
-set softtabstop=4
-set expandtab
-set smarttab
-
-" filehandling
+" }}}
+" Filehandling {{{
 set encoding=utf-8
 set scrolloff=3
-"set autochdir
+set modelines=5
 set autoindent
 set showmode
 set showcmd
 set hidden
+set nobackup
+set nowritebackup
+set noswapfile
 set wildmenu
 set visualbell
 set ttyfast
@@ -99,29 +134,36 @@ if version >= 703
   set undoreload=10000
 endif
 set undolevels=1000
-
-" commenting
+" }}}
+" Modemappings {{{
 set fo+=o " insert on o
 set fo-=r " don't insert on enter
 set fo-=t " don't autoreap
 set wildmode=longest,list
 set backspace=indent,eol,start " powerfull backspace
-
-" wrapping
+" }}}
+" Wrapping {{{
 set wrap
 set textwidth=79
 set formatoptions=qrn1
 set colorcolumn=80
-
-" indentation
+" }}}
+" Indentation {{{
 set autoindent
 set cindent
 set cinoptions=:s,ps,ts,cs
 set cinwords=if,else,while,do,for,switch,case
 set smartindent
 set joinspaces
-
-" searching
+" Tabstops {{{
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+set expandtab
+set smarttab
+" }}}
+" }}}
+" Searching {{{
 nnoremap / /\v
 vnoremap / /\v
 set ignorecase
@@ -134,13 +176,14 @@ nnoremap <leader><space> :noh<cr>
 nnoremap <tab> %
 vnoremap <tab> %
 
-" Syntax highlighting
+" }}}
+" Syntax highlighting {{{
 syntax on
 filetype plugin indent on
-
-" Visual settings
+" }}}
+" Visual settings {{{
 set list
-set listchars=tab:▸\ ,trail:▸,extends:>,precedes:<,eol:¬
+set listchars=trail:·,precedes:«,extends:»,eol:↲,tab:▸\ 
 set ruler
 set showcmd
 set shortmess=atI
@@ -152,45 +195,58 @@ set guioptions-=m
 " Remove toolbar
 set guioptions-=T
 
-" spellfile
+set background=light
+colorscheme bubblegum
+
+" restore position on read
+au BufReadPost * if line("'\"") > 0 &&
+            \ line("'\"") <= line("$") | execute "normal g'\"" | endif
+
+" }}}
+" Spell {{{
 set spellfile=~/.vim/spell/de_local.utf-8.add
 setlocal spelllang=de
 nmap <silent> <localleader>s :set spell!<CR>
-
-" Filetypes
+" }}}
+" Filetypes {{{
+" Markdown {{{
 au BufRead,BufNewFile {*.md,*.mkd,*.markdown} set ft=ghmarkdown
+" }}}
+" Git-Commit {{{
 au BufRead,BufNewFile {COMMIT_EDITMSG} set ft=gitcommit
-au BufRead,BufNewFile *.json set ft=javascript " highlight json like javascript
+" }}}
+" json-as-javascript {{{
+"au BufRead,BufNewFile *.json set ft=javascript " highlight json like javascript
+" }}}
+" phtml {{{
 au BufRead,BufNewFile *.phtml set ft=phtml
-
-" smarty filetype
+" }}}
+" smarty {{{
 au FileType smarty call RagtagInit()
 au FileType smarty runtime! ftplugin/html.vim
 au FileType smarty set fileencoding=latin1
 au Filetype smarty exec('set dictionary=/home/user/.vim/syntax/smarty.vim')
 au Filetype smarty set complete+=k
-
-" mail filetype
+" }}}
+" mails {{{
 au FileType mail setlocal fo=aw
 au FileType mail setlocal spell spelllang=de
-
-" iptables
+" }}}
+" Iptables {{{
 if getline(1) =~ "^# Generated by iptables-save" ||
             \ getline(1) =~ "^# Firewall configuration written by"
     setfiletype iptables
     set commentstring=#%s
     finish
 endif
-
-" restore position on read
-au BufReadPost * if line("'\"") > 0 &&
-            \ line("'\"") <= line("$") | execute "normal g'\"" | endif
-
-" remap leader
+" }}}
+" }}}
+" Keymappings {{{
+" Leader {{{
 let mapleader = ","
-let maplocalleader = "-"
-
-" disable keys
+let maplocalleader = "\\"
+" }}}
+" disable keys {{{
 inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
@@ -204,7 +260,8 @@ inoremap <left> <nop>
 inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
-
+" }}}
+"
 " remap search to center on line
 map N Nzz
 map n nzz
@@ -253,11 +310,12 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-
-" Argumentwrap
+" }}}
+" Bundle-Settings {{{
+" Argumentwrap {{{
 nnoremap <silent> <leader>aw :call argumentrewrap#RewrapArguments()<CR>
-
-" syntactics
+" }}}
+" syntactics (Check with <localleader>sc){{{
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_auto_jump = 1
 let g:syntastic_enable_highlighting = 1
@@ -268,24 +326,27 @@ let g:syntastic_mode_map = { 'mode': 'passive',
             \ 'active_filetypes': ['ruby', 'php', 'python'],
             \ 'passive_filetypes': [] }
 
-map <leader>sc :SyntasticCheck<CR>
-
-" Gundo
+map <localleader>sc :SyntasticCheck<CR>
+" }}}
+" Gundo (toggle with <localleader><C-e>){{{
 nnoremap <localleader><C-e> :GundoToggle<CR>
-
-" NERDTree
+" }}}
+" NERDTree (use - to open in current buffer, <C-e> to toggle + <leader><C-e>to open and find file) {{{
+let g:NERDTreeHijackNetrw = 1
 nnoremap <C-e> :NERDTreeToggle<CR>
 nnoremap <leader><C-e> :NERDTreeFind<CR>
-
-" Gist
-let g:gist_detect_filetype = 1
-
-" CtrlP
+" netrw
+" let g:netrw_liststyle = 3
+" }}}
+" Gist {{{
+" let g:gist_detect_filetype = 1
+" }}}
+" CtrlP {{{
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_extensions = ['line']
-let g:ctrlp_root_markers = ['templates/','engine/']
+" let g:ctrlp_root_markers = ['templates/','engine/']
 let g:ctrlp_by_filename = 1
-let g:ctrlp_max_height = 20
+let g:ctrlp_max_height = 25
 let g:ctrlp_switch_buffer = 'EtVH'
 let g:ctrlp_user_command = [
             \ '.git',
@@ -297,8 +358,8 @@ let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_mruf_relative = 1
 map <leader><C-p> :CtrlPBuffer<CR>
 " map <leader><C-t> :CtrlPTag<CR>
-
-" UltiSnips
+" }}}
+" UltiSnips {{{
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsListSnippets="<right>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
@@ -318,8 +379,8 @@ fun! SnippetFilename(...)
     return substitute(template, '$1', basename, 'g')
   endif
 endf
-
-" matchtagalways
+" }}}
+" matchtagalways {{{
 let g:mta_filetypes = {
     \ 'html' : 1,
     \ 'xhtml' : 1,
@@ -328,20 +389,24 @@ let g:mta_filetypes = {
     \ 'smarty' : 1,
     \ 'phtml' : 1,
     \}
-
-" airline
-let g:airline#extensions#hunks#non_zero_only = 1
+" }}}
+" airline {{{
 let g:airline#extensions#csv#column_display = 'Name'
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#hunks#non_zero_only = 1
+let g:airline#extensions#syntastic#enabled = 1
+
+let g:airline_powerline_fonts = 1
 
 " airline custom parts
 call airline#parts#define_function('lline', 'StatuslineLongLineWarning')
-call airline#parts#define_minwidth('lline', 100)
+call airline#parts#define_minwidth('lline', 180)
 
 call airline#parts#define_function('ch', 'StatuslineCurrentHighlight')
-call airline#parts#define_minwidth('ch', 120)
+call airline#parts#define_minwidth('ch', 170)
 
 call airline#parts#define_function('mtime', 'FileMTime')
-call airline#parts#define_minwidth('mtime', 180)
+call airline#parts#define_minwidth('mtime', 160)
 
 " airline sections
 let g:airline_section_c = airline#section#create([
@@ -406,7 +471,6 @@ function! StatuslineLongLineWarning()
         if len(long_line_lens) > 0
             let b:statusline_long_line_warning = "[" .
                         \ '#' . len(long_line_lens) . "," .
-                        \ 'm' . s:Median(long_line_lens) . "," .
                         \ '$' . max(long_line_lens) . "]"
         else
             let b:statusline_long_line_warning = ""
@@ -435,14 +499,90 @@ function! s:Median(nums)
         return (nums[l/2] + nums[(l/2)-1]) / 2
     endif
 endfunction
-
-" Source simplenote vimrc {{{
+" }}}
+" Simplenote (needs ~/.simplenoterc) {{{
+" source simplenoterc when it exists
 let s:simplenoterc = expand($HOME . '/.simplenoterc')
 if filereadable(s:simplenoterc)
     exec ':so ' . s:simplenoterc
 endif
 " }}}
+" multiple-cursors {{{
+" highlight multiple_cursors_cursor ctermfg=182 ctermbg=bg cterm=underline guifg=#D7AFd7 guibg=bg gui=underline
+" highlight multiple_cursors_visual ctermfg=bg ctermbg=182 cterm=underline guifg=bg guibg=#D7AFD7 gui=underline
+" }}}
+" delimitMAte {{{
+let delimitMate_expand_cr = 2
+let delimitMate_expand_space = 0
+let delimitMate_jump_expansion = 1
+let delimitMate_balance_matchpairs = 1
+let delimitMate_excluded_ft = "mail,txt"
+au FileType html let b:delimitMate_quotes = "\" '"
+au FileType phtml,html,smarty let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
+" }}}
+" Neocomplete {{{
 
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+endif
+
+let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"function! s:my_cr_function()
+  "return neocomplete#close_popup() . "\<CR>"
+"endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
+
+" }}}
+" easymotion {{{
+let g:EasyMotion_smartcase = 1
+
+nmap s <Plug>(easymotion-s2)
+
+map <leader><leader>j <Plug>(easymotion-j)
+map <leader><leader>k <Plug>(easymotion-k)
+
+" }}}
+" AutoPairs {{{
+"let g:AutoPairsFlyMode = 1
+"let g:AutoPairsShortcutBackInsert = '<leader><BS>'
+" }}}
+" }}}
+" Misc {{{
+
+map <silent> <localLeader>ml :call AppendModeline()<cr>
+map <silent> <localLeader>mn :call LastModNow()<cr>
+" }}}
+" Encryption {{{
+" GPG {{{
 " Transparent editing of encrypted files (from
 " http://vim.wikia.com/wiki/Encryption)
 " Transparent editing of gpg encrypted files.
@@ -474,7 +614,9 @@ augroup encrypted
     " after the file has been written.
     autocmd BufWritePost,FileWritePost *.gpg u
 augroup END
-
+"
+" }}}
+" Crypt {{{
 augroup CPT
     au!
     au BufReadPre *.cpt set bin
@@ -488,15 +630,6 @@ augroup CPT
     au BufWritePost *.cpt u
     au BufWritePost *.cpt set nobin
 augroup END
-
-" multiple-cursors
-highlight multiple_cursors_cursor ctermfg=182 ctermbg=bg cterm=underline guifg=#D7AFd7 guibg=bg gui=underline
-highlight multiple_cursors_visual ctermfg=bg ctermbg=182 cterm=underline guifg=bg guibg=#D7AFD7 gui=underline
-
-" delimitMAte
-let delimitMate_expand_cr = 2
-let delimitMate_jump_expansion = 1
-let delimitMate_balance_matchpairs = 1
-let delimitMate_excluded_ft = "mail,txt"
-au FileType html let b:delimitMate_quotes = "\" '"
-au FileType phtml,html,smarty let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
+" }}}
+" }}}
+" }}}
