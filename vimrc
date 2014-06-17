@@ -1,6 +1,6 @@
 " vim:fdm=marker
 
-" Bundles {{{
+" Plugins {{{
 set nocompatible
 filetype off
 
