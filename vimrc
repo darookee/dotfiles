@@ -5,84 +5,85 @@ set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call vundle#begin()
 
-Bundle "gmarik/vundle"
+Plugin 'gmarik/vundle'
 
 " File handling
-Bundle "sjl/gundo.vim"
+Plugin 'sjl/gundo.vim'
 " Undoviewer
-Bundle "kien/ctrlp.vim"
+Plugin 'kien/ctrlp.vim'
 " Fuzzyfinder
-Bundle "scrooloose/nerdtree"
+Plugin 'scrooloose/nerdtree'
 " Filebrowser
 " <c-e>
-Bundle "dhruvasagar/vim-vinegar"
+Plugin 'dhruvasagar/vim-vinegar'
 " Use Nerdtree in current window
 
-Bundle "bling/vim-airline"
+Plugin 'bling/vim-airline'
 " Statusline
 
 " Autoinsert
-Bundle "scrooloose/nerdcommenter"
+Plugin 'scrooloose/nerdcommenter'
 " Toggle comments
-Bundle "Raimondi/delimitMate"
+Plugin 'Raimondi/delimitMate'
 " Autoinsert closing brackets
-Bundle "tpope/vim-ragtag"
+Plugin 'tpope/vim-ragtag'
 " HTML-Hotkeys
-Bundle 'tpope/vim-speeddating'
+Plugin 'tpope/vim-speeddating'
 " In- and decrement dates
-Bundle "tpope/vim-surround"
+Plugin 'tpope/vim-surround'
 " ysw( -> (hallo)
-Bundle "SirVer/ultisnips"
-Bundle "darookee/vim-snippets"
+Plugin 'SirVer/ultisnips'
+Plugin 'darookee/vim-snippets'
 " Snippets
 
 " External Commands
-Bundle "tpope/vim-fugitive"
+Plugin 'tpope/vim-fugitive'
 " use git in vim
-Bundle "tpope/vim-eunuch"
+Plugin 'tpope/vim-eunuch'
 " Rename and Move files
-Bundle "airblade/vim-gitgutter"
+Plugin 'airblade/vim-gitgutter'
 " Display git diff signs in sign col
-Bundle "mileszs/ack.vim"
+Plugin 'mileszs/ack.vim'
 " Use ack for filecontent finding
 
 " Motion and search
-Bundle "Lokaltog/vim-easymotion"
+Plugin 'Lokaltog/vim-easymotion'
 " move by find
-Bundle 'camelcasemotion'
+Plugin 'bkad/CamelCaseMotion'
 " move by camelcase
-Bundle "IndexedSearch"
+Plugin 'IndexedSearch'
 " Display searchresultcount
-Bundle "kshenoy/vim-signature"
+Plugin 'kshenoy/vim-signature'
 " Use marks
 
-Bundle "AndrewRadev/splitjoin.vim"
+Plugin 'AndrewRadev/splitjoin.vim'
 " Split and join lines and arguments
-Bundle "jakobwesthoff/argumentrewrap"
+Plugin 'jakobwesthoff/argumentrewrap'
 " Split arguments
 " ,aw
-Bundle "tommcdo/vim-lion"
+Plugin 'tommcdo/vim-lion'
 " Align on =
 
 " Syntax
-Bundle "scrooloose/syntastic"
+Plugin 'scrooloose/syntastic'
 " Check syntax
 
-Bundle "othree/xml.vim"
+Plugin 'othree/xml.vim'
 " XML-Syntax + tools
-Bundle "Valloric/MatchTagAlways"
+Plugin 'Valloric/MatchTagAlways'
 " Display matching xml + html tags
-Bundle "sheerun/vim-polyglot"
+Plugin 'sheerun/vim-polyglot'
 " multiple language syntax and indent configuration
 
 " Visual
-Bundle "roman/golden-ratio"
+Plugin 'roman/golden-ratio'
 " Change windowsize on selection change
-Bundle "Shougo/neocomplete.vim"
+Plugin 'Shougo/neocomplete.vim'
 
-Bundle "arecarn/crunch"
+
+call vundle#end()
 
 " }}}
 " Filehandling {{{
