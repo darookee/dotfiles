@@ -1,3 +1,7 @@
 vim/bundle/*
 vim/undodir/*
-vim/spell/de_local.utf-8.add.spl
+vim/colors/*
+vim/spell/*
+vim/ftplugin/*
+gitconfig
+
