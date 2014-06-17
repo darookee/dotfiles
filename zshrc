@@ -19,3 +19,5 @@ ZSH_HIGHLIGHT_PATTERNS+=('git rm *' 'fg=white,bold,bg=red')
 ZSH_HIGHLIGHT_PATTERNS+=('git *' 'fg=yellow')
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
 ZSH_HIGHLIGHT_STYLES[path]='underline'
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
