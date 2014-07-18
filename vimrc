@@ -1,92 +1,143 @@
-" vim:fdm=marker
+" darookee vimrc
 
-" Plugins {{{
+" Vundle {{{
 set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
 
+" Vundle {{{
 Plugin 'gmarik/vundle'
-
-" File handling
+" }}}
+" File handling {{{
 Plugin 'sjl/gundo.vim'
 " Undoviewer
+
 Plugin 'kien/ctrlp.vim'
 " Fuzzyfinder
+
 Plugin 'scrooloose/nerdtree'
 " Filebrowser
 " <c-e>
+
 Plugin 'dhruvasagar/vim-vinegar'
 " Use Nerdtree in current window
 
-Plugin 'bling/vim-airline'
-" Statusline
+"Plugin 'chrisbra/CheckAttach'
+" Check for attachments in mails
 
-" Autoinsert
+" }}}
+" Statusline {{{
+Plugin 'bling/vim-airline'
+" }}}
+" Autoinsert Text {{{
 Plugin 'scrooloose/nerdcommenter'
 " Toggle comments
+
 Plugin 'Raimondi/delimitMate'
 " Autoinsert closing brackets
+
 Plugin 'tpope/vim-ragtag'
 " HTML-Hotkeys
+
 Plugin 'tpope/vim-speeddating'
 " In- and decrement dates
+
 Plugin 'tpope/vim-surround'
 " ysw( -> (hallo)
+
 Plugin 'SirVer/ultisnips'
 Plugin 'darookee/vim-snippets'
 " Snippets
 
-" External Commands
+Plugin 'Shougo/neocomplete.vim'
+" Omnicomplete
+
+Plugin 'arecarn/crunch'
+" Calculate math expressions
+
+" }}}
+" External Commands {{{
+" git {{{
 Plugin 'tpope/vim-fugitive'
 " use git in vim
-Plugin 'tpope/vim-eunuch'
-" Rename and Move files
 Plugin 'airblade/vim-gitgutter'
 " Display git diff signs in sign col
+Plugin 'idanarye/vim-merginal'
+" git branch buffer
+" }}}
+Plugin 'tpope/vim-eunuch'
+" Rename and Move files
+
 Plugin 'mileszs/ack.vim'
 " Use ack for filecontent finding
 
-" Motion and search
+" }}}
+" Motion and search {{{
 Plugin 'Lokaltog/vim-easymotion'
 " move by find
+
 Plugin 'bkad/CamelCaseMotion'
 " move by camelcase
+
 Plugin 'IndexedSearch'
 " Display searchresultcount
+
 Plugin 'kshenoy/vim-signature'
 " Use marks
 
+" }}}
+" Textformat {{{
 Plugin 'AndrewRadev/splitjoin.vim'
 " Split and join lines and arguments
+
 Plugin 'jakobwesthoff/argumentrewrap'
 " Split arguments
 " ,aw
+
 Plugin 'tommcdo/vim-lion'
 " Align on =
 
-" Syntax
+" }}}
+" Syntax {{{
 Plugin 'scrooloose/syntastic'
 " Check syntax
 
 Plugin 'othree/xml.vim'
 " XML-Syntax + tools
+
 Plugin 'Valloric/MatchTagAlways'
 " Display matching xml + html tags
-Plugin 'sheerun/vim-polyglot'
+
+"Plugin 'sheerun/vim-polyglot'
 " multiple language syntax and indent configuration
 
-" Visual
+Plugin 'chrisbra/csv.vim'
+" csv tools
+
+Plugin 'stephpy/vim-php-cs-fixer'
+" php fixer
+
+"Plugin "Chiel92/vim-autoformat"
+" Autoformat files
+
+
+" }}}
+" Visual {{{
 Plugin 'roman/golden-ratio'
 " Change windowsize on selection change
-Plugin 'Shougo/neocomplete.vim'
+" }}}
 
+let s:vimlocalpluginsrc = expand($HOME . '/.vim.local.plugins')
+if filereadable(s:vimlocalpluginsrc)
+    exec ':so ' . s:vimlocalpluginsrc
+endif
 
 call vundle#end()
 
 " }}}
-" Filehandling {{{
+" Basic settings {{{
 set encoding=utf-8
 set scrolloff=3
 set modelines=5
@@ -113,16 +164,13 @@ endif
 set undolevels=1000
 " }}}
 " Modemappings {{{
-set fo+=o " insert on o
-set fo-=r " don't insert on enter
-set fo-=t " don't autoreap
 set wildmode=longest,list
 set backspace=indent,eol,start " powerfull backspace
 " }}}
 " Wrapping {{{
 set wrap
 set textwidth=79
-set formatoptions=qrn1
+set formatoptions=n1cq
 set colorcolumn=80
 " }}}
 " Indentation {{{
@@ -149,10 +197,6 @@ set gdefault
 set incsearch
 set showmatch
 set hlsearch
-nnoremap <leader><space> :noh<cr>
-nnoremap <tab> %
-vnoremap <tab> %
-
 " }}}
 " Syntax highlighting {{{
 syntax on
@@ -206,7 +250,12 @@ au Filetype smarty exec('set dictionary=/home/user/.vim/syntax/smarty.vim')
 au Filetype smarty set complete+=k
 " }}}
 " mails {{{
-au FileType mail setlocal fo=aw
+au FileType mail NeoCompleteLock " disable neocomplete for mails
+au FileType mail setlocal nonumber
+au FileType mail setlocal formatprg=par-format\ -q\ -e
+"au FileType mail setlocal textwidth=0
+"au FileType mail setlocal wrapmargin=0
+"au FileType mail setlocal wrap
 au FileType mail setlocal spell spelllang=de
 " }}}
 " Iptables {{{
@@ -238,14 +287,14 @@ inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 " }}}
-"
-" remap search to center on line
+" remap search to center on line {{{
 map N Nzz
 map n nzz
-
-" edit and reload .vimrc
+" }}}
+" edit and reload .vimrc {{{
 nnoremap <silent> <Leader>vrc :tabnew<CR>:e ~/.vimrc<CR>
 nnoremap <silent> <Leader>rld :so ~/.vimrc<CR>
+" }}}
 
 " toggle folds with space
 nnoremap <space> za
@@ -263,7 +312,7 @@ nnoremap <silent> <leader>j gEa<CR><ESC>ew
 " Press ,W to remove trailing whitespace
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>:nohl<CR>
 
-" ,V to highlight pasted text
+"  to highlight pasted text
 nnoremap gp `[v`]
 
 " redirect last search matching lines to new buffer
@@ -272,9 +321,6 @@ nnoremap <silent> <localleader>f
 
 " escape with jj
 inoremap jj <ESC>
-
-" insert new row (into brackets for example)
-inoremap <leader>ll <CR><ESC>O
 
 " expand %% to current filepath in commandline
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
@@ -288,7 +334,7 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 " }}}
-" Bundle-Settings {{{
+" Plugin-Settings {{{
 " Argumentwrap {{{
 nnoremap <silent> <leader>aw :call argumentrewrap#RewrapArguments()<CR>
 " }}}
@@ -518,11 +564,6 @@ inoremap <expr><C-g>     neocomplete#undo_completion()
 inoremap <expr><C-l>     neocomplete#complete_common_string()
 
 " Recommended key-mappings.
-" <CR>: close popup and save indent.
-"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-"function! s:my_cr_function()
-  "return neocomplete#close_popup() . "\<CR>"
-"endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
@@ -545,10 +586,21 @@ map <leader><leader>k <Plug>(easymotion-k)
 map <unique> <localleader>cl <Plug>CrunchEvalLine
 map <unique> <localleader>cb <Plug>CrunchEvalBlock
 " }}}
+" php-cs-fixer {{{
+let g:php_cs_fixer_path = "~/.bin.untracked/php-cs-fixer" " define the path to the php-cs-fixer.phar
+let g:php_cs_fixer_level = "all"                  " which level ?
+let g:php_cs_fixer_config = "default"             " configuration
+let g:php_cs_fixer_php_path = "php"               " Path to PHP
+" If you want to define specific fixers:
+let g:php_cs_fixer_fixers_list = "-braces"
+let g:php_cs_fixer_enable_default_mapping = 1     " Enable the mapping by default (<leader>pcd)
+let g:php_cs_fixer_dry_run = 0                    " Call command with dry-run option
+let g:php_cs_fixer_verbose = 0                    " Return the output of command if 1, else an inline information.
+" }}}
 " }}}
 " Misc {{{
 " Useful from http://www.askapache.com/linux/fast-vimrc.html
-" FUNCTION - AppendModeline {{{3
+" FUNCTION - AppendModeline {{{
 " Append modeline after last line in buffer.
 " Use substitute() instead of printf() to handle '%%s' modeline
 function! AppendModeline()
@@ -563,7 +615,7 @@ function! AppendModeline()
     let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
     call append(line("$"), l:modeline)
 endfunction
-
+" }}}
 " FUNCTION - LastModNow {{{3
 function! LastModNow()
     let l:updateline = printf(
