@@ -4,128 +4,129 @@
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#begin()
+"set rtp+=~/.vim/bundle/vundle/
+"call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
 " Vundle {{{
-Plugin 'gmarik/vundle'
+Plug 'gmarik/vundle'
 " }}}
 " File handling {{{
-Plugin 'sjl/gundo.vim'
+Plug 'sjl/gundo.vim'
 " Undoviewer
 
-Plugin 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 " Fuzzyfinder
 
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 " Filebrowser
 " <c-e>
 
-Plugin 'dhruvasagar/vim-vinegar'
+Plug 'dhruvasagar/vim-vinegar'
 " Use Nerdtree in current window
 
-"Plugin 'chrisbra/CheckAttach'
+"Plug 'chrisbra/CheckAttach'
 " Check for attachments in mails
 
 " }}}
 " Statusline {{{
-Plugin 'bling/vim-airline'
+Plug 'bling/vim-airline'
 " }}}
 " Autoinsert Text {{{
-Plugin 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter'
 " Toggle comments
 
-Plugin 'Raimondi/delimitMate'
+Plug 'Raimondi/delimitMate'
 " Autoinsert closing brackets
 
-Plugin 'tpope/vim-ragtag'
+Plug 'tpope/vim-ragtag'
 " HTML-Hotkeys
 
-Plugin 'tpope/vim-speeddating'
+Plug 'tpope/vim-speeddating'
 " In- and decrement dates
 
-Plugin 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 " ysw( -> (hallo)
 
-Plugin 'SirVer/ultisnips'
-Plugin 'darookee/vim-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'darookee/vim-snippets'
 " Snippets
 
-Plugin 'Shougo/neocomplete.vim'
+Plug 'Shougo/neocomplete.vim'
 " Omnicomplete
 
-Plugin 'arecarn/crunch'
+Plug 'arecarn/crunch'
 " Calculate math expressions
 
 " }}}
 " External Commands {{{
 " git {{{
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 " use git in vim
-Plugin 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 " Display git diff signs in sign col
-Plugin 'idanarye/vim-merginal'
+Plug 'idanarye/vim-merginal'
 " git branch buffer
 " }}}
-Plugin 'tpope/vim-eunuch'
+Plug 'tpope/vim-eunuch'
 " Rename and Move files
 
-Plugin 'mileszs/ack.vim'
+Plug 'mileszs/ack.vim'
 " Use ack for filecontent finding
 
 " }}}
 " Motion and search {{{
-Plugin 'Lokaltog/vim-easymotion'
+Plug 'Lokaltog/vim-easymotion'
 " move by find
 
-Plugin 'bkad/CamelCaseMotion'
+Plug 'bkad/CamelCaseMotion'
 " move by camelcase
 
-Plugin 'IndexedSearch'
+Plug 'IndexedSearch'
 " Display searchresultcount
 
-Plugin 'kshenoy/vim-signature'
+Plug 'kshenoy/vim-signature'
 " Use marks
 
 " }}}
 " Textformat {{{
-Plugin 'AndrewRadev/splitjoin.vim'
+Plug 'AndrewRadev/splitjoin.vim'
 " Split and join lines and arguments
 
-Plugin 'jakobwesthoff/argumentrewrap'
+Plug 'jakobwesthoff/argumentrewrap'
 " Split arguments
 " ,aw
 
-Plugin 'tommcdo/vim-lion'
+Plug 'tommcdo/vim-lion'
 " Align on =
 
 " }}}
 " Syntax {{{
-Plugin 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 " Check syntax
 
-Plugin 'othree/xml.vim'
+Plug 'othree/xml.vim'
 " XML-Syntax + tools
 
-Plugin 'Valloric/MatchTagAlways'
+Plug 'Valloric/MatchTagAlways'
 " Display matching xml + html tags
 
-"Plugin 'sheerun/vim-polyglot'
+"Plug 'sheerun/vim-polyglot'
 " multiple language syntax and indent configuration
 
-Plugin 'chrisbra/csv.vim'
+Plug 'chrisbra/csv.vim'
 " csv tools
 
-Plugin 'stephpy/vim-php-cs-fixer'
+Plug 'stephpy/vim-php-cs-fixer'
 " php fixer
 
-"Plugin "Chiel92/vim-autoformat"
+"Plug "Chiel92/vim-autoformat"
 " Autoformat files
 
 
 " }}}
 " Visual {{{
-Plugin 'roman/golden-ratio'
+Plug 'roman/golden-ratio'
 " Change windowsize on selection change
 " }}}
 
@@ -134,7 +135,8 @@ if filereadable(s:vimlocalpluginsrc)
     exec ':so ' . s:vimlocalpluginsrc
 endif
 
-call vundle#end()
+"call vundle#end()
+call plug#end()
 
 " }}}
 " Basic settings {{{
@@ -682,3 +684,5 @@ augroup END
 " }}}
 " }}}
 " }}}
+
+" vim:fdm=marker

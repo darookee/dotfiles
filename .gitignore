@@ -3,5 +3,6 @@ vim/undodir/*
 vim/colors/*
 vim/spell/*
 vim/ftplugin/*
+vim/plugged/*
 gitconfig
 
