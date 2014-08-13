@@ -15,7 +15,7 @@ Plug 'gmarik/vundle'
 Plug 'sjl/gundo.vim'
 " Undoviewer
 
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 " Fuzzyfinder
 
 Plug 'scrooloose/nerdtree'
