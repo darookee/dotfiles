@@ -15,8 +15,6 @@ robbyrussell/oh-my-zsh lib/
 
 common-aliases
 git
-#ssh-agent
-#gpg-agent
 composer
 systemadmin
 sudo
@@ -29,7 +27,6 @@ zsh-users/zaw
 darookee/minimo
 darookee/zsh-functions
 
-#sorin-ionescu/prezto modules/gpg
 EOBUNDLES
 
 autoload -Uz promptinit ; promptinit
@@ -40,8 +37,10 @@ prompt minimo
 
 antigen apply
 
-start_ssh-agent
-start_gpg-agent
+if [[ -e "${HOME}/.gnupg/gpg-agent.conf" ]]; then
+    start_ssh-agent
+    start_gpg-agent
+fi
 
 PATH=$HOME/.bin.untracked:$HOME/.bin:$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
