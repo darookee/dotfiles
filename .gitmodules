@@ -1,18 +1,6 @@
-[submodule "vim/bundle/vundle"]
-	path = vim/bundle/vundle
-	url = https://github.com/gmarik/vundle.git
 [submodule "bin/tmux-extra"]
 	path = bin/tmux-extra
 	url = https://github.com/brandur/tmux-extra.git
-[submodule "bin/yuicompressor-git"]
-	path = bin/yuicompressor-git
-	url = https://github.com/yui/yuicompressor.git
-[submodule "bin/tree-gist"]
-	path = bin/tree-gist
-	url = git://gist.github.com/896397.git
-[submodule "tmuxifier"]
-	path = tmuxifier
-	url = https://github.com/darookee/tmuxifier.git
-[submodule "zprezto"]
-	path = zprezto
-	url = https://github.com/darookee/prezto.git
+[submodule "antigen"]
+	path = antigen
+	url = https://github.com/zsh-users/antigen.git
