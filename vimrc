@@ -1,6 +1,6 @@
 " darookee vimrc
 
-" Vundle {{{
+" Plug {{{
 set nocompatible
 filetype off
 

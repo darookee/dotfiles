@@ -37,6 +37,6 @@ do
     ln -fs ${PWD}/${DOTFILE} ${SYMLINK}
 done
 
-vim +BundleInstall +qa\!
+vim +PlugInstall +qa\!
 
 chmod +x ${HOME}/.bin/*
