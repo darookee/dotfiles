@@ -26,6 +26,7 @@ zsh-users/zsh-completions src
 zsh-users/zaw
 
 darookee/minimo
+darookee/zsh-functions
 EOBUNDLES
 
 # bind UP and DOWN arrow keys
@@ -51,10 +52,12 @@ ZSH_HIGHLIGHT_STYLES[path]='underline'
 autoload -Uz promptinit ; promptinit
 prompt minimo
 
+antigen apply
+
 [ -e "${ZDOTDIR:-$HOME}/.zsh/options.zsh" ] && source "${ZDOTDIR:-$HOME}/.zsh/options.zsh"
 [ -e "${ZDOTDIR:-$HOME}/.zsh/aliases.zsh" ] && source "${ZDOTDIR:-$HOME}/.zsh/aliases.zsh"
 
-antigen apply
 
 PATH=$HOME/.bin.untracked:$HOME/.bin:$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
+# vim:fdm=marker
