@@ -29,6 +29,10 @@ darookee/zsh-functions
 
 EOBUNDLES
 
+if [[ -s $HOME/.rvm/scripts/rvm ]]; then
+  antigen-bundle robbyrussell/oh-my-zsh plugins/rvm
+fi
+
 autoload -Uz promptinit ; promptinit
 prompt minimo
 
