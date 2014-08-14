@@ -130,7 +130,7 @@ Plug 'roman/golden-ratio'
 " Change windowsize on selection change
 " }}}
 
-let s:vimlocalpluginsrc = expand($HOME . '/.vim.local.plugins')
+let s:vimlocalpluginsrc = expand($HOME . '/.vim/local.plugins')
 if filereadable(s:vimlocalpluginsrc)
     exec ':so ' . s:vimlocalpluginsrc
 endif
@@ -521,13 +521,6 @@ function! s:Median(nums)
         return (nums[l/2] + nums[(l/2)-1]) / 2
     endif
 endfunction
-" }}}
-" Simplenote (needs ~/.simplenoterc) {{{
-" source simplenoterc when it exists
-let s:simplenoterc = expand($HOME . '/.simplenoterc')
-if filereadable(s:simplenoterc)
-    exec ':so ' . s:simplenoterc
-endif
 " }}}
 " delimitMAte {{{
 let delimitMate_expand_cr = 2
