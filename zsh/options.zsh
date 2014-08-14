@@ -1,4 +1,3 @@
-#
 # Sets history options and defines history aliases. {{{
 #
 
@@ -35,9 +34,6 @@ setopt HIST_BEEP                 # Beep when accessing non-existent history.
 alias history-stat="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
 
 # }}}
-
-
-#
 # Defines Rsync aliases. {{{
 #
 
@@ -59,8 +55,6 @@ if (( $+commands[rsync] )); then
 fi
 
 # }}}
-
-#
 # Completion {{{
 #
 # mostly taken from sorin-ionescu/prezto
@@ -161,6 +155,35 @@ zstyle ':completion:*:(ssh|scp|rsync):*:hosts-host' ignored-patterns '*(.|:)*' l
 zstyle ':completion:*:(ssh|scp|rsync):*:hosts-domain' ignored-patterns '<->.<->.<->.<->' '^[-[:alnum:]]##(.[-[:alnum:]]##)##' '*@*'
 zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<->.<->.<->|(|::)([[:xdigit:].]##:(#c,2))##(|%*))' '127.0.0.<->' '255.255.255.255' '::1' 'fe80::*'
 
+# }}}
+# History substring search {{{
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=cyan,fg=black'
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='fg=red'
+# bind UP and DOWN arrow keys
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+
+bindkey -M vicmd "k" history-substring-search-up
+bindkey -M vicmd "j" history-substring-search-down
+# }}}
+# Zsh Syntaxhighlight  {{{
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
+ZSH_HIGHLIGHT_PATTERNS+=('rm * -rf' 'fg=white,bold,bg=red')
+ZSH_HIGHLIGHT_PATTERNS+=('git rm *' 'fg=white,bold,bg=red')
+ZSH_HIGHLIGHT_PATTERNS+=('git*' 'fg=cyan')
+ZSH_HIGHLIGHT_STYLES[globbing]='fg=magenta'
+ZSH_HIGHLIGHT_STYLES[path]='underline'
+ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=cyan'
+ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,bold'
+ZSH_HIGHLIGHT_STYLES[alias]='fg=magenta'
+
+# }}}
+# zaw {{{
+zstyle ':filter-select:highlight' matched fg=green
+zstyle ':filter-select' max-lines 5
+zstyle ':filter-select' case-insensitive yes # enable case-insensitive 
+zstyle ':filter-select' extended-search yes # see below
 # }}}
 
 # vim:fdm=marker
