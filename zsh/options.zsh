@@ -1,17 +1,7 @@
 # Sets history options and defines history aliases. {{{
-#
-
-#
-# Variables
-#
-
 HISTFILE="${ZDOTDIR:-$HOME}/.zhistory"       # The path to the history file.
 HISTSIZE=10000                   # The maximum number of events to save in the internal history.
 SAVEHIST=10000                   # The maximum number of events to save in the history file.
-
-#
-# Options
-#
 
 setopt BANG_HIST                 # Treat the '!' character specially during expansion.
 setopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format.
@@ -25,35 +15,9 @@ setopt HIST_IGNORE_SPACE         # Do not record an event starting with a space.
 setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
 setopt HIST_VERIFY               # Do not execute immediately upon history expansion.
 setopt HIST_BEEP                 # Beep when accessing non-existent history.
-
 #
-# Aliases
-#
-
 # Lists the ten most used commands.
 alias history-stat="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
-
-# }}}
-# Defines Rsync aliases. {{{
-#
-
-if (( $+commands[rsync] )); then
-
-    #
-    # Aliases
-    #
-
-    _rsync_cmd='rsync --verbose --progress --human-readable --compress --archive --hard-links --one-file-system'
-
-    alias rsync-copy="${_rsync_cmd}"
-    alias rsync-move="${_rsync_cmd} --remove-source-files"
-    alias rsync-update="${_rsync_cmd} --update"
-    alias rsync-synchronize="${_rsync_cmd} --update --delete"
-
-    unset _rsync_cmd
-
-fi
-
 # }}}
 # Completion {{{
 #
@@ -184,6 +148,9 @@ zstyle ':filter-select:highlight' matched fg=green
 zstyle ':filter-select' max-lines 5
 zstyle ':filter-select' case-insensitive yes # enable case-insensitive 
 zstyle ':filter-select' extended-search yes # see below
+# }}}
+# ssh-agent {{{
+zstyle :plugin:ssh:load identities id_rsa id_rsa.gitolite id_rsa.git.local id_rsa.ssh
 # }}}
 
 # vim:fdm=marker

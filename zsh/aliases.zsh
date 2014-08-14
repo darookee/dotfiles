@@ -1,4 +1,3 @@
-#
 # Defines Git aliases. {{{
 #
 
@@ -175,8 +174,6 @@ if (( $+commands[git] )); then
 fi
 
 # }}}
-
-#
 # rsync aliases {{{
 #
 # taken from sorin-ionescu/prezto
@@ -195,8 +192,6 @@ if (( $+commands[rsync] )); then
 fi
 
 # }}}
-
-#
 # misc aliases {{{
 #
 # taken from sorin-ionescu/prezto

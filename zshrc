@@ -15,7 +15,8 @@ robbyrussell/oh-my-zsh lib/
 
 common-aliases
 git
-gpg-agent
+#ssh-agent
+#gpg-agent
 composer
 systemadmin
 sudo
@@ -27,6 +28,8 @@ zsh-users/zaw
 
 darookee/minimo
 darookee/zsh-functions
+
+#sorin-ionescu/prezto modules/gpg
 EOBUNDLES
 
 autoload -Uz promptinit ; promptinit
@@ -36,6 +39,9 @@ prompt minimo
 [ -e "${ZDOTDIR:-$HOME}/.zsh/aliases.zsh" ] && source "${ZDOTDIR:-$HOME}/.zsh/aliases.zsh"
 
 antigen apply
+
+start_ssh-agent
+start_gpg-agent
 
 PATH=$HOME/.bin.untracked:$HOME/.bin:$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
