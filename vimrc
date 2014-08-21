@@ -8,9 +8,6 @@ filetype off
 "call vundle#begin()
 call plug#begin('~/.vim/plugged')
 
-" Vundle {{{
-Plug 'gmarik/vundle'
-" }}}
 " File handling {{{
 Plug 'sjl/gundo.vim'
 " Undoviewer
