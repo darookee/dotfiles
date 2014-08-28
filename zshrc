@@ -24,6 +24,8 @@ zsh-users/zsh-history-substring-search
 zsh-users/zsh-completions src
 zsh-users/zaw
 
+gentoo/gentoo-zsh-completions
+
 darookee/minimo
 darookee/zsh-functions
 
