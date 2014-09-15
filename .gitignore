@@ -6,3 +6,5 @@ vim/ftplugin/*
 vim/plugged/*
 gitconfig
 
+vim/.netrwhist
+vim/tmp
