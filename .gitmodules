@@ -1,6 +1,3 @@
 [submodule "bin/tmux-extra"]
 	path = bin/tmux-extra
 	url = https://github.com/brandur/tmux-extra.git
-[submodule "antigen"]
-	path = antigen
-	url = https://github.com/zsh-users/antigen.git

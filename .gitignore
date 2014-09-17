@@ -8,3 +8,4 @@ gitconfig
 vim/autoload/plug.vim
 vim/.netrwhist
 vim/tmp
+antigen

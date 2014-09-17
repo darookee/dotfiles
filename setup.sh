@@ -1,7 +1,13 @@
 #!/bin/sh
-git submodule update --init --recursive
-
 # Thanks to Kechol (https://gist.github.com/Kechol) for this gist (https://gist.github.com/1862504)
+
+cd "$( dirname "${BASH_SOURCE[0]}" )"
+
+if [ ! -d "./antigen" ]; then
+    git clone https://github.com/zsh-users/antigen.git ./antigen
+fi
+
+git submodule update --init --recursive
 
 #symlinks
 PWD=`pwd`
@@ -37,6 +43,6 @@ do
     ln -fs ${PWD}/${DOTFILE} ${SYMLINK}
 done
 
-vim +PlugInstall +qa\!
+vim +qa\!
 
 chmod +x ${HOME}/.bin/*
