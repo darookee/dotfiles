@@ -34,6 +34,8 @@ Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
 Plug 'mattn/unite-gist'
 
+Plug 'c9s/lftp-sync.vim'
+
 Plug 'scrooloose/nerdcommenter'
 
 Plug 'tpope/vim-fugitive'
@@ -424,6 +426,9 @@ let delimitMate_excluded_ft               = "mail,txt,text"
 " vim-gist {{{
 let g:gist_detect_filetype                = 1
 let g:gist_show_private                   = 1
+" }}}
+" lftp-sync {{{
+let g:lftp_sync_no_default_mapping        = 1
 " }}}
 " easymotion {{{
 let g:EasyMotion_smartcase = 1
