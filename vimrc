@@ -237,22 +237,31 @@ endfunction
 
 " }}}
 " unite {{{
-" enable yanks!
-let g:unite_data_directory = '~/.vim/tmp/unite/'
-let g:unite_source_history_yank_enable = 1
-let g:unite_split_rule='botright'
-let g:unite_prompt = '➜ '
+let g:unite_data_directory            = '~/.vim/tmp/unite/'
+let g:unite_split_rule                ='botright'
+let g:unite_prompt                    = '➜ '
 
-let g:unite_source_grep_command = 'ack'
-let g:unite_source_grep_default_opts = '--column --no-color --no-group'
-let g:unite_source_grep_recursive_opt = ''
+if executable('ag')
+    let g:unite_source_grep_command               = 'ag'
+    let g:unite_source_grep_default_opts          = '--nocolor --nogroup -a -S'
+    let g:unite_source_grep_recursive_opt         = ''
+    let g:unite_source_grep_search_word_highlight = 1
+elseif executable('ack')
+    let g:unite_source_grep_command               = 'ack'
+    let g:unite_source_grep_default_opts          = '--no-group --no-color --column --with-filename'
+    let g:unite_source_grep_recursive_opt         = ''
+    let g:unite_source_grep_search_word_highlight = 1
+endif
 
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#source('file_rec/async','sorters','sorter_rank')
 call unite#custom#source('grep', 'matchers', 'matcher_fuzzy')
 
-autocmd FileType unite call s:unite_settings()
+augroup unite_settings
+    au!
+    au FileType unite call s:unite_settings()
+augroup END
 
 fun! s:unite_settings()
   "Don't add parens to my filters
