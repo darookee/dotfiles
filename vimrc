@@ -192,15 +192,25 @@ nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>:nohl<CR>
 " split lines (opposite of S-j)
 nnoremap <leader>j gEa<CR><ESC>
 "
-" expand %% to current filepath in commandline
-cnoremap %% <C-R>=expand('%:h').'/'<cr>
-
 " split window settings
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" toggle number and list
+nnoremap <Leader><F10> :<C-u>call Toggle_copy_source()<CR>
+
+fun! Toggle_copy_source()
+    set number!
+    set list!
+    exe "GitGutterToggle"
+endf
+" }}}
+" COMMAND {{{
+" expand %% to current filepath in commandline
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+" }}}
 " }}}
 " PluginSettings {{{
 " vim-airline {{{
