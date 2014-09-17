@@ -214,20 +214,23 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 " }}}
 " PluginSettings {{{
 " vim-airline {{{
-let g:airline#extensions#csv#column_display = 'Name'
-let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#csv#column_display  = 'Name'
+let g:airline#extensions#branch#enabled      = 1
 let g:airline#extensions#hunks#non_zero_only = 1
-let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#syntastic#enabled   = 1
 
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts                = 1
 
-call airline#parts#define_function('mtime', 'FileMTime')
+" Display File-Modification-Time
+call airline#parts#define_function('mtime', 'Airline_FileMTime')
 call airline#parts#define_minwidth('mtime', 160)
 
-let g:airline_section_c = airline#section#create(['%<', 'file', g:airline_symbols.space, 'mtime', g:airline_symbols.space, 'readonly'])
+let g:airline_section_c = airline#section#create(['%<', 'file',
+            \ g:airline_symbols.space, 'mtime', g:airline_symbols.space,
+            \ 'readonly'])
 
 " function for mtime
-function! FileMTime()
+function! Airline_FileMTime()
     let file = expand("%:p")
     return '('.strftime("%c", getftime(file)).')'
 endfunction
