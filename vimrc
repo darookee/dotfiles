@@ -8,6 +8,8 @@ if has('vim_starting') " Do stuff on startup {{{
         echo "Installing vim-plug\n"
         silent execute '!mkdir -p ~/.vim/autoload'
         silent execute '!curl -fLo ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+        source expand('~/.vim/autoload/plug.vim')
+        execute 'PlugInstall!'
     endif
 " }}}
 endif
