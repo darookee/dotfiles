@@ -27,27 +27,37 @@ Plug 'scrooloose/syntastic'
 Plug 'SirVer/ultisnips'
 Plug 'darookee/vim-snippets'
 
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-ragtag'
-Plug 'screooloose/nerdcommenter'
-
-Plug 'airblade/vim-gitgutter'
-
 Plug 'Raimondi/delimitMate'
 
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
 Plug 'mattn/unite-gist'
 
-Plug 'tommcdo/vim-lion'
-Plug 'AndrewRadev/splitjoin.vim'
+Plug 'scrooloose/nerdcommenter'
 
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-ragtag'
+
+Plug 'airblade/vim-gitgutter'
 Plug 'IndexedSearch'
 Plug 'roman/golden-ratio'
 
-Plug 'tsukkee/unite-help'
+Plug 'Lokaltog/vim-easymotion'
+
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'tommcdo/vim-lion'
+
+
+Plug 'tpope/vim-git'
+Plug 'pangloss/vim-javascript'
+Plug 'leshill/vim-json'
+Plug 'StanAngeloff/php.vim'
+Plug 'acustodioo/vim-tmux'
+Plug 'chrisbra/Colorizer'
+
+
 
 let s:vimlocalpluginsrc = expand($HOME . '/.vim/local.plugins')
 if filereadable(s:vimlocalpluginsrc)
@@ -264,48 +274,55 @@ augroup unite_settings
 augroup END
 
 fun! s:unite_settings()
-  "Don't add parens to my filters
-  let b:delimitMate_autoclose = 0
+    let b:delimitMate_autoclose = 0
 
-  "Keymaps inside the unite split
-  nmap <buffer> <ESC> <Plug>(unite_exit)
-  nmap <buffer> <nowait> <C-c> <Plug>(unite_exit)
-  imap <buffer> <nowait> <C-c> <Plug>(unite_exit)
+    "Keymaps inside the unite split
+    nmap <buffer> <ESC> <Plug>(unite_exit)
+    nmap <buffer> <nowait> <C-c> <Plug>(unite_exit)
+    imap <buffer> <nowait> <C-c> <Plug>(unite_exit)
 
-  imap <buffer> jj <Plug>(unite_insert_leave)
+    nmap <buffer> <C-j> <Plug>(unite_select_next_line)
+    nmap <buffer> <C-k> <Plug>(unite_select_previous_line)
+    imap <buffer> <C-j> <Plug>(unite_select_next_line)
+    imap <buffer> <C-k> <Plug>(unite_select_previous_line)
 
-  nmap <buffer> <C-j> <Plug>(unite_select_next_line)
-  nmap <buffer> <C-k> <Plug>(unite_select_previous_line)
-  imap <buffer> <C-j> <Plug>(unite_select_next_line)
-  imap <buffer> <C-k> <Plug>(unite_select_previous_line)
+    nmap <silent><buffer><expr> <C-x> unite#do_action('split')
+    nmap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
+    imap <silent><buffer><expr> <C-x> unite#do_action('split')
+    imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
 
-  nmap <silent><buffer><expr> <C-x> unite#do_action('split')
-  nmap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
-  imap <silent><buffer><expr> <C-x> unite#do_action('split')
-  imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
+    imap <buffer> jj <Plug>(unite_insert_leave)
+endf
+
+nnoremap <C-P> :<C-u>Unite -buffer-name=files -start-insert buffer file_rec/async:! file/new<CR>
+nnoremap <silent> _b :<C-u>Unite -buffer-name=files -start-insert -quick-match buffer<CR>
+nnoremap <silent> _a :<C-u>Unite -start-insert grep:.<CR>
+nnoremap _A :<C-u>Unite -start-insert grep:
+nnoremap <silent> _s :<C-u>Unite -start-insert ultisnips<CR>
+" }}}
+
+
+
 
 endf
 
-nnoremap - :Unite -no-split directory file file/new directory/new<CR>
-nnoremap <C-P> :<C-u>Unite -buffer-name=files -start-insert buffer file_rec/git file_rec/async:! file/new line<CR>
-nnoremap <Leader><C-a> :<C-u>Unite -start-insert grep:.<CR>
-nnoremap <Leader><C-y> :<C-u>Unite history/yank<CR>
-nnoremap <Leader><Tab> :<C-u>Unite ultisnips<CR>
 " }}}
 " NeoComplete {{{
 "
 " Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_at_startup                 = 1
+let g:neocomplete#enable_omni_fallback              = 1
 " Use smartcase.
-let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#enable_smart_case                 = 1
 " Set minimum syntax keyword length.
 let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+let g:neocomplete#lock_buffer_name_pattern          = '\*ku\*'
 
 " Define keyword.
 if !exists('g:neocomplete#keyword_patterns')
     let g:neocomplete#keyword_patterns = {}
 endif
+
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
 " Enable heavy omni completion.
@@ -316,50 +333,53 @@ endif
 let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 
 " Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
+inoremap <expr><C-g> neocomplete#undo_completion()
+inoremap <expr><C-l> neocomplete#complete_common_string()
 
-" Recommended key-mappings.
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
+inoremap <expr><C-y> neocomplete#close_popup()
+inoremap <expr><C-e> neocomplete#cancel_popup()
+
+augroup neocomplete_lock
+    au!
+    au FileType text NeoCompleteLock
+    au FileType mail NeoCompleteLock
+augroup END
 
 " }}}
 " Syntastics {{{
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_auto_jump = 1
-let g:syntastic_enable_highlighting = 1
-let g:syntastic_enable_signs = 1
-let g:syntastic_javascript_checkers=['jslint']
-let g:syntastic_php_checkers=['php']
-let g:syntastic_mode_map = { 'mode': 'passive',
+let g:syntastic_auto_loc_list        = 1
+let g:syntastic_auto_jump            = 1
+let g:syntastic_enable_highlighting  = 1
+let g:syntastic_enable_signs         = 1
+let g:syntastic_javascript_checkers  = ['jslint']
+let g:syntastic_php_checkers         = ['php']
+let g:syntastic_mode_map             = { 'mode': 'passive',
             \ 'active_filetypes': ['ruby', 'php', 'python'],
             \ 'passive_filetypes': [] }
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_style_error_symbol = '✠'
-let g:syntastic_warning_symbol = '∆'
+let g:syntastic_error_symbol         = '✗'
+let g:syntastic_style_error_symbol   = '✠'
+let g:syntastic_warning_symbol       = '∆'
 let g:syntastic_style_warning_symbol = '≈'
 
-map <localleader>sc :SyntasticCheck<CR>
+map <LocalLeader>sc :SyntasticCheck<CR>
 
 " }}}
 " UltiSnips {{{
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsListSnippets="<right>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsExpandTrigger              = "<tab>"
+let g:UltiSnipsListSnippets               = "<right>"
+let g:UltiSnipsJumpForwardTrigger         = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger        = "<s-tab>"
 
-let g:snips_author = "Nils Uliczka"
+let g:snips_author                        = "Nils Uliczka"
 
 fun! SnippetFilename(...)
-    let template = get(a:000, 0, "$1")
-    let arg2 = get(a:000, 1, "")
+    let template                          = get(a:000, 0, "$1")
+    let arg2                              = get(a:000, 1, "")
 
-    let basename = expand('%:t:r')
+    let basename                          = expand('%:t:r')
 
     if basename == ''
         return arg2
@@ -370,15 +390,51 @@ endf
 
 " }}}
 " delimitMate {{{
-let delimitMate_expand_cr = 2
-let delimitMate_expand_space = 0
-let delimitMate_jump_expansion = 1
-let delimitMate_balance_matchpairs = 1
-let delimitMate_excluded_ft = "mail,txt"
+let delimitMate_expand_cr                 = 2
+let delimitMate_expand_space              = 0
+let delimitMate_jump_expansion            = 1
+let delimitMate_balance_matchpairs        = 1
+let delimitMate_excluded_ft               = "mail,txt,text"
 " }}}
 " vim-gist {{{
-let g:gist_detect_filetype = 1
-let g:gist_show_private = 1
+let g:gist_detect_filetype                = 1
+let g:gist_show_private                   = 1
+" }}}
+" easymotion {{{
+let g:EasyMotion_smartcase = 1
+
+nmap s <Plug>(easymotion-s2)
+nmap t <Plug>(eatymotion-t2)
+
+map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+
+let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
+
+" }}}
+" Polyglott and other filetype plugins {{{
+
+" PHP Syntax
+" highlight docblock
+function! PhpSyntaxOverride()
+    hi! def link phpDocTags  phpDefine
+    hi! def link phpDocParam phpType
+endfunction
+
+augroup syntaxCommands
+    au!
+    au FileType php call PhpSyntaxOverride()
+    au BufNewFile,BufReadPost *.md set filetype=markdown
+augroup END
+
+" JSON Syntax
+"let g:vim_json_syntax_conceal = 0
+
+" Colorizer
+let g:colorizer_auto_filetype='css,html,sass,less,smarty'
+
 " }}}
 " }}}
 
