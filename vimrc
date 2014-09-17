@@ -17,7 +17,7 @@ endif
 call plug#begin() " Plugins {{{
 Plug 'bling/vim-airline'
 
-Plug 'Shougo/vimproc.vim', { 'do': 'make -f make_unix.mal' }
+Plug 'Shougo/vimproc.vim', { 'do': 'make -f make_unix.mak' }
 Plug 'Shougo/unite.vim'
 
 Plug 'Shougo/neocomplete.vim'
