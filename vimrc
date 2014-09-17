@@ -69,32 +69,29 @@ set smarttab
 set nrformats-=octal
 
 set ttimeout
-set ttimeoutlen=100
+set ttimeoutlen=50
 
 set incsearch
 set ignorecase
 set smartcase
 set gdefault
-set hlsearch
 
 nnoremap / /\v
 vnoremap / /\v
 
-nnoremap ?/ ?/\v
-vnoremap ?/ ?/\v
+nnoremap ? ?\v
+vnoremap ? ?\v
 
 map N Nzz
 map n nzz
 
-" Use <C-L> to clear the highlighting of :set hlsearch.
-if maparg('<C-L>', 'n') ==# ''
-  nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
-endif
+" Use _<C-L> to clear the highlighting of :set hlsearch.
+nnoremap <silent> _<C-L> :nohlsearch<CR><C-L>
 
 set laststatus=2
 set ruler
 set list
-set lcs=trail:·,precedes:«,extends:»,eol:↲,tab:▸\ 
+set lcs=trail:·,precedes:«,eol:↲,tab:▸\ ,extends:»
 set showcmd
 set shortmess=atI
 set noshowmode
@@ -126,7 +123,6 @@ set expandtab
 
 set cursorline
 set number
-set relativenumber
 
 set encoding=utf-8
 set shell=/bin/zsh
@@ -148,17 +144,19 @@ nmap <silent> <LocalLeader>s :set spell!<CR>
 
 set cryptmethod=blowfish
 
-" Colors
+" Load matchit.vim
+runtime! macros/matchit.vim
+" Colors {{{
 set background=light
 colorscheme bubblegum
-
+" }}}
 " }}}
 " Mappings {{{
-
-let mapleader = ","
-let maplocalleader = "\\"
-
-" disable keys {{{
+" leader (, and \) {{{
+let mapleader                                = ","
+let maplocalleader                           = "\\"
+" }}}
+" disable some default keys {{{
 inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
@@ -173,15 +171,17 @@ inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 " }}}
-
+" INSERT {{{
+" exit with jj
 inoremap jj <ESC>
-
+" }}}
+" NORMAL {{{
 " toggle folds with space
 nnoremap <SPACE> za
 
 " add new lines and exit insert mode
-nmap gO O<ESC>
-nmap go o<ESC>
+nnoremap gO O<ESC>
+nnoremap go o<ESC>
 
 " highlight last paste
 nnoremap gp `[V`]
