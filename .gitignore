@@ -5,6 +5,6 @@ vim/spell/*
 vim/ftplugin/*
 vim/plugged/*
 gitconfig
-
+vim/autoload/plug.vim
 vim/.netrwhist
 vim/tmp
