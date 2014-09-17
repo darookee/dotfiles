@@ -19,6 +19,7 @@ Plug 'bling/vim-airline'
 
 Plug 'Shougo/vimproc.vim', { 'do': 'make -f make_unix.mak' }
 Plug 'Shougo/unite.vim'
+Plug 'Shougo/vimfiler.vim'
 
 Plug 'Shougo/neocomplete.vim'
 
@@ -300,12 +301,36 @@ nnoremap <silent> _a :<C-u>Unite -start-insert grep:.<CR>
 nnoremap _A :<C-u>Unite -start-insert grep:
 nnoremap <silent> _s :<C-u>Unite -start-insert ultisnips<CR>
 " }}}
+" Vimfiler {{{
+" Disable netrw
+let g:loaded_netrwPlugin                  = 1
+" ... and use vimfiler instead
+let g:vimfiler_as_default_explorer        = 1
+let g:vimfiler_force_overwrite_statusline = 0
 
+let g:vimfiler_data_directory             = '~/.vim/tmp/vimfiler/'
 
+let g:vimfiler_file_icon                  = '-'
+let g:vimfiler_tree_leaf_icon             = ' '
+let g:vimfiler_tree_opened_icon           = '▾'
+let g:vimfiler_tree_closed_icon           = '▸'
+let g:vimfiler_marked_file_icon           = '✓'
+let g:vimfiler_readonly_file_icon         = ''
 
+call vimfiler#custom#profile('default', 'context', { 'safe' : 0 })
 
+augroup vimfiler_settings
+    au!
+    au FileType vimfiler call s:vimfiler_settings()
+    "au VimEnter * if !argc() | VimFiler | endif
+augroup END
+
+fun! s:vimfiler_settings()
+    let b:delimitMate_autoclose           = 0
+    nmap <buffer> - <Plug>(vimfiler_exit)
 endf
 
+nnoremap - :<C-u>VimFilerBufferDir<CR>
 " }}}
 " NeoComplete {{{
 "
