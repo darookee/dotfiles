@@ -52,7 +52,6 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tommcdo/vim-lion'
 
-
 Plug 'tpope/vim-git'
 Plug 'pangloss/vim-javascript'
 Plug 'leshill/vim-json'
@@ -60,7 +59,7 @@ Plug 'StanAngeloff/php.vim'
 Plug 'acustodioo/vim-tmux'
 Plug 'chrisbra/Colorizer'
 
-
+Plug 'sjl/gundo.vim'
 
 let s:vimlocalpluginsrc = expand($HOME . '/.vim/local.plugins')
 if filereadable(s:vimlocalpluginsrc)
