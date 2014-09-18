@@ -6,9 +6,16 @@
 #
 
 # Load Antigen
-if [[ -s "${ZDOTDIR:-$HOME}/.antigen/antigen.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.antigen/antigen.zsh"
+if [[ ! -d "${ZDOTDIR:-$HOME}/.antigen" ]]; then
+    mkdir ${ZDOTDIR:-$HOME}/.antigen
 fi
+
+if [[ ! -s "${ZDOTDIR:-$HOME}/.antigen/antigen.zsh" ]]; then
+    curl -fLo ${ZDOTDIR:-$HOME}/.antigen/antigen.zsh https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh
+    chmod +x ${ZDOTDIR:-$HOME}/.antigen/antigen.zsh
+fi
+
+source "${ZDOTDIR:-$HOME}/.antigen/antigen.zsh"
 
 antigen bundles <<EOBUNDLES
 robbyrussell/oh-my-zsh lib/

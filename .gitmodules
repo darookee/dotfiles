@@ -1,3 +1,0 @@
-[submodule "bin/tmux-extra"]
-	path = bin/tmux-extra
-	url = https://github.com/brandur/tmux-extra.git
