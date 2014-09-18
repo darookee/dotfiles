@@ -55,7 +55,6 @@ Plug 'tommcdo/vim-lion'
 
 Plug 'tpope/vim-git'
 Plug 'pangloss/vim-javascript'
-Plug 'vim-scripts/JavaScript-Indent'
 Plug 'leshill/vim-json'
 Plug 'StanAngeloff/php.vim'
 Plug 'acustodioo/vim-tmux'
