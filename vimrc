@@ -145,13 +145,13 @@ if &t_Co == 8 && $TERM !~# '^linux'
   set t_Co=16
 endif
 
-set undodir=~/.vim/undodir
+set undodir=~/.vim.tmp/undodir
 set undofile
 set undoreload=10000
 set undolevels=1000
 
 " Spelling
-set spellfile=~/.vim/spell/de_local.utf-8.add
+set spellfile=~/.vim.tmp/spell/de_local.utf-8.add
 set nospell spelllang=de,en
 nmap <silent> <LocalLeader>s :set spell!<CR>
 
@@ -250,7 +250,7 @@ endfunction
 
 " }}}
 " unite {{{
-let g:unite_data_directory            = '~/.vim/tmp/unite/'
+let g:unite_data_directory            = '~/.vim.tmp/unite/'
 let g:unite_split_rule                ='botright'
 let g:unite_prompt                    = '➜ '
 
@@ -310,7 +310,7 @@ let g:loaded_netrwPlugin                  = 1
 let g:vimfiler_as_default_explorer        = 1
 let g:vimfiler_force_overwrite_statusline = 0
 
-let g:vimfiler_data_directory             = '~/.vim/tmp/vimfiler/'
+let g:vimfiler_data_directory             = '~/.vim.tmp/vimfiler/'
 
 let g:vimfiler_file_icon                  = '-'
 let g:vimfiler_tree_leaf_icon             = ' '
