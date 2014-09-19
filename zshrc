@@ -49,12 +49,12 @@ prompt minimo
 
 antigen apply
 
+PATH=$HOME/.bin.untracked:$HOME/.bin:$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
 #if [[ -e "${HOME}/.gnupg/gpg-agent.conf" ]]; then
     #start_ssh-agent
     #start_gpg-agent
 #fi
 start_keychain
-
-PATH=$HOME/.bin.untracked:$HOME/.bin:$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 # vim:fdm=marker
