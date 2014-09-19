@@ -50,7 +50,7 @@ prompt minimo
 antigen apply
 
 if [[ -e "${HOME}/.gnupg/gpg-agent.conf" ]]; then
-    start_ssh-agent
+    #start_ssh-agent
     start_gpg-agent
 fi
 
