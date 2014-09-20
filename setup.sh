@@ -11,7 +11,7 @@ ln -sf ${PWD}/.bin/bin/ ${PWD}/bin
 PWD=`pwd`
 PREFIX='.'
 DOTFILES=`ls -1`
-IGNOREFILES=( .. bak setup.sh README.md .git )
+IGNOREFILES=( .. bak setup.sh setup-remote.sh README.md .git )
 
 #cleanup
 if [ -e "${HOME}/.antigen" ]; then
