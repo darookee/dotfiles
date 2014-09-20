@@ -5,10 +5,14 @@
 #   Nils Uliczka <nils.uliczka@darookee.net>
 #
 
-# Load Antigen
-if [[ ! -d "${ZDOTDIR:-$HOME}/.antigen" ]]; then
-    mkdir ${ZDOTDIR:-$HOME}/.antigen
+PATH=$HOME/.bin.untracked:$HOME/.bin:$PATH
+
+if [ -d "$HOME/.rvm" ]; then
+    PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 fi
+
+# Load Antigen
+[ -d "${ZDOTDIR:-$HOME}/.antigen" ] || mkdir ${ZDOTDIR:-$HOME}/.antigen
 
 if [[ ! -s "${ZDOTDIR:-$HOME}/.antigen/antigen.zsh" ]]; then
     curl -fLo ${ZDOTDIR:-$HOME}/.antigen/antigen.zsh https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh
@@ -34,27 +38,14 @@ zsh-users/zaw
 darookee/gentoo-zsh-completions
 darookee/minimo
 darookee/zsh-functions
+darookee/zsh-settings
 
 EOBUNDLES
 
 if [[ -s $HOME/.rvm/scripts/rvm ]]; then
-  antigen-bundle robbyrussell/oh-my-zsh plugins/rvm
+  antigen bundle robbyrussell/oh-my-zsh plugins/rvm
 fi
 
-autoload -Uz promptinit ; promptinit
-prompt minimo
-
-[ -e "${ZDOTDIR:-$HOME}/.zsh/options.zsh" ] && source "${ZDOTDIR:-$HOME}/.zsh/options.zsh"
-[ -e "${ZDOTDIR:-$HOME}/.zsh/aliases.zsh" ] && source "${ZDOTDIR:-$HOME}/.zsh/aliases.zsh"
-
 antigen apply
-
-PATH=$HOME/.bin.untracked:$HOME/.bin:$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
-#if [[ -e "${HOME}/.gnupg/gpg-agent.conf" ]]; then
-    #start_ssh-agent
-    #start_gpg-agent
-#fi
-start_keychain
 
 # vim:fdm=marker
