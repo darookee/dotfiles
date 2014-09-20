@@ -13,6 +13,15 @@ PREFIX='.'
 DOTFILES=`ls -1`
 IGNOREFILES=( .. bak setup.sh README.md .git )
 
+#cleanup
+if [ -e "${HOME}/.antigen" ]; then
+    rm -rf ${HOME}/.antigen
+fi
+
+if [ -e "${HOME}/.vim/autoload/plug.vim" ]; then
+    rm -f ${HOME}/.vim/autoload/plug.vim
+fi
+
 for DOTFILE in ${DOTFILES[@]}
 do
     for IGNOREFILE in ${IGNOREFILES[@]}
