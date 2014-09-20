@@ -3,11 +3,9 @@
 
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 
-if [ ! -d "./antigen" ]; then
-    git clone https://github.com/zsh-users/antigen.git ./antigen
-fi
-
-git submodule update --init --recursive
+git clone https://github.com/darookee/dotfiles-bin.git ${PWD}/.bin
+${PWD}/.bin/setup.sh
+ln -sf ${PWD}/.bin/bin/ ${PWD}/bin
 
 #symlinks
 PWD=`pwd`
@@ -27,22 +25,16 @@ do
 
     SYMLINK="${HOME}/${PREFIX}${DOTFILE}"
     BACKUPTIME=`date +%s`
-    BACKUPDIR="${HOME}/${PREFIX}dotfiles-bak/${BACKUPTIME}"
-
-    if [ ! -d ${BACKUPDIR} ]
-    then
-        mkdir -p ${BACKUPDIR}
-    fi
 
     if [ -e ${SYMLINK} ]
     then
-        mv -f ${SYMLINK} ${BACKUPDIR}
+        rm -f ${SYMLINK}
     fi
 
     echo "${PWD}/${DOTFILE} => ${SYMLINK}"
     ln -fs ${PWD}/${DOTFILE} ${SYMLINK}
+
+    if [ -e "${PWD}/${DOTFILE}.local" ]; then
+        cat ${PWD}/${DOTFILE}.local >> ${PWD}/${DOTFILE}
+    fi
 done
-
-vim +qa\!
-
-chmod +x ${HOME}/.bin/*
