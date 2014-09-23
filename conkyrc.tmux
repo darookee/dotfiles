@@ -14,6 +14,6 @@ ${if_match ${new_mails /home/darookee/.mail/darookee/INBOX/}>0}\#[fg=colour179,b
 ${if_match "${addr eth1}"!="No Address"}\#[fg=colour150]⍟ \#[fg=colour249]${addr eth1}${else}\#[fg=colour174]INTERNET${endif} \#[fg=colour249] \
 \#[fg=colour150]≣\#[fg=colour249] [h:${fs_free /home/darookee}] \#[fg=colour237,bg=colour238]\#[bg=colour237] \
 \#[fg=colour249]${execi 21600 /home/darookee/.bin.untracked/weathermajig Braunschweig --short} \#[fg=colour150,bg=colour237]\#[bg=colour150] \
-\#[fg=colour238]${time %a, %Y-%m-%d (%V)}\#[fg=colour237]  \#[fg=colour238]${time %H:%M} \#[fg=colour245,bg=colour238]\
+\#[fg=colour238]${time %a, %Y-%m-%d (%V)}\#[fg=colour237]  \#[fg=colour238,bold]${time %H:%M} \#[fg=colour245,nobold,bg=colour238]\
 
 # vim: set ft=conkyrc ts=4 sw=4 tw=79 foldmethod=manual :
