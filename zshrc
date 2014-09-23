@@ -36,7 +36,7 @@ zsh-users/zsh-completions src
 zsh-users/zaw
 
 darookee/gentoo-zsh-completions
-darookee/minimo
+darookee/minair
 darookee/zsh-functions
 darookee/zsh-settings
 
