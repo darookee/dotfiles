@@ -1,8 +1,6 @@
 " ~darookee/.vimrc
 
 if has('vim_starting') " Do stuff on startup {{{
-    set nocompatible
-    filetype off
 " Download vim-plug if not exists {{{
     if !filereadable(expand('~/.vim/autoload/plug.vim'))
         echo "Installing vim-plug\n"
@@ -14,7 +12,13 @@ if has('vim_starting') " Do stuff on startup {{{
 " }}}
 endif
 " }}}
-call plug#begin() " Plugins {{{
+" Plugins {{{
+set nocompatible
+filetype off
+
+call plug#begin() 
+Plug 'darookee/vim-settings'
+
 Plug 'bling/vim-airline'
 
 Plug 'Shougo/vimproc.vim', { 'do': 'make -f make_unix.mak' }
@@ -60,8 +64,6 @@ Plug 'acustodioo/vim-tmux'
 Plug 'chrisbra/Colorizer'
 
 Plug 'sjl/gundo.vim'
-
-Plug 'darookee/vim-settings'
 
 let s:vimlocalpluginsrc = expand($HOME . '/.vim/local.plugins')
 if filereadable(s:vimlocalpluginsrc)
