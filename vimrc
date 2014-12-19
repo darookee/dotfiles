@@ -79,5 +79,7 @@ if filereadable(s:vimlocalpluginsrc)
 endif
 
 call plug#end() " }}}
+filetype plugin indent on
+syntax enable
 
 " vim:fdm=marker
