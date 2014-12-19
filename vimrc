@@ -37,7 +37,8 @@ Plug 'scrooloose/syntastic'
 Plug 'SirVer/ultisnips'
 Plug 'darookee/vim-snippets'
 
-Plug 'Raimondi/delimitMate'
+"Plug 'Raimondi/delimitMate'
+Plug 'jiangmiao/auto-pairs'
 
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
