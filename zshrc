@@ -48,4 +48,6 @@ fi
 
 antigen apply
 
+# export current tty for pinentry-curses
+export GPG_TTY=$( tty )
 # vim:fdm=marker
