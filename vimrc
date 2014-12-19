@@ -40,9 +40,9 @@ Plug 'darookee/vim-snippets'
 "Plug 'Raimondi/delimitMate'
 Plug 'jiangmiao/auto-pairs'
 
-Plug 'mattn/webapi-vim'
-Plug 'mattn/gist-vim'
-Plug 'mattn/unite-gist'
+"Plug 'mattn/webapi-vim'
+"Plug 'mattn/gist-vim'
+"Plug 'mattn/unite-gist'
 
 Plug 'c9s/lftp-sync.vim'
 
