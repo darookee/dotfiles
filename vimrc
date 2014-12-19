@@ -21,9 +21,14 @@ Plug 'darookee/vim-settings'
 
 Plug 'bling/vim-airline'
 
-Plug 'Shougo/vimproc.vim', { 'do': 'make -f make_unix.mak' }
-Plug 'Shougo/unite.vim'
-Plug 'Shougo/vimfiler.vim'
+"Plug 'Shougo/vimproc.vim', { 'do': 'make -f make_unix.mak' }
+"Plug 'Shougo/unite.vim'
+"Plug 'Shougo/vimfiler.vim'
+
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'FelikZ/ctrlp-py-matcher'
+
+Plug 'mileszs/ack.vim'
 
 Plug 'Shougo/neocomplete.vim'
 
