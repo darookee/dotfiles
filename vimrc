@@ -67,7 +67,8 @@ Plug 'pangloss/vim-javascript'
 Plug 'leshill/vim-json'
 Plug 'StanAngeloff/php.vim'
 Plug 'acustodioo/vim-tmux'
-Plug 'chrisbra/Colorizer'
+"Plug 'chrisbra/Colorizer'
+Plug 'gorodinskiy/vim-coloresque'
 
 Plug 'sjl/gundo.vim'
 
