@@ -28,7 +28,8 @@ Plug 'bling/vim-airline'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'FelikZ/ctrlp-py-matcher'
 
-Plug 'mileszs/ack.vim'
+"Plug 'mileszs/ack.vim'
+Plug 'dyng/ctrlsf.vim'
 
 Plug 'Shougo/neocomplete.vim'
 
