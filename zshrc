@@ -26,9 +26,9 @@ robbyrussell/oh-my-zsh lib/
 
 common-aliases
 git
-composer
 systemadmin
 sudo
+symfony2
 
 zsh-users/zsh-syntax-highlighting
 zsh-users/zsh-history-substring-search
