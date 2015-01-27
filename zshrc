@@ -7,9 +7,6 @@
 
 PATH=$HOME/.bin.untracked:$HOME/.bin:$PATH
 
-if [ -d "$HOME/.rvm" ]; then
-    PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-fi
 
 # Load Antigen
 [ -d "${ZDOTDIR:-$HOME}/.antigen" ] || mkdir ${ZDOTDIR:-$HOME}/.antigen
@@ -22,13 +19,6 @@ fi
 source "${ZDOTDIR:-$HOME}/.antigen/antigen.zsh"
 
 antigen bundles <<EOBUNDLES
-robbyrussell/oh-my-zsh lib/
-
-common-aliases
-git
-systemadmin
-sudo
-symfony2
 
 zsh-users/zsh-syntax-highlighting
 zsh-users/zsh-history-substring-search
@@ -42,8 +32,11 @@ darookee/zsh-settings
 
 EOBUNDLES
 
-if [[ -s $HOME/.rvm/scripts/rvm ]]; then
-  antigen bundle robbyrussell/oh-my-zsh plugins/rvm
+if [ -d "$HOME/.rvm" ]; then
+    PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+    if [[ -s $HOME/.rvm/scripts/rvm ]]; then
+        antigen bundle robbyrussell/oh-my-zsh plugins/rvm
+    fi
 fi
 
 antigen apply
