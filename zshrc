@@ -41,8 +41,14 @@ fi
 
 antigen apply
 
-# export current tty for pinentry-curses
 export GPG_TTY=$( tty )
 eval `get_keychain_keys|xargs keychain --eval`
+
+# Set prompt
+if [[ "$TERM" == "linux" ]]; then
+    prompt redhat
+else
+    prompt minair
+fi
 
 # vim:fdm=marker
