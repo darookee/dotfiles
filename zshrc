@@ -42,7 +42,9 @@ fi
 antigen apply
 
 export GPG_TTY=$( tty )
-eval `get_keychain_keys|xargs keychain --eval`
+if (( $+commands[keychain] )); then
+    eval `get_keychain_keys|xargs keychain --eval`
+fi
 
 # Set prompt
 if [[ "$TERM" == "linux" ]]; then
