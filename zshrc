@@ -43,4 +43,6 @@ antigen apply
 
 # export current tty for pinentry-curses
 export GPG_TTY=$( tty )
+eval `get_keychain_keys|xargs keychain --eval`
+
 # vim:fdm=marker
