@@ -33,9 +33,9 @@ darookee/zsh-settings
 EOBUNDLES
 
 if [ -d "$HOME/.rvm" ]; then
-    PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+    PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
     if [[ -s $HOME/.rvm/scripts/rvm ]]; then
-        antigen bundle robbyrussell/oh-my-zsh plugins/rvm
+        source $HOME/.rvm/scripts/completion
     fi
 fi
 
