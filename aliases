@@ -85,6 +85,10 @@ if (( $+commands[git] )); then
     alias gfm='git pull'
     alias gfr='git pull --rebase'
 
+    # Index (i)
+    alias gia='git add'
+    alias giA='git add --patch'
+
     # Log (l)
     alias gl='git log --topo-order --pretty=format:${_git_log_medium_format}'
     alias gls='git log --topo-order --stat --pretty=format:${_git_log_medium_format}'
