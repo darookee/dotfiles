@@ -190,7 +190,7 @@ if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
 fi
 
 chpwd() {
-  print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
+  print -l $PWD ${(u)dirstack} >!$DIRSTACKFILE
 }
 
 DIRSTACKSIZE=20
