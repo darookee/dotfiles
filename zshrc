@@ -277,5 +277,10 @@ else
     prompt pure
 fi
 # }}}
+# Start programs and services {{{
+# keychain {{{
+(( $+commands[keychain] && $+commands[get_keychain_keys] )) && eval `keychain --eval $( get_keychain_keys )`
+# }}}
+# }}}
 
 # vim:fdm=marker
