@@ -3,47 +3,47 @@
 
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 
-git clone https://github.com/darookee/dotfiles-bin.git ${PWD}/.bin
-${PWD}/.bin/setup.sh
-ln -sf ${PWD}/.bin/bin/ ${PWD}/bin
-
 #symlinks
 PWD=`pwd`
 PREFIX='.'
-DOTFILES=`ls -1`
-IGNOREFILES=( .. bak setup.sh setup-remote.sh README.md .git )
+DOTFILES=${PWD}/*
+IGNOREFILES=( setup.sh README.md )
 
-#cleanup
+# Cleanup old installations
+
+# remove antigen
 if [ -e "${HOME}/.antigen" ]; then
     rm -rf ${HOME}/.antigen
 fi
 
+# remove zgen
+if [ -e "${HOME}/.zgen" ]; then
+    rm -rf ${HOME}/.zgen
+fi
+
+# remove vim-plug
 if [ -e "${HOME}/.vim/autoload/plug.vim" ]; then
     rm -f ${HOME}/.vim/autoload/plug.vim
 fi
 
-for DOTFILE in ${DOTFILES[@]}
-do
-    for IGNOREFILE in ${IGNOREFILES[@]}
-    do
-        if [ ${DOTFILE} == ${IGNOREFILE} ]
-        then
+for DOTFILE in ${PWD}/*; do
+    for IGNOREFILE in ${IGNOREFILES[@]}; do
+        if [ ${DOTFILE} == ${IGNOREFILE} ]; then
             continue 2
         fi
     done
 
     SYMLINK="${HOME}/${PREFIX}${DOTFILE}"
-    BACKUPTIME=`date +%s`
 
-    if [ -e ${SYMLINK} ]
-    then
+    if [ -e ${SYMLINK} ]; then
         rm -f ${SYMLINK}
     fi
 
     echo "${PWD}/${DOTFILE} => ${SYMLINK}"
-    ln -fs ${PWD}/${DOTFILE} ${SYMLINK}
+    ln -sf ${PWD}/${DOTFILE} ${SYMLINK}
 
     if [ -e "${PWD}/${DOTFILE}.local" ]; then
-        cat ${PWD}/${DOTFILE}.local >> ${PWD}/${DOTFILE}
+        echo "Adding local settings from ${PWD}/${DOTFILE}.local => ${SYMLINK}"
+        cat ${PWD}/${DOTFILE}.local >> ${SYMLINK}
     fi
 done
