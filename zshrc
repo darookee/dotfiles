@@ -4,6 +4,7 @@
 #
 
 # Load zgen {{{
+#
 [ -d "${ZDOTDIR:-$HOME}/.zgen" ] || mkdir ${ZDOTDIR:-$HOME}/.zgen
 
 if [[ ! -s "${ZDOTDIR:-$HOME}/.zgen/zgen.zsh" ]]; then
@@ -27,25 +28,6 @@ autoload -U compinit promptinit colors
 # }}}
 # colors {{{
 colors
-
-typeset -Ag FX FG BG
-
-FX=(
-    reset     "%{^[[00m%}"
-    bold      "%{^[[01m%}" no-bold      "%{^[[22m%}"
-    italic    "%{^[[03m%}" no-italic    "%{^[[23m%}"
-    underline "%{^[[04m%}" no-underline "%{^[[24m%}"
-    blink     "%{^[[05m%}" no-blink     "%{^[[25m%}"
-    reverse   "%{^[[07m%}" no-reverse   "%{^[[27m%}"
-)
-
-for color in {000..255}; do
-    FG[$color]="%{^[[38;5;${color}m%}"
-    BG[$color]="%{^[[48;5;${color}m%}"
-done
-
-[[ -e "${HOME}/.dir_colors" ]] && eval `dircolors "${HOME}/.dir_colors"`
-
 # }}}
 # Completion {{{
 #
@@ -217,25 +199,13 @@ chpwd() {
 
 DIRSTACKSIZE=20
 
-setopt autopushd pushdsilent pushdtohome
-
-## Remove duplicate entries
-setopt pushdignoredups
-
-## This reverts the +/- operators.
-setopt pushdminus
-
-setopt auto_cd
-setopt cdablevars
-unsetopt rm_star_silent
-unsetopt clobber
-
 # }}}
 # Aliases {{{
 [[ -f "${HOME}/.aliases" ]] && source ${HOME}/.aliases
 # }}}
 # Plugin-Options {{{
 # history-substring-search {{{
+#
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=green,fg=black'
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='fg=white,bg=red'
 [[ -n "${key[Up]}"       ]]  && bindkey  "${key[Up]}"       history-substring-search-up
@@ -245,25 +215,21 @@ bindkey -M vicmd "k" history-substring-search-up
 bindkey -M vicmd "j" history-substring-search-down
 # }}}
 # zsh-syntax-highlighting {{{
+#
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 ZSH_HIGHLIGHT_PATTERNS+=(' -rf ' 'fg=white,bold,bg=red')
 ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,bold'
 ZSH_HIGHLIGHT_STYLES[alias]='fg=cyan'
 # }}}
 # }}}
-# $PATH and other env {{{
-export PATH="${HOME}/.bin:${HOME}/.bin.untracked:${PATH}"
-
+# includes (rvm,...) {{{
+#
 # include rvm if exists
+#
 if [[ -d "${HOME}/.rvm" ]]; then
     [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
     [[ -s "$HOME/.rvm/scripts/completion" ]] && source "$HOME/.rvm/scripts/completion" # Load RVM completion
-    export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
 fi
-
-# export GPG_TTY for pinentry
-export GPG_TTY=$( tty )
-
 # }}}
 # Prompt {{{
 #
@@ -277,10 +243,5 @@ else
     prompt pure
 fi
 # }}}
-# Start programs and services {{{
-# keychain {{{
-(( $+commands[keychain] && $+commands[get_keychain_keys] )) && eval `keychain --eval $( get_keychain_keys )`
-# }}}
-# }}}
 
-# vim:fdm=marker
+# vim:fdm=marker ft=zsh
