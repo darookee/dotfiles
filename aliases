@@ -54,10 +54,6 @@ if (( $+commands[rsync] )); then
     alias rsync-update="${_rsync_cmd} --update"
     alias rsync-synchronize="${_rsync_cmd} --update --delete"
 
-    compdef _rsync rsync-copy
-    compdef _rsync rsync-move
-    compdef _rsync rsync-update
-    compdef _rsync rsync-synchronize
 
     unset _rsync_cmd
 fi
