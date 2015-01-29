@@ -154,7 +154,7 @@ set cryptmethod=blowfish
 runtime! macros/matchit.vim
 " Colors {{{
 set background=light
-colorscheme bubblegum
+colorscheme zenburn
 " }}}
 " }}}
 " Mappings {{{
