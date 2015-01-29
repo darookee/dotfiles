@@ -27,6 +27,8 @@ if [ -e "${HOME}/.vim/autoload/plug.vim" ]; then
 fi
 
 for DOTFILE in ${PWD}/*; do
+    DOTFILE=`basename ${DOTFILE}`
+
     for IGNOREFILE in ${IGNOREFILES[@]}; do
         if [ ${DOTFILE} == ${IGNOREFILE} ]; then
             continue 2
