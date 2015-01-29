@@ -10,5 +10,3 @@ vim/.netrwhist
 vim/tmp
 antigen
 *.local
-bin
-.bin
