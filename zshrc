@@ -24,8 +24,7 @@ fi
 # }}}
 # Load modules {{{
 #
-autoload -U compinit promptinit colors
-# }}}
+autoload -U compinit promptinit colors edit-command-line
 # colors {{{
 colors
 # }}}
@@ -183,6 +182,7 @@ fi
 # Additional keybindings
 bindkey 'jj' vi-cmd-mode # exit insert mode
 bindkey -M viins 'jj' vi-cmd-mode # exit insert mode
+zle -N edit-command-line
 bindkey '\C-x\C-e' edit-command-line
 bindkey -M viins '\C-x\C-e' edit-command-line
 # }}}
