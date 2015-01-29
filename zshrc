@@ -28,23 +28,49 @@ autoload -U compinit promptinit colors edit-command-line
 # colors {{{
 colors
 # }}}
+# }}}
+# Options {{{
+#
+setopt autolist               # list choices on ambiguous completion
+setopt automenu               # show menu on double-tab
+setopt autoparamslash         # add slash after directory
+setopt hashlistall            # hash everything before completion
+setopt alwaystoend            # when completing from the middle of a word, move the cursor to the end of the word
+setopt completeinword         # allow completion from within a word/phrase
+setopt correct                # spelling correction for commands
+setopt listambiguous          # complete as much of a completion until it gets ambiguous.
+setopt extendedglob           # use # ~ and ^ for globbing
+setopt nocompletealiases      # don't complete alisases
+setopt nocaseglob             # case insensitive glob
+setopt banghist               # treat ! special
+setopt extendedhistory        # save start time and duration to history
+setopt incappendhistory       # continious write history insted of waiting for shell exit
+setopt sharehistory           # share history between running sessions
+setopt histexpiredupsfirst    # purge duplicates first when history needs trimming
+setopt histignoredups         # don't save duplicate commands to history
+setopt histignorealldups      # remove old duplicate command from history
+setopt histfindnodups         # don't use duplicates as results for searching
+setopt histsavenodups         # don't save duplicate entries
+setopt histignorespace        # don't save to history when command starts with space
+setopt histverify             # don't execute line with history expansion, just expand
+setopt autoparamkeys          # remove space after completion, when closing brackt is inserted
+setopt pathdirs               # perform path search for commands (X11/xinit -> /usr/local/bin/X11/xinit)
+setopt autopushd              # push to directory stack
+setopt pushdsilent            # don't print stack after pushing
+setopt pushdtohome            # `pushd` acts like `cd` -> `pushd $HOME`
+setopt pushdignoredups        # Remove duplicate entries
+setopt pushdminus             # This reverts the +/- operators.
+setopt autocd                 # cd without cd
+setopt cdablevars             # cd ínto pathesfrom variables
+setopt noclobber              # dont overwrite existing files whn piping
+setopt chaselinks             # resolve links when cding
+setopt normstarsilent         # ask before rm *
+setopt promptsubst            # parameter expansion, command substitution and arithmetic expansion in prompt
+# }}}
 # Completion {{{
 #
 compinit
 
-# options {{{
-setopt auto_list
-setopt auto_param_slash         # add slash after directory
-setopt hash_list_all            # hash everything before completion
-setopt always_to_end            # when completing from the middle of a word, move the cursor to the end of the word
-setopt complete_in_word         # allow completion from within a word/phrase
-setopt correct                  # spelling correction for commands
-setopt list_ambiguous           # complete as much of a completion until it gets ambiguous.
-setopt chase_links
-setopt extended_glob
-unsetopt completealiases          # complete alisases
-unsetopt case_glob
-# }}}
 # general {{{
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion:*' cache-path "${ZDOTDIR:-$HOME}/.zcompcache"
@@ -117,23 +143,6 @@ HISTFILE="${ZDOTDIR:-$HOME}/.zhistory"
 HISTSIZE=10000
 SAVEHIST=10000
 HIST_STAMPS="yyyy-mm-dd"
-
-setopt bang_hist
-setopt extended_history
-setopt inc_append_history
-setopt share_history
-setopt hist_expire_dups_first
-setopt hist_ignore_dups
-setopt hist_ignore_all_dups
-setopt hist_find_no_dups
-setopt hist_ignore_space
-setopt hist_save_no_dups
-setopt hist_verify
-
-# }}}
-# Input {{{
-setopt auto_param_keys
-setopt path_dirs
 # }}}
 # Keybindings {{{
 #
@@ -234,8 +243,6 @@ fi
 # Prompt {{{
 #
 promptinit
-
-setopt prompt_subst
 
 if [[ "$TERM" == "linux" ]]; then
     prompt redhat
