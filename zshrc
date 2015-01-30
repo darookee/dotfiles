@@ -237,7 +237,6 @@ ZSH_HIGHLIGHT_STYLES[alias]='fg=cyan'
 #
 if [[ -d "${HOME}/.rvm" ]]; then
     [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-    [[ -s "$HOME/.rvm/scripts/completion" ]] && source "$HOME/.rvm/scripts/completion" # Load RVM completion
 fi
 # }}}
 # Prompt {{{
