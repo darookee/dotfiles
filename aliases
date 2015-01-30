@@ -4,7 +4,8 @@
 # Directories {{{
 alias ..='cd ..'
 alias ls='ls --color=auto'
-alias ll='ls --color=auto -lah'
+alias la='ls --color=auto -lah'
+alias ll='ls -lh'
 alias mkdir='mkdir -pv'
 
 if [ -z "\${which tree}" ]; then
@@ -53,7 +54,6 @@ if (( $+commands[rsync] )); then
     alias rsync-move="${_rsync_cmd} --remove-source-files"
     alias rsync-update="${_rsync_cmd} --update"
     alias rsync-synchronize="${_rsync_cmd} --update --delete"
-
 
     unset _rsync_cmd
 fi
