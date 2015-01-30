@@ -1,0 +1,52 @@
+# ssl
+set ftp:ssl-force false
+set ftp:ssl-protect-data true
+set ftp:ssl-protect-fxp true
+set ftp:ssl-protect-list true
+set ftps:initial-prot "P"
+set ssl:verify-certificate false
+
+# workaround for broken servers
+set ftp:ssl-copy-sid false
+
+# use stat when listing directories
+set ftp:use-stat-for-list true
+
+# enable fxp
+set ftp:use-fxp true
+
+# never attempt to fix pasv address
+set ftp:fix-pasv-address false
+
+# mdtm is slow for large directories
+set ftp:use-mdtm false
+
+# misc
+set cmd:remote-completion true
+set bmk:save-passwords true
+set color:use-color auto
+
+# nice prompt
+set prompt "\[\033[36m\]\u\[\033[32m\]\@\[\033[36m\]\h\[\033[33m\]:ftp\[\033[32m\] [\[\033[32m\]\w\[\033[32m\]] \[\033[0m\]"
+
+# aliases
+alias .. "cd .."
+
+alias ll "cls \
+    --long \
+    --human-readable \
+    --sort=date"
+alias lg "ls | grep -i"
+alias l "ll | less -R"
+
+alias s "slot"
+
+alias m "mirror \
+    --continue \
+    --no-empty-dirs \
+    --no-perms \
+    --no-umask \
+    --dereference \
+    --loop
+
+alias q "queue"
