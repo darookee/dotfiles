@@ -6,8 +6,8 @@ cd "$( dirname "${BASH_SOURCE[0]}" )"
 #symlinks
 PWD=`pwd`
 PREFIX='.'
-DOTFILES=${PWD}/*
-IGNOREFILES=( setup.sh README.md )
+DOTFILES=$(git ls-files)
+IGNOREFILES=( setup.sh README.md .gitignore )
 
 # Cleanup old installations
 
@@ -26,8 +26,8 @@ if [ -e "${HOME}/.vim/autoload/plug.vim" ]; then
     rm -f ${HOME}/.vim/autoload/plug.vim
 fi
 
-for DOTFILE in ${PWD}/*; do
-    DOTFILE=`basename ${DOTFILE}`
+for DOTFILE in ${DOTFILES}; do
+    DOTFILEDIR=$(dirname ${DOTFILE})
 
     for IGNOREFILE in ${IGNOREFILES[@]}; do
         if [ ${DOTFILE} == ${IGNOREFILE} ]; then
@@ -36,12 +36,14 @@ for DOTFILE in ${PWD}/*; do
     done
 
     SYMLINK="${HOME}/${PREFIX}${DOTFILE}"
+    SYMLINKDIR="${HOME}/${PREFIX}${DOTFILEDIR}"
 
     if [ -e ${SYMLINK} ]; then
         rm -f ${SYMLINK}
     fi
 
     echo "${PWD}/${DOTFILE} => ${SYMLINK}"
+    [[ -d ${SYMLINKDIR} ]] || mkdir -p ${SYMLINKDIR}
     ln -sf ${PWD}/${DOTFILE} ${SYMLINK}
 
     if [ -e "${PWD}/${DOTFILE}.local" ]; then
