@@ -196,18 +196,8 @@ bindkey '\C-x\C-e' edit-command-line
 bindkey -M viins '\C-x\C-e' edit-command-line
 # }}}
 # Directories {{{
-DIRSTACKFILE="${TMPPREFIX}/dirs"
-if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
-  dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
-  [[ -d $dirstack[1] ]] && cd $dirstack[1]
-fi
-
-chpwd() {
-  print -l $PWD ${(u)dirstack} >!$DIRSTACKFILE
-}
 
 DIRSTACKSIZE=20
-
 # }}}
 # Aliases {{{
 [[ -f "${HOME}/.aliases" ]] && source ${HOME}/.aliases
