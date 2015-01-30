@@ -405,6 +405,8 @@ augroup END
 " }}}
 " }}}
 " Functions {{{
+" Ack for word(s) in motion {{{
+" http://www.vimbits.com/bits/153
 function! s:CopyMotionForType(type)
     if a:type ==# 'v'
         silent execute "normal! `<" . a:type . "`>y"
@@ -419,6 +421,22 @@ function! s:AckMotion(type) abort
     execute "normal! :CtrlSF " . shellescape(@@) . "\<cr>"
     let @@ = reg_save
 endfunction
+" }}}
+" Mkdir on write if it does not exist {{{
+function s:MkNonExDir(file, buf)
+    if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
+        let dir=fnamemodify(a:file, ':h')
+        if !isdirectory(dir)
+            call mkdir(dir, 'p')
+        endif
+    endif
+endfunction
+
+augroup BWCCreateDir
+    autocmd!
+    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+augroup END
+" }}}
 " }}}
 " }}}
 
