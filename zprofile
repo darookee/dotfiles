@@ -31,7 +31,7 @@ export VISUAL=$editor
 export PAGER='less'
 export LESS='-F -g -i -M -R -S -w -X -z-4'
 
-[[ -e "${HOME}/.dir_colors" ]] && (( $+commands[dircolors] ))  && eval `echo 'loading dircols'; dircolors "${HOME}/.dir_colors"`
+[[ -e "${HOME}/.dir_colors" ]] && (( $+commands[dircolors] ))  && eval `dircolors "${HOME}/.dir_colors"`
 
 if [[ "${TMPDIR}" == "" ]]; then
     export TMPDIR="/tmp/$USER"
