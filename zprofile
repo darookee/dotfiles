@@ -37,7 +37,7 @@ if [[ "${TMPDIR}" == "" ]]; then
     export TMPDIR="/tmp/$USER"
 fi
 
-if [[ -d "$TMPDIR" ]]; then
+if [[ ! -d "$TMPDIR" ]]; then
     mkdir -p -m 700 "$TMPDIR"
 fi
 
