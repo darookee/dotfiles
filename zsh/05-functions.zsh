@@ -112,7 +112,7 @@ _archive() {
     _arguments \
         "*::folder:_files -/"
 }
-comdef _archive archive
+compdef _archive archive
 # }}}
 
 # vim:fdm=marker
