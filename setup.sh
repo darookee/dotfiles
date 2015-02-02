@@ -13,17 +13,17 @@ ignorefiles=( setup.sh README.md .gitignore )
 # Cleanup old installations
 
 # remove antigen
-if [ -e "${HOME}/.antigen" && "$update" == "no"]; then
+if [[ -e "${HOME}/.antigen" && "$update" == "no"]]; then
     rm -rf ${HOME}/.antigen
 fi
 
 # remove zgen
-if [ -e "${HOME}/.zgen" && "$update" == "no" ]; then
+if [[ -e "${HOME}/.zgen" && "$update" == "no" ]]; then
     rm -rf ${HOME}/.zgen
 fi
 
 # remove vim-plug
-if [ -e "${HOME}/.vim/autoload/plug.vim" && "$update" == "no" ]; then
+if [[ -e "${HOME}/.vim/autoload/plug.vim" && "$update" == "no" ]]; then
     rm -f ${HOME}/.vim/autoload/plug.vim
 fi
 
@@ -47,7 +47,7 @@ for dotfile in ${dotfiles}; do
     [[ -d ${symlinkdir} ]] || mkdir -p ${symlinkdir}
     ln -sf ${PWD}/${dotfile} ${symlink}
 
-    if [ -e "${PWD}/${dotfile}.local" && "$update" == no ]; then
+    if [[ -e "${PWD}/${dotfile}.local" && "$update" == no ]]; then
         echo "Adding local settings from ${PWD}/${dotfile}.local => ${symlink}"
         cat ${PWD}/${dotfile}.local >> ${symlink}
     fi
