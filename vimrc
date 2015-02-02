@@ -27,7 +27,7 @@ Plug 'dyng/ctrlsf.vim'
 
 Plug 'Shougo/neocomplete.vim'
 
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
 
 Plug 'SirVer/ultisnips'
 Plug 'darookee/vim-snippets'
@@ -242,7 +242,7 @@ vnoremap <leader><C-r> "vy:%s/<C-r>v//g<Left><Left>
 let g:airline#extensions#csv#column_display  = 'Name'
 let g:airline#extensions#branch#enabled      = 1
 let g:airline#extensions#hunks#non_zero_only = 1
-let g:airline#extensions#syntastic#enabled   = 1
+" let g:airline#extensions#syntastic#enabled   = 1
 
 let g:airline_powerline_fonts                = 1
 
@@ -342,22 +342,22 @@ augroup neocomplete_lock
 augroup END
 
 " }}}
-" Syntastics {{{
-let g:syntastic_auto_loc_list        = 1
-let g:syntastic_auto_jump            = 1
-let g:syntastic_enable_highlighting  = 1
-let g:syntastic_enable_signs         = 1
-let g:syntastic_javascript_checkers  = ['jslint']
-let g:syntastic_php_checkers         = ['php']
-let g:syntastic_mode_map             = { 'mode': 'passive',
-            \ 'active_filetypes': ['ruby', 'php', 'python'],
-            \ 'passive_filetypes': [] }
-let g:syntastic_error_symbol         = '✗'
-let g:syntastic_style_error_symbol   = '✠'
-let g:syntastic_warning_symbol       = '∆'
-let g:syntastic_style_warning_symbol = '≈'
+" Syntastics (disabled) {{{
+" let g:syntastic_auto_loc_list        = 1
+" let g:syntastic_auto_jump            = 1
+" let g:syntastic_enable_highlighting  = 1
+" let g:syntastic_enable_signs         = 1
+" let g:syntastic_javascript_checkers  = ['jslint']
+" let g:syntastic_php_checkers         = ['php']
+" let g:syntastic_mode_map             = { 'mode': 'passive',
+"             \ 'active_filetypes': ['ruby', 'php', 'python'],
+"             \ 'passive_filetypes': [] }
+" let g:syntastic_error_symbol         = '✗'
+" let g:syntastic_style_error_symbol   = '✠'
+" let g:syntastic_warning_symbol       = '∆'
+" let g:syntastic_style_warning_symbol = '≈'
 
-map <LocalLeader>sc :SyntasticCheck<CR>
+" map <LocalLeader>sc :SyntasticCheck<CR>
 
 " }}}
 " UltiSnips {{{
