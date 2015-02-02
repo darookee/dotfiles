@@ -30,8 +30,8 @@ fi
 for dotfile in ${dotfiles}; do
     dotfiledir=$(dirname ${dotfile})
 
-    for IGNOREFILE in ${ignorefiles[@]}; do
-        if [ ${dotfile} == ${ignorefile} ]; then
+    for ignorefile in ${ignorefiles[@]}; do
+        if [[ "${dotfile}" == "${ignorefile}" ]]; then
             continue 2
         fi
     done
