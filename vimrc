@@ -36,7 +36,8 @@ Plug 'jiangmiao/auto-pairs'
 
 Plug 'c9s/lftp-sync.vim'
 
-Plug 'scrooloose/nerdcommenter'
+"Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-commentary'
 
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-eunuch'
