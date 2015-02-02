@@ -1,3 +1,8 @@
+#
+# Authors:
+#   Nils Uliczka <nils.uliczka@darookee.net>
+#
+
 if [[ -z "$LANG" ]]; then
     export LANG='en_US.UTF-8'
 fi
@@ -6,23 +11,21 @@ fi
 if [[ -n "$TMUX"  ]]; then
     export TERM="screen-256color"
 fi
-
-# Set PATH
+# Set PATH {{{
 function path-prepend {
     [[ -d "$1" ]] && path[1,0]=($1)
 }
 path-prepend "${HOME}/.bin"
 path-prepend "${HOME}/.bin.untracked"
-[[ -d "${HOME}/.rvm" ]] && path-prepend "${HOME}/.rvm/bin"
-
-# Set CDPATH
+# [[ -d "${HOME}/.rvm" ]] && path-prepend "${HOME}/.rvm/bin"
+# }}}
+# Set CDPATH {{{
 function cdpath-append {
     [[ -d "$1" ]] && cdpath+=($1)
 }
 cdpath-append "${HOME}"
 cdpath-append "${HOME}/Dev/Kunden"
-
-typeset -gU path fpath cdpath
+# }}}
 
 (( $+commands[vim] )) && editor='vim' || editor='nano'
 export EDITOR=$editor
@@ -31,8 +34,10 @@ export VISUAL=$editor
 export PAGER='less'
 export LESS='-F -g -i -M -R -S -w -X -z-4'
 
+# Load dir_colors if file exists
 [[ -e "${HOME}/.dir_colors" ]] && (( $+commands[dircolors] ))  && eval `dircolors "${HOME}/.dir_colors"`
 
+# Setup tempdir
 if [[ "${TMPDIR}" == "" ]]; then
     export TMPDIR="/tmp/$USER"
 fi
@@ -66,6 +71,16 @@ done
 export FX
 export FG
 export BG
+# }}}
+
+# Include zprofile.local
+[[ -e ${HOME}/.zprofile.local ]] && source ${HOME}/.zprofile.local
+
+# cleanup {{{
+unfunction path-prepend
+unfunction cdpath-append
+
+typeset -gU path fpath cdpath
 # }}}
 
 # vim:fdm=marker ft=zsh
