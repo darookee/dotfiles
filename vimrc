@@ -21,6 +21,7 @@ Plug 'bling/vim-airline'
 
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'FelikZ/ctrlp-py-matcher'
+Plug 'jeetsukumaran/vim-filebeagle'
 
 Plug 'dyng/ctrlsf.vim'
 
@@ -212,7 +213,7 @@ nnoremap <silent> <leader>a :set opfunc=<SID>AckMotion<CR>g@
 " (https://www.reddit.com/r/vim/comments/2l6adg/how_do_you_do_a_search_replace_to_minimize_the/clrvf69)
 nnoremap <leader>r :%s/\<<C-r><C-w>\>//g<Left><Left>
 nnoremap <leader>R :%s/\<<C-r><C-a>\>//g<Left><Left>
-"
+
 " toggle number and list
 nnoremap <Leader><F10> :<C-u>call Toggle_copy_source()<CR>
 
@@ -292,12 +293,12 @@ nnoremap <silent> _b :<C-u>CtrlPBuffer<CR>
 
 " map <leader><C-t> :CtrlPTag<CR>
 " }}}
-" netrw {{{
-let g:netrw_banner       = 0
-let g:netrw_keepdir      = 1
-let g:netrw_liststyle    = 3 " or 3
-let g:netrw_sort_options = 'i'
-nnoremap <silent> - :<C-u>Explore<CR>
+" netrw (disabled) {{{
+"let g:netrw_banner       = 0
+"let g:netrw_keepdir      = 1
+"let g:netrw_liststyle    = 3 " or 3
+"let g:netrw_sort_options = 'i'
+"nnoremap <silent> - :<C-u>Explore<CR>
 " }}}
 " NeoComplete {{{
 "
