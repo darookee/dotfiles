@@ -73,7 +73,7 @@ zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<-
 # }}}
 
 # }}}
-# Completios {{{
+# Completions {{{
 # Symfony2 basic command completion {{{
 _symfony_console () {
   echo "php $(find . -maxdepth 2 -mindepth 1 -name 'console' -type f | head -n 1)"

@@ -20,7 +20,7 @@ ark() {
                 *)           echo "Cannot list contents of '$2' with >ark<" ;;
             esac ;;
 
-        e)
+        x)
             case $2 in
                 *.tar.bz2)   tar xvjf $2      ;;
                 *.tar.gz)    tar xvzf $2      ;;
@@ -54,7 +54,41 @@ ark() {
             echo "WATT?" ;;
 
     esac
-} # }}}
+}
+
+# autocompletion
+_ark() {
+    actions=(
+        'l:list archive contents'
+        'x:extract achive'
+        'c:create archive'
+    )
+
+    if (( CURRENT == 2 )); then
+        _describe -t actions 'actions' actions
+    elif (( CURRENT == 3 )); then
+        case $words[2] in
+            l|x)
+                _arguments \
+                    "*::archive file:_files -g '(#i)*.(tar|bz2|gz|rar|tbz2|tgz|zip|Z|7z)(-.)'"
+                ;;
+            c)
+                _arguments \
+                    "*::files and directories:_files"
+                ;;
+        esac
+    elif (( CURRENT == 4 )); then
+        case $words[2] in
+            c)
+                _arguments \
+                    "*::archive file:_files -g '(#i)*.(tar|bz2|gz|rar|tbz2|tgz|zip|Z|7z)(-.)'"
+                ;;
+        esac
+    fi
+}
+compdef _ark ark
+
+# }}}
 # tree {{{
 if [ -z "\${which tree}" ]; then
   tree () {
@@ -74,6 +108,11 @@ archive() {
         echo "Need an directory to archive."
     fi
 }
+_archive() {
+    _arguments \
+        "*::folder:_files -/"
+}
+comdef _archive archive
 # }}}
 
 # vim:fdm=marker
