@@ -425,7 +425,7 @@ function! s:AckMotion(type) abort
 endfunction
 " }}}
 " Mkdir on write if it does not exist {{{
-function s:MkNonExDir(file, buf)
+function! s:MkNonExDir(file, buf)
     if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
         let dir=fnamemodify(a:file, ':h')
         if !isdirectory(dir)
