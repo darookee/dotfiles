@@ -13,7 +13,7 @@ ignorefiles=( setup.sh README.md .gitignore )
 # Cleanup old installations
 
 # remove antigen
-if [[ -e "${HOME}/.antigen" && "$update" == "no"]]; then
+if [[ -e "${HOME}/.antigen" && "$update" == "no" ]]; then
     rm -rf ${HOME}/.antigen
 fi
 
