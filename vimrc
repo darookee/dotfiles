@@ -198,7 +198,9 @@ nnoremap gp `[V`]
 nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>:nohl<CR>
 
 " split lines (opposite of S-j)
-nnoremap <leader>j gEa<CR><ESC>
+"nnoremap <leader>j gEa<CR><ESC>
+" another version vom /u/Wiggledan
+nnoremap S i<CR><Esc>^mwgk:silent! s/\v +$//<CR>:noh<CR>
 "
 " split window settings
 nnoremap <C-h> <C-w>h
