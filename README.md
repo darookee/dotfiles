@@ -7,5 +7,14 @@ Install
 ```
 git clone https://github.com/darookee/dotfiles .dotfiles
 cd .dotfiles
-bash setup.sh
+./setup.sh
+```
+
+Update
+------
+
+```
+cd ~/.dotfiles
+git pull --rebase
+./setup.sh update
 ```
