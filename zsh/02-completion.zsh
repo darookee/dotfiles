@@ -97,6 +97,48 @@ alias sfroute='sf router:debug'
 alias sfcontainer='sf container:debug'
 alias sfgb='sf generate:bundle'
 # }}}
+# archive {{{
+_archive() {
+    _arguments \
+        "*::folder:_files -/"
+}
+
+compdef _archive archive
+# }}}
+# ark {{{
+_ark() {
+    actions=(
+        'l:list archive contents'
+        'x:extract achive'
+        'c:create archive'
+    )
+
+    if (( CURRENT == 2 )); then
+        _describe -t actions 'actions' actions
+    elif (( CURRENT == 3 )); then
+        case $words[2] in
+            l|x)
+                _arguments \
+                    "*::archive file:_files -g '(#i)*.(tar|bz2|gz|rar|tbz2|tgz|zip|Z|7z)(-.)'"
+                ;;
+            c)
+                _arguments \
+                    "*::files and directories:_files"
+                ;;
+        esac
+    elif (( CURRENT == 4 )); then
+        case $words[2] in
+            c)
+                _arguments \
+                    "*::archive file:_files -g '(#i)*.(tar|bz2|gz|rar|tbz2|tgz|zip|Z|7z)(-.)'"
+                ;;
+        esac
+    fi
+}
+compdef _ark ark
+
+
+# }}}
 # }}}
 
 # vim:fdm=marker ft=zsh
