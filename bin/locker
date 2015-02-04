@@ -1,0 +1,14 @@
+#!/bin/bash
+#
+# takes a screenshot, blurs it and locks the screen
+#
+# requires:
+#   imagemagick (import + mogrify)
+#   i3lock
+#
+# Author: Nils Uliczka
+#
+
+import -window root -screen ~/.lock.png &&
+mogrify -gaussian-blur 25 ~/.lock.png &&
+i3lock -i ~/.lock.png

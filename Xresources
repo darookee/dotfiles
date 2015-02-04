@@ -1,0 +1,84 @@
+! Scrollbar
+*scrollBar:				false
+! And scrolling
+*scrollTtyOutput:		false
+*scrollWithBuffer:		true
+*scrollTtyKeypress:		true
+
+! URLs
+*underlineURLs:			true
+
+! Font
+URxvt*font:				-*-terminus-medium-r-normal-*-12-*-*-*-*-*-*-u
+XTerm*font:				-*-terminus-medium-r-normal-*-12-*-*-*-c-*-*-u
+*letterSpace:			0
+
+!URxvt.inheritPixmap:	 true
+
+! WTF? Что то связанное с less
+!URxvt.secondaryScreen:	 1
+!URxvt.secondaryScroll:	 0
+
+URxvt*keysym.Home:		\033[1~
+URxvt*keysym.End:		\033[4~
+
+!! smear - dcat
+
+
+!*background:	#20242c
+!*foreground:	#b3b8c4
+
+!*color0:	#3e4853
+!*color1:	#b06a58
+!*color2:	#95b47b
+!*color3:	#e5c078
+!*color4:	#58698c
+!*color5:	#7b5e8d
+!*color6:	#82a1b2
+!*color7:	#cccaca
+
+!*color8:	#525c67
+!*color9:	#ba7e6c
+!*color10:	#a9c88f
+!*color11:	#f9d48c
+!*color12:	#6c7da0
+!*color13:	#8f72a1
+!*color14:	#96b5c6
+!*color15:	#e0dede
+
+! special
+*.foreground:   #f8f8f8
+*.background:   #202020
+*.cursorColor:  #ffffff
+
+! black
+*.color0:       #404040
+*.color8:       #808080
+
+! red
+*.color1:       #a54242
+*.color9:       #cc6666
+
+! green
+*.color2:       #8c9440
+*.color10:      #b5bd68
+
+! yellow
+*.color3:       #de935f
+*.color11:      #f0c674
+
+! blue
+*.color4:       #5f819d
+*.color12:      #81a2be
+
+! magenta
+*.color5:       #85678f
+*.color13:      #b294bb
+
+! cyan
+*.color6:       #5e8d87
+*.color14:      #8abeb7
+
+! white
+*.color7:       #a0a0a0
+*.color15:      #f8f8f8
