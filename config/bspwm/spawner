@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# Spawner for Bar Ain't Recursive
+#
+
+while read cmd
+do
+	case "$cmd" in
+		volume) amixer set Master toggle ;;
+		 [1-5]) bspc desktop -f ^$cmd ;;
+		     *) $cmd ;;
+	esac
+done

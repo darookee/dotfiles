@@ -1,0 +1,156 @@
+#!/bin/bash
+#
+# Bar Ain't Recursive panel
+# by Ivan Sokolov
+#
+
+WHITE=f8f8f8
+RED=a54242
+GREEN=8c9440
+BLACK=202020
+GRAY=404040
+
+function A {
+	echo -n "%{A:$2:}$1%{A}"
+}
+
+function B {
+	echo -n "%{B#ff$2}$1%{B-}"
+}
+
+function F {
+	echo -n "%{F#ff$2}$1%{F-}"
+}
+
+function o {
+	echo "%{+o}$1%{-o}"
+}
+
+function u {
+	echo "%{+u}$1%{-u}"
+}
+
+###
+
+DIV=$(F '|' $GRAY)
+
+###
+
+network() {
+	ping -c 1 8.8.8.8 >/dev/null 2>&1 && echo -n $(F + $GREEN) || echo -n $(F - $RED)
+}
+
+day() {
+    DATE=$(date -u +'%a,')
+    echo -n $(F $DATE $WHITE)
+}
+
+year() {
+    DATE=$(date -u +'%F')
+    echo -n $(F $DATE $WHITE)
+}
+
+week() {
+    DATE=$(date -u +'(%V)')
+    echo -n $(F $DATE $WHITE)
+}
+
+clock() {
+	TIME=$(date -u +%H:%M)
+	echo -n $(F $TIME $WHITE)
+}
+
+volume() {
+    rawvol=$(amixer get Master|grep dB)
+    volume=$(sed 's/.*\[\(.*\)%\].*/\1/g' <<< $rawvol)
+	if [[ $rawvol == *"[off]"* ]]
+	then
+		vcolor=$GRAY
+	else
+		vcolor=$WHITE
+	fi
+	echo -n "$(A $(F $volume $vcolor) volume)"
+}
+
+battery() {
+	BATTERY=$(acpi -b | awk '{gsub(/%,/,""); print $4}' | sed 's/%//g')
+	if [[ $BATTERY -gt 20 ]]
+	then
+		BCOLOR=$WHITE
+	else
+		BCOLOR=$RED
+	fi
+	echo -n $(F $BATTERY ff$BCOLOR)
+}
+
+layout() {
+	echo -n "$(A $(F $(xkb-switch) $WHITE) layout)"
+}
+
+mpc_status() {
+	if [[ -n $(mpc | grep playing) ]]
+	then
+		echo -n "$(F "$(mpc current -f "[%title%]")" $WHITE) $DIV "
+		echo -n "$(F "$(mpc current -f "[%album%]")" $WHITE) $DIV "
+		echo -n "$(F "$(mpc current -f "[%artist%]")" $WHITE) "
+	else
+		echo -n ''
+	fi
+}
+
+#		echo -n "$(F "$(mpc current -f "[%title% $(F - $GRAY) %album% $(F - $GRAY) %artist%]|[%file%]")" $WHITE)"
+
+mpc_controls() {
+	echo -n ''
+}
+
+while true
+do
+	# Left
+	printf '%s' '%{l}'
+    desktopstate=$(bspc control --get-status)
+    desktops=""
+    IFS=':' read -a desktop_array <<< "$desktopstate"
+    index=0
+    for element in "${desktop_array[@]}"
+    do
+        if [[ $element == "O"* ]] || [[ $element == "F"* ]]; then
+            desktops="${desktops} $(F \| $GREEN)$(F $index $WHITE)$(F \| $GREEN)" # active desktop
+        else if [[ $element == "o"* ]]; then
+            desktops="${desktops} %{A:bspc desktop -f ^$index:}$(F \| $GRAY)$(F $index $WHITE)$(F \| $GRAY)%{A}" # desktop with open leaves
+        else if [[ $element == "f"* ]]; then
+            desktops="${desktops} %{A:bspc desktop -f ^$index:}$(F \| $WHITE)$(F $index $WHITE)$(F \| $WHITE)%{A}" # clean desktop
+        fi
+        fi
+        fi
+        (( index += 1 ))
+    done
+	# Desktops
+	# for i in 1 2 3 4 5
+	# do
+	# 	printf ' %s' "%{A:$i:}$(F \| $GRAY)$(F $i $WHITE)$(F \| $GRAY)%{A}"
+	# done
+    printf ' %s' "${desktops}"
+
+	# Center
+	printf '%s' '%{c}'
+	printf '%s' "$(mpc_status)"
+	# printf '%s' "$(mpc_controls)"
+
+	# Right
+	printf '%s' '%{r}'
+	printf ' %s' $(network) $DIV
+	# printf ' %s' $(layout) $DIV
+	printf ' %s' $(volume) $DIV
+	printf ' %s' $(battery) $DIV
+	printf ' %s' $(day)
+    printf ' %s' $(year)
+	printf ' %s' $(week)
+	printf ' %s \n' $(clock)
+
+	sleep 0.5s
+done | bar-aint-recursive \
+	-F \#ff$WHITE \
+	-B \#ff$BLACK \
+	-g 1346x20+10+10 \
+	-f '-*-terminus-medium-r-normal-*-12-*-*-*-c-*-*-u' | ~/.config/bspwm/spawner
