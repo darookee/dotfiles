@@ -1,0 +1,3 @@
+#!/bin/bash
+
+[[ -f ~/.volume ]] && amixer set Master $(cat ~/.volume) 1>&2>/dev/null

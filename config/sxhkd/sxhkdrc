@@ -1,0 +1,83 @@
+#!/bin/bash
+
+#
+# BSPWM hotkeys
+#
+
+# Close bspwm
+super + shift + q
+    save_volume && bspc quit 1 && pkill bar
+	# pamixer --get-volume > ~/.volume \
+
+# Balance tree
+super + b
+	bspc desktop -B
+
+# Change windows params
+super + {d,f,s,a}
+	bspc window -t {floating,fullscreen,sticky,locked}
+
+# Presel window for splitting
+super + ctrl + {h,j,k,l}
+	bspc window -p {left,down,up,right}
+
+# Select windows, or move
+super + {_,shift + }{h,j,k,l}
+	bspc window -{f,s} {left,down,up,right} || bspc window -f {prev, prev, next, next}
+
+# Move current window to largest space
+super + Return
+	bspc window -s biggest
+
+# Mirror and flip leaves of tree
+super + {comma,period}
+	bspc desktop -F {horizontal,vertical}
+
+# Rotate leaves of tree
+super + shift + {comma,period}
+	bspc desktop -R {90,270}
+
+# Close window
+super + alt + w
+	bspc window -c
+
+# Desktops
+super + {1-5}
+	bspc desktop -f ^{1-5}
+
+# Mouse
+~button1
+	bspc pointer -g focus
+
+super + button{1-3}
+	bspc pointer -g {move,resize_side,resize_corner}
+
+super + !button{1-3}
+	bspc pointer -t %i %i
+
+super + @button{1-3}
+	bspc pointer -u
+
+#
+# Non WM hotkeys
+#
+
+# URxvt
+super + shift + Return
+    urxvt
+
+# XTerm
+super + alt + Return
+	xterm
+
+# dmenu
+super + space
+	dmenu_wrapper
+
+# lighthouse
+super + alt + space
+    lighthouse | sh
+
+# Reload SXHKD
+super + shift + Escape
+	pkill -USR1 -x sxhkd && ~/.config/bspwm/bspwmrc

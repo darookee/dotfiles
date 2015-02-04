@@ -1,0 +1,5 @@
+#!/bin/bash
+
+rawvol=$(amixer get Master|grep dB)
+volume=$(sed 's/.*\[\(.*\)%\].*/\1/g' <<< $rawvol)
+echo $volume% > ~/.volume

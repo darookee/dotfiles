@@ -1,0 +1,8 @@
+#!/bin/bash
+
+dmenu_run \
+	-fn '-*-terminus-medium-r-normal-*-12-*-*-*-c-*-*-u' \
+	-nb \#202020 \
+	-nf \#f8f8f8 \
+	-sb \#404040 \
+	-sf \#ffffff
