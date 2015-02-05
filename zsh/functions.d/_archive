@@ -1,0 +1,8 @@
+#compdef archive
+
+_archive() {
+    _arguments \
+        "*::folder:_files -/"
+}
+
+# vim:fdm=marker ft=zsh

@@ -135,6 +135,14 @@ fi
 # Shell specific {{{
 alias histroy='fc -fl 1'
 # }}}
+# Symfony2 {{{
+alias sf='`_symfony_console`'
+alias sfcl='sf cache:clear'
+alias sfcw='sf cache:warmup'
+alias sfroute='sf router:debug'
+alias sfcontainer='sf container:debug'
+alias sfgb='sf generate:bundle'
+# }}}
 
 
 # vim:ft=zsh:fdm=marker

@@ -44,5 +44,9 @@ setopt sharehistory           # share history between running sessions
 # Directories {{{
 DIRSTACKSIZE=20
 # }}}
+# fpath {{{
+fpath=($HOME/.zsh/functions.d $fpath)
+# }}}
+
 
 # vim:fdm=marker ft=zsh
