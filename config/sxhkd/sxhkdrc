@@ -68,7 +68,7 @@ super + shift + Return
 
 # XTerm
 super + alt + Return
-	xterm
+	st -f "DejaVu Sans Mono for Powerline-10"
 
 # dmenu
 super + space
