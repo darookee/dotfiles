@@ -73,13 +73,19 @@ volume() {
 }
 
 battery() {
-	BATTERY=$(acpi -b | awk '{gsub(/%,/,""); print $4}' | sed 's/%//g')
+    braw=$(acpi -b)
+	BATTERY=$(echo $braw | awk '{gsub(/%,/,""); print $4}' | sed 's/%//g')
+    state=$(echo $braw|awk '{gsub(/,/,""); print $3}')
 	if [[ $BATTERY -gt 20 ]]
 	then
 		BCOLOR=$WHITE
 	else
 		BCOLOR=$RED
 	fi
+    if [ "$state" == "Charging" ]
+    then
+        BCOLOR=$GREEN
+    fi
 	echo -n $(F $BATTERY ff$BCOLOR)
 }
 
