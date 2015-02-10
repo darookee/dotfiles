@@ -17,6 +17,7 @@ function path-prepend {
 }
 path-prepend "${HOME}/.bin"
 path-prepend "${HOME}/.bin.untracked"
+path-prepend "${HOME}/.local/bin" # python
 # [[ -d "${HOME}/.rvm" ]] && path-prepend "${HOME}/.rvm/bin"
 # }}}
 # Set CDPATH {{{
