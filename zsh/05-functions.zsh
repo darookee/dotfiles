@@ -65,15 +65,55 @@ fi
 # }}}
 # archive - tar up directories and remove them {{{
 archive() {
-    if [ -d "${1}" ]; then
-        archivedir=$(dirname "$1" )
-        archivefile=${1#${archivedir}/}
-        tar cvjf "${1}.tar.bz2" -C "${archivedir}" "${archivefile}" && 
-        read -q "REMOVE?Remove '${1}' [y/N]? "
-        [[ "${REMOVE}" == "y" ]] && rm -rf "${1}"
-    else
-        echo "Need an directory to archive."
-    fi
+    case $1 in
+        ls)
+            if [ -d "${archivedir}" ]; then
+                if [ -f "${archivedir}/${2}" ]; then
+                    ark l ${archivedir}/${2}
+                else
+                    ls -lh "${archivedir}"|sed -n '1!p'|awk '{ print $9 " " $5 }'
+                fi
+            fi
+            ;;
+        rm)
+            archivetorm=${archivedir}/${2}
+            read -q "REMOVE?Remove '${2}' from archive [y/N]? "
+            [[ "${REMOVE}" == "y" ]] && rm -f "${archivetorm}"
+            echo "\n"
+            ;;
+        restore)
+            archivetorestore=${archivedir}/${2}
+            restorepath=$(sed 's/-/\//g' <<< $2)
+            restorepath=$(dirname ${restorepath%.tar.bz2})
+            if [ ! -d "${restorepath}" ]; then
+                mkdir -p "${restorepath}"
+            fi
+            echo "Restoring into '${restorepath}'"
+            tar xjf "${archivetorestore}" -C "${restorepath}"
+            read -q "REMOVE?Remove '${2}' from archive [y/N]? "
+            [[ "${REMOVE}" == "y" ]] && rm -f "${archivetorestore}"
+            echo "\n"
+            ;;
+        add)
+            if [ -d "${2}" ]; then
+                archivebasedir=$(dirname "$2")
+                if [ ! -d "${archivedir}" ]; then
+                    archivedir=$archivebasedir
+                fi
+                archivefile=${2#${archivebasedir}/}
+                archive=${archivedir}/$(sed 's/\//-/g' <<< $2).tar.bz2
+                echo "Archiving '${archivefile}'"
+                tar cjf "${archive}" -C "${archivebasedir}" "${archivefile}" && 
+                read -q "REMOVE?Remove '${2}' [y/N]? "
+                [[ "${REMOVE}" == "y" ]] && rm -rf "${2}"
+                echo "\n"
+            else
+                echo "Need an directory to archive."
+            fi
+            ;;
+        *)
+            echo "ls, rm or add" ;;
+    esac
 }
 # }}}
 

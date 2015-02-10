@@ -52,6 +52,13 @@ if [[ -d "$TMPPREFIX" ]]; then
     mkdir -p -m 700 "$TMPPREFIX"
 fi
 
+# archivedir {{{
+export archivedir=~/.archive
+if [[ -d "$TMPPREFIX" ]]; then
+    mkdir -p -m 700 "$TMPPREFIX"
+fi
+# }}}
+
 # colors {{{
 typeset -Ag FX FG BG
 
