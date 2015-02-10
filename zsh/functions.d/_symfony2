@@ -1,8 +1,4 @@
-#compdef app/console bin/console sf `_symfony_console`
-
-_symfony_console () {
-  echo "php $(find . -maxdepth 2 -mindepth 1 -name 'console' -type f | head -n 1)"
-}
+#compdef app/console bin/console sf
 
 _symfony2_get_command_list () {
     `_symfony_console` --no-ansi|sed "1,/Available commands/d"|grep :|(while read -r line; do echo $line; done;)|awk '{ gsub(/:/,"\\:",$1); sub(/[  ]/,":", $0); gsub(/[  ]/,"\\ ", $0); print $0; }'

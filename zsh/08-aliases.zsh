@@ -136,7 +136,13 @@ fi
 alias histroy='fc -fl 1'
 # }}}
 # Symfony2 {{{
+_symfony_console () {
+  echo "php $(find . -maxdepth 2 -mindepth 1 -name 'console' -type f | head -n 1)"
+}
+
 alias sf='`_symfony_console`'
+compdef _symfony2 sf
+compdef _symfony2 `_symfony_console`
 alias sfcl='sf cache:clear'
 alias sfcw='sf cache:warmup'
 alias sfroute='sf router:debug'
