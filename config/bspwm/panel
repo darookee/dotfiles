@@ -155,8 +155,8 @@ do
 	printf ' %s \n' $(clock)
 
 	sleep 0.5s
-done | bar-aint-recursive \
+done | bar \
 	-F \#ff$WHITE \
 	-B \#ff$BLACK \
-	-g 1346x20+10+10 \
+	-g 1016x20+4+4 \
 	-f '-*-terminus-medium-r-normal-*-12-*-*-*-c-*-*-u' | ~/.config/bspwm/spawner
