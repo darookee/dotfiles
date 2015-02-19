@@ -9,5 +9,5 @@
 yaourt -S rsync openssh
 yaourt -S xorg-server xf86-video-intel xorg-xinit
 yaourt -S acpi alsa-utils mpc terminus-font imagemagick powerline-fonts-git
-yaourt -S sxhkd bspwm i3lock xautolock hsetroot unclutter st bar-aint-recursive demnu
+yaourt -S sxhkd bspwm i3lock xautolock hsetroot unclutter st bar-aint-recursive demnu rofi-git
 yaourt -S dillo
