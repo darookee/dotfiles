@@ -1,8 +1,0 @@
-#!/bin/bash
-maildir="${1-$HOME/.mail/INBOX/new}"
-
-mcount=`find $maildir -type f | wc -l`
-
-if [ "0" != "${mcount}" ]; then
-    echo "#[fg=yellow](✉#[default]${mcount}#[fg=yellow])"
-fi
