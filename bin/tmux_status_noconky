@@ -21,11 +21,13 @@ function get_ip() {
 
     [[ -f $cachefile ]] || curl -s ipv4.ipchimp.net > $cachefile
 
-    filemtime=`stat -c %Y $cachefile`
-    currtime=`date +%s`
-    diff=$(( (currtime - filemtime) ))
+    {
+        filemtime=`stat -c %Y $cachefile`
+        currtime=`date +%s`
+        diff=$(( (currtime - filemtime) ))
 
-    [[ "$diff" -lt "60" ]] || curl -s ipv4.ipchimp.net > $cachefile
+        [[ "$diff" -lt "60" ]] || curl -s ipv4.ipchimp.net > $cachefile
+    } &
 
     cat $cachefile
 }
@@ -78,13 +80,15 @@ function get_weather_raw() {
 function get_weather() {
     cachefile="${TMPDIR}/tmux.cache.weather"
 
-    [[ -f $cachefile ]] || $(get_weather_raw) > $cachefile
+    [[ -f $cachefile ]] || get_weather_raw > $cachefile
 
-    filemtime=`stat -c %Y $cachefile`
-    currtime=`date +%s`
-    diff=$(( (currtime - filemtime) ))
+    {
+        filemtime=`stat -c %Y $cachefile`
+        currtime=`date +%s`
+        diff=$(( (currtime - filemtime) ))
 
-    [[ "$diff" -lt "1800" ]] || $(get_weather_raw) > $cachefile
+        [[ "$diff" -lt "1800" ]] || get_weather_raw > $cachefile
+    } &
 
     cat $cachefile
 }
@@ -94,7 +98,7 @@ function get_mailcount() {
 
     mcount=`find $maildir -type f | wc -l`
 
-    [[ "0" -lt "${mcount}" ]] && echo "#[fg=yellow](✉#[default]${mcount}#[fg=yellow])"
+    [[ "0" -lt "${mcount}" ]] && echo "${mcount}"
 }
 
 mail_count=$(get_mailcount ~/.mail/darookee/INBOX/new)
