@@ -56,7 +56,7 @@ week() {
 }
 
 clock() {
-	TIME=$(date -u +%H:%M)
+	TIME=$(date +%H:%M)
 	echo -n $(F $TIME $WHITE)
 }
 
