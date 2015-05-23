@@ -45,6 +45,10 @@ super + alt + w
 super + {1-5}
 	bspc desktop -f ^{1-5}
 
+# Move to Desktop
+super + shift + {1-5}
+    bspc window -d focused:^{1-5}
+
 # Mouse
 ~button1
 	bspc pointer -g focus
