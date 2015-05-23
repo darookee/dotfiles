@@ -1,3 +1,4 @@
 #!/bin/bash
 
-printf "#%03x%03x" $((RANDOM%4096)) $((RANDOM%256))
+echo -n "#"
+perl -e'print[0..9,A..F]->[rand 16]for 1..8'
