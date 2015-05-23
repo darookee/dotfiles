@@ -8,7 +8,7 @@ restore_volume
 
 xset b off
 xsetroot -cursor_name left_ptr
-hsetroot -solid \#a6826d
+hsetroot -solid "$(random_hex_color.sh)"
 
 sxhkd &
 bspwm &
