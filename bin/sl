@@ -1,0 +1,5 @@
+#!/bin/bash
+
+command=$(grep Exec ~/Desktop/*${1}*.desktop|awk -F\= '{ print $2 }')
+
+exec $command
