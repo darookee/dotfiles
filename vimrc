@@ -25,19 +25,18 @@ Plug 'jeetsukumaran/vim-filebeagle'
 
 Plug 'dyng/ctrlsf.vim'
 
-Plug 'Shougo/neocomplete.vim'
 
 "Plug 'scrooloose/syntastic'
 
 Plug 'SirVer/ultisnips'
 Plug 'darookee/vim-snippets'
 
-Plug 'jiangmiao/auto-pairs'
+Plug 'cohama/lexima.vim'
 
 Plug 'c9s/lftp-sync.vim'
 
 "Plug 'scrooloose/nerdcommenter'
-Plug 'tpope/vim-commentary'
+Plug 'tomtom/tcomment_vim'
 
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-eunuch'
@@ -50,13 +49,19 @@ Plug 'IndexedSearch'
 Plug 'roman/golden-ratio'
 
 Plug 'tpope/vim-git'
-Plug 'pangloss/vim-javascript'
+Plug 'vim-scripts/JavaScript-Indent'
 Plug 'leshill/vim-json'
 Plug 'StanAngeloff/php.vim'
+Plug 'shawncplus/phpcomplete.vim'
 Plug 'evidens/vim-twig'
 Plug 'gorodinskiy/vim-coloresque'
+Plug 'chrisbra/vim-diff-enhanced'
+
+Plug 'ludovicchabant/vim-gutentags'
 
 Plug 'sjl/gundo.vim'
+
+Plug 'chriskempson/base16-vim'
 
 let s:vimlocalpluginsrc = expand($HOME . '/.vim/local.plugins')
 if filereadable(s:vimlocalpluginsrc)
@@ -95,6 +100,7 @@ map n nzz
 
 " Use _<C-L> to clear the highlighting of :set hlsearch.
 nnoremap <silent> _<C-L> :nohlsearch<CR><C-L>
+nnoremap <silent><BS> :nohlsearch<CR>
 
 set laststatus=2
 set ruler
@@ -103,6 +109,7 @@ set lcs=trail:·,precedes:«,eol:↲,tab:▸\ ,extends:»
 set showcmd
 set shortmess=atI
 set noshowmode
+set lazyredraw
 
 set wildmenu
 set wildmode=longest,list
@@ -132,6 +139,8 @@ set expandtab
 set cursorline
 set number
 
+set foldlevelstart=2
+
 set encoding=utf-8
 set shell=/bin/zsh
 
@@ -145,6 +154,10 @@ set undofile
 set undoreload=10000
 set undolevels=1000
 
+" Autocompletion
+set completeopt-=preview
+set wildignore+=.git,vendor,node_modules,bower_components
+
 " Spelling
 set spellfile=~/.vim/spell/de_local.utf-8.add
 set nospell spelllang=de,en
@@ -155,8 +168,9 @@ set cryptmethod=blowfish
 " Load matchit.vim
 runtime! macros/matchit.vim
 " Colors {{{
-set background=light
-colorscheme zenburn
+set background=dark
+let g:rehash256 = 1
+colorscheme base16-default
 " }}}
 " }}}
 " Mappings {{{
@@ -192,7 +206,8 @@ nnoremap gO O<ESC>
 nnoremap go o<ESC>
 
 " highlight last paste
-nnoremap gp `[V`]
+" another version vom /u/Wiggledan
+nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 " Remove trailing whitespace with ,W
 nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>:nohl<CR>
@@ -217,6 +232,10 @@ nnoremap <silent> <leader>a :set opfunc=<SID>AckMotion<CR>g@
 nnoremap <leader>r :%s/\<<C-r><C-w>\>//g<Left><Left>
 nnoremap <leader>R :%s/\<<C-r><C-a>\>//g<Left><Left>
 
+" run current line in shell and replace line with output
+" https://www.youtube.com/watch?v=MquaityA1SM
+noremap Q !!$SHELL<CR>
+
 " toggle number and list
 nnoremap <Leader><F10> :<C-u>call Toggle_copy_source()<CR>
 
@@ -229,6 +248,9 @@ endf
 " COMMAND {{{
 " expand %% to current filepath in commandline
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
+
+" sudo write
+cmap w!! w !sudo tee > /dev/null %
 " }}}
 " VISUAL {{{
 " Ack for word(s) in motion
@@ -238,6 +260,32 @@ xnoremap <silent> <leader>a :<C-U>call <SID>AckMotion(visualmode())<CR>
 " replace with <leader><C-r>
 " (https://www.reddit.com/r/vim/comments/2l6adg/how_do_you_do_a_search_replace_to_minimize_the/clrvf69)
 vnoremap <leader><C-r> "vy:%s/<C-r>v//g<Left><Left>
+" }}}
+" OPENDING {{{
+" from romainl
+" http://stackoverflow.com/questions/11320083/is-there-a-way-to-get-integer-object-motions-in-vim
+onoremap N  :<c-u>call <SID>NumberTextObject(0)<cr>
+xnoremap N  :<c-u>call <SID>NumberTextObject(0)<cr>
+onoremap aN :<c-u>call <SID>NumberTextObject(1)<cr>
+xnoremap aN :<c-u>call <SID>NumberTextObject(1)<cr>
+onoremap iN :<c-u>call <SID>NumberTextObject(1)<cr>
+xnoremap iN :<c-u>call <SID>NumberTextObject(1)<cr>
+
+function! s:NumberTextObject(whole)
+    normal! v
+
+    while getline('.')[col('.')] =~# '\v[0-9]'
+        normal! l
+    endwhile
+
+    if a:whole
+        normal! o
+
+        while col('.') > 1 && getline('.')[col('.') - 2] =~# '\v[0-9]'
+            normal! h
+        endwhile
+    endif
+endfunction
 " }}}
 " }}}
 " PluginSettings {{{
@@ -271,97 +319,34 @@ let g:ctrlp_extensions = ['line']
 let g:ctrlp_by_filename = 1
 let g:ctrlp_max_height = 30
 let g:ctrlp_switch_buffer = 'EtVH'
-"let g:ctrlp_user_command = [
-            "\ '.git',
-            "\ 'cd %s && git ls-files . -co --exclude-standard |
-            "\ grep -v -P "\.jpg$|\.png$|\.gif$"',
-            "\ 'find %s -type f| grep -v -P "\.jpg$|\.png$|\.gif$"'
-            "\ ]
-
+let g:ctrlp_use_caching = 0
 " http://blog.patspam.com/2014/super-fast-ctrlp
 
-let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-      \ --ignore .git
-      \ --ignore .svn
-      \ --ignore .hg
-      \ --ignore .DS_Store
-      \ --ignore "**/*.pyc"
-      \ -g ""'
+if executable('ag')
+    let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+                \ --ignore .git
+                \ --ignore .svn
+                \ --ignore .hg
+                \ --ignore .DS_Store
+                \ --ignore "**/*.pyc"
+                \ -g ""'
+else
+    let g:ctrlp_user_command = [
+                \ '.git',
+                \ 'cd %s && git ls-files . -co --exclude-standard |
+                \ grep -v -P "\.jpg$|\.png$|\.gif$"',
+                \ 'find %s -type f| grep -v -P "\.jpg$|\.png$|\.gif$"'
+                \ ]
+endif
 
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_mruf_relative = 1
 nnoremap <silent> _b :<C-u>CtrlPBuffer<CR>
+nnoremap <silent> _t :<C-u>CtrlPTag<CR>
 
 " map <leader><C-t> :CtrlPTag<CR>
-" }}}
-" netrw (disabled) {{{
-"let g:netrw_banner       = 0
-"let g:netrw_keepdir      = 1
-"let g:netrw_liststyle    = 3 " or 3
-"let g:netrw_sort_options = 'i'
-"nnoremap <silent> - :<C-u>Explore<CR>
-" }}}
-" NeoComplete {{{
-"
-" Use neocomplete.
-let g:neocomplete#enable_at_startup                 = 1
-let g:neocomplete#enable_omni_fallback              = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case                 = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern          = '\*ku\*'
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
-endif
-
-let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-
-" Plugin key-mappings.
-inoremap <expr><C-g> neocomplete#undo_completion()
-inoremap <expr><C-l> neocomplete#complete_common_string()
-
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y> neocomplete#close_popup()
-inoremap <expr><C-e> neocomplete#cancel_popup()
-
-augroup neocomplete_lock
-    au!
-    au FileType text NeoCompleteLock
-    au FileType mail NeoCompleteLock
-augroup END
-
-" }}}
-" Syntastics (disabled) {{{
-" let g:syntastic_auto_loc_list        = 1
-" let g:syntastic_auto_jump            = 1
-" let g:syntastic_enable_highlighting  = 1
-" let g:syntastic_enable_signs         = 1
-" let g:syntastic_javascript_checkers  = ['jslint']
-" let g:syntastic_php_checkers         = ['php']
-" let g:syntastic_mode_map             = { 'mode': 'passive',
-"             \ 'active_filetypes': ['ruby', 'php', 'python'],
-"             \ 'passive_filetypes': [] }
-" let g:syntastic_error_symbol         = '✗'
-" let g:syntastic_style_error_symbol   = '✠'
-" let g:syntastic_warning_symbol       = '∆'
-" let g:syntastic_style_warning_symbol = '≈'
-
-" map <LocalLeader>sc :SyntasticCheck<CR>
-
 " }}}
 " UltiSnips {{{
 let g:UltiSnipsExpandTrigger              = "<tab>"
@@ -391,9 +376,29 @@ let g:lftp_sync_no_default_mapping        = 1
 " CtrlSF {{{
 nnoremap _A :<C-u>CtrlSF 
 " }}}
+" Grep {{{
+if executable('ag')
+    command! -nargs=+ -complete=file_in_path -bar Grep silent! grep! <args> | cwindow 3 | redraw!
+    set grepprg=ag\ --vimgrep
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
+elseif executable('ack')
+    command! -nargs=+ -complete=file_in_path -bar Grep silent! grep! <args> | cwindow 3 | redraw!
+    set grepprg=ack\ --nogroup\ --nocolor\ --ignore-case\ --column
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
+endif
+nnoremap K :<C-u>Grep <C-R><C-W>"<CR>:cw<CR>
+nnoremap _K :<C-u>Grep 
+" }}}
 " Filetype specific {{{
 
-" PHP Syntax
+" PHP 
+" Complete
+let g:phpcomplete_relax_static_constraint = 1
+let g:phpcomplete_complete_for_unknown_classes = 1
+let g:phpcomplete_search_tags_for_variables = 1
+let g:phpcomplete_parse_docblock_comments = 1
+
+" Syntax
 " highlight docblock
 function! PhpSyntaxOverride()
     hi! def link phpDocTags  phpDefine
