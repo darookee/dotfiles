@@ -163,8 +163,6 @@ set spellfile=~/.vim/spell/de_local.utf-8.add
 set nospell spelllang=de,en
 nmap <silent> <LocalLeader>s :set spell!<CR>
 
-set cryptmethod=blowfish
-
 " Load matchit.vim
 runtime! macros/matchit.vim
 " Colors {{{
