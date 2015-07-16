@@ -167,7 +167,7 @@ nmap <silent> <LocalLeader>s :set spell!<CR>
 runtime! macros/matchit.vim
 " Colors {{{
 set background=dark
-let g:rehash256 = 1
+let base16colorspace=256
 colorscheme base16-default
 " }}}
 " }}}
