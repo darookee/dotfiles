@@ -1,9 +1,11 @@
 #!/bin/bash
 
+export MPD_HOST=192.168.0.15
+
 function get_cpu_temp() {
     temp=$(cat /sys/class/thermal/thermal_zone0/temp|awk '{ printf("%.0f", $1/1000) }')
     if [ "$temp" -gt "39" ]; then
-        echo -n "#[fg=colour166]$temp°C"
+        echo -n "#[fg=colour1]$temp°C"
     else
         echo -n "$temp°C"
     fi
@@ -15,7 +17,7 @@ function get_ip() {
     ping -c 1 mail.darookee.net > /dev/null 2>&1
 
     if [ $? -ne 0 ]; then
-        echo "#[fg=colour166]OFFLINE"
+        echo "#[fg=colour1]OFFLINE"
         exit
     fi
 
@@ -122,21 +124,21 @@ time=$(date +"%H:%M")
 # MPDPi not working
 
 if [ ! -z "${mail_count}" ]; then
-    echo -n "#[fg=colour142,bg=colour237,nobold]#[bg=colour142,fg=colour166]✉ #[fg=colour238]${mail_count} #[bg=colour142,fg=colour236]#[bg=colour236]"
+    echo -n "#[fg=colour3,bg=colour10,nobold]#[bg=colour3,fg=colour9]✉ #[fg=colour10]${mail_count} #[bg=colour3,fg=colour11]#[bg=colour11]"
 else 
-    echo -n "#[bg=colour237,fg=colour236]#[bg=colour236]"
+    echo -n "#[bg=colour10,fg=colour11]#[bg=colour11]"
 fi
-echo -n "#[bg=colour236,fg=colour174] ❤#[fg=colour188] ${cpu_temp} #[fg=colour188][${cpu_load}]#[fg=colour245,bg=colour236]#[fg=colour188][${mem_percent}]"
-echo -n "#[fg=colour238,bg=colour236] #[bg=colour238] "
+echo -n "#[bg=colour11,fg=colour9] ❤#[fg=colour12] ${cpu_temp} #[fg=colour12][${cpu_load}][${mem_percent}]"
+echo -n "#[fg=colour10,bg=colour11] #[bg=colour10] "
 if [ ! -z "${mpc}" ]; then
-    echo -n "#[fg=colour109]♪ #[fg=colour188]${mpc}"
+    echo -n "#[fg=colour6]♪ #[fg=colour12]${mpc}"
 else
-    echo -n "#[fg=colour190]⍟ #[fg=colour188]${cur_ip}#[fg=colour236]  "
-    echo -n "#[fg=colour190]≣ #[fg=colour188]${space_home}"
+    echo -n "#[fg=colour2]⍟ #[fg=colour12]${cur_ip}#[fg=colour11]  "
+    echo -n "#[fg=colour2]≣ #[fg=colour12]${space_home}"
 fi
-echo -n "#[fg=colour236,bg=colour238] #[bg=colour236] "
-echo -n "#[fg=colour109]${weather}#[fg=colour109,bg=colour236] #[bg=colour109] "
-echo -n "#[fg=colour238]${date}#[fg=colour237]  #[fg=colour238,bold]${time} #[fg=colour245,nobold,bg=colour238]"
+echo -n "#[fg=colour11,bg=colour10] #[bg=colour11] "
+echo -n "#[fg=colour12]${weather}#[bg=colour11,fg=colour4] #[bg=colour4] "
+echo -n "#[fg=colour10]${date}#[fg=colour0]  #[fg=colour10,bold]${time} #[fg=colour11,nobold,bg=colour4]"
 
 
 
