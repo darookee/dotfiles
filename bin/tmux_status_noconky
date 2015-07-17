@@ -4,7 +4,7 @@ export MPD_HOST=192.168.0.15
 
 function get_cpu_temp() {
     temp=$(cat /sys/class/thermal/thermal_zone0/temp|awk '{ printf("%.0f", $1/1000) }')
-    if [ "$temp" -gt "39" ]; then
+        if [ "$temp" -gt 39 ]; then
         echo -n "#[fg=colour1]$temp°C"
     else
         echo -n "$temp°C"
