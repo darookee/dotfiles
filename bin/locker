@@ -10,5 +10,6 @@
 #
 
 import -window root -screen ~/.lock.png &&
-mogrify -gaussian-blur 25 ~/.lock.png &&
+convert ~/.lock.png -scale 50% -scale 200% -fill black -colorize 25% ~/.lock.png &&
+convert ~/.lock.png ~/.lock-icon.png -gravity center -composite -matte ~/.lock.png &&
 i3lock -i ~/.lock.png
