@@ -85,3 +85,18 @@ super + alt + space
 # Reload SXHKD
 super + shift + Escape
 	pkill -USR1 -x sxhkd && ~/.config/bspwm/bspwmrc
+
+XF86MonBrightnessUp
+    xbacklight +10
+
+XF86MonBrightnessDown
+    xbacklight -10
+
+XF86AudioMute
+    amixer set Master toggle
+
+XF86AudioRaiseVolume
+    amixer set Master 9%+
+
+XF86AudioLowerVolume
+    amixer set Master 10%-
