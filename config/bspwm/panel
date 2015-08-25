@@ -72,6 +72,11 @@ volume() {
 	echo -n "$(A $(F $volume $vcolor) volume)"
 }
 
+brightness() {
+    brightness=$(xbacklight|cut -d. -f1)
+    echo -n "$(F $brightness ff$WHITE)"
+}
+
 battery() {
     braw=$(acpi -b)
 	BATTERY=$(echo $braw | awk '{gsub(/%,/,""); print $4}' | sed 's/%//g')
@@ -140,7 +145,7 @@ do
 
 	# Center
 	printf '%s' '%{c}'
-	printf '%s' "$(mpc_status)"
+	# printf '%s' "$(mpc_status)"
 	# printf '%s' "$(mpc_controls)"
 
 	# Right
@@ -149,6 +154,7 @@ do
 	# printf ' %s' $(layout) $DIV
 	printf ' %s' $(volume) $DIV
 	printf ' %s' $(battery) $DIV
+    printf ' %s' $(brightness) $DIV
 	printf ' %s' $(day)
     printf ' %s' $(year)
 	printf ' %s' $(week)
@@ -158,5 +164,5 @@ do
 done | bar-aint-recursive \
 	-F \#ff$WHITE \
 	-B \#CC$BLACK \
-	-g 1346x20+10+10 \
+	-g 1260x20+10+10 \
 	-f '-*-terminus-medium-r-normal-*-12-*-*-*-c-*-*-u' | ~/.config/bspwm/spawner
