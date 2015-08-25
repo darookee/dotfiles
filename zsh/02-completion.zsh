@@ -139,11 +139,6 @@ compdef _ark ark
 
 
 # }}}
-_sl() {
-    _arguments "*::Games:_files -g '(#i)*.desktop' -W ~/Desktop/"
-}
-compdef _sl sl
-
 # }}}
 
 # vim:fdm=marker ft=zsh
