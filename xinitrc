@@ -13,6 +13,6 @@ hsetroot -solid "$(random_hex_color.sh)"
 sxhkd &
 bspwm &
 compton -cb &
-unclutter -grab &
+unclutter --timeout 1 -b
 xautolock -time 5 -locker ~/.bin.untracked/locker &
 ~/.config/bspwm/panel 2>/dev/null
