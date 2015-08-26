@@ -1,0 +1,6 @@
+Host *
+    IdentitiesOnly yes
+    TCPKeepAlive yes
+    ControlPath ~/.ssh/master-%r@%h:%p
+    ControlMaster auto
+    ForwardAgent no
