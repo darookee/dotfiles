@@ -83,3 +83,5 @@ URxvt*keysym.End:		\033[4~
 ! white
 *.color7:       #a0a0a0
 *.color15:      #f8f8f8
+
+rofi.terminal:                       st -f "DejaVu Sans Mono for Powerline-10"
