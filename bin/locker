@@ -12,4 +12,4 @@
 import -window root -screen ~/.lock.png &&
 convert ~/.lock.png -scale 50% -scale 200% -fill black -colorize 25% ~/.lock.png &&
 convert ~/.lock.png ~/.lock-icon.png -gravity center -composite -matte ~/.lock.png &&
-i3lock -i ~/.lock.png
+i3lock -i ~/.lock.png --insidevercolor=0000a0bf --insidewrongcolor=ff8000bf --insidecolor=ffffffbf --ringvercolor=0020ffff --ringwrongcolor=4040ffff --ringcolor=404090ff --textcolor=ffffffff --linecolor=aaaaaaff --keyhlcolor=ff8000ff --bshlcolor=ff8000bf
