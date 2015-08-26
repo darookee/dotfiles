@@ -100,3 +100,16 @@ XF86AudioRaiseVolume
 
 XF86AudioLowerVolume
     amixer set Master 10%-
+
+XF86ScreenSaver
+    ~/.bin/locker
+
+XF86Launch1
+    st -f "DejaVu Sans Mono for Powerline-10"
+
+XF86RotateWindows
+    ~/.bin/rotate_screen.sh invert
+
+XF86TaskPane
+    ~/.bin/rotate_screen.sh normal
+
