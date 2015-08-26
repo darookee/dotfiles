@@ -161,7 +161,7 @@ do
 	printf ' %s \n' $(clock)
 
 	sleep 0.5s
-done | bar-aint-recursive \
+done | lemonbar \
 	-F \#ff$WHITE \
 	-B \#CC$BLACK \
 	-g 1260x20+10+10 \
