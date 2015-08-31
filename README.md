@@ -18,3 +18,9 @@ cd ~/.dotfiles
 git pull --rebase
 ./setup.sh update
 ```
+
+X
+--
+
+Looks like this:
+![screenshot](crystal.png)
