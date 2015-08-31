@@ -1,12 +1,19 @@
 #!/bin/bash
 
 if hash rofi; then
-rofi -show run -switchers "run,ssh" -font "snap 10" -fg "#505050" -bg "#000000" -hifg "#ffb964" -hibg "#000000" -o 85
+    rofi -show run \
+        -switchers "run,ssh" \
+        -fg "#f2f0ec" \
+        -bg "#2d2d2d" \
+        -hlfg "#d3d0c8" \
+        -hlbg "#6699cc" \
+        -o 66 \
+        -font "dejavu sans mono 8"
 else
-dmenu_run \
-	-fn '-*-terminus-medium-r-normal-*-12-*-*-*-c-*-*-u' \
-	-nb \#202020 \
-	-nf \#f8f8f8 \
-	-sb \#404040 \
-	-sf \#ffffff
+    dmenu_run \
+        -fn '-*-terminus-medium-r-normal-*-12-*-*-*-c-*-*-u' \
+        -nb \#202020 \
+        -nf \#f8f8f8 \
+        -sb \#404040 \
+        -sf \#ffffff
 fi
