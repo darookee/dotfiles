@@ -4,11 +4,17 @@
 # by Ivan Sokolov
 #
 
-WHITE=f8f8f8
-RED=a54242
-GREEN=8c9440
-BLACK=202020
-GRAY=404040
+panelHeight=20
+padding=0
+monwidth=$(bspc query -T|grep -oE "[0-9]{2,6}"|head -n1)
+panelWidth=$(expr $monwidth - 0)
+echo $panelWidth
+
+WHITE=f2f0ec
+RED=f2777a
+GREEN=99cc99
+BLACK=2d2d2d
+GRAY=e8e6df
 
 function A {
 	echo -n "%{A:$2:}$1%{A}"
@@ -20,6 +26,14 @@ function B {
 
 function F {
 	echo -n "%{F#ff$2}$1%{F-}"
+}
+
+function f {
+    echo -n "%{F#$2}$1%{F-}"
+}
+
+function I {
+    echo -e "%{T2}\u$1%{T-}"
 }
 
 function o {
@@ -37,21 +51,21 @@ DIV=$(F '|' $GRAY)
 ###
 
 network() {
-	ping -c 1 8.8.8.8 >/dev/null 2>&1 && echo -n $(F + $GREEN) || echo -n $(F - $RED)
+	ping -c 1 8.8.8.8 >/dev/null 2>&1 && echo -n $(F $(I f1eb) $GREEN) || echo -n $(F $(I f007) $RED)
 }
 
 day() {
-    DATE=$(date -u +'%a,')
+    DATE=$(date +'%a,')
     echo -n $(F $DATE $WHITE)
 }
 
 year() {
-    DATE=$(date -u +'%F')
+    DATE=$(date +'%F')
     echo -n $(F $DATE $WHITE)
 }
 
 week() {
-    DATE=$(date -u +'(%V)')
+    DATE=$(date +'(%V)')
     echo -n $(F $DATE $WHITE)
 }
 
@@ -65,33 +79,66 @@ volume() {
     volume=$(sed 's/.*\[\(.*\)%\].*/\1/g' <<< $rawvol)
 	if [[ $rawvol == *"[off]"* ]]
 	then
+        icon="f026"
 		vcolor=$GRAY
 	else
+        if [[ $volume -gt 50 ]]
+        then
+            icon="f028"
+        else
+            icon="f027"
+        fi
 		vcolor=$WHITE
 	fi
-	echo -n "$(A $(F $volume $vcolor) volume)"
+    echo -n "$(A $(F $(I $icon) $vcolor) volume)"
 }
 
 brightness() {
     brightness=$(xbacklight|cut -d. -f1)
-    echo -n "$(F $brightness ff$WHITE)"
+    if [[ $brightness -gt 90 ]]
+    then
+        alpha="ff"
+    elif [[ $brightness -gt 50 ]]
+    then
+        alpha="cc"
+    elif [[ $brightness -gt 25 ]]
+    then
+        alpha="aa"
+    else
+        alpha="77"
+    fi
+    echo -n "$(f $(I "f042") ${alpha}$WHITE)"
 }
 
 battery() {
     braw=$(acpi -b)
 	BATTERY=$(echo $braw | awk '{gsub(/%,/,""); print $4}' | sed 's/%//g')
     state=$(echo $braw|awk '{gsub(/,/,""); print $3}')
-	if [[ $BATTERY -gt 20 ]]
+	if [[ $BATTERY -gt 90 ]]
 	then
+        ICON="f240"
 		BCOLOR=$WHITE
-	else
+    elif [[ $BATTERY -gt 75 ]]
+    then
+        ICON="f241"
+		BCOLOR=$WHITE
+    elif [[ $BATTERY -gt 50 ]]
+    then
+        ICON="f242"
+		BCOLOR=$WHITE
+    elif [[ $BATTERY -gt 25 ]]
+    then
+        ICON="f243"
+		BCOLOR=$WHITE
+    else
+        ICON="f244"
 		BCOLOR=$RED
 	fi
     if [ "$state" == "Charging" ]
     then
         BCOLOR=$GREEN
     fi
-	echo -n $(F $BATTERY ff$BCOLOR)
+    echo -n $(F $(I $ICON) ff$BCOLOR)
 }
 
 layout() {
@@ -126,13 +173,11 @@ do
     for element in "${desktop_array[@]}"
     do
         if [[ $element == "O"* ]] || [[ $element == "F"* ]]; then
-            desktops="${desktops} $(F \| $GREEN)$(F $index $WHITE)$(F \| $GREEN)" # active desktop
-        else if [[ $element == "o"* ]]; then
-            desktops="${desktops} %{A:bspc desktop -f ^$index:}$(F \| $GRAY)$(F $index $WHITE)$(F \| $GRAY)%{A}" # desktop with open leaves
-        else if [[ $element == "f"* ]]; then
-            desktops="${desktops} %{A:bspc desktop -f ^$index:}$(F \| $WHITE)$(F $index $WHITE)$(F \| $WHITE)%{A}" # clean desktop
-        fi
-        fi
+            desktops="${desktops} $(F $(I "f192") $WHITE)" # active desktop
+        elif [[ $element == "o"* ]]; then
+            desktops="${desktops} %{A:bspc desktop -f ^$index:}$(F $(I "f192") $WHITE)%{A}" # desktop with open leaves
+        elif [[ $element == "f"* ]]; then
+            desktops="${desktops} %{A:bspc desktop -f ^$index:}$(F $(I "f10c") $WHITE)%{A}" # clean desktop
         fi
         (( index += 1 ))
     done
@@ -141,28 +186,32 @@ do
 	# do
 	# 	printf ' %s' "%{A:$i:}$(F \| $GRAY)$(F $i $WHITE)$(F \| $GRAY)%{A}"
 	# done
-    printf ' %s' "${desktops}"
+    printf ' %s' $(I f073)
+	printf ' %s' $(day)
+    printf ' %s' $(year)
+	printf ' %s' $(week)
 
 	# Center
 	printf '%s' '%{c}'
+    printf ' %s' "${desktops}"
 	# printf '%s' "$(mpc_status)"
 	# printf '%s' "$(mpc_controls)"
 
 	# Right
 	printf '%s' '%{r}'
-	printf ' %s' $(network) $DIV
 	# printf ' %s' $(layout) $DIV
-	printf ' %s' $(volume) $DIV
-	printf ' %s' $(battery) $DIV
-    printf ' %s' $(brightness) $DIV
-	printf ' %s' $(day)
-    printf ' %s' $(year)
-	printf ' %s' $(week)
+    printf ' %s' $(brightness)
+	printf ' %s' $(volume)
+	printf ' %s' $(network)
+	printf ' %s' $(battery)
+    # printf ' %s ' $(I f017)
 	printf ' %s \n' $(clock)
 
 	sleep 0.5s
 done | lemonbar \
 	-F \#ff$WHITE \
-	-B \#CC$BLACK \
-	-g 1260x20+10+10 \
-	-f '-*-terminus-medium-r-normal-*-12-*-*-*-c-*-*-u' | ~/.config/bspwm/spawner
+	-B \#ff$BLACK \
+	-g ${panelWidth}x${panelHeight}+${padding}+${padding} \
+	-f 'DejaVu\ Sans\ Mono\ for\ Powerline:size=8' \
+    -f 'Font Awesome:size=8' \
+    | ~/.config/bspwm/spawner
