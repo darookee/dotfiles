@@ -25,6 +25,9 @@ super + ctrl + {h,j,k,l}
 super + {_,shift + }{h,j,k,l}
 	bspc window -{f,s} {left,down,up,right} || bspc window -f {prev, prev, next, next}
 
+super + alt + {h,j,k,l}
+    bspc window -e {left -10, down +10, up -10, right +10}
+
 # Move current window to largest space
 super + Return
 	bspc window -s biggest
@@ -77,10 +80,6 @@ super + alt + Return
 # dmenu
 super + space
 	dmenu_wrapper
-
-# lighthouse
-super + alt + space
-    lighthouse | sh
 
 # Reload SXHKD
 super + shift + Escape
