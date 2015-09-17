@@ -149,6 +149,9 @@ alias sfroute='sf router:debug'
 alias sfcontainer='sf container:debug'
 alias sfgb='sf generate:bundle'
 # }}}
+# misc {{{
+alias xkcdpw="shuf -n4 /usr/share/dict/words | sed \"s/'s$//\" | tr '[:upper:]' '[:lower:]'|paste -s -d ' '"
+# }}}
 
 
 # vim:ft=zsh:fdm=marker
