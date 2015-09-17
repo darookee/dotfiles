@@ -36,6 +36,9 @@ Plug 'shawncplus/phpcomplete.vim'
 " snippets
 Plug 'SirVer/ultisnips'
 Plug 'darookee/vim-snippets'
+
+" Text
+Plug 'tpope/vim-surround'
 call plug#end()
 " }}}
 " Colors {{{
@@ -80,8 +83,13 @@ set hlsearch
 set display+=lastline
 
 set wildmenu
-set wildmode=longest,list
-set wildignore+=.git,vendor/**,node_modules/**,bower_components/**
+set wildignore+=*.swp,*.bak
+set wildignore+=*.pyc
+set wildignore+=*/.git/**/*,*/.hg/**/*,*/.svn/**/*
+set wildignore+=*/min/*,*/vendor/*,*/node_modules/*,*/bower_components/*
+set wildignore+=*.tar.*
+set wildignorecase
+set wildmode=full
 
 " Spelling
 set spellfile=~/.vim/spell/de_local.utf-8.add
@@ -93,6 +101,7 @@ set smarttab
 
 set list
 set listchars=tab:»·,eol:↲
+set showbreak=›››\
 
 set hidden
 " }}}
@@ -286,7 +295,8 @@ function! Status(winnr)
     endif
 
     " column
-    let stat .= '%#StatuslineDim#' . (line(".") / 100 >= 1 ? '%l' : ' %2l')
+    let stat .= '%#StatuslineDim#' . (line(".") / 100 >= 1 ?
+                \ '%l' : ' %2l').'/%L'
     let stat .= ':' . (col(".") / 100 >= 1 ? '%v ' : ' %2v ')
 
     " file
@@ -431,8 +441,13 @@ augroup FiletypeSettings
 augroup END
 " }}}
 " Commands{{{
+" Rename current file
 command! -nargs=* -complete=file -bang Rename :call Rename("<args>", "<bang>")
+" Remove current file but don't close buffer
 command! Remove :call delete(@%)
+" past buffer to sprunge.us
+command! -range=% SP  execute <line1> . "," . <line2> .
+            \ "w !curl -F 'sprunge=<-' http://sprunge.us | tr -d '\\n'"
 " }}}
 
 " vim:fdm=marker
