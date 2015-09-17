@@ -39,7 +39,7 @@ export LESS='-F -g -i -M -R -S -w -X -z-4'
 
 # Setup tempdir
 if [[ "${TMPDIR}" == "" ]]; then
-    export TMPDIR="/tmp/$USER"
+    export TMPDIR="${HOME}/.tmp"
 fi
 
 if [[ ! -d "$TMPDIR" ]]; then
