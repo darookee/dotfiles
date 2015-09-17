@@ -6,6 +6,7 @@ _archive() {
         'rm:remove from achive'
         'add:add folder to archive',
         'restore:restore files from archive'
+        'stats:show archive stats'
     )
 
     if (( CURRENT == 2 )); then
@@ -16,7 +17,7 @@ _archive() {
                 _arguments \
                     "*::folder:_files -/"
                 ;;
-            ls|rm|restore)
+            ls|rm|restore|stats)
                 _arguments \
                     "*::archives:_files -W ${archivedir}"
                 ;;

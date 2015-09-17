@@ -69,22 +69,22 @@ archive() {
         ls)
             if [ -d "${archivedir}" ]; then
                 if [ -f "${archivedir}/${2}" ]; then
-                    ark l ${archivedir}/${2}
+                    tar tvjf "${archivedir}/${2}"
                 else
                     ls -lh "${archivedir}"|sed -n '1!p'|awk '{ print $9 " " $5 }'
                 fi
             fi
             ;;
         rm)
-            archivetorm=${archivedir}/${2}
+            archivetorm="${archivedir}/${2}"
             read -q "REMOVE?Remove '${2}' from archive [y/N]? "
             [[ "${REMOVE}" == "y" ]] && rm -f "${archivetorm}"
             echo "\n"
             ;;
         restore)
-            archivetorestore=${archivedir}/${2}
+            archivetorestore="${archivedir}/${2}"
             restorepath=$(sed 's/-/\//g' <<< $2)
-            restorepath=$(dirname ${restorepath%.tar.bz2})
+            restorepath=$(dirname "${restorepath%.tar.bz2}")
             if [ ! -d "${restorepath}" ]; then
                 mkdir -p "${restorepath}"
             fi
@@ -98,10 +98,10 @@ archive() {
             if [ -d "${2}" ]; then
                 archivebasedir=$(dirname "$2")
                 if [ ! -d "${archivedir}" ]; then
-                    archivedir=$archivebasedir
+                    archivedir="$archivebasedir"
                 fi
-                archivefile=${2#${archivebasedir}/}
-                archive=${archivedir}/$(sed 's/\//-/g' <<< $2).tar.bz2
+                archivefile="${2#${archivebasedir}/}"
+                archive="${archivedir}/$(sed 's/\//-/g' <<< $2).tar.bz2"
                 echo "Archiving '${archivefile}'"
                 tar cjf "${archive}" -C "${archivebasedir}" "${archivefile}" && 
                 read -q "REMOVE?Remove '${2}' [y/N]? "
@@ -111,8 +111,31 @@ archive() {
                 echo "Need an directory to archive."
             fi
             ;;
+        stats)
+            if [[ "" == "${2}" ]]; then
+                size=$(du -sh "${archivedir}"|awk '{print $1}')
+                files=$(ls -1 "${archivedir}"|wc -l)
+                echo "Containing $fg[yellow]${files}$fg[white] archives with total size of $fg[red]${size}$fg[white]"
+            else
+                if [ -f "${archivedir}/${2}" ]; then
+                    rawinfo=$(stat "${archivedir}/${2}")
+                    created=$(echo $rawinfo|grep "Change"|awk -F\: '{ print $2 }')
+                    size=$(du -h "${archivedir}/${2}"|awk '{print $1}')
+                    echo "Size: ${size}"
+                    echo "Created: ${created}"
+                else
+                    echo "No archive by that name"
+                fi
+            fi
+            ;;
         *)
-            echo "ls, rm or add" ;;
+            echo "Unknown option."
+            echo "add - add directory to archive"
+            echo "ls - list archives or contents"
+            echo "restore - restore files from archive"
+            echo "rm - remove from archive"
+            echo "stats - show stats about archives"
+            ;;
     esac
 }
 # }}}
