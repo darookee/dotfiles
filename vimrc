@@ -1,5 +1,5 @@
 " ~darookee/.vimrc
-
+" Plug {{{
 if has('vim_starting') " Do stuff on startup {{{
 " Download vim-plug if not exists {{{
     if !filereadable(expand('~/.vim/autoload/plug.vim'))
@@ -12,218 +12,144 @@ if has('vim_starting') " Do stuff on startup {{{
 " }}}
 endif
 " }}}
-" Plugins {{{
+" }}}
 set nocompatible
 filetype off
-
-call plug#begin() 
-Plug 'bling/vim-airline'
-
+" Plugins {{{
+call plug#begin()
+" File finder
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'jeetsukumaran/vim-filebeagle'
 
-Plug 'dyng/ctrlsf.vim'
+" Colors
+Plug 'darookee/base16-vim'
 
-
-"Plug 'scrooloose/syntastic'
-
-Plug 'SirVer/ultisnips'
-Plug 'darookee/vim-snippets'
-
-Plug 'cohama/lexima.vim'
-
-Plug 'c9s/lftp-sync.vim'
-
-"Plug 'scrooloose/nerdcommenter'
-Plug 'tomtom/tcomment_vim'
-
+" Git
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-ragtag'
-
 Plug 'airblade/vim-gitgutter'
 
-Plug 'IndexedSearch'
-Plug 'roman/golden-ratio'
-
-Plug 'tpope/vim-git'
-Plug 'vim-scripts/JavaScript-Indent'
-Plug 'leshill/vim-json'
-Plug 'StanAngeloff/php.vim'
-Plug 'shawncplus/phpcomplete.vim'
+" Filetype
 Plug 'evidens/vim-twig'
-Plug 'gorodinskiy/vim-coloresque'
-Plug 'chrisbra/vim-diff-enhanced'
+Plug 'shawncplus/phpcomplete.vim'
 
-Plug 'ludovicchabant/vim-gutentags'
-
-Plug 'sjl/gundo.vim'
-
-Plug 'chriskempson/base16-vim'
-
-let s:vimlocalpluginsrc = expand($HOME . '/.vim/local.plugins')
-if filereadable(s:vimlocalpluginsrc)
-    exec ':so ' . s:vimlocalpluginsrc
-endif
-
-call plug#end() " }}}
+" snippets
+Plug 'SirVer/ultisnips'
+Plug 'darookee/vim-snippets'
+call plug#end()
+" }}}
+" Colors {{{
+set background=dark
+let base16colorspace=256
+colorscheme base16-monokai
+" }}}
+" Settings {{{
 filetype plugin indent on
-syntax enable
-" Configuration {{{
-" Settings (partly taken from tpope/vim-sensible {{{
+syntax on
 
-set autoindent
-" set smartindent
-set backspace=indent,eol,start
-set smarttab
+" remove startup message
+set shortmess=atI
+set laststatus=2
 
-set nrformats-=octal
+" linenumbers, cursorposition
+set number
+set cursorline
+set ruler
+set scrolloff=5
+set colorcolumn=81
+set showmatch
 
-set ttimeout
-set ttimeoutlen=50
+" undo
+set undodir=~/.vim/undodir
+set undofile
+set noswapfile
 
+" whitespace
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set textwidth=80
+
+" search
 set incsearch
 set ignorecase
 set smartcase
 set gdefault
+set hlsearch
 
-nnoremap / /\v
-vnoremap / /\v
-
-nnoremap ? ?\v
-vnoremap ? ?\v
-
-map N Nzz
-map n nzz
-
-" Use _<C-L> to clear the highlighting of :set hlsearch.
-nnoremap <silent> _<C-L> :nohlsearch<CR><C-L>
-nnoremap <silent><BS> :nohlsearch<CR>
-
-set laststatus=2
-set ruler
-set list
-set lcs=trail:·,precedes:«,eol:↲,tab:▸\ ,extends:»
-set showcmd
-set shortmess=atI
-set noshowmode
-set lazyredraw
+set display+=lastline
 
 set wildmenu
 set wildmode=longest,list
-
-set hidden
-set nobackup
-set noswapfile
-
-set ttyfast
-
-set pastetoggle=<F10>
-
-set scrolloff=5
-set sidescrolloff=5
-set display+=lastline
-set wrap
-set showmatch
-
-set textwidth=80
-set formatoptions=n1cqj
-set colorcolumn=81
-
-set shiftwidth=4
-set tabstop=4
-set expandtab
-
-set cursorline
-set number
-
-set foldlevelstart=2
-
-set encoding=utf-8
-set shell=/bin/zsh
-
-" Allow color schemes to do bright colors without forcing bold.
-if &t_Co == 8 && $TERM !~# '^linux'
-  set t_Co=16
-endif
-
-set undodir=~/.vim/undodir
-set undofile
-set undoreload=10000
-set undolevels=1000
-
-" Autocompletion
-set completeopt-=preview
-set wildignore+=.git,vendor,node_modules,bower_components
+set wildignore+=.git,vendor/**,node_modules/**,bower_components/**
 
 " Spelling
 set spellfile=~/.vim/spell/de_local.utf-8.add
 set nospell spelllang=de,en
-nmap <silent> <LocalLeader>s :set spell!<CR>
+nnoremap <silent> _s :set spell!<CR>
 
-" Load matchit.vim
-runtime! macros/matchit.vim
-" Colors {{{
-set background=dark
-let base16colorspace=256
-colorscheme base16-default
+set backspace=indent,eol,start
+set smarttab
+
+set list
+set listchars=tab:»·,eol:↲
+
+set hidden
 " }}}
-" }}}
-" Mappings {{{
-" leader (, and \) {{{
-let mapleader                                = ","
-let maplocalleader                           = "\\"
-" }}}
-" disable some default keys {{{
+" Disable unused keys {{{
 inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
+
 nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
+
 inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
-nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
-nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+" }}}
+" Leader {{{
+set pastetoggle=<F10>
+let mapleader = ","
 " }}}
 " INSERT {{{
-" exit with jj
 inoremap jj <ESC>
 " }}}
 " NORMAL {{{
-" toggle folds with space
-nnoremap <SPACE> za
+" Move over wrapped lines {{{
+nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+" }}}
+nnoremap <space> za
 
-" add new lines and exit insert mode
+" insert new line and go back to normal
 nnoremap gO O<ESC>
 nnoremap go o<ESC>
 
+nnoremap <C-h> <C-w>h
+nnoremap <C-k> <C-w>k
+nnoremap <C-j> <C-w>j
+nnoremap <C-l> <C-w>l
+augroup windows
+    " http://vimrcfu.com/snippet/186
+    autocmd VimResized * :wincmd =
+augroup END
+
+" remove highlighting and redraw
+nnoremap <silent> <BS> :nohlsearch<CR><C-L>
+
 " highlight last paste
-" another version vom /u/Wiggledan
+" from /u/Wiggledan
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 " Remove trailing whitespace with ,W
 nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>:nohl<CR>
 
-" split lines (opposite of S-j)
-"nnoremap <leader>j gEa<CR><ESC>
-" another version vom /u/Wiggledan
-nnoremap S i<CR><Esc>^mwgk:silent! s/\v +$//<CR>:noh<CR>
-"
-" split window settings
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
-" Ack for word(s) in motion
-" http://www.vimbits.com/bits/153
-nnoremap <silent> <leader>a :set opfunc=<SID>AckMotion<CR>g@
+" Break line, opposite of J
+nnoremap <silent> S :call BreakHere()<CR>
 
 " replace with <leader>r/R
 " (https://www.reddit.com/r/vim/comments/2l6adg/how_do_you_do_a_search_replace_to_minimize_the/clrvf69)
@@ -233,93 +159,32 @@ nnoremap <leader>R :%s/\<<C-r><C-a>\>//g<Left><Left>
 " run current line in shell and replace line with output
 " https://www.youtube.com/watch?v=MquaityA1SM
 noremap Q !!$SHELL<CR>
-
-" toggle number and list
-nnoremap <Leader><F10> :<C-u>call Toggle_copy_source()<CR>
-
-fun! Toggle_copy_source()
-    set number!
-    set list!
-    exe "GitGutterToggle"
-endf
 " }}}
 " COMMAND {{{
-" expand %% to current filepath in commandline
-cnoremap %% <C-R>=expand('%:h').'/'<cr>
-
-" sudo write
+" expan %% to current path in commandline
+cnoremap %% <C-R>=expand('%:h').'/'<CR>
+" sudo write file
 cmap w!! w !sudo tee > /dev/null %
 " }}}
 " VISUAL {{{
-" Ack for word(s) in motion
-" http://www.vimbits.com/bits/153
-xnoremap <silent> <leader>a :<C-U>call <SID>AckMotion(visualmode())<CR>
-
-" replace with <leader><C-r>
-" (https://www.reddit.com/r/vim/comments/2l6adg/how_do_you_do_a_search_replace_to_minimize_the/clrvf69)
-vnoremap <leader><C-r> "vy:%s/<C-r>v//g<Left><Left>
+vnoremap <leader>r "vy:%s/<C-r>v//g<Left><Left>
+" Move visual block
+" http://vimrcfu.com/snippet/77
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 " }}}
-" OPENDING {{{
-" from romainl
-" http://stackoverflow.com/questions/11320083/is-there-a-way-to-get-integer-object-motions-in-vim
-onoremap N  :<c-u>call <SID>NumberTextObject(0)<cr>
-xnoremap N  :<c-u>call <SID>NumberTextObject(0)<cr>
-onoremap aN :<c-u>call <SID>NumberTextObject(1)<cr>
-xnoremap aN :<c-u>call <SID>NumberTextObject(1)<cr>
-onoremap iN :<c-u>call <SID>NumberTextObject(1)<cr>
-xnoremap iN :<c-u>call <SID>NumberTextObject(1)<cr>
-
-function! s:NumberTextObject(whole)
-    normal! v
-
-    while getline('.')[col('.')] =~# '\v[0-9]'
-        normal! l
-    endwhile
-
-    if a:whole
-        normal! o
-
-        while col('.') > 1 && getline('.')[col('.') - 2] =~# '\v[0-9]'
-            normal! h
-        endwhile
-    endif
-endfunction
-" }}}
-" }}}
-" PluginSettings {{{
-" vim-airline {{{
-let g:airline#extensions#csv#column_display  = 'Name'
-let g:airline#extensions#branch#enabled      = 1
-let g:airline#extensions#hunks#non_zero_only = 1
-" let g:airline#extensions#syntastic#enabled   = 1
-
-let g:airline_powerline_fonts                = 1
-
-" Display File-Modification-Time
-call airline#parts#define_function('mtime', 'Airline_FileMTime')
-call airline#parts#define_minwidth('mtime', 160)
-
-let g:airline_section_c = airline#section#create(['%<', 'file',
-            \ g:airline_symbols.space, 'mtime', g:airline_symbols.space,
-            \ 'readonly'])
-
-" function for mtime
-function! Airline_FileMTime()
-    let file = expand("%:p")
-    return '('.strftime("%c", getftime(file)).')'
-endfunction
-
-" }}}
+" Plugins {{{
 " CtrlP {{{
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_extensions = ['line']
-" let g:ctrlp_root_markers = ['templates/','engine/']
 let g:ctrlp_by_filename = 1
 let g:ctrlp_max_height = 30
 let g:ctrlp_switch_buffer = 'EtVH'
 let g:ctrlp_use_caching = 0
-" http://blog.patspam.com/2014/super-fast-ctrlp
+let g:ctrlp_follow_symlinks = 1
+let g:ctrlp_mruf_relative = 1
 
+" http://blog.patspam.com/2014/super-fast-ctrlp
 if executable('ag')
     let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
                 \ --ignore .git
@@ -338,41 +203,34 @@ else
 endif
 
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-
-let g:ctrlp_follow_symlinks = 1
-let g:ctrlp_mruf_relative = 1
-nnoremap <silent> _b :<C-u>CtrlPBuffer<CR>
-nnoremap <silent> _t :<C-u>CtrlPTag<CR>
-
-" map <leader><C-t> :CtrlPTag<CR>
-" }}}
-" UltiSnips {{{
-let g:UltiSnipsExpandTrigger              = "<tab>"
-let g:UltiSnipsListSnippets               = "<right>"
-let g:UltiSnipsJumpForwardTrigger         = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger        = "<s-tab>"
-
-let g:snips_author                        = "Nils Uliczka"
-
-fun! SnippetFilename(...)
-    let template                          = get(a:000, 0, "$1")
-    let arg2                              = get(a:000, 1, "")
-
-    let basename                          = expand('%:t:r')
-
-    if basename == ''
-        return arg2
-    else
-        return substitute(template, '$1', basename, 'g')
-    endif
+" CtrlP_StatusLine: {{{
+" Arguments: focus, byfname, s:regexp, prv, item, nxt, marked
+"            a:1    a:2      a:3       a:4  a:5   a:6  a:7
+fu! CtrlP_main_status(...)
+  let regex = a:3 ? 'regex %*' : ''
+  let prv = '%#StatuslineDim# '.a:4.' %*'
+  let item = '%#StatuslineHighlighted# '.a:5.' %*'
+  let nxt = '%#StatuslineDim# '.a:6.' %*'
+  let byfname = ' '.a:2.' %*'
+  let dir = ' '.fnamemodify(getcwd(), ':~').' %*'
+  retu  prv . item . nxt . '%=%*%<' . byfname . regex . dir
 endf
 
+" Argument: len
+"           a:1
+fu! CtrlP_progress_status(...)
+  let len = '%#StatuslineHighlighted# '.a:1.' %*'
+  let dir = ' %=%<%#StatuslineDim# '.getcwd().' %*'
+  retu len.dir
+endf
+
+let g:ctrlp_status_func = {
+  \ 'main': 'CtrlP_main_status',
+  \ 'prog': 'CtrlP_progress_status'
+  \}
 " }}}
-" lftp-sync {{{
-let g:lftp_sync_no_default_mapping        = 1
+nnoremap <silent> _b :<C-u>CtrlPBuffer<CR>
 " }}}
-" CtrlSF {{{
-nnoremap _A :<C-u>CtrlSF 
 " }}}
 " Grep {{{
 if executable('ag')
@@ -384,53 +242,145 @@ elseif executable('ack')
     set grepprg=ack\ --nogroup\ --nocolor\ --ignore-case\ --column
     set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
-nnoremap K :<C-u>Grep <C-R><C-W>"<CR>:cw<CR>
-nnoremap _K :<C-u>Grep 
+nnoremap K :<C-u>Grep <C-R><C-W>"<CR>
+nnoremap _K :<C-u>Grep
+
+" autoopen quickfix after grep
+augroup Grep
+    au!
+    " http://vimrcfu.com/snippet/194
+    autocmd QuickFixCmdPost grep,make,grepadd,vimgrep,vimgrepadd,cscope,cfile,cgetfile,caddfile,helpgrep cwindow
+    autocmd QuickFixCmdPost lgrep,lmake,lgrepadd,lvimgrep,lvimgrepadd,lfile,lgetfile,laddfile lwindow
+augroup END
 " }}}
-" Filetype specific {{{
+" Status{{{
+" http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
+function! Status(winnr)
+    let stat = ''
+    let active = winnr() == a:winnr
+    let buffer = winbufnr(a:winnr)
 
-" PHP 
-" Complete
-let g:phpcomplete_relax_static_constraint = 1
-let g:phpcomplete_complete_for_unknown_classes = 1
-let g:phpcomplete_search_tags_for_variables = 1
-let g:phpcomplete_parse_docblock_comments = 1
+    let modified = getbufvar(buffer, '&modified')
+    let readonly = getbufvar(buffer, '&ro')
+    let ftype = getbufvar(buffer, '&ft')
+    let encoding = getbufvar(buffer, '&enc')
+    let type = getbufvar(buffer, '&buftype')
+    let fname = bufname(buffer)
+    let filepath = fnamemodify(fname, ':p')
+    let lineends = search('\s\+$', 'nw')
 
-" Syntax
-" highlight docblock
-function! PhpSyntaxOverride()
-    hi! def link phpDocTags  phpDefine
-    hi! def link phpDocParam phpType
+    function! Color(active, num, content)
+        if a:active
+            return '%#'.a:num.'#' . a:content . '%*'
+        else
+            return a:content
+        endif
+    endfunction
+
+    let stat .= Color(active, 'StatuslineHighlighted', active ? ' » ' : ' « ')
+
+    if type != ''
+        let stat .= '%<'
+        let stat .= Color(active, 'StatuslineHighlighted', type)
+        return stat
+    endif
+
+    " column
+    let stat .= '%#StatuslineDim#' . (line(".") / 100 >= 1 ? '%l' : ' %2l')
+    let stat .= ':' . (col(".") / 100 >= 1 ? '%v ' : ' %2v ')
+
+    " file
+    let stat .= '%<'
+
+    if type != ''
+        let stat .= Color(active, 'StatuslineHighlighted', type)
+    else
+        let stat .= Color(active, 'StatuslineHighlighted', '%f ').
+                    \ '%#StatuslineDim#↺' .
+                    \ strftime("%F %H:%M", getftime(filepath)) . ' '
+    endif
+
+    " file modified
+    let stat .= Color(active, 'StatuslineWarning', modified ? '⇄ ' : '')
+
+    " read only
+    let stat .= Color(active, 'StatuslineAlert', readonly ? ' ' : '')
+
+    if active
+        if lineends != 0
+            let stat .= Color(active, 'StatuslineAlert',
+                        \ '␣ ')
+        endif
+    endif
+
+    " paste
+    if active && &paste
+        let stat .= '%#StatuslineHighlighted#' . '⇣ ' . '%*'
+    endif
+
+    " right side
+    let stat .= '%='
+
+    let stat .= '%#StatuslineDim# '.ftype
+    if encoding != 'utf-8'
+        let stat .= '['.encoding.']'
+    endif
+
+    " git branch
+    if exists('*fugitive#head')
+        let head = fugitive#head(6)
+
+        if empty(head) && exists('*fugitive#detect') && !exists('b:git_dir')
+            call fugitive#detect(getcwd())
+            let head = fugitive#head(6)
+        endif
+    endif
+
+    if !empty(head)
+        if exists("*gitgutter#hunk#hunks")
+            let hunks = gitgutter#hunk#hunks()
+            if empty(hunks)
+                let git_color = 'StatuslinePositive'
+            else
+                let git_color = 'StatuslineAlert'
+            endif
+        else
+            let git_color = 'StatuslineDim'
+        endif
+        let stat .= Color(active, git_color, '  '.head)
+    endif
+
+    return stat
 endfunction
 
-augroup syntaxCommands
+function! SetStatus()
+  for nr in range(1, winnr('$'))
+    call setwinvar(nr, '&statusline', '%!Status('.nr.')')
+  endfor
+endfunction
+
+augroup status
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter,BufUnload * call SetStatus()
+  autocmd Filetype qf call SetStatus()
+augroup END
+" }}}
+" Custom Highlight{{{
+augroup highlights
     au!
-    au FileType php call PhpSyntaxOverride()
-    au BufNewFile,BufReadPost *.md set filetype=markdown
+    autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/ containedin=ALL
 augroup END
 
+hi ExtraWhitespace term=reverse ctermfg=15 ctermbg=9
+hi StatuslineHighlighted ctermfg=4 ctermbg=18
+hi StatuslinePositive ctermfg=2 ctermbg=18
+hi StatuslineWarning ctermfg=5 ctermbg=18
+hi StatuslineAlert ctermfg=1 ctermbg=18
+hi StatuslineDim ctermfg=8 ctermbg=18
 " }}}
-" }}}
-" Functions {{{
-" Ack for word(s) in motion {{{
-" http://www.vimbits.com/bits/153
-function! s:CopyMotionForType(type)
-    if a:type ==# 'v'
-        silent execute "normal! `<" . a:type . "`>y"
-    elseif a:type ==# 'char'
-        silent execute "normal! `[v`]y"
-    endif
-endfunction
-
-function! s:AckMotion(type) abort
-    let reg_save = @@
-    call s:CopyMotionForType(a:type)
-    execute "normal! :CtrlSF " . shellescape(@@) . "\<cr>"
-    let @@ = reg_save
-endfunction
-" }}}
+" Functions{{{
 " Mkdir on write if it does not exist {{{
-function! s:MkNonExDir(file, buf)
+function! MkNonExDir(file, buf)
     if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
         let dir=fnamemodify(a:file, ':h')
         if !isdirectory(dir)
@@ -439,12 +389,50 @@ function! s:MkNonExDir(file, buf)
     endif
 endfunction
 
-augroup BWCCreateDir
+augroup CreateDirOnWrite
     autocmd!
-    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+    autocmd BufWritePre * :call MkNonExDir(expand('<afile>'), +expand('<abuf>'))
 augroup END
 " }}}
+
+" split lines (opposite of S-j)
+" from /u/-romainl-
+" mapped to S
+function! BreakHere()
+    s/\(.\{-}\)\(\s*\)\(\%#\)\(\s*\)\(.*\)/\1\r\3\5
+    call histdel("/", -1)
+endfunction
+
+" http://www.vim.org/scripts/script.php?script_id=2724
+function! Rename(name, bang)
+    let l:curfile = expand("%:p")
+    let l:curfilepath = expand("%:p:h")
+    let l:newname = l:curfilepath . "/" . a:name
+    let v:errmsg = ""
+    silent! exe "saveas" . a:bang . " " . l:newname
+    if v:errmsg =~# '^$\|^E329'
+        if expand("%:p") !=# l:curfile && filewritable(expand("%:p"))
+            silent exe "bwipe! " . l:curfile
+            if delete(l:curfile)
+                echoerr "Could not delete " . l:curfile
+            endif
+        endif
+    else
+        echoerr v:errmsg
+    endif
+endfunction
 " }}}
+" Filetypes {{{
+augroup FiletypeSettings
+    au!
+    autocmd BufNewFile,BufReadPost *.md set ft=markdown
+    " http://vimrcfu.com/snippet/168
+    autocmd FileType css,scss setlocal iskeyword+=-
+augroup END
+" }}}
+" Commands{{{
+command! -nargs=* -complete=file -bang Rename :call Rename("<args>", "<bang>")
+command! Remove :call delete(@%)
 " }}}
 
 " vim:fdm=marker
