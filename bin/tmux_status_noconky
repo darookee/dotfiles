@@ -3,11 +3,19 @@
 export MPD_HOST=192.168.0.15
 
 function get_cpu_temp() {
-    temp=$(cat /sys/class/thermal/thermal_zone0/temp|awk '{ printf("%.0f", $1/1000) }')
-        if [ "$temp" -gt 39 ]; then
-        echo -n "#[fg=colour1]$temp°C"
+    if [ -r "/sys/class/thermal/thermal_zone0/temp" ]; then
+        temp=$(cat /sys/class/thermal/thermal_zone0/temp|awk '{ printf("%.0f", $1/1000) }')
+        if [ -n "$temp" ]; then
+            if [ "$temp" -gt 39 ]; then
+                echo -n "#[fg=colour1]$temp°C"
+            else
+                echo -n "$temp°C"
+            fi
+        else
+            echo -n "#[fg=colour18]-°C"
+        fi
     else
-        echo -n "$temp°C"
+        echo -n "#[fg=colour18]-°C"
     fi
 }
 
@@ -39,16 +47,16 @@ function get_weather_raw() {
     ## created by gnomeye 2012-01-05
     ## modified by darookee 2015-02-03
 
-    ### Yahoo weather RSS 
+    ### Yahoo weather RSS
     rss='http://weather.yahooapis.com/forecastrss'
     woeid=${1:-640831}
     metr=${2:-c}
 
-    default="✔"
-    sun="☀"
-    snow="❄"
-    rain="☂"
-    cloud="☁"
+    default="#[fg=colour2]✔#[fg=colour20]"
+    sun="#[fg=colour3]☀#[fg=colour20]"
+    snow="#[fg=colour6]❄#[fg=colour20]"
+    rain="#[fg=colour7]☂#[fg=colour20]"
+    cloud="#[fg=colour15]☁#[fg=colour20]"
 
     url="${rss}?w=${woeid}&u=${metr}"
     ret=$(curl -s "$url" | grep "C<BR" | sed 's/^\(.*\)<.*$/\1/')
