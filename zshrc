@@ -38,12 +38,15 @@ for r in ${HOME}/.zsh/*.zsh; do
   source $r
 done
 # }}}
-# includes (rvm,...) {{{
+# includes (rvm,gvm,...) {{{
 #
-# include rvm if exists
+# include rvm/gvm if exists
 #
 if [[ -d "${HOME}/.rvm" ]]; then
     [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+fi
+if [[ -d "${HOME}/.gvm" ]]; then
+    [[ -s "/home/darookee/.gvm/scripts/gvm" ]] && source "/home/darookee/.gvm/scripts/gvm"
 fi
 # }}}
 # include zshrc.local {{{
