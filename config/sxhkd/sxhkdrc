@@ -6,7 +6,7 @@
 
 # Close bspwm
 super + shift + q
-    save_volume && bspc quit 1 && pkill bar
+    save_volume && bspc quit 1 && pkill xwait
 	# pamixer --get-volume > ~/.volume \
 
 # Balance tree
