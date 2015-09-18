@@ -3,8 +3,8 @@
 # BSPWM config file
 #
 
-bspc config border_width		2
-bspc config window_gap			10
+bspc config border_width		1
+bspc config window_gap			4
 
 bspc monitor -d 1 2 3
 
