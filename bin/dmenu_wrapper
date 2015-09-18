@@ -2,7 +2,7 @@
 
 if hash rofi; then
     rofi -show run \
-        -switchers "run,ssh" \
+        -switchers "run,ssh,window" \
         -fg "#f2f0ec" \
         -bg "#2d2d2d" \
         -hlfg "#d3d0c8" \
