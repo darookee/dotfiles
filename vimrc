@@ -100,7 +100,7 @@ set backspace=indent,eol,start
 set smarttab
 
 set list
-set listchars=tab:»·,eol:↲
+set listchars=tab:»·,eol:↲,nbsp:␣,extends:…
 set showbreak=›››\
 
 set hidden
