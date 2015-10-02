@@ -441,11 +441,21 @@ function! Rename(name, bang)
 endfunction
 " }}}
 " Filetypes {{{
+" indenthtml
+let g:html_indent_script1 = "inc"
+let g:html_indent_style1 = "inc"
+
 augroup FiletypeSettings
     au!
     autocmd BufNewFile,BufReadPost *.md set ft=markdown
     " http://vimrcfu.com/snippet/168
     autocmd FileType css,scss setlocal iskeyword+=-
+augroup END
+
+augroup QuickFix
+    au!
+    autocmd Filetype qf nnoremap <buffer> j j
+    autocmd Filetype qf nnoremap <buffer> k k
 augroup END
 " }}}
 " Commands{{{
