@@ -240,6 +240,10 @@ let g:ctrlp_status_func = {
 " }}}
 nnoremap <silent> _b :<C-u>CtrlPBuffer<CR>
 " }}}
+" vim-surround {{{
+" comment with ys<textobject>*
+let b:surround_{char2nr("*")} = printf(&commentstring, " \r ")
+" }}}
 " }}}
 " Grep {{{
 if executable('ag')
