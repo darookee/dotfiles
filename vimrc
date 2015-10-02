@@ -39,6 +39,7 @@ Plug 'darookee/vim-snippets'
 
 " Text
 Plug 'tpope/vim-surround'
+Plug 'FooSoft/vim-argwrap'
 call plug#end()
 " }}}
 " Colors {{{
@@ -239,6 +240,9 @@ let g:ctrlp_status_func = {
   \}
 " }}}
 nnoremap <silent> _b :<C-u>CtrlPBuffer<CR>
+" }}}
+" ArgWrap {{{
+nnoremap <silent> _a :ArgWrap<CR>
 " }}}
 " vim-surround {{{
 " comment with ys<textobject>*
