@@ -439,6 +439,12 @@ function! Rename(name, bang)
         echoerr v:errmsg
     endif
 endfunction
+
+" http://snippetrepo.com/snippets/filter-quickfix-list-in-vim
+function! s:FilterQuickfixList(bang, pattern)
+  let cmp = a:bang ? '!~#' : '=~#'
+  call setqflist(filter(getqflist(), "bufname(v:val['bufnr']) " . cmp . " a:pattern"))
+endfunction
 " }}}
 " Filetypes {{{
 " indenthtml
@@ -466,6 +472,9 @@ command! Remove :call delete(@%)
 " past buffer to sprunge.us
 command! -range=% SP  execute <line1> . "," . <line2> .
             \ "w !curl -F 'sprunge=<-' http://sprunge.us | tr -d '\\n'"
+" http://snippetrepo.com/snippets/filter-quickfix-list-in-vim
+command! -bang -nargs=1 -complete=file QFilter call
+            \ s:FilterQuickfixList(<bang>0, <q-args>)
 " }}}
 
 " vim:fdm=marker
