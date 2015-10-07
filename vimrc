@@ -395,6 +395,7 @@ hi StatuslinePositive ctermfg=2 ctermbg=18
 hi StatuslineWarning ctermfg=5 ctermbg=18
 hi StatuslineAlert ctermfg=1 ctermbg=18
 hi StatuslineDim ctermfg=8 ctermbg=18
+hi Search cterm=reverse
 " }}}
 " Functions{{{
 " Mkdir on write if it does not exist {{{
