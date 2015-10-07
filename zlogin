@@ -19,7 +19,7 @@
 # start keychain {{{
 # export GPG_TTY for pinentry
 export GPG_TTY=$( tty )
-(( $+commands[keychain] && $+commands[get_keychain_keys] )) && eval `keychain --eval $( get_keychain_keys )`
+(( $+commands[keychain] && $+commands[get_keychain_keys] )) && eval `keychain --agents gpg,ssh --eval $( get_keychain_keys )`
 # }}}
 # Print a random, hopefully interesting, adage. {{{
 if (( $+commands[fortune] )); then
