@@ -31,7 +31,7 @@ Plug 'airblade/vim-gitgutter'
 
 " Filetype
 Plug 'evidens/vim-twig'
-Plug 'shawncplus/phpcomplete.vim'
+Plug 'othree/html5.vim'
 
 " snippets
 Plug 'SirVer/ultisnips'
