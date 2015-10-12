@@ -13,3 +13,5 @@ setlocal makeprg=php\ -l\ -n\ -d\ display_errors=1\ -d\ error_log=\ -d\ error_re
 
 command! -buffer Make silent make % | silent redraw! | silent wincmd p | cwindow 3
 autocmd! BufWritePost <buffer> Make
+
+setlocal omnifunc=phpcomplete#CompletePHP
