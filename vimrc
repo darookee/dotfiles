@@ -92,6 +92,8 @@ set wildignore+=*.tar.*
 set wildignorecase
 set wildmode=full
 
+set completeopt-=preview
+
 " Spelling
 set spellfile=~/.vim/spell/de_local.utf-8.add
 set nospell spelllang=de,en
