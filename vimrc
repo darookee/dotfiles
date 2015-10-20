@@ -40,6 +40,8 @@ Plug 'darookee/vim-snippets'
 " Text
 Plug 'tpope/vim-surround'
 Plug 'FooSoft/vim-argwrap'
+Plug 'cohama/lexima.vim'
+
 call plug#end()
 " }}}
 " Colors {{{
@@ -249,6 +251,15 @@ nnoremap <silent> _a :ArgWrap<CR>
 " vim-surround {{{
 " comment with ys<textobject>*
 let b:surround_{char2nr("*")} = printf(&commentstring, " \r ")
+" }}}
+" {{{ lexima.vim
+call lexima#add_rule({
+            \ 'char': '%',
+            \ 'at': '{\%#',
+            \ 'input': '% ',
+            \ 'input_after': ' %',
+            \ 'filetype': 'html.twig'
+            \ })
 " }}}
 " }}}
 " Grep {{{
