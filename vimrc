@@ -30,8 +30,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " Filetype
-Plug 'evidens/vim-twig'
-Plug 'othree/html5.vim'
+Plug 'sheerun/vim-polyglot'
 
 " snippets
 Plug 'SirVer/ultisnips'
@@ -260,6 +259,9 @@ call lexima#add_rule({
             \ 'input_after': ' %',
             \ 'filetype': 'html.twig'
             \ })
+" }}}
+" vim-polyglot {{{
+let g:polyglot_disabled = ['css', 'php']
 " }}}
 " }}}
 " Grep {{{
