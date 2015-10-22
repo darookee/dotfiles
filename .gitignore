@@ -4,6 +4,7 @@ vim/colors/*
 vim/spell/*
 vim/ftplugin/*
 vim/plugged/*
+vim/after/*
 gitconfig
 vim/autoload/plug.vim*
 vim/.netrwhist
