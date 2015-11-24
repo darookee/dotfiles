@@ -24,6 +24,7 @@ Plug 'jeetsukumaran/vim-filebeagle'
 
 " Colors
 Plug 'darookee/base16-vim'
+Plug 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -45,8 +46,7 @@ call plug#end()
 " }}}
 " Colors {{{
 set background=dark
-let base16colorspace=256
-colorscheme base16-monokai
+colorscheme dracula
 " }}}
 " Settings {{{
 filetype plugin indent on
@@ -410,8 +410,16 @@ hi StatuslinePositive ctermfg=2 ctermbg=18
 hi StatuslineWarning ctermfg=5 ctermbg=18
 hi StatuslineAlert ctermfg=1 ctermbg=18
 hi StatuslineDim ctermfg=8 ctermbg=18
-hi CursorLine ctermbg=19
+hi CursorLine ctermbg=18
 hi Search cterm=reverse
+hi VertSplit ctermbg=none ctermfg=19
+hi SpellBad cterm=underline
+hi SpellCap cterm=underline
+hi SpellLocal cterm=underline
+hi SpellRare cterm=underline
+" dracula highlight is slightly invisible
+hi Visual ctermbg=19
+hi phpStructure ctermfg=212
 " }}}
 " Functions{{{
 " Mkdir on write if it does not exist {{{
