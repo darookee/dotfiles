@@ -132,22 +132,19 @@ time=$(date +"%H:%M")
 # MPDPi not working
 
 if [ ! -z "${mail_count}" ]; then
-    echo -n "#[fg=colour3,bg=colour18,nobold]#[bg=colour3,fg=colour16]✉ #[fg=colour18]${mail_count} #[bg=colour3,fg=colour19]#[bg=colour19]"
-else 
-    echo -n "#[bg=colour18,fg=colour19]#[bg=colour19]"
+    echo -n "#[bg=colour2]#[fg=colour18] ${mail_count} "
 fi
+echo -n "#[bg=colour18,fg=colour19] | "
 # echo -n "#[bg=colour236,fg=colour174] ❤#[fg=colour188] ${cpu_temp} #[fg=colour188][${cpu_percent}]#[fg=colour245,bg=colour236]#[fg=colour188][${mem_percent}]"
-echo -n "#[bg=colour19,fg=colour16] ❤#[fg=colour20] ${cpu_temp} #[fg=colour20][${cpu_load}][${mem_percent}]"
-echo -n "#[fg=colour18,bg=colour19] #[bg=colour18] "
+echo -n "#[bg=colour18,fg=colour16] ❤#[fg=colour20] ${cpu_temp} #[fg=colour20][${cpu_load}][${mem_percent}]#[fg=colour19] | "
 if [ ! -z "${mpc}" ]; then
     echo -n "#[fg=colour6]♪ #[fg=colour20]${mpc}"
 else
-    echo -n "#[fg=colour2]⍟ #[fg=colour20]${cur_ip}#[fg=colour19]  "
-    echo -n "#[fg=colour2]≣ #[fg=colour20]${space_home}"
+    echo -n "#[fg=colour2]⍟ #[fg=colour20]${cur_ip}#[fg=colour19] | "
+    echo -n "#[fg=colour2]≣ #[fg=colour20]${space_home}#[fg=colour19] | "
 fi
-echo -n "#[fg=colour19,bg=colour18] #[bg=colour19] "
-echo -n "#[fg=colour20]${weather}#[bg=colour19,fg=colour4] #[bg=colour4] "
-echo -n "#[fg=colour18]${date}#[fg=colour0]  #[fg=colour18,bold]${time} #[fg=colour19,nobold,bg=colour4]"
+echo -n "${weather}#[fg=colour19] | "
+echo -n "#[fg=colour4]${date} #[fg=colour7]${time} "
 
 
 
