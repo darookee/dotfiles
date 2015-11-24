@@ -103,9 +103,15 @@ nnoremap <silent> _s :set spell!<CR>
 set backspace=indent,eol,start
 set smarttab
 
+set formatoptions=tcql1n
+
 set list
 set listchars=tab:»·,eol:↲,nbsp:␣,extends:…
-set showbreak=›››\
+if has('linebreak')
+  set breakindent
+  let &showbreak = '↳ '
+  set cpo+=n
+end
 
 set hidden
 " }}}
