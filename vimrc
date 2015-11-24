@@ -347,8 +347,7 @@ function! Status(winnr)
     endif
 
     " column
-    let stat .= '%#StatuslineDim#' . (line(".") / 100 >= 1 ?
-                \ '%l' : ' %2l').'/%L'
+    let stat .= '%#StatuslineDim# %3l/%L'
     let stat .= ':' . (col(".") / 100 >= 1 ? '%v ' : ' %2v ')
 
     " file
