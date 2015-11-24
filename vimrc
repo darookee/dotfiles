@@ -274,6 +274,14 @@ call lexima#add_rule({
             \ 'input_after': ' %',
             \ 'filetype': 'html.twig'
             \ })
+
+call lexima#add_rule({
+            \ 'char': '{',
+            \ 'at': '{\%#',
+            \ 'input': '{ ',
+            \ 'input_after': ' }',
+            \ 'filetype': 'html.twig'
+            \ })
 " }}}
 " vim-polyglot {{{
 let g:polyglot_disabled = ['css', 'php']
@@ -282,7 +290,7 @@ let g:polyglot_disabled = ['css', 'php']
 " Grep {{{
 if executable('ag')
     command! -nargs=+ -complete=file_in_path -bar Grep silent! grep! <args> | cwindow 3 | redraw!
-    set grepprg=ag\ --vimgrep
+    set grepprg=ag\ --vimgrep\ --ignore=\"**.min.js\"
     set grepformat=%f:%l:%c:%m,%f:%l:%m
 elseif executable('ack')
     command! -nargs=+ -complete=file_in_path -bar Grep silent! grep! <args> | cwindow 3 | redraw!
