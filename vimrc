@@ -31,7 +31,12 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " Filetype
-Plug 'sheerun/vim-polyglot'
+Plug '2072/PHP-Indenting-for-VIm'
+Plug 'tobyS/vmustache'
+Plug 'MikkelPaulson/tobyS-pdv', { 'branch': 'add-interface-and-trait-templates' }
+Plug 'tobyS/php-accessors.vim'
+Plug 'othree/html5.vim'
+Plug 'beyondwords/vim-twig'
 
 " snippets
 Plug 'SirVer/ultisnips'
@@ -115,6 +120,8 @@ end
 " Thanks /u/Bloodshot25
 " https://www.reddit.com/r/vim/comments/3r8p6x/do_any_of_you_vim_users_use_a_4k_display/cwmen38
 set fillchars=vert:│,fold:┈
+
+set updatetime=1000
 
 set hidden
 " }}}
@@ -284,7 +291,6 @@ call lexima#add_rule({
             \ })
 " }}}
 " vim-polyglot {{{
-let g:polyglot_disabled = ['css', 'php']
 " }}}
 " }}}
 " Grep {{{
