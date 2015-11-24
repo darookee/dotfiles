@@ -189,11 +189,17 @@ cnoremap %% <C-R>=expand('%:h').'/'<CR>
 cmap w!! w !sudo tee > /dev/null %
 " }}}
 " VISUAL {{{
+" replace with <leader>r/R
+" (https://www.reddit.com/r/vim/comments/2l6adg/how_do_you_do_a_search_replace_to_minimize_the/clrvf69)
 vnoremap <leader>r "vy:%s/<C-r>v//g<Left><Left>
+
 " Move visual block
 " http://vimrcfu.com/snippet/77
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+
+" Align columns
+vnoremap _= :!column -t -o" "<CR>gv=
 " }}}
 " Plugins {{{
 " CtrlP {{{
