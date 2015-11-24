@@ -112,6 +112,9 @@ if has('linebreak')
   let &showbreak = '↳ '
   set cpo+=n
 end
+" Thanks /u/Bloodshot25
+" https://www.reddit.com/r/vim/comments/3r8p6x/do_any_of_you_vim_users_use_a_4k_display/cwmen38
+set fillchars=vert:│,fold:┈
 
 set hidden
 " }}}
