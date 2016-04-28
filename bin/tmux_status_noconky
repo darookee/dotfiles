@@ -46,11 +46,10 @@ function get_weather_raw() {
 
     ## created by gnomeye 2012-01-05
     ## modified by darookee 2015-02-03
+    ## Yahoo! needs OAUTH now
+    ## Using external tool
 
-    ### Yahoo weather RSS
-    rss='http://weather.yahooapis.com/forecastrss'
-    woeid=${1:-640831}
-    metr=${2:-c}
+    hash get_weather.sh > /dev/null || exit 1
 
     default="#[fg=colour2]✔#[fg=colour20]"
     sun="#[fg=colour3]☀#[fg=colour20]"
@@ -58,14 +57,12 @@ function get_weather_raw() {
     rain="#[fg=colour7]☂#[fg=colour20]"
     cloud="#[fg=colour15]☁#[fg=colour20]"
 
-    url="${rss}?w=${woeid}&u=${metr}"
-    ret=$(curl -s "$url" | grep "C<BR" | sed 's/^\(.*\)<.*$/\1/')
-    condition=${ret%,*}
-    temperatur=${ret#*, }
-    temperatur=${temperatur% *}
-    temperatur=$(echo $temperatur|tr -d ' ')
-    metrdisplay=$(echo $metr|tr '[:lower:]' '[:upper:]')
-    metrdisplay="°${metrdisplay}"
+    weather=$(~/.bin/get_weather.sh)
+
+    condition=${weather%;*}
+    temperatur=${weather#*;}
+
+    metrdisplay="°C"
 
     case "$condition" in
         *Sun*|*sun*)
