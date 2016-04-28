@@ -47,6 +47,11 @@ Plug 'tpope/vim-surround'
 Plug 'FooSoft/vim-argwrap'
 Plug 'cohama/lexima.vim'
 
+" navigation
+Plug 'rhysd/clever-f.vim'
+Plug 'ggVGc/vim-fuzzysearch'
+Plug 'mbbill/undotree'
+Plug 'naddeoa/vim-visual-page-percent'
 call plug#end()
 " }}}
 " Colors {{{
