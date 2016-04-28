@@ -43,11 +43,17 @@ done
 # include rvm/gvm if exists
 #
 if [[ -d "${HOME}/.rvm" ]]; then
-    [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+    [[ -s "${HOME}/.rvm/scripts/rvm" ]] && source "${HOME}/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 fi
 if [[ -d "${HOME}/.gvm" ]]; then
-    [[ -s "/home/darookee/.gvm/scripts/gvm" ]] && source "/home/darookee/.gvm/scripts/gvm"
+    [[ -s "${HOME}/.gvm/scripts/gvm" ]] && source "${HOME}/.gvm/scripts/gvm"
 fi
+# export WORKON_HOME and include virtualenvwrapper if it exists
+export WORKON_HOME="${HOME}/.venvs/"
+if [[ -d "${WORKON_HOME}" ]]; then
+    [[ -s "${HOME}/.local/bin/virtualenvwrapper.sh" ]] && source ${HOME}/.local/bin/virtualenvwrapper.sh
+fi
+
 # }}}
 # include zshrc.local {{{
 [[ -e ${HOME}/.zshrc.local ]] && source ${HOME}/.zshrc.local
