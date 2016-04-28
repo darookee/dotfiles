@@ -56,7 +56,10 @@ call plug#end()
 " }}}
 " Colors {{{
 set background=dark
-colorscheme dracula
+let base16colorspace=256
+colorscheme base16-monokai
+" colorscheme dracula
+" colorscheme bubblegum
 " }}}
 " Settings {{{
 filetype plugin indent on
