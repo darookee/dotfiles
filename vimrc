@@ -302,6 +302,18 @@ call lexima#add_rule({
             \ })
 " }}}
 " vim-polyglot {{{
+" let g:polyglot_disabled = ['css', 'php', 'json']
+" }}}
+" vim-fuzzysearch {{{
+let g:fuzzysearch_match_spaces = 1
+
+nmap _/ :FuzzySearch<CR>
+" }}}
+" undotree {{{
+nnoremap <F5> :UndotreeToggle<CR>
+" }}}
+" visual-page-percent {{{
+let g:visualPagePercent_display_width = 8
 " }}}
 " }}}
 " Grep {{{
