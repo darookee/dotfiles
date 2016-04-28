@@ -372,6 +372,7 @@ function! Status(winnr)
     " column
     let stat .= '%#StatuslineDim# %3l/%L'
     let stat .= ':' . (col(".") / 100 >= 1 ? '%v ' : ' %2v ')
+    let stat .= '%{VisualPercent()} '
 
     " file
     let stat .= '%<'
