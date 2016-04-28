@@ -454,6 +454,9 @@ augroup END
 augroup highlights
     au!
     autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/ containedin=ALL
+    " Cursor line only on active window
+    autocmd WinEnter * setlocal cursorline
+    autocmd WinLeave * setlocal nocursorline
 augroup END
 
 hi ExtraWhitespace term=reverse ctermfg=15 ctermbg=9
