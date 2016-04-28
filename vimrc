@@ -96,6 +96,9 @@ set gdefault
 set hlsearch
 
 set display+=lastline
+set timeout
+set ttimeoutlen=100
+set timeoutlen=750
 
 set wildmenu
 set wildignore+=*.swp,*.bak
