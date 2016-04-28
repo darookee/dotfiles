@@ -33,7 +33,7 @@ Plug 'airblade/vim-gitgutter'
 " Filetype
 Plug '2072/PHP-Indenting-for-VIm'
 Plug 'tobyS/vmustache'
-Plug 'MikkelPaulson/tobyS-pdv', { 'branch': 'add-interface-and-trait-templates' }
+Plug 'tobyS/pdv'
 Plug 'tobyS/php-accessors.vim'
 Plug 'othree/html5.vim'
 Plug 'beyondwords/vim-twig'
