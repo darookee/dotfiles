@@ -363,78 +363,90 @@ function! Status(winnr)
 
     let stat .= Color(active, 'StatuslineHighlighted', active ? ' » ' : ' « ')
 
-    if type != ''
-        let stat .= '%<'
-        let stat .= Color(active, 'StatuslineHighlighted', type)
-        return stat
-    endif
+    if active
+        if type != ''
+            let stat .= '%<'
+            let stat .= Color(active, 'StatuslineHighlighted', type)
+            return stat
+        endif
 
-    " column
-    let stat .= '%#StatuslineDim# %3l/%L'
-    let stat .= ':' . (col(".") / 100 >= 1 ? '%v ' : ' %2v ')
-    let stat .= '%{VisualPercent()} '
+        " column
+        let stat .= '%#StatuslineDim# %3l/%L'
+        let stat .= ':' . (col(".") / 100 >= 1 ? '%v ' : ' %2v ')
+        let stat .= '%{VisualPercent()} '
+    endif
 
     " file
     let stat .= '%<'
 
-    if type != ''
-        let stat .= Color(active, 'StatuslineHighlighted', type)
-    else
-        let stat .= Color(active, 'StatuslineHighlighted', '%f').
-                    \ '%#StatuslineDim# ↺' .
-                    \ strftime("%F %H:%M", getftime(filepath)) . ' '
-    endif
-
-    " file modified
-    let stat .= Color(active, 'StatuslineWarning', modified ? ' ⇄ ' : '')
-
-    " read only
-    let stat .= Color(active, 'StatuslineAlert', readonly ? '  ' : '')
-
     if active
-        if lineends != 0
-            let stat .= Color(active, 'StatuslineAlert',
-                        \ ' ␣ ')
+        if type != ''
+            let stat .= Color(active, 'StatuslineHighlighted', type)
+        else
+            let stat .= Color(active, 'StatuslineHighlighted', '%f').
+                        \ '%#StatuslineDim# ↺' .
+                        \ strftime("%F %H:%M", getftime(filepath)) . ' '
         endif
-    endif
 
-    " paste
-    if active && &paste
-        let stat .= '%#StatuslineHighlighted#' . '⇣' . '%*'
+        " file modified
+        let stat .= Color(active, 'StatuslineWarning', modified ? ' ⇄ ' : '')
+
+        " read only
+        let stat .= Color(active, 'StatuslineAlert', readonly ? '  ' : '')
+
+        if active
+            if lineends != 0
+                let stat .= Color(active, 'StatuslineAlert',
+                            \ ' ␣ ')
+            endif
+        endif
+
+        " paste
+        if active && &paste
+            let stat .= '%#StatuslineHighlighted#' . '⇣' . '%*'
+        endif
+    else
+        if type != ''
+            let stat .= Color(active, 'StatuslineHighlighted', type)
+        else
+            let stat .= Color(active, 'StatuslineHighlighted', '%f')
+        endif
     endif
 
     " right side
     let stat .= '%='
 
-    let stat .= '%#StatuslineDim# '.ftype
-    if encoding != 'utf-8'
-        let stat .= '['.encoding.']'
-    endif
+    if active
+        let stat .= '%#StatuslineDim# '.ftype
+        if encoding != 'utf-8'
+            let stat .= '['.encoding.']'
+        endif
 
-    let stat .= ' '
+        let stat .= ' '
 
-    " git branch
-    if exists('*fugitive#head')
-        let head = fugitive#head(6)
-
-        if empty(head) && exists('*fugitive#detect') && !exists('b:git_dir')
-            call fugitive#detect(getcwd())
+        " git branch
+        if exists('*fugitive#head')
             let head = fugitive#head(6)
-        endif
-    endif
 
-    if !empty(head)
-        if exists("*gitgutter#hunk#hunks")
-            let hunks = gitgutter#hunk#hunks()
-            if empty(hunks)
-                let git_color = 'StatuslinePositive'
-            else
-                let git_color = 'StatuslineAlert'
+            if empty(head) && exists('*fugitive#detect') && !exists('b:git_dir')
+                call fugitive#detect(getcwd())
+                let head = fugitive#head(6)
             endif
-        else
-            let git_color = 'StatuslineDim'
         endif
-        let stat .= Color(active, git_color, '  '.head)
+
+        if !empty(head)
+            if exists("*gitgutter#hunk#hunks")
+                let hunks = gitgutter#hunk#hunks()
+                if empty(hunks)
+                    let git_color = 'StatuslinePositive'
+                else
+                    let git_color = 'StatuslineAlert'
+                endif
+            else
+                let git_color = 'StatuslineDim'
+            endif
+            let stat .= Color(active, git_color, '  '.head)
+        endif
     endif
 
     return stat
