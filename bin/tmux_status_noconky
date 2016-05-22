@@ -7,15 +7,15 @@ function get_cpu_temp() {
         temp=$(cat /sys/class/thermal/thermal_zone0/temp|awk '{ printf("%.0f", $1/1000) }')
         if [ -n "$temp" ]; then
             if [ "$temp" -gt 39 ]; then
-                echo -n "#[fg=colour1]$temp°C"
+                echo -n "#[fg=colour13]$temp°C"
             else
                 echo -n "$temp°C"
             fi
         else
-            echo -n "#[fg=colour18]-°C"
+            echo -n "#[fg=colour15]-°C"
         fi
     else
-        echo -n "#[fg=colour18]-°C"
+        echo -n "#[fg=colour15]-°C"
     fi
 }
 
@@ -25,7 +25,7 @@ function get_ip() {
     ping -c 1 mail.darookee.net > /dev/null 2>&1
 
     if [ $? -ne 0 ]; then
-        echo "#[fg=colour1]OFFLINE"
+        echo "#[fg=colour9]OFFLINE"
         exit
     fi
 
@@ -110,6 +110,45 @@ function get_mailcount() {
 
 }
 
+function get_battery() {
+    batpath="/sys/class/power_supply/BAT0"
+
+    if [ -d ${batpath} ]; then
+        capacity=$(cat ${batpath}/capacity)
+        state=$(cat ${batpath}/status)
+        if [ "Charging" = "${state}" ]; then
+            echo -n "#[fg=colour11] #[fg=colour15]"
+        fi
+        [[ "$capacity" -lt 30 ]] && echo -n "#[fg=colour13]  #[fg=colour15]"
+        [[ "$capacity" -lt 50 ]] && echo -n "  "
+        [[ "$capacity" -lt 70 ]] && echo -n "  "
+        [[ "$capacity" -gt 90 ]] && echo -n "  "
+    fi
+}
+
+function get_wifi() {
+    if hash wpa_cli 2>/dev/null; then
+        ssid=$(wpa_cli status ${1}|grep \^ssid|cut -d\= -f2)
+        if [ ! -z "$ssid" ]; then
+            echo "#[fg=colour10]  #[fg=colour15]${ssid}"
+        fi
+    fi
+}
+
+function get_volume() {
+    if hash amixer 2>/dev/null; then
+        state=$(amixer get Master|grep "o: P"|cut -d\  -f8|tr -dc 'onf')
+
+        echo -n "#[fg=colour11]"
+        if [[ "${state}" == "off" ]]; then
+            echo -n ""
+        else
+            vol=$(amixer get Master|grep "o: P"|cut -d\  -f6|tr -dc '0-9')
+            [[ ${vol} -ge 50 ]] && echo -n " " || echo -n " "
+        fi
+    fi
+}
+
 mail_count=$(get_mailcount ~/.mail/darookee/INBOX/new)
 
 cpu_temp=$(get_cpu_temp)
@@ -121,6 +160,10 @@ cur_ip=$(get_ip)
 
 space_home=$(df -h /home|grep "[0-9]"|awk '{ print $4 }')
 
+battery=$(get_battery)
+wifi=$(get_wifi)
+volume=$(get_volume)
+
 weather=$(get_weather)
 
 date=$(date +"%a, %Y-%m-%d (%V)")
@@ -129,19 +172,30 @@ time=$(date +"%H:%M")
 # MPDPi not working
 
 if [ ! -z "${mail_count}" ]; then
-    echo -n "#[bg=colour2]#[fg=colour18] ${mail_count} "
+    echo -n "#[bg=colour13]#[fg=colour7] ${mail_count} "
 fi
-echo -n "#[bg=colour18,fg=colour19] | "
+echo -n "#[bg=colour8,fg=colour12] | "
 # echo -n "#[bg=colour236,fg=colour174] ❤#[fg=colour188] ${cpu_temp} #[fg=colour188][${cpu_percent}]#[fg=colour245,bg=colour236]#[fg=colour188][${mem_percent}]"
-echo -n "#[bg=colour18,fg=colour16]❤#[fg=colour20] ${cpu_temp} #[fg=colour20][${cpu_load}][${mem_percent}]#[fg=colour19] | "
+echo -n "#[bg=colour8,fg=colour13]❤#[fg=colour15] ${cpu_temp} #[fg=colour15][${cpu_load}][${mem_percent}]#[fg=colour12] | "
 if [ ! -z "${mpc}" ]; then
-    echo -n "#[fg=colour6]♪ #[fg=colour20]${mpc}"
+    echo -n "#[fg=colour11]♪ #[fg=colour15]${mpc}#[fg=colour12] | "
 else
-    echo -n "#[fg=colour2]⍟ #[fg=colour20]${cur_ip}#[fg=colour19] | "
-    echo -n "#[fg=colour2]≣ #[fg=colour20]${space_home}#[fg=colour19] | "
+    echo -n "#[fg=colour10]⍟ #[fg=colour15]${cur_ip}#[fg=colour12] | "
+    if [ ! -z "${wifi}" ]; then
+        echo -n "${wifi}#[fg=colour12] | "
+    fi
+    echo -n "#[fg=colour10]≣ #[fg=colour15]${space_home}#[fg=colour12] | "
 fi
-echo -n "${weather}#[fg=colour19] | "
-echo -n "#[fg=colour4]${date} #[fg=colour7]${time} "
+if [ ! -z "${volume}" ]; then
+    echo -n "#[fg=colour15]${volume}#[fg=colour12] | "
+fi
+if [ ! -z "${weather}" ]; then
+    echo -n "${weather}#[fg=colour12] | "
+fi
+if [ ! -z "${battery}" ]; then
+    echo -n "#[fg=colour15]${battery}#[fg=colour12]| "
+fi
+echo -n "#[fg=colour12]${date} #[fg=colour7]${time} "
 
 
 
