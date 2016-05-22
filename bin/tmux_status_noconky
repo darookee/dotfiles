@@ -51,11 +51,11 @@ function get_weather_raw() {
 
     hash get_weather.sh > /dev/null || exit 1
 
-    default="#[fg=colour2]✔#[fg=colour20]"
-    sun="#[fg=colour3]☀#[fg=colour20]"
-    snow="#[fg=colour6]❄#[fg=colour20]"
-    rain="#[fg=colour7]☂#[fg=colour20]"
-    cloud="#[fg=colour15]☁#[fg=colour20]"
+    default="#[fg=colour2]✔#[fg=colour15]"
+    sun="#[fg=colour3]☀#[fg=colour15]"
+    snow="#[fg=colour6]❄#[fg=colour15]"
+    rain="#[fg=colour7]☂#[fg=colour15]"
+    cloud="#[fg=colour15]☁#[fg=colour15]"
 
     weather=$(~/.bin/get_weather.sh)
 
