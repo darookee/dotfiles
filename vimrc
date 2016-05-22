@@ -380,27 +380,27 @@ function! Status(winnr)
     if type != ''
         let stat .= Color(active, 'StatuslineHighlighted', type)
     else
-        let stat .= Color(active, 'StatuslineHighlighted', '%f ').
-                    \ '%#StatuslineDim#↺' .
+        let stat .= Color(active, 'StatuslineHighlighted', '%f').
+                    \ '%#StatuslineDim# ↺' .
                     \ strftime("%F %H:%M", getftime(filepath)) . ' '
     endif
 
     " file modified
-    let stat .= Color(active, 'StatuslineWarning', modified ? '⇄ ' : '')
+    let stat .= Color(active, 'StatuslineWarning', modified ? ' ⇄ ' : '')
 
     " read only
-    let stat .= Color(active, 'StatuslineAlert', readonly ? ' ' : '')
+    let stat .= Color(active, 'StatuslineAlert', readonly ? '  ' : '')
 
     if active
         if lineends != 0
             let stat .= Color(active, 'StatuslineAlert',
-                        \ '␣ ')
+                        \ ' ␣ ')
         endif
     endif
 
     " paste
     if active && &paste
-        let stat .= '%#StatuslineHighlighted#' . '⇣ ' . '%*'
+        let stat .= '%#StatuslineHighlighted#' . '⇣' . '%*'
     endif
 
     " right side
@@ -410,6 +410,8 @@ function! Status(winnr)
     if encoding != 'utf-8'
         let stat .= '['.encoding.']'
     endif
+
+    let stat .= ' '
 
     " git branch
     if exists('*fugitive#head')
