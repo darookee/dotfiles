@@ -461,22 +461,22 @@ augroup highlights
     autocmd WinLeave * setlocal nocursorline
 augroup END
 
-hi ExtraWhitespace term=reverse ctermfg=15 ctermbg=9
-hi StatuslineHighlighted ctermfg=4 ctermbg=18
-hi StatuslinePositive ctermfg=2 ctermbg=18
-hi StatuslineWarning ctermfg=5 ctermbg=18
-hi StatuslineAlert ctermfg=1 ctermbg=18
-hi StatuslineDim ctermfg=8 ctermbg=18
-hi CursorLine ctermbg=18
+hi ExtraWhitespace term=reverse ctermfg=13 ctermbg=13
+hi StatuslineHighlighted ctermfg=15 ctermbg=8
+hi StatuslinePositive ctermfg=0 ctermbg=10
+hi StatuslineWarning ctermfg=0 ctermbg=11
+hi StatuslineAlert ctermfg=0 ctermbg=13
+hi StatuslineDim ctermfg=15 ctermbg=0
+hi CursorLine ctermbg=8
 hi Search cterm=reverse
-hi VertSplit ctermbg=none ctermfg=19
+hi VertSplit ctermbg=none ctermfg=4
 hi SpellBad cterm=underline
 hi SpellCap cterm=underline
 hi SpellLocal cterm=underline
 hi SpellRare cterm=underline
 " dracula highlight is slightly invisible
-hi Visual ctermbg=19
-hi phpStructure ctermfg=212
+hi Visual ctermbg=4
+hi phpStructure ctermfg=4
 " }}}
 " Functions{{{
 " Mkdir on write if it does not exist {{{
