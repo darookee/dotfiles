@@ -120,8 +120,8 @@ function get_battery() {
             echo -n "#[fg=colour11] #[fg=colour15]"
         fi
         [[ "$capacity" -lt 30 ]] && echo -n "#[fg=colour13]  #[fg=colour15]"
-        [[ "$capacity" -lt 50 ]] && echo -n "  "
-        [[ "$capacity" -lt 70 ]] && echo -n "  "
+        [[ "$capacity" -lt 50 && "$capacity" -gt 30 ]] && echo -n "  "
+        [[ "$capacity" -lt 70 && "$capacity" -gt 50 ]] && echo -n "  "
         [[ "$capacity" -gt 90 ]] && echo -n "  "
     fi
 }
