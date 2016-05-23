@@ -72,7 +72,7 @@ set number
 set cursorline
 set ruler
 set scrolloff=5
-set colorcolumn=81
+let &l:colorcolumn='+' . join(range(0, 254), ',+')
 set showmatch
 
 " undo
