@@ -6,4 +6,4 @@ if filereadable(s:simplenoterc)
 endif
 " }}}
 
-" vim:fdm=marker
+" vim:fdm=marker ft=vim
