@@ -1,0 +1,5 @@
+#!/bin/bash
+
+if hash amixer 2>/dev/null; then
+    [[ -f ~/.volume ]] && amixer set Master $(cat ~/.volume) 1>&2>/dev/null
+fi
