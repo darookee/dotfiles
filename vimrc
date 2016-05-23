@@ -197,6 +197,9 @@ nnoremap <leader>R :%s/\<<C-r><C-a>\>//g<Left><Left>
 " run current line in shell and replace line with output
 " https://www.youtube.com/watch?v=MquaityA1SM
 noremap Q !!$SHELL<CR>
+
+" toggle lists and numbers
+nnoremap _<F10> :setlocal list! number!<CR>
 " }}}
 " COMMAND {{{
 " expan %% to current path in commandline
