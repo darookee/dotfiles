@@ -556,6 +556,8 @@ augroup QuickFix
     au!
     autocmd Filetype qf nnoremap <buffer> j j
     autocmd Filetype qf nnoremap <buffer> k k
+
+    autocmd Filetype qf setlocal nonumber nolist
 augroup END
 " }}}
 " Commands{{{
