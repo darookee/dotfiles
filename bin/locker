@@ -1,0 +1,3 @@
+#!/bin/sh
+
+i3lock-fancy -g -p -f DejaVu-Sans-Mono

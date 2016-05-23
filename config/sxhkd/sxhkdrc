@@ -1,0 +1,69 @@
+#!/bin/bash
+
+#
+# BSPWM hotkeys
+#
+
+# Close bspwm
+super + shift + q
+    save_volume && bspc quit 1
+    # pamixer --get-volume > ~/.volume
+
+# Change windows params
+super +  {d,f,s}
+   bspc node -t \~{floating,fullscreen,tiled}
+
+# Select windows, or move
+super + {h,j,k,l}
+    bspc node -f {prev, prev, next, next}
+
+# Close window
+super + alt + w
+    bspc node -c
+
+# Desktops
+super + {1-9,0}
+    open_and_switch_desktop.sh {1-9,10}
+
+# Move to Desktop
+super + alt + {1-9,0}
+    bspc node focused -d ^{1-9,10}
+
+# cycle nodes and desktops
+{alt,super} + {_,shift} + Tab
+    bspc {node,desktop} -f {prev,next}
+
+#
+# Non WM hotkeys
+#
+
+# XTerm
+super + alt + Return
+    st
+
+# dmenu
+super + space
+    dmenu_wrapper
+
+# Reload SXHKD
+super + shift + Escape
+    pkill -USR1 -x sxhkd && ~/.config/bspwm/bspwmrc
+
+XF86MonBrightnessUp
+    xbacklight +10
+
+XF86MonBrightnessDown
+    xbacklight -10
+
+XF86AudioMute
+    amixer set Master toggle
+
+XF86AudioRaiseVolume
+    amixer set Master 9%+
+
+XF86AudioLowerVolume
+    amixer set Master 10%-
+
+XF86Display
+    ~/.bin/switch_monitors.sh
+
