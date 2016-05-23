@@ -9,7 +9,7 @@ set synmaxcol=800
 " and tomtom/checksyntax
 "
 setlocal errorformat=%f:%l:%c:\ %m
-setlocal makeprg=~/.bin.untracked/phplintcs
+setlocal makeprg=~/.bin/phplintcs
 
 command! -buffer Make silent make % | silent redraw! | silent wincmd p | cwindow 3
 autocmd! BufWritePost <buffer> Make
