@@ -39,7 +39,7 @@ super + alt + {1-9}
 
 # XTerm
 super + alt + Return
-    st
+    start_terminal.sh
 
 # dmenu
 super + space
