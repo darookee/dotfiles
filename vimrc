@@ -292,7 +292,7 @@ call lexima#add_rule({
             \ 'at': '{\%#',
             \ 'input': '% ',
             \ 'input_after': ' %',
-            \ 'filetype': 'html.twig'
+            \ 'filetype': ['html.twig', 'twig']
             \ })
 
 call lexima#add_rule({
@@ -300,7 +300,7 @@ call lexima#add_rule({
             \ 'at': '{\%#',
             \ 'input': '{ ',
             \ 'input_after': ' }',
-            \ 'filetype': 'html.twig'
+            \ 'filetype': ['html.twig', 'twig']
             \ })
 " }}}
 " vim-polyglot {{{
