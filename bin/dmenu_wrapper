@@ -1,14 +1,7 @@
 #!/bin/bash
 
 if hash rofi; then
-    rofi -show run \
-        -switchers "run,ssh,window" \
-        -fg "#f2f0ec" \
-        -bg "#2d2d2d" \
-        -hlfg "#d3d0c8" \
-        -hlbg "#6699cc" \
-        -o 66 \
-        -font "dejavu sans mono 8"
+    rofi -show run
 else
     dmenu_run \
         -fn '-*-terminus-medium-r-normal-*-12-*-*-*-c-*-*-u' \
