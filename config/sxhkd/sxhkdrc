@@ -22,12 +22,12 @@ super + alt + w
     bspc node -c
 
 # Desktops
-super + {1-9,0}
-    open_and_switch_desktop.sh {1-9,10}
+super + {1-9}
+    bspc desktop -f ^{1-9}
 
 # Move to Desktop
-super + alt + {1-9,0}
-    bspc node focused -d ^{1-9,10}
+super + alt + {1-9}
+    bspc node focused -d ^{1-9}
 
 # cycle nodes and desktops
 {alt,super} + {_,shift} + Tab
