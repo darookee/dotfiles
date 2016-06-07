@@ -19,7 +19,7 @@ rofi.opacity:       95
 rofi.width:         50
 rofi.lines:         15
 rofi.columns:       1
-rofi.font:          dejavu sans mono 8
+rofi.font:          dejavu sans mono 14
 rofi.color-enabled: true
 rofi.color-window: #1f1d1f, #1f1d1f, #1f1d1f
 rofi.color-normal: #1f1d1f, #ffffff, #1f1d1f, #cc1081, #ffffff
