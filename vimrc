@@ -110,7 +110,7 @@ set wildmode=full
 set completeopt-=preview
 
 " Spelling
-set spellfile=~/.vim/spell/de_local.utf-8.add
+set spellfile=~/.vim/spell/local.utf-8.de.add
 set nospell spelllang=de,en
 nnoremap <silent> _s :set spell!<CR>
 
