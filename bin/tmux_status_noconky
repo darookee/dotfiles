@@ -128,7 +128,7 @@ function get_battery() {
 
 function get_wifi() {
     if hash wpa_cli 2>/dev/null; then
-        ssid=$(wpa_cli status ${1}|grep \^ssid|cut -d\= -f2)
+        ssid=$(wpa_cli status ${1}|grep \^ssid|cut -d\= -f2|cut -c1-12)
         if [ ! -z "$ssid" ]; then
             echo "#[fg=colour10]  #[fg=colour15]${ssid}"
         fi
