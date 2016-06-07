@@ -319,12 +319,14 @@ let g:visualPagePercent_display_width = 8
 " }}}
 " }}}
 " Grep {{{
-if executable('ag')
-    command! -nargs=+ -complete=file_in_path -bar Grep silent! grep! <args> | cwindow 3 | redraw!
+command! -nargs=+ -complete=file_in_path -bar Grep silent! grep! <args> | cwindow 3 | redraw!
+if executable('sift')
+    set grepprg=sift\ -nMs\ --no-color\ --binary-skip\ --column\ --no-group\ --git\ --follow
+    set grepformat=%f:%l:%c:%m
+elseif executable('ag')
     set grepprg=ag\ --vimgrep\ --ignore=\"**.min.js\"
     set grepformat=%f:%l:%c:%m,%f:%l:%m
 elseif executable('ack')
-    command! -nargs=+ -complete=file_in_path -bar Grep silent! grep! <args> | cwindow 3 | redraw!
     set grepprg=ack\ --nogroup\ --nocolor\ --ignore-case\ --column
     set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
