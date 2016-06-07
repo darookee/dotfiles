@@ -24,7 +24,8 @@ Plug 'jeetsukumaran/vim-filebeagle'
 
 " Colors
 Plug 'darookee/base16-vim'
-Plug 'zenorocha/dracula-theme', {'rtp': 'vim/'}
+Plug 'dracula/vim'
+Plug 'ewilazarus/preto'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -57,7 +58,7 @@ call plug#end()
 " Colors {{{
 set background=dark
 " colorscheme dracula
-colorscheme bubblegum
+colorscheme preto
 " }}}
 " Settings {{{
 filetype plugin indent on
