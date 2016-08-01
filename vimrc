@@ -472,27 +472,51 @@ augroup END
 augroup highlights
     au!
     autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/ containedin=ALL
+    autocmd Syntax * syn match Error '–'
+
     " Cursor line only on active window
     autocmd WinEnter * setlocal cursorline
     autocmd WinLeave * setlocal nocursorline
+
+    " custom highlights
+    autocmd ColorScheme * call AddCustomHighlights()
+    autocmd VimEnter * call AddCustomHighlights()
 augroup END
 
-hi ExtraWhitespace term=reverse ctermfg=13 ctermbg=13
-hi StatuslineHighlighted ctermfg=15 ctermbg=8
-hi StatuslinePositive ctermfg=0 ctermbg=10
-hi StatuslineWarning ctermfg=0 ctermbg=11
-hi StatuslineAlert ctermfg=0 ctermbg=13
-hi StatuslineDim ctermfg=15 ctermbg=0
-hi CursorLine ctermbg=8
-hi Search cterm=reverse
-hi VertSplit ctermbg=none ctermfg=4
-hi SpellBad cterm=underline
-hi SpellCap cterm=underline
-hi SpellLocal cterm=underline
-hi SpellRare cterm=underline
-" dracula highlight is slightly invisible
-hi Visual ctermbg=4
-hi phpStructure ctermfg=4
+function! AddCustomHighlights()
+    hi StatusLine ctermfg=0 ctermbg=8 cterm=none
+    hi StatusLineNC ctermfg=0 ctermbg=8 cterm=none
+
+    hi StatuslineDim ctermfg=8 ctermbg=0
+    hi StatuslineHighlighted ctermfg=7 ctermbg=0
+
+    hi StatuslinePositive ctermfg=8 ctermbg=2
+    hi StatuslineWarning ctermfg=8 ctermbg=3
+    hi StatuslineAlert ctermfg=7 ctermbg=1
+
+    hi CursorLine ctermbg=0
+    hi VertSplit ctermbg=none ctermfg=8
+    hi Search cterm=reverse
+    hi SearchCurrent ctermbg=blue
+
+    hi MatchParent ctermfg=9
+
+    hi ExtraWhitespace ctermfg=1 ctermbg=1
+    hi SpellBad cterm=underline
+    hi SpellCap cterm=underline
+    hi SpellLocal cterm=underline
+    hi SpellRare cterm=underline
+
+    hi WildMenu ctermfg=2 ctermbg=8
+
+    hi qfFileName ctermfg=8
+    hi Directory ctermfg=8
+
+    if g:colors_name == 'dracula'
+        hi Visual cterm=reverse
+        hi phpStructure ctermfg=4
+    endif
+endfunction
 " }}}
 " Functions{{{
 " Mkdir on write if it does not exist {{{
