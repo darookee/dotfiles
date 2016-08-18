@@ -1,0 +1,9 @@
+{
+    "require": {
+        "squizlabs/php_codesniffer": "^2.6",
+        "escapestudios/symfony2-coding-standard": "^2.9",
+        "phpmd/phpmd": "^2.4",
+        "sebastian/phpcpd": "^2.0",
+        "phpunit/phpunit": "^5.5"
+    }
+}
