@@ -52,3 +52,11 @@ for dotfile in ${dotfiles}; do
         cat ${PWD}/${dotfile}.local >> ${symlink}
     fi
 done
+
+if command -v php 2>/dev/null; then
+    if [[ ! -f "${HOME}/.bin/composer" ]]; then
+        command -v curl 2>/dev/null && curl -Ls -o "${HOME}/.bin/composer" \
+        https://getcomposer.org/composer.phar && chmod +x "${HOME}/.bin/composer" \
+    fi
+    composer global install
+fi
