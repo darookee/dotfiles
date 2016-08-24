@@ -37,6 +37,7 @@ Plug 'tobyS/vmustache'
 Plug 'tobyS/pdv'
 Plug 'tobyS/php-accessors.vim'
 Plug 'othree/html5.vim'
+Plug 'nvie/vim-flake8'
 Plug 'beyondwords/vim-twig'
 
 " snippets
