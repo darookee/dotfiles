@@ -42,6 +42,7 @@ Plug 'beyondwords/vim-twig'
 " snippets
 Plug 'SirVer/ultisnips'
 Plug 'darookee/vim-snippets'
+Plug 'mattn/emmet-vim'
 
 " Text
 Plug 'tpope/vim-surround'
@@ -316,6 +317,10 @@ nnoremap <F5> :UndotreeToggle<CR>
 " }}}
 " visual-page-percent {{{
 let g:visualPagePercent_display_width = 8
+" }}}
+" emmet-vim {{{
+let g:user_emmet_install_global = 0
+autocmd FileType html,css,html.twig EmmetInstall
 " }}}
 " }}}
 " Grep {{{
