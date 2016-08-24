@@ -39,6 +39,7 @@ Plug 'tobyS/php-accessors.vim'
 Plug 'othree/html5.vim'
 Plug 'nvie/vim-flake8'
 Plug 'beyondwords/vim-twig'
+Plug 'kana/vim-textobj-user' | Plug 'whatyouhide/vim-textobj-xmlattr'
 
 " snippets
 Plug 'SirVer/ultisnips'
