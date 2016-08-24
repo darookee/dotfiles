@@ -607,5 +607,13 @@ command! -range=% SP  execute <line1> . "," . <line2> .
 command! -bang -nargs=1 -complete=file QFilter call
             \ s:FilterQuickfixList(<bang>0, <q-args>)
 " }}}
+" Text-Objects {{{
+for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', '`' ]
+    execute 'xnoremap i' . char . ' :<C-u>normal! T' . char . 'vt' . char . '<CR>'
+    execute 'onoremap i' . char . ' :normal vi' . char . '<CR>'
+    execute 'xnoremap a' . char . ' :<C-u>normal! F' . char . 'vf' . char . '<CR>'
+    execute 'onoremap a' . char . ' :normal va' . char . '<CR>'
+endfor
+" }}}
 
 " vim:fdm=marker
