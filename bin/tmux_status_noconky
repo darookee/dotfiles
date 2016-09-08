@@ -7,15 +7,13 @@ function get_cpu_temp() {
         temp=$(cat /sys/class/thermal/thermal_zone0/temp|awk '{ printf("%.0f", $1/1000) }')
         if [ -n "$temp" ]; then
             if [ "$temp" -gt 39 ]; then
-                echo -n "#[fg=colour13]$temp°C"
+                echo -n " #[fg=colour13]$temp°C"
             else
-                echo -n "$temp°C"
+                echo -n " $temp°C"
             fi
         else
-            echo -n "#[fg=colour15]-°C"
+            echo -n " #[fg=colour15]-°C"
         fi
-    else
-        echo -n "#[fg=colour15]-°C"
     fi
 }
 
@@ -176,7 +174,7 @@ if [ ! -z "${mail_count}" ]; then
 fi
 echo -n "#[bg=colour8,fg=colour12] | "
 # echo -n "#[bg=colour236,fg=colour174] ❤#[fg=colour188] ${cpu_temp} #[fg=colour188][${cpu_percent}]#[fg=colour245,bg=colour236]#[fg=colour188][${mem_percent}]"
-echo -n "#[bg=colour8,fg=colour13]❤#[fg=colour15] ${cpu_temp} #[fg=colour15][${cpu_load}][${mem_percent}]#[fg=colour12] | "
+echo -n "#[bg=colour8,fg=colour13]❤#[fg=colour15]${cpu_temp} #[fg=colour15][${cpu_load}][${mem_percent}]#[fg=colour12] | "
 if [ ! -z "${mpc}" ]; then
     echo -n "#[fg=colour11]♪ #[fg=colour15]${mpc}#[fg=colour12] | "
 else
