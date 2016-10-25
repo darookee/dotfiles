@@ -45,6 +45,7 @@ Plug 'kana/vim-textobj-user' | Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'SirVer/ultisnips'
 Plug 'darookee/vim-snippets'
 Plug 'mattn/emmet-vim'
+Plug 'lifepillar/vim-mucomplete'
 
 " Text
 Plug 'tpope/vim-surround'
@@ -323,6 +324,9 @@ let g:visualPagePercent_display_width = 8
 " emmet-vim {{{
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,html.twig EmmetInstall
+" }}}
+" MUcomplete {{{
+let g:mucomplete#enable_auto_at_startup = 1
 " }}}
 " }}}
 " Grep {{{
