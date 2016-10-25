@@ -327,7 +327,10 @@ autocmd FileType html,css,html.twig EmmetInstall
 " }}}
 " Grep {{{
 command! -nargs=+ -complete=file_in_path -bar Grep silent! grep! <args> | cwindow 3 | redraw!
-if executable('sift')
+if executable('rg')
+    set grepprg=rg\ -S\ --vimgrep
+    set grepformat=%f:%l:%c:%m
+elseif executable('sift')
     set grepprg=sift\ -nMs\ --no-color\ --binary-skip\ --column\ --no-group\ --git\ --follow
     set grepformat=%f:%l:%c:%m
 elseif executable('ag')
