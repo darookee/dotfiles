@@ -3,9 +3,9 @@
 #   Nils Uliczka <nils.uliczka@darookee.net>
 # Directories {{{
 alias ..='cd ..'
-alias ls='ls --color=auto'
-alias la='ls --color=auto -lah'
-alias ll='ls -lh'
+alias ls='ls --color=auto --time-style=long-iso'
+alias la='ls --color=auto --time-style=long-iso -lah'
+alias ll='ls --time-style=long-iso -lh'
 alias mkdir='mkdir -pv'
 
 # }}}
