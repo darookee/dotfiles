@@ -57,6 +57,7 @@ Plug 'rhysd/clever-f.vim'
 Plug 'ggVGc/vim-fuzzysearch'
 Plug 'mbbill/undotree'
 Plug 'naddeoa/vim-visual-page-percent'
+Plug 'timakro/vim-searchant'
 call plug#end()
 " }}}
 " Colors {{{
