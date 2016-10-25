@@ -205,6 +205,10 @@ nnoremap <leader>R :%s/\<<C-r><C-a>\>//g<Left><Left>
 " https://www.youtube.com/watch?v=MquaityA1SM
 noremap Q !!$SHELL<CR>
 
+" replace words with .
+" (https://www.reddit.com/r/vim/comments/4gjbqn/what_tricks_do_you_use_instead_of_popular_plugins/d2i2ogx)
+nnoremap c* *Ncgn
+
 " toggle lists and numbers
 nnoremap _<F10> :setlocal list! number!<CR>
 " }}}
