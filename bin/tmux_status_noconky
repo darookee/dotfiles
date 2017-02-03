@@ -178,7 +178,7 @@ echo -n "#[bg=colour8,fg=colour13]❤#[fg=colour15]${cpu_temp} #[fg=colour15][${
 if [ ! -z "${mpc}" ]; then
     echo -n "#[fg=colour11]♪ #[fg=colour15]${mpc}#[fg=colour12] | "
 else
-    echo -n "#[fg=colour10]⍟ #[fg=colour15]${cur_ip}#[fg=colour12] | "
+    echo -n "#[fg=colour10]◌ #[fg=colour15]${cur_ip}#[fg=colour12] | "
     if [ ! -z "${wifi}" ]; then
         echo -n "${wifi}#[fg=colour12] | "
     fi
