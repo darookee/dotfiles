@@ -158,7 +158,7 @@ inoremap <right> <nop>
 " }}}
 " Leader {{{
 set pastetoggle=<F10>
-let mapleader = ","
+let mapleader = ','
 " }}}
 " INSERT {{{
 inoremap jj <ESC>
@@ -329,7 +329,10 @@ let g:visualPagePercent_display_width = 8
 " }}}
 " emmet-vim {{{
 let g:user_emmet_install_global = 0
-autocmd FileType html,css,html.twig EmmetInstall
+augroup Emmet
+    autocmd FileType html,css,html.twig EmmetInstall
+augroup END
+
 " }}}
 " MUcomplete {{{
 let g:mucomplete#enable_auto_at_startup = 1
@@ -396,7 +399,7 @@ function! Status(winnr)
 
         " column
         let stat .= '%#StatuslineDim# %3l/%L'
-        let stat .= ':' . (col(".") / 100 >= 1 ? '%v ' : ' %2v ')
+        let stat .= ':' . (col('.') / 100 >= 1 ? '%v ' : ' %2v ')
         let stat .= '%{VisualPercent()} '
     endif
 
@@ -409,25 +412,7 @@ function! Status(winnr)
         else
             let stat .= Color(active, 'StatuslineHighlighted', '%f').
                         \ '%#StatuslineDim# ↺' .
-                        \ strftime("%F %H:%M", getftime(filepath)) . ' '
-        endif
-
-        " file modified
-        let stat .= Color(active, 'StatuslineWarning', modified ? ' ⇄ ' : '')
-
-        " read only
-        let stat .= Color(active, 'StatuslineAlert', readonly ? '  ' : '')
-
-        if active
-            if lineends != 0
-                let stat .= Color(active, 'StatuslineAlert',
-                            \ ' ␣ ')
-            endif
-        endif
-
-        " paste
-        if active && &paste
-            let stat .= '%#StatuslineHighlighted#' . '⇣' . '%*'
+                        \ strftime('%F %H:%M', getftime(filepath)) . ' '
         endif
     else
         if type != ''
@@ -435,6 +420,21 @@ function! Status(winnr)
         else
             let stat .= Color(active, 'StatuslineHighlighted', '%f')
         endif
+    endif
+
+    " file modified
+    let stat .= Color(active, 'StatuslineWarning', modified ? ' ⇄ ' : '')
+
+    " read only
+    let stat .= Color(active, 'StatuslineAlert', readonly ? '  ' : '')
+
+    if active
+        if lineends != 0
+            let stat .= Color(active, 'StatuslineAlert', ' ↲ ')
+        endif
+
+        " paste
+        let stat .= Color(active, 'StatuslineHighlighted', &paste ? '⇣' : '')
     endif
 
     " right side
@@ -459,7 +459,7 @@ function! Status(winnr)
         endif
 
         if !empty(head)
-            if exists("*gitgutter#hunk#hunks")
+            if exists('*gitgutter#hunk#hunks')
                 let hunks = gitgutter#hunk#hunks()
                 if empty(hunks)
                     let git_color = 'StatuslinePositive'
@@ -560,21 +560,21 @@ augroup END
 " mapped to S
 function! BreakHere()
     s/\(.\{-}\)\(\s*\)\(\%#\)\(\s*\)\(.*\)/\1\r\3\5
-    call histdel("/", -1)
+    call histdel('/', -1)
 endfunction
 
 " http://www.vim.org/scripts/script.php?script_id=2724
 function! Rename(name, bang)
-    let l:curfile = expand("%:p")
-    let l:curfilepath = expand("%:p:h")
-    let l:newname = l:curfilepath . "/" . a:name
-    let v:errmsg = ""
-    silent! exe "saveas" . a:bang . " " . l:newname
+    let l:curfile = expand('%:p')
+    let l:curfilepath = expand('%:p:h')
+    let l:newname = l:curfilepath . '/' . a:name
+    let v:errmsg = ''
+    silent! exe 'saveas' . a:bang . ' ' . l:newname
     if v:errmsg =~# '^$\|^E329'
-        if expand("%:p") !=# l:curfile && filewritable(expand("%:p"))
-            silent exe "bwipe! " . l:curfile
+        if expand('%:p') !=# l:curfile && filewritable(expand('%:p'))
+            silent exe 'bwipe! ' . l:curfile
             if delete(l:curfile)
-                echoerr "Could not delete " . l:curfile
+                echoerr 'Could not delete ' . l:curfile
             endif
         endif
     else
@@ -585,13 +585,13 @@ endfunction
 " http://snippetrepo.com/snippets/filter-quickfix-list-in-vim
 function! s:FilterQuickfixList(bang, pattern)
   let cmp = a:bang ? '!~#' : '=~#'
-  call setqflist(filter(getqflist(), "bufname(v:val['bufnr']) " . cmp . " a:pattern"))
+  call setqflist(filter(getqflist(), "bufname(v:val['bufnr']) " . cmp . ' a:pattern'))
 endfunction
 " }}}
 " Filetypes {{{
 " indenthtml
-let g:html_indent_script1 = "inc"
-let g:html_indent_style1 = "inc"
+let g:html_indent_script1 = 'inc'
+let g:html_indent_style1 = 'inc'
 
 augroup FiletypeSettings
     au!
