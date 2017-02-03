@@ -53,7 +53,7 @@ if exists("loaded_matchit")
   let b:match_words .= "," . s:smarty_match_words()
 endif
 
-setlocal fileencoding=latin1
+" setlocal fileencoding=latin1
 setlocal omnifunc=htmlcomplete#CompleteTags
 "
 " vim: ts=8 sts=2 sw=2 expandtab
