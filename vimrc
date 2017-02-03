@@ -40,6 +40,7 @@ Plug 'othree/html5.vim'
 Plug 'nvie/vim-flake8'
 Plug 'beyondwords/vim-twig'
 Plug 'kana/vim-textobj-user' | Plug 'whatyouhide/vim-textobj-xmlattr'
+Plug 'w0rp/ale'
 
 " snippets
 Plug 'SirVer/ultisnips'
@@ -337,6 +338,10 @@ augroup END
 " MUcomplete {{{
 let g:mucomplete#enable_auto_at_startup = 1
 " }}}
+" ale {{{
+let g:ale_php_phpcs_standard = 'Symfony2'
+let g:ale_statusline_format = ['‽%d', '‼%d', '']
+" }}}
 " }}}
 " Grep {{{
 command! -nargs=+ -complete=file_in_path -bar Grep silent! grep! <args> | cwindow 3 | redraw!
@@ -435,6 +440,9 @@ function! Status(winnr)
 
         " paste
         let stat .= Color(active, 'StatuslineHighlighted', &paste ? '⇣' : '')
+
+        " ale status
+        let stat .= '%{ALEGetStatusLine()} '
     endif
 
     " right side
