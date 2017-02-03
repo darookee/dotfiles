@@ -54,6 +54,11 @@ if [[ -d "${WORKON_HOME}" ]]; then
     [[ -s "${HOME}/.local/bin/virtualenvwrapper.sh" ]] && source ${HOME}/.local/bin/virtualenvwrapper.sh
 fi
 
+# source kubectl completion
+if [ $commands[kubectl] ]; then
+  source <(kubectl completion zsh)
+fi
+
 # }}}
 # include zshrc.local {{{
 [[ -e ${HOME}/.zshrc.local ]] && source ${HOME}/.zshrc.local
