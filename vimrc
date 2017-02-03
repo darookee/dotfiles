@@ -340,7 +340,7 @@ let g:mucomplete#enable_auto_at_startup = 1
 " }}}
 " ale {{{
 let g:ale_php_phpcs_standard = 'Symfony2'
-let g:ale_statusline_format = ['‽%d', '‼%d', '']
+let g:ale_statusline_format = ['‼%d', '‽%d', '']
 " }}}
 " }}}
 " Grep {{{
