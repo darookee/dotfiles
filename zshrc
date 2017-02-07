@@ -59,6 +59,10 @@ if [ $commands[kubectl] ]; then
   source <(kubectl completion zsh)
 fi
 
+if [ -f /opt/google-cloud-sdk/completion.zsh.inc ]; then
+    source /opt/google-cloud-sdk/completion.zsh.inc
+fi
+
 # }}}
 # include zshrc.local {{{
 [[ -e ${HOME}/.zshrc.local ]] && source ${HOME}/.zshrc.local
