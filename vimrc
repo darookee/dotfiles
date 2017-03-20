@@ -346,7 +346,7 @@ let g:ale_statusline_format = ['‼%d', '‽%d', '']
 " Grep {{{
 command! -nargs=+ -complete=file_in_path -bar Grep silent! grep! <args> | cwindow 3 | redraw!
 if executable('rg')
-    set grepprg=rg\ -S\ --vimgrep
+    set grepprg=rg\ -S\ -i\ --vimgrep
     set grepformat=%f:%l:%c:%m
 elseif executable('sift')
     set grepprg=sift\ -nMs\ --no-color\ --binary-skip\ --column\ --no-group\ --git\ --follow
