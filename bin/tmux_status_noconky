@@ -172,7 +172,7 @@ time=$(date +"%H:%M")
 # MPDPi not working
 
 if [ ! -z "${mail_count}" ]; then
-    echo -n "#[bg=colour13]#[fg=colour7] ${mail_count} "
+    echo -n "#[bg=colour13]#[fg=colour15] ${mail_count} "
 fi
 echo -n "#[bg=colour8,fg=colour12] | "
 # echo -n "#[bg=colour236,fg=colour174] ❤#[fg=colour188] ${cpu_temp} #[fg=colour188][${cpu_percent}]#[fg=colour245,bg=colour236]#[fg=colour188][${mem_percent}]"
