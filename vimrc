@@ -369,6 +369,23 @@ augroup Grep
     autocmd QuickFixCmdPost lgrep,lmake,lgrepadd,lvimgrep,lvimgrepadd,lfile,lgetfile,laddfile lwindow
 augroup END
 " }}}
+" Formatting {{{
+augroup Formatting
+    au!
+    if executable('prettier')
+        autocmd FileType javascript setlocal formatprg=prettier\ --stdin\ --single-quote\ --trailing-comma\ es5\ --tab-width\ 4
+    endif
+    if executable('jq')
+        autocmd FileType json setlocal formatprg=jq\ .
+    endif
+    if executable('sqlformat')
+        autocmd FileType sql setlocal formatprg=sqlformat\ --reindent\ -
+    endif
+    if executable('remark')
+        autocmd FileType markdown setlocal formatprg=remark\ --no-color\ --silent
+    endif
+augroup END
+" }}}
 " Status{{{
 " http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
 function! Status(winnr)
