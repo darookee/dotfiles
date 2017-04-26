@@ -58,7 +58,7 @@ call plug#end()
 " Colors {{{
 set background=dark
 " colorscheme dracula
-colorscheme preto
+colorscheme bubblegum
 " }}}
 " Settings {{{
 filetype plugin indent on
