@@ -18,7 +18,9 @@ function path-prepend {
 path-prepend "${HOME}/.bin"
 path-prepend "${HOME}/.bin.untracked"
 path-prepend "${HOME}/.local/bin" # python
+path-prepend "${HOME}/.npm/bin" # npm
 path-prepend "${HOME}/.config/composer/vendor/bin" # composer
+path-prepend "${HOME}/.local/lib/go/bin" # go
 # [[ -d "${HOME}/.rvm" ]] && path-prepend "${HOME}/.rvm/bin"
 # }}}
 # Set CDPATH {{{
