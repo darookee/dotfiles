@@ -545,10 +545,7 @@ function! AddCustomHighlights()
     hi SpellLocal cterm=underline
     hi SpellRare cterm=underline
 
-    hi WildMenu ctermfg=2 ctermbg=8
 
-    hi qfFileName ctermfg=8
-    hi Directory ctermfg=8
 
     if g:colors_name == 'dracula'
         hi Visual cterm=reverse
