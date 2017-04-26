@@ -23,21 +23,16 @@ Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'jeetsukumaran/vim-filebeagle'
 
 " Colors
-Plug 'darookee/base16-vim'
-Plug 'dracula/vim'
-Plug 'ewilazarus/preto'
 
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " Filetype
-Plug '2072/PHP-Indenting-for-VIm'
 Plug 'tobyS/vmustache'
 Plug 'tobyS/pdv'
 Plug 'tobyS/php-accessors.vim'
 Plug 'othree/html5.vim'
-Plug 'nvie/vim-flake8'
 Plug 'beyondwords/vim-twig'
 Plug 'kana/vim-textobj-user' | Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'w0rp/ale'
@@ -45,8 +40,6 @@ Plug 'w0rp/ale'
 " snippets
 Plug 'SirVer/ultisnips'
 Plug 'darookee/vim-snippets'
-Plug 'mattn/emmet-vim'
-Plug 'lifepillar/vim-mucomplete'
 
 " Text
 Plug 'tpope/vim-surround'
