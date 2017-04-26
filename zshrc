@@ -54,13 +54,13 @@ if [[ -d "${WORKON_HOME}" ]]; then
     [[ -s "${HOME}/.local/bin/virtualenvwrapper.sh" ]] && source ${HOME}/.local/bin/virtualenvwrapper.sh
 fi
 
+if [ -f /opt/google-cloud-sdk/completion.zsh.inc ]; then
+    source /opt/google-cloud-sdk/completion.zsh.inc
+fi
+
 # source kubectl completion
 if [ $commands[kubectl] ]; then
   source <(kubectl completion zsh)
-fi
-
-if [ -f /opt/google-cloud-sdk/completion.zsh.inc ]; then
-    source /opt/google-cloud-sdk/completion.zsh.inc
 fi
 
 # }}}
