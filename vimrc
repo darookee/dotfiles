@@ -452,7 +452,7 @@ function! Status(winnr)
         let stat .= Color(active, 'StatuslineHighlighted', &paste ? '⇣' : '')
 
         " ale status
-        let stat .= '%{ALEGetStatusLine()} '
+        let stat .= '%{exists("ALEGetStatusLine") ? ALEGetStatusLine() : ""} '
     endif
 
     " right side
