@@ -39,7 +39,6 @@ Plug 'w0rp/ale'
 
 " snippets
 Plug 'SirVer/ultisnips'
-Plug 'darookee/vim-snippets'
 
 " Text
 Plug 'tpope/vim-surround'
