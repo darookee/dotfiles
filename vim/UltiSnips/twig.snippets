@@ -1,0 +1,43 @@
+priority -50
+
+snippet block "block" b
+{% block ${1:name} %}
+		$2
+{% endblock $1 %}
+endsnippet
+
+snippet # "comment" b
+{# $1 #}
+endsnippet
+
+snippet $ "variable" b
+{{ $1 }}
+endsnippet
+
+snippet extends "extends" b
+{% extends "${1:template}" %}
+endsnippet
+
+snippet include "include" b
+{% include "${1:template}" %}
+endsnippet
+
+snippet import "import" b
+{% import "${1:template}" %}
+endsnippet
+
+snippet if "if" b
+{% if ${1:expr} %}
+	$2
+{% endif %}
+endsnippet
+
+snippet for "for" b
+{% for ${1:item} in ${2:sequence} %}
+	$3
+{% endfor %}
+endsnippet
+
+snippet set "set" b
+{% set ${1:name} = ${2:'value'} %}
+endsnippet
