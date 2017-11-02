@@ -338,6 +338,15 @@ let g:mucomplete#enable_auto_at_startup = 1
 let g:ale_php_phpcs_standard = 'Symfony2'
 let g:ale_statusline_format = ['‼%d', '‽%d', '']
 " }}}
+" Gitgutter {{{
+let g:gitgutter_sign_added = '●'
+let g:gitgutter_sign_modified = '●'
+let g:gitgutter_sign_removed = '●'
+let g:gitgutter_sign_removed_first_line = '^'
+let g:gitgutter_sign_modified_removed = 'w'
+let g:gitgutter_grep_command = 'rg -i'
+let g:gitgutter_highlight_lines = 0
+" }}}
 " }}}
 " Grep {{{
 command! -nargs=+ -complete=file_in_path -bar Grep silent! grep! <args> | cwindow 3 | redraw!
