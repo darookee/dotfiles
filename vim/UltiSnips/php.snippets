@@ -13,7 +13,7 @@ endglobal
 
 snippet pub "Public function" b
 /**
- * ${3:undocumented function}
+ * $1
  *
  * @return ${4:void}
  */
@@ -26,7 +26,7 @@ endsnippet
 
 snippet pro "Protected function" b
 /**
- * ${3:undocumented function}
+ * $1
  *
  * @return ${4:void}
  */
@@ -39,7 +39,7 @@ endsnippet
 
 snippet pri "Private function" b
 /**
- * ${3:undocumented function}
+ * $1
  *
  * @return ${4:void}
  */
@@ -52,7 +52,7 @@ endsnippet
 
 snippet pubs "Public static function" b
 /**
- * ${3:undocumented function}
+ * $1
  *
  * @return ${4:void}
  */
@@ -65,7 +65,7 @@ endsnippet
 
 snippet pros "Protected static function" b
 /**
- * ${3:undocumented function}
+ * $1
  *
  * @return ${4:void}
  */
@@ -78,7 +78,7 @@ endsnippet
 
 snippet pris "Private static function" b
 /**
- * ${3:undocumented function}
+ * $1
  *
  * @return ${4:void}
  */
@@ -100,6 +100,13 @@ endsnippet
 snippet new "New class instance" b
 $${1:variableName} = new ${2:${1/\w+\s*/\u$0/}}($3);
 $0
+endsnippet
+
+snippet var "add variable declaration" b
+/*
+ * @var ${3:string}
+ */
+${1:protected} $${2:var};$0
 endsnippet
 
 snippet ns "namespace declaration" b
@@ -271,13 +278,33 @@ endsnippet
 
 snippet ac "Symfony2 action and template" b
 /**
+ * $1Action
+ * @param $3mixed ${2/, /\n     * \@param mixed /g}
  */
-public function $1Action($2)
+public function ${1:index}Action($2)
 {
-	$3
+	$0
 	return [];
 }`!p
 relpath = os.path.relpath(path)`
+endsnippet
+
+snippet dd "Doctrine dump" b
+\Doctrine\Common\Util\Debug::dump(${1});
+endsnippet
+
+snippet vd "var_dump" b
+var_dump(${1});
+endsnippet
+
+snippet ddd "Doctrine dump and die" b
+\Doctrine\Common\Util\Debug::dump(${1});
+die();
+endsnippet
+
+snippet vdd "var_dump and die" b
+var_dump(${1});
+die();
 endsnippet
 
 # :vim:ft=snippets:
