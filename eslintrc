@@ -40,7 +40,7 @@ rules:
     - never
   space-unary-ops:
     - 2
-  space-return-throw-case:
+  keyword-spacing:
     - 2
   no-warning-comments:
     - 1
