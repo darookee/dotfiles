@@ -72,7 +72,7 @@ set number
 set cursorline
 set ruler
 set scrolloff=5
-let &l:colorcolumn='+' . join(range(0, 254), ',+')
+set colorcolumn=+1
 set showmatch
 
 " undo
@@ -124,13 +124,15 @@ set listchars=tab:»·,eol:↲,nbsp:␣,extends:…
 if has('linebreak')
   set breakindent
   let &showbreak = '↳ '
-  set cpo+=n
+  set cpoptions+=n
 end
 " Thanks /u/Bloodshot25
 " https://www.reddit.com/r/vim/comments/3r8p6x/do_any_of_you_vim_users_use_a_4k_display/cwmen38
 set fillchars=vert:│,fold:┈
 
 set updatetime=1000
+set encoding=utf-8
+scriptencoding utf-8
 
 set hidden
 " }}}
@@ -405,7 +407,7 @@ function! Status(winnr)
     let stat .= Color(active, 'StatuslineHighlighted', active ? ' » ' : ' « ')
 
     if active
-        if type != ''
+        if type !=? ''
             let stat .= '%<'
             let stat .= Color(active, 'StatuslineHighlighted', type)
             return stat
@@ -421,7 +423,7 @@ function! Status(winnr)
     let stat .= '%<'
 
     if active
-        if type != ''
+        if type !=? ''
             let stat .= Color(active, 'StatuslineHighlighted', type)
         else
             let stat .= Color(active, 'StatuslineHighlighted', '%f').
@@ -429,7 +431,7 @@ function! Status(winnr)
                         \ strftime('%F %H:%M', getftime(filepath)) . ' '
         endif
     else
-        if type != ''
+        if type !=? ''
             let stat .= Color(active, 'StatuslineHighlighted', type)
         else
             let stat .= Color(active, 'StatuslineHighlighted', '%f')
@@ -459,7 +461,7 @@ function! Status(winnr)
 
     if active
         let stat .= '%#StatuslineDim# '.ftype
-        if encoding != 'utf-8'
+        if encoding !=? 'utf-8'
             let stat .= '['.encoding.']'
         endif
 
