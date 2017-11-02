@@ -238,7 +238,9 @@ let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_mruf_relative = 1
 
 " http://blog.patspam.com/2014/super-fast-ctrlp
-if executable('ag')
+if executable('rg')
+    let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+elseif executable('ag')
     let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
                 \ --ignore .git
                 \ --ignore .svn
