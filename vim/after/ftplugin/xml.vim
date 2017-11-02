@@ -8,6 +8,5 @@ setlocal errorformat=%A%f:%l:\ %.%#error\ :\ %m,%-Z%p^,%-C%.%#
 setlocal makeprg=xmllint
 
 command! -buffer Make silent make % | silent redraw! | silent wincmd p | cwindow 3
-autocmd! BufWritePost <buffer> Make
 
 setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
