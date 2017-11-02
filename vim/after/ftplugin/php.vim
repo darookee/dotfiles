@@ -24,4 +24,4 @@ let g:phpacc_template_dir = $HOME . "/.vim/php-accessor-templates/"
 nnoremap <buffer> _gs :call phpacc#GenerateAccessors()<CR>
 vnoremap <buffer> _gs :call phpacc#GenerateAccessors()<CR>
 
-let b:argwrap_tail_comma = 1
+let b:argwrap_tail_comma = 0
