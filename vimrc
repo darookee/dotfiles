@@ -321,6 +321,7 @@ nnoremap <silent> _b :<C-u>CtrlPBuffer<CR>
 " }}}
 " ArgWrap {{{
 nnoremap <silent> _a :ArgWrap<CR>
+let g:argwrap_tail_comma_braces = '['
 " }}}
 " vim-surround {{{
 " comment with ys<textobject>*
@@ -360,7 +361,6 @@ let g:visualPagePercent_display_width = 8
 " emmet-vim {{{
 let g:user_emmet_install_global = 0
 augroup Emmet
-    autocmd FileType html,css,html.twig EmmetInstall
 augroup END
 
 " }}}
@@ -368,6 +368,7 @@ augroup END
 let g:mucomplete#enable_auto_at_startup = 1
 " }}}
 " ale {{{
+let g:ale_open_list = 0
 let g:ale_php_phpcs_standard = 'Symfony2'
 let g:ale_statusline_format = ['‼%d', '‽%d', '']
 " }}}
