@@ -158,7 +158,7 @@ cpu_load=$(uptime|cut -d, -f5|sed 's/ //')
 
 cur_ip=$(get_ip)
 
-space_home=$(df -h /home|grep "[0-9]"|awk '{ print $4 }')
+space_home=$(df -h $HOME|grep "[0-9]"|awk '{ print $4 }')
 
 battery=$(get_battery)
 wifi=$(get_wifi)
