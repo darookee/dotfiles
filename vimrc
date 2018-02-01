@@ -679,6 +679,14 @@ augroup QuickFix
 
     autocmd Filetype qf setlocal nonumber nolist
 augroup END
+
+augroup Marks
+    autocmd!
+    autocmd BufLeave *.css,*.scss,*.less    normal! mC
+    autocmd BufLeave *.html                 normal! mH
+    autocmd BufLeave *.js                   normal! mJ
+    autocmd BufLeave *.php                  normal! mP
+augroup END
 " }}}
 " Commands{{{
 " Rename current file
