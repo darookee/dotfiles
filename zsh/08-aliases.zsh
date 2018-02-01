@@ -135,20 +135,6 @@ fi
 # Shell specific {{{
 alias histroy='fc -fl 1'
 # }}}
-# Symfony2 {{{
-_symfony_console () {
-  echo "php $(find . -maxdepth 2 -mindepth 1 -name 'console' -type f | head -n 1)"
-}
-
-alias sf='`_symfony_console`'
-compdef _symfony2 sf
-compdef _symfony2 `_symfony_console`
-alias sfcl='sf cache:clear'
-alias sfcw='sf cache:warmup'
-alias sfroute='sf router:debug'
-alias sfcontainer='sf container:debug'
-alias sfgb='sf generate:bundle'
-# }}}
 # misc {{{
 alias xkcdpw="shuf -n4 /usr/share/dict/words | sed \"s/'s$//\" | tr '[:upper:]' '[:lower:]'|paste -s -d ' '"
 if (( $+commands[neomutt] )); then
