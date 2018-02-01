@@ -31,10 +31,26 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tobyS/vmustache'
 Plug 'tobyS/pdv'
 Plug 'tobyS/php-accessors.vim'
-Plug 'othree/html5.vim'
-Plug 'beyondwords/vim-twig'
-Plug 'kana/vim-textobj-user' | Plug 'whatyouhide/vim-textobj-xmlattr'
+Plug 'sheerun/vim-polyglot'
 Plug 'w0rp/ale'
+"Plug 'ludovicchabant/vim-gutentags'
+
+" textobj
+Plug 'kana/vim-textobj-user'
+" iu
+Plug 'jceb/vim-textobj-uri'
+" ic
+Plug 'jasonlong/vim-textobj-css'
+" ih
+Plug 'gilligan/textobj-gitgutter'
+" ix
+Plug 'whatyouhide/vim-textobj-xmlattr'
+" if
+Plug 'kana/vim-textobj-function'
+" ida
+Plug 'kana/vim-textobj-datetime'
+" iv
+Plug 'Julian/vim-textobj-variable-segment'
 
 " snippets
 Plug 'SirVer/ultisnips'
@@ -45,11 +61,17 @@ Plug 'FooSoft/vim-argwrap'
 Plug 'cohama/lexima.vim'
 
 " navigation
+" f and F further
 Plug 'rhysd/clever-f.vim'
+" _/ search
 Plug 'ggVGc/vim-fuzzysearch'
+" visual undo
 Plug 'mbbill/undotree'
+" statusbar bling
 Plug 'naddeoa/vim-visual-page-percent'
+" search result highlighting
 Plug 'timakro/vim-searchant'
+" buffer content preview
 Plug 'junegunn/vim-peekaboo'
 call plug#end()
 " }}}
