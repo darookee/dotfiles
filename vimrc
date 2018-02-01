@@ -22,6 +22,7 @@ Plug 'nixprime/cpsm', { 'do': 'env PY3=OFF ./install.sh' }
 Plug 'jeetsukumaran/vim-filebeagle'
 
 " Colors
+Plug 'romainl/Apprentice'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -84,7 +85,7 @@ endif
 set termguicolors
 set background=dark
 " colorscheme dracula
-colorscheme bubblegum
+colorscheme apprentice
 " }}}
 " Settings {{{
 filetype plugin indent on
