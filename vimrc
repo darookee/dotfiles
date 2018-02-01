@@ -667,7 +667,7 @@ augroup FiletypeSettings
     au!
     autocmd BufNewFile,BufReadPost *.md set ft=markdown
     " http://vimrcfu.com/snippet/168
-    autocmd FileType css,scss setlocal iskeyword+=-
+    autocmd FileType css,scss,less setlocal iskeyword+=-
     autocmd BufNewFile,BufRead COMMIT_EDITMSG setlocal spell
     autocmd FileType text,markdown setlocal nonumber spell
 augroup END
