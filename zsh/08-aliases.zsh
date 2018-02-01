@@ -151,6 +151,9 @@ alias sfgb='sf generate:bundle'
 # }}}
 # misc {{{
 alias xkcdpw="shuf -n4 /usr/share/dict/words | sed \"s/'s$//\" | tr '[:upper:]' '[:lower:]'|paste -s -d ' '"
+if (( $+commands[neomutt] )); then
+    alias mutt=neomutt
+fi
 # }}}
 
 
