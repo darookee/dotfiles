@@ -13,7 +13,6 @@ if has('vim_starting') " Do stuff on startup {{{
 endif
 " }}}
 " }}}
-set nocompatible
 filetype off
 " Plugins {{{
 call plug#begin()
@@ -55,6 +54,12 @@ Plug 'junegunn/vim-peekaboo'
 call plug#end()
 " }}}
 " Colors {{{
+" 'fix' for tmux and termguicolors
+if &term =~# '^screen'
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+set termguicolors
 set background=dark
 " colorscheme dracula
 colorscheme bubblegum
@@ -117,7 +122,7 @@ nnoremap <silent> _s :set spell!<CR>
 set backspace=indent,eol,start
 set smarttab
 
-set formatoptions=tcql1n
+set formatoptions=tcql1jn
 
 set list
 set listchars=tab:»·,eol:↲,nbsp:␣,extends:…
@@ -534,34 +539,48 @@ augroup highlights
 augroup END
 
 function! AddCustomHighlights()
-    hi StatusLine ctermfg=0 ctermbg=8 cterm=none
-    hi StatusLineNC ctermfg=0 ctermbg=8 cterm=none
+    hi StatusLine ctermfg=0 ctermbg=8 cterm=none guibg=#1B1E21
+    hi StatusLineNC ctermfg=0 ctermbg=8 cterm=none guibg=#204050
 
-    hi StatuslineDim ctermfg=8 ctermbg=0
-    hi StatuslineHighlighted ctermfg=7 ctermbg=0
+    hi StatuslineDim ctermfg=8 ctermbg=0 guibg=#10161A
+    hi StatuslineHighlighted ctermfg=7 ctermbg=0 guibg=#556270 guifg=#C7F464
 
-    hi StatuslinePositive ctermfg=8 ctermbg=2
-    hi StatuslineWarning ctermfg=8 ctermbg=3
-    hi StatuslineAlert ctermfg=7 ctermbg=1
+    hi StatuslinePositive ctermfg=8 ctermbg=2 guibg=#d4edda guifg=#155724
+    hi StatuslineWarning ctermfg=8 ctermbg=3 guibg=#fff3cd guifg=#856404
+    hi StatuslineAlert ctermfg=7 ctermbg=1 guibg=#f8d7da guifg=#721c24
 
-    hi CursorLine ctermbg=0
-    hi VertSplit ctermbg=none ctermfg=8
+    hi CursorLine ctermbg=0 guibg=#151A1E
+    hi VertSplit ctermbg=none ctermfg=8 guibg=#204050
     hi Search cterm=reverse
-    hi SearchCurrent ctermbg=blue
+    hi SearchCurrent ctermbg=blue guibg=#c0e0f0 guifg=#cc4422
 
     hi MatchParent ctermfg=9
 
-    hi ExtraWhitespace ctermfg=1 ctermbg=1
+    hi ExtraWhitespace ctermfg=1 ctermbg=1 guibg=#ff0000 guifg=#ff0000
     hi SpellBad cterm=underline
     hi SpellCap cterm=underline
     hi SpellLocal cterm=underline
     hi SpellRare cterm=underline
 
+    hi ALEError ctermfg=1 cterm=underline guibg=#f8d7da
 
 
-    if g:colors_name == 'dracula'
+    hi GitGutterAdd ctermbg=2 guifg=#155724
+    hi GitGutterChange ctermbg=3 guifg=#856404
+    hi GitGutterDelete ctermbg=1 guifg=#721C24
+    hi GitGutterChangeDelete ctermbg=8 guifg=#151A1E
+
+
+    highlight OverLength ctermbg=3 ctermfg=white guibg=#d1ecf1 guifg=#0c5460
+    match OverLength /\%81v.\+/
+
+    if g:colors_name ==? 'dracula'
         hi Visual cterm=reverse
         hi phpStructure ctermfg=4
+    endif
+
+    if &termguicolors ==? '1'
+        hi Search guibg=#103040 guifg=#ee8866 cterm=NONE
     endif
 endfunction
 " }}}
