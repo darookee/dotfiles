@@ -18,7 +18,7 @@ filetype off
 call plug#begin()
 " File finder
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'FelikZ/ctrlp-py-matcher'
+Plug 'nixprime/cpsm', { 'do': 'env PY3=OFF ./install.sh' }
 Plug 'jeetsukumaran/vim-filebeagle'
 
 " Colors
@@ -260,9 +260,10 @@ else
                 \ grep -v -P "\.jpg$|\.png$|\.gif$"',
                 \ 'find %s -type f| grep -v -P "\.jpg$|\.png$|\.gif$"'
                 \ ]
+    let g:ctrlp_use_caching = 1
 endif
 
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+let g:ctrlp_match_func = { 'match': 'cpsm#CtrlPMatch' }
 " CtrlP_StatusLine: {{{
 " Arguments: focus, byfname, s:regexp, prv, item, nxt, marked
 "            a:1    a:2      a:3       a:4  a:5   a:6  a:7
