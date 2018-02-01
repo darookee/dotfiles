@@ -74,6 +74,10 @@ Plug 'naddeoa/vim-visual-page-percent'
 Plug 'timakro/vim-searchant'
 " buffer content preview
 Plug 'junegunn/vim-peekaboo'
+" modern replacement for matchit
+Plug 'andymass/vim-matchup'
+" numbers only visible in active windows
+Plug 'AssailantLF/vim-active-numbers'
 call plug#end()
 " }}}
 " Colors {{{
