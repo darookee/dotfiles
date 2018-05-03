@@ -185,7 +185,6 @@ inoremap <right> <nop>
 " }}}
 " Leader {{{
 set pastetoggle=<F10>
-let mapleader = ','
 " }}}
 " INSERT {{{
 inoremap jj <ESC>
@@ -218,7 +217,7 @@ nnoremap <silent> <BS> :nohlsearch<CR><C-L>
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 " Remove trailing whitespace with ,W
-nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>:nohl<CR>
+nnoremap ,W :%s/\s\+$//<CR>:let @/=''<CR>:nohl<CR>
 
 " Break line, opposite of J
 nnoremap <silent> S :call BreakHere()<CR>
