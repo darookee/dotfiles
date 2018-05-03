@@ -149,6 +149,7 @@ function get_volume() {
     fi
 }
 
+local_status=$(~/.bin.untracked/get_local_status.sh)
 mail_count=$(get_mailcount ~/.mail/darookee/INBOX/new)
 
 cpu_temp=$(get_cpu_temp)
@@ -171,6 +172,9 @@ time=$(date +"%H:%M")
 
 # MPDPi not working
 
+if [ ! -z "${local_status}" ]; then
+    echo -n "#[bg=colour3]#[fg=colour8] ${local_status} "
+fi
 if [ ! -z "${mail_count}" ]; then
     echo -n "#[bg=colour13]#[fg=colour15] ${mail_count} "
 fi
