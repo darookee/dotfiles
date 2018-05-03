@@ -424,119 +424,113 @@ augroup Formatting
     endif
 augroup END
 " }}}
-" Status{{{
+" Status {{{
 " http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
 function! Status(winnr)
-    let stat = ''
-    let active = winnr() == a:winnr
-    let buffer = winbufnr(a:winnr)
+    let l:stat = ''
+    let l:active = winnr() == a:winnr
+    let l:buffer = winbufnr(a:winnr)
 
-    let modified = getbufvar(buffer, '&modified')
-    let readonly = getbufvar(buffer, '&ro')
-    let ftype = getbufvar(buffer, '&ft')
-    let encoding = getbufvar(buffer, '&enc')
-    let type = getbufvar(buffer, '&buftype')
-    let fname = bufname(buffer)
-    let filepath = fnamemodify(fname, ':p')
-    let lineends = search('\s\+$', 'nw')
+    let l:modified = getbufvar(l:buffer, '&modified')
+    let l:readonly = getbufvar(l:buffer, '&ro')
+    let l:ftype = getbufvar(l:buffer, '&ft')
+    let l:encoding = getbufvar(l:buffer, '&enc')
+    let l:type = getbufvar(l:buffer, '&buftype')
+    let l:fname = bufname(l:buffer)
+    let l:filepath = fnamemodify(l:fname, ':p')
+    let l:lineends = search('\s\+$', 'nw')
 
-    function! Color(active, num, content)
+    function! LinterStatus() abort
+        let l:counts = ale#statusline#Count(bufnr(''))
+
+        let l:all_errors = l:counts.error + l:counts.style_error
+        let l:all_non_errors = l:counts.total - l:all_errors
+
+        return l:counts.total == 0 ? 'OK' : printf(
+                    \   '%dW %dE',
+                    \   l:all_non_errors,
+                    \   l:all_errors
+                    \)
+    endfunction
+
+    function! Part(active, num, content)
         if a:active
-            return '%#'.a:num.'#' . a:content . '%*'
+            return '%#'.a:num.'# ' . a:content . ' %*'
         else
-            return a:content
+            return ' '.a:content.' '
         endif
     endfunction
 
-    let stat .= Color(active, 'StatuslineHighlighted', active ? ' » ' : ' « ')
+    let l:stat .= Part(l:active, 'StatuslineHighlighted', l:active ? '»' : '«')
 
-    if active
-        if type !=? ''
-            let stat .= '%<'
-            let stat .= Color(active, 'StatuslineHighlighted', type)
-            return stat
-        endif
+    if l:type !=? ''
+        let l:stat .= '%<'
+        let l:stat .= Part(l:active, 'StatuslineHighlighted', l:type)
+        return l:stat
+    endif
 
+    " linenumbers only for l:active windows
+    if l:active
         " column
-        let stat .= '%#StatuslineDim# %3l/%L'
-        let stat .= ':' . (col('.') / 100 >= 1 ? '%v ' : ' %2v ')
-        let stat .= '%{VisualPercent()} '
+        let l:stat .= Part(l:active, 'StatuslineDim', ' %3l/%L:' . (col('.') / 100 >= 1 ? '%v ' : ' %2v '))
+        " let l:stat .= '%{VisualPercent()} '
     endif
 
     " file
-    let stat .= '%<'
-
-    if active
-        if type !=? ''
-            let stat .= Color(active, 'StatuslineHighlighted', type)
-        else
-            let stat .= Color(active, 'StatuslineHighlighted', '%f').
-                        \ '%#StatuslineDim# ↺' .
-                        \ strftime('%F %H:%M', getftime(filepath)) . ' '
-        endif
-    else
-        if type !=? ''
-            let stat .= Color(active, 'StatuslineHighlighted', type)
-        else
-            let stat .= Color(active, 'StatuslineHighlighted', '%f')
-        endif
-    endif
-
-    " file modified
-    let stat .= Color(active, 'StatuslineWarning', modified ? ' ⇄ ' : '')
+    let l:stat .= '%<'
 
     " read only
-    let stat .= Color(active, 'StatuslineAlert', readonly ? '  ' : '')
+    let l:stat .= l:readonly ? Part(l:active, 'StatuslineError', '') : ''
 
-    if active
-        if lineends != 0
-            let stat .= Color(active, 'StatuslineAlert', ' ↲ ')
-        endif
+    let l:stat .= Part(l:active, 'StatuslineHighlighted', '%f') .
+                \ (l:active ? Part(l:active, 'StatuslineDim', '↺ '.strftime('%F %H:%M', getftime(l:filepath))) : '')
 
+    " file modified
+    let l:stat .= (l:modified ? Part(l:active, 'StatusLineWarning', '⇄') : '')
+
+    if l:active
         " paste
-        let stat .= Color(active, 'StatuslineHighlighted', &paste ? '⇣' : '')
-
-        " ale status
-        let stat .= '%{exists("ALEGetStatusLine") ? ALEGetStatusLine() : ""} '
+        let l:stat .= &paste ? Part(l:active, 'StatuslineHighlighted', '⇣') : ''
     endif
 
     " right side
-    let stat .= '%='
+    let l:stat .= '%='
 
-    if active
-        let stat .= '%#StatuslineDim# '.ftype
-        if encoding !=? 'utf-8'
-            let stat .= '['.encoding.']'
-        endif
+    if l:active
+        let l:stat .= Part(l:active, 'StatuslineDim', '['.l:ftype.(l:encoding !=? 'utf-8'?':'.l:encoding.'':'').']')
 
-        let stat .= ' '
+        let l:linter = LinterStatus()
+        let l:stat .= Part(l:active, l:linter ==? 'OK' ? 'StatuslineOK' : 'StatuslineError', l:linter)
+
+        " lines ending in whitespace
+        let l:stat .= l:lineends !=? 0 ? Part(l:active, 'StatuslineAlert', '↲') : ''
 
         " git branch
         if exists('*fugitive#head')
-            let head = fugitive#head(6)
+            let l:head = fugitive#head(6)
 
-            if empty(head) && exists('*fugitive#detect') && !exists('b:git_dir')
+            if empty(l:head) && exists('*fugitive#detect') && !exists('b:git_dir')
                 call fugitive#detect(getcwd())
-                let head = fugitive#head(6)
+                let l:head = fugitive#head(6)
             endif
         endif
 
-        if !empty(head)
+        if !empty(l:head)
             if exists('*gitgutter#hunk#hunks')
-                let hunks = gitgutter#hunk#hunks()
-                if empty(hunks)
-                    let git_color = 'StatuslinePositive'
+                let l:hunks = gitgutter#hunk#hunks(l:buffer)
+                if empty(l:hunks)
+                    let l:git_color = 'StatuslinePositive'
                 else
-                    let git_color = 'StatuslineAlert'
+                    let l:git_color = 'StatuslineAlert'
                 endif
             else
-                let git_color = 'StatuslineDim'
+                let l:git_color = 'StatuslineDim'
             endif
-            let stat .= Color(active, git_color, '  '.head)
+            let l:stat .= Part(l:active, l:git_color, ''.(l:head !=? 'master'?' '.l:head.'':''))
         endif
     endif
 
-    return stat
+    return l:stat
 endfunction
 
 function! SetStatus()
