@@ -368,8 +368,12 @@ let g:mucomplete#enable_auto_at_startup = 1
 " }}}
 " ale {{{
 let g:ale_open_list = 0
+let g:ale_lint_on_text_changed = 'always'
+let g:ale_lint_delay = 1000
+let g:ale_lint_on_enter = 0
 let g:ale_php_phpcs_standard = 'Symfony2'
 let g:ale_statusline_format = ['‼%d', '‽%d', '']
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 " }}}
 " Gitgutter {{{
 let g:gitgutter_sign_added = '●'
