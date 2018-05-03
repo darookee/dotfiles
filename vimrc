@@ -295,21 +295,21 @@ let g:ctrlp_match_func = { 'match': 'cpsm#CtrlPMatch' }
 " Arguments: focus, byfname, s:regexp, prv, item, nxt, marked
 "            a:1    a:2      a:3       a:4  a:5   a:6  a:7
 fu! CtrlP_main_status(...)
-  let regex = a:3 ? 'regex %*' : ''
-  let prv = '%#StatuslineDim# '.a:4.' %*'
-  let item = '%#StatuslineHighlighted# '.a:5.' %*'
-  let nxt = '%#StatuslineDim# '.a:6.' %*'
-  let byfname = ' '.a:2.' %*'
-  let dir = ' '.fnamemodify(getcwd(), ':~').' %*'
-  retu  prv . item . nxt . '%=%*%<' . byfname . regex . dir
+  let l:regex = a:3 ? 'regex %*' : ''
+  let l:prv = '%#StatuslineDim# '.a:4.' %*'
+  let l:item = '%#StatuslineHighlighted# '.a:5.' %*'
+  let l:nxt = '%#StatuslineDim# '.a:6.' %*'
+  let l:byfname = ' '.a:2.' %*'
+  let l:dir = ' '.fnamemodify(getcwd(), ':~').' %*'
+  retu  l:prv . l:item . l:nxt . '%=%*%<' . l:byfname . l:regex . l:dir
 endf
 
 " Argument: len
 "           a:1
 fu! CtrlP_progress_status(...)
-  let len = '%#StatuslineHighlighted# '.a:1.' %*'
-  let dir = ' %=%<%#StatuslineDim# '.getcwd().' %*'
-  retu len.dir
+  let l:len = '%#StatuslineHighlighted# '.a:1.' %*'
+  let l:dir = ' %=%<%#StatuslineDim# '.getcwd().' %*'
+  retu l:len.l:dir
 endf
 
 let g:ctrlp_status_func = {
@@ -541,8 +541,8 @@ function! Status(winnr)
 endfunction
 
 function! SetStatus()
-  for nr in range(1, winnr('$'))
-    call setwinvar(nr, '&statusline', '%!Status('.nr.')')
+  for l:nr in range(1, winnr('$'))
+    call setwinvar(l:nr, '&statusline', '%!Status('.l:nr.')')
   endfor
 endfunction
 
@@ -617,9 +617,9 @@ endfunction
 " Mkdir on write if it does not exist {{{
 function! MkNonExDir(file, buf)
     if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
-        let dir=fnamemodify(a:file, ':h')
-        if !isdirectory(dir)
-            call mkdir(dir, 'p')
+        let l:dir=fnamemodify(a:file, ':h')
+        if !isdirectory(l:dir)
+            call mkdir(l:dir, 'p')
         endif
     endif
 endfunction
@@ -659,8 +659,8 @@ endfunction
 
 " http://snippetrepo.com/snippets/filter-quickfix-list-in-vim
 function! s:FilterQuickfixList(bang, pattern)
-  let cmp = a:bang ? '!~#' : '=~#'
-  call setqflist(filter(getqflist(), "bufname(v:val['bufnr']) " . cmp . ' a:pattern'))
+  let l:cmp = a:bang ? '!~#' : '=~#'
+  call setqflist(filter(getqflist(), "bufname(v:val['bufnr']) ".l:cmp.' a:pattern'))
 endfunction
 " }}}
 " Filetypes {{{
@@ -706,11 +706,11 @@ command! -bang -nargs=1 -complete=file QFilter call
             \ s:FilterQuickfixList(<bang>0, <q-args>)
 " }}}
 " Text-Objects {{{
-for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', '`' ]
-    execute 'xnoremap i' . char . ' :<C-u>normal! T' . char . 'vt' . char . '<CR>'
-    execute 'onoremap i' . char . ' :normal vi' . char . '<CR>'
-    execute 'xnoremap a' . char . ' :<C-u>normal! F' . char . 'vf' . char . '<CR>'
-    execute 'onoremap a' . char . ' :normal va' . char . '<CR>'
+for l:char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', '`' ]
+    execute 'xnoremap i' . l:char . ' :<C-u>normal! T' . l:char . 'vt' . l:char . '<CR>'
+    execute 'onoremap i' . l:char . ' :normal vi' . l:char . '<CR>'
+    execute 'xnoremap a' . l:char . ' :<C-u>normal! F' . l:char . 'vf' . l:char . '<CR>'
+    execute 'onoremap a' . l:char . ' :normal va' . l:char . '<CR>'
 endfor
 " }}}
 
