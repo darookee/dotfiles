@@ -590,6 +590,7 @@ function! AddCustomHighlights()
 
     hi ALEError ctermfg=1 cterm=underline guibg=#f8d7da
 
+    hi WildMenu ctermfg=2 ctermbg=8 guibg=#204050 guifg=#ffffff
 
     hi GitGutterAdd ctermbg=2 guifg=#155724
     hi GitGutterChange ctermbg=3 guifg=#856404
