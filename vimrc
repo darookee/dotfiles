@@ -699,11 +699,11 @@ command! -bang -nargs=1 -complete=file QFilter call
             \ s:FilterQuickfixList(<bang>0, <q-args>)
 " }}}
 " Text-Objects {{{
-for l:char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', '`' ]
-    execute 'xnoremap i' . l:char . ' :<C-u>normal! T' . l:char . 'vt' . l:char . '<CR>'
-    execute 'onoremap i' . l:char . ' :normal vi' . l:char . '<CR>'
-    execute 'xnoremap a' . l:char . ' :<C-u>normal! F' . l:char . 'vf' . l:char . '<CR>'
-    execute 'onoremap a' . l:char . ' :normal va' . l:char . '<CR>'
+for g:objchar in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', '`' ]
+    execute 'xnoremap i' . g:objchar . ' :<C-u>normal! T' . g:objchar . 'vt' . g:objchar . '<CR>'
+    execute 'onoremap i' . g:objchar . ' :normal vi' . g:objchar . '<CR>'
+    execute 'xnoremap a' . g:objchar . ' :<C-u>normal! F' . g:objchar . 'vf' . g:objchar . '<CR>'
+    execute 'onoremap a' . g:objchar . ' :normal va' . g:objchar . '<CR>'
 endfor
 " }}}
 
