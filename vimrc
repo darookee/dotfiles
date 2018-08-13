@@ -269,7 +269,11 @@ let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_mruf_relative = 1
 
 " http://blog.patspam.com/2014/super-fast-ctrlp
-if executable('rg')
+if executable('fd')
+    let g:ctrlp_user_command = 'fd --type f --color=never "" %s'
+    let g:ctrlp_use_caching = 0
+    let g:ctrlp_match_window_reversed = 0
+elseif executable('rg')
     let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
 elseif executable('ag')
     let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
