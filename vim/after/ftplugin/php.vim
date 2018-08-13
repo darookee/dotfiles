@@ -1,7 +1,10 @@
-setlocal nocursorline
 syntax sync minlines=100
-syntax sync maxlines=240
-set synmaxcol=800
+syntax sync maxlines=500
+
+setlocal nocursorline
+setlocal regexpengine=1
+setlocal synmaxcol=500
+setlocal foldmethod=manual
 
 "
 " Poor mans syntastic
@@ -25,3 +28,11 @@ nnoremap <buffer> _gs :call phpacc#GenerateAccessors()<CR>
 vnoremap <buffer> _gs :call phpacc#GenerateAccessors()<CR>
 
 let b:argwrap_tail_comma = 0
+
+" disable a lot of syntax highlighting
+let php_html_in_heredoc = 0
+let php_html_in_nowdoc = 0
+let php_sql_heredoc = 0
+let php_sql_nowdoc = 0
+let php_sql_query = 0
+let php_ignore_phpdoc = 1
