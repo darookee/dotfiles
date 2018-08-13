@@ -18,7 +18,7 @@ if ! zgen saved; then
     zgen load zsh-users/zsh-history-substring-search
     zgen load darookee/pure
     zgen load zsh-users/zsh-syntax-highlighting
-    zgen load rimraf/k
+    zgen load supercrabtree/k
     zgen save
 fi
 
