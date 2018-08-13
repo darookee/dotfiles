@@ -517,20 +517,20 @@ function! Status(winnr)
                 call fugitive#detect(getcwd())
                 let l:head = fugitive#head(6)
             endif
-        endif
 
-        if !empty(l:head)
-            if exists('*gitgutter#hunk#hunks')
-                let l:hunks = gitgutter#hunk#hunks(l:buffer)
-                if empty(l:hunks)
-                    let l:git_color = 'StatuslinePositive'
+            if !empty(l:head)
+                if exists('*gitgutter#hunk#hunks')
+                    let l:hunks = gitgutter#hunk#hunks(l:buffer)
+                    if empty(l:hunks)
+                        let l:git_color = 'StatuslinePositive'
+                    else
+                        let l:git_color = 'StatuslineAlert'
+                    endif
                 else
-                    let l:git_color = 'StatuslineAlert'
+                    let l:git_color = 'StatuslineDim'
                 endif
-            else
-                let l:git_color = 'StatuslineDim'
+                let l:stat .= Part(l:active, l:git_color, ''.(l:head !=? 'master'?' '.l:head.'':''))
             endif
-            let l:stat .= Part(l:active, l:git_color, ''.(l:head !=? 'master'?' '.l:head.'':''))
         endif
     endif
 
