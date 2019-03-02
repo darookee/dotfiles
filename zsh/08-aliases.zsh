@@ -142,5 +142,4 @@ if (( $+commands[neomutt] )); then
 fi
 # }}}
 
-
 # vim:ft=zsh:fdm=marker

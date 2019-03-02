@@ -17,6 +17,7 @@ function path-prepend {
 }
 path-prepend "${HOME}/.bin"
 path-prepend "${HOME}/.bin.untracked"
+path-prepend "${HOME}/.bin.docker"
 path-prepend "${HOME}/.local/bin" # python
 path-prepend "${HOME}/.npm/bin" # npm
 path-prepend "${HOME}/.config/composer/vendor/bin" # composer
