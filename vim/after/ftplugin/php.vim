@@ -14,7 +14,6 @@ setlocal foldmethod=manual
 setlocal errorformat=%f:%l:%c:\ %m
 setlocal makeprg=~/.bin/phplintcs
 
-command! -buffer Make silent make % | silent redraw! | silent wincmd p | cwindow 3
 
 setlocal omnifunc=phpcomplete#CompletePHP
 
