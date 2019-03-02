@@ -87,8 +87,7 @@ if exists('+termguicolors')
     set t_ut=
 endif
 set background=dark
-" colorscheme dracula
-colorscheme apprentice
+colorscheme mono_sw
 " }}}
 " Settings {{{
 filetype plugin indent on
