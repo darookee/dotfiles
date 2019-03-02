@@ -80,11 +80,12 @@ call plug#end()
 " }}}
 " Colors {{{
 " 'fix' for tmux and termguicolors
-if &term =~# '^screen'
+if exists('+termguicolors')
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    set termguicolors
+    set t_ut=
 endif
-set termguicolors
 set background=dark
 " colorscheme dracula
 colorscheme apprentice
@@ -102,7 +103,6 @@ set number
 set cursorline
 set ruler
 set scrolloff=5
-set colorcolumn=+1
 set showmatch
 
 " undo
@@ -156,6 +156,7 @@ if has('linebreak')
   let &showbreak = '↳ '
   set cpoptions+=n
 end
+set cpo+=$
 " Thanks /u/Bloodshot25
 " https://www.reddit.com/r/vim/comments/3r8p6x/do_any_of_you_vim_users_use_a_4k_display/cwmen38
 set fillchars=vert:│,fold:┈
@@ -163,6 +164,11 @@ set fillchars=vert:│,fold:┈
 set updatetime=1000
 set encoding=utf-8
 scriptencoding utf-8
+
+set diffopt-=internal
+set diffopt+=algorithm:patience,indent-heuristic
+
+set tags+=./.git/tags
 
 set hidden
 " }}}
@@ -319,6 +325,7 @@ let g:ctrlp_status_func = {
   \}
 " }}}
 nnoremap <silent> _b :<C-u>CtrlPBuffer<CR>
+nnoremap <silent> _t :<C-u>CtrlPTag<CR>
 " }}}
 " ArgWrap {{{
 nnoremap <silent> _a :ArgWrap<CR>
@@ -401,6 +408,9 @@ elseif executable('ag')
 elseif executable('ack')
     set grepprg=ack\ --nogroup\ --nocolor\ --ignore-case\ --column
     set grepformat=%f:%l:%c:%m,%f:%l:%m
+else
+    set grepprg=grep\ -R
+    set grepformat=%f:%m
 endif
 nnoremap K :<C-u>Grep <C-R><C-W>"<CR>
 nnoremap _K :<C-u>Grep
@@ -551,11 +561,12 @@ augroup status
   autocmd Filetype qf call SetStatus()
 augroup END
 " }}}
-" Custom Highlight{{{
+" Custom Highlight {{{
 augroup highlights
     au!
     autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/ containedin=ALL
     autocmd Syntax * syn match Error '–'
+    autocmd Syntax * syn match UnfoldedFoldLine "^.*{{{"
 
     " Cursor line only on active window
     autocmd WinEnter * setlocal cursorline
@@ -577,12 +588,7 @@ function! AddCustomHighlights()
     hi StatuslineWarning ctermfg=8 ctermbg=3 guibg=#fff3cd guifg=#856404
     hi StatuslineAlert ctermfg=7 ctermbg=1 guibg=#f8d7da guifg=#721c24
 
-    hi CursorLine ctermbg=0 guibg=#151A1E
-    hi VertSplit ctermbg=none ctermfg=8 guibg=#204050
-    hi Search cterm=reverse
-    hi SearchCurrent ctermbg=blue guibg=#c0e0f0 guifg=#cc4422
 
-    hi MatchParent ctermfg=9
 
     hi ExtraWhitespace ctermfg=1 ctermbg=1 guibg=#ff0000 guifg=#ff0000
     hi SpellBad cterm=underline
@@ -590,9 +596,7 @@ function! AddCustomHighlights()
     hi SpellLocal cterm=underline
     hi SpellRare cterm=underline
 
-    hi ALEError ctermfg=1 cterm=underline guibg=#f8d7da
 
-    hi WildMenu ctermfg=2 ctermbg=8 guibg=#204050 guifg=#ffffff
 
     hi GitGutterAdd ctermbg=2 guifg=#155724
     hi GitGutterChange ctermbg=3 guifg=#856404
@@ -600,8 +604,12 @@ function! AddCustomHighlights()
     hi GitGutterChangeDelete ctermbg=8 guifg=#151A1E
 
 
-    highlight OverLength ctermbg=3 ctermfg=white guibg=#d1ecf1 guifg=#0c5460
-    match OverLength /\%81v.\+/
+    hi HighlightedyankRegion cterm=reverse gui=reverse
+
+    hi OverLength ctermbg=3 ctermfg=white guibg=#FF5555 guifg=#424450
+    call matchadd('OverLength', '\%81v', 100)
+
+    hi UnfoldedFoldLine ctermfg=white guifg=#E0E0E0
 
     if g:colors_name ==? 'dracula'
         hi Visual cterm=reverse
