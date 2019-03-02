@@ -29,7 +29,7 @@ function get_ip() {
 
     echo -n "#[fg=colour10]◉ #[fg=colour15]"
 
-    [[ -f $cachefile ]] || curl -s ipv4.ipchimp.net > $cachefile
+    [[ -f $cachefile ]] || curl -s ifconfig.me > $cachefile
 
     {
         filemtime=`stat -c %Y $cachefile`
