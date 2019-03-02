@@ -20,9 +20,13 @@ call plug#begin()
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'nixprime/cpsm', { 'do': 'env PY3=OFF ./install.sh' }
 Plug 'jeetsukumaran/vim-filebeagle'
+Plug 'romainl/vim-qf'
 
 " Colors
-Plug 'romainl/Apprentice'
+Plug 'andreypopp/vim-colors-plain'
+Plug 'abnt713/vim-hashpunk'
+Plug 'smallwat3r/vim-mono_sw'
+Plug 'TroyFletcher/vim-colors-synthwave'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -34,42 +38,36 @@ Plug 'tobyS/pdv'
 Plug 'tobyS/php-accessors.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'w0rp/ale'
-"Plug 'ludovicchabant/vim-gutentags'
 
 " textobj
 Plug 'kana/vim-textobj-user'
 " iu
-Plug 'jceb/vim-textobj-uri'
 " ic
-Plug 'jasonlong/vim-textobj-css'
 " ih
-Plug 'gilligan/textobj-gitgutter'
 " ix
-Plug 'whatyouhide/vim-textobj-xmlattr'
 " if
-Plug 'kana/vim-textobj-function'
 " ida
-Plug 'kana/vim-textobj-datetime'
 " iv
 Plug 'Julian/vim-textobj-variable-segment'
 
 " snippets
-Plug 'SirVer/ultisnips'
+if has("python3")
+    Plug 'SirVer/ultisnips'
+endif
 
 " Text
 Plug 'tpope/vim-surround'
 Plug 'FooSoft/vim-argwrap'
 Plug 'cohama/lexima.vim'
+Plug 'machakann/vim-highlightedyank'
 
 " navigation
 " f and F further
-Plug 'rhysd/clever-f.vim'
 " _/ search
 Plug 'ggVGc/vim-fuzzysearch'
 " visual undo
 Plug 'mbbill/undotree'
 " statusbar bling
-Plug 'naddeoa/vim-visual-page-percent'
 " search result highlighting
 Plug 'timakro/vim-searchant'
 " buffer content preview
