@@ -1,17 +1,39 @@
 Xcursor.theme: Human
+
+*.font:         Hack Nerd Font:pixelsize=10:antialias=true:autohint=true
+
+*.foreground: #F8F8F2
+*.background: #282A36
+*.color0:     #000000
+*.color8:     #4D4D4D
+*.color1:     #FF5555
+*.color9:     #FF6E67
+*.color2:     #50FA7B
+*.color10:    #5AF78E
+*.color3:     #F1FA8C
+*.color11:    #F4F99D
+*.color4:     #BD93F9
+*.color12:    #CAA9FA
+*.color5:     #FF79C6
+*.color13:    #FF92D0
+*.color6:     #8BE9FD
+*.color14:    #9AEDFE
+*.color7:     #BFBFBF
+*.color15:    #E6E6E6
+
 !
 ! Scrollbar
-*scrollBar:				false
+*scrollBar:             false
 !
 ! And scrolling
-*scrollTtyOutput:		false
-*scrollWithBuffer:		true
-*scrollTtyKeypress:		true
+*scrollTtyOutput:       false
+*scrollWithBuffer:      true
+*scrollTtyKeypress:     true
 
 ! URLs
-*underlineURLs:			true
+*underlineURLs:         true
 
-*letterSpace:			0
+*letterSpace:           0
 
 !rofi
 rofi.modi:          run,ssh,window
@@ -32,12 +54,10 @@ rofi.terminal:      st
 
 ! effective at startup
 st.termname:  screen-256color
-st.shell:     /bin/zsh
-st.tabspaces: 4
+st.shell:     /bin/tmux
 
 ! reloadable via USR1
-st.font:         DejaVu Sans Mono for Powerline:pixelsize=12:antialias=true:autohint=true
-st.borderpx:     1
+st.borderpx:     0
 st.cursorshape:  3
 st.bold_font:    0
 st.xfps:         120
@@ -46,42 +66,4 @@ st.chscale:      1.0
 st.cwscale:      1.0
 st.blinktimeout: 800
 st.bellvolume:   20
-
-! st can reload these with USR1
-! special
-*.foreground:   #c0c5ce
-*.background:   #2b303b
-*.cursorColor:  #c0c5ce
-
-! black
-*.color0:       #2b303b
-*.color8:       #65737e
-
-! red
-*.color1:       #bf616a
-*.color9:       #bf616a
-
-! green
-*.color2:       #a3be8c
-*.color10:      #a3be8c
-
-! yellow
-*.color3:       #ebcb8b
-*.color11:      #ebcb8b
-
-! blue
-*.color4:       #8fa1b3
-*.color12:      #8fa1b3
-
-! magenta
-*.color5:       #b48ead
-*.color13:      #b48ead
-
-! cyan
-*.color6:       #96b5b4
-*.color14:      #96b5b4
-
-! white
-*.color7:       #c0c5ce
-*.color15:      #eff1f5
-
+st.cursorColor:  #c0c5ce
