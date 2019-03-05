@@ -8,8 +8,6 @@ hc() {
 
 hc emit_hook reload
 
-#xsetroot -solid '#5A8E3A'
-
 # remove all existing keybindings
 hc keyunbind --all
 
@@ -64,8 +62,8 @@ hc keybind $Mod-Control-Up      resize up +$resizestep
 hc keybind $Mod-Control-Right   resize right +$resizestep
 
 # tags
-tag_names=( {1..9} )
-tag_keys=( {1..9} 0 )
+tag_names=( {1..2} )
+tag_keys=( {1..2} 0 )
 
 hc rename default "${tag_names[0]}" || true
 for i in ${!tag_names[@]} ; do
@@ -169,3 +167,7 @@ for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
     # start it on each monitor
     "$panel" $monitor &
 done
+
+layout="(clients max:0 0x1000005 0x1600001)"
+
+hc load "$layout"

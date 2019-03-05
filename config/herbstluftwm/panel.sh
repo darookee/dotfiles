@@ -2,6 +2,6 @@
 
 monitor=${1:-0}
 
-herbstclient pad $monitor 35 5 5 5
+herbstclient pad $monitor 5 5 35 5
 
-polybar -r example
+polybar -r bottom
