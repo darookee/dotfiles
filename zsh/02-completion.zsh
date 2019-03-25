@@ -10,7 +10,10 @@ compinit
 # general {{{
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion:*' cache-path "${ZDOTDIR:-$HOME}/.zcompcache"
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' matcher-list '' \
+  'm:{a-z\-}={A-Z\_}' \
+  'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
+  'r:|?=** m:{a-z\-}={A-Z\_}'
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' menu select=2
 zstyle ':completion:*::::' completer _expand _complete _match _ignored _approximate
