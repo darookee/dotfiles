@@ -14,6 +14,8 @@ endif
 " }}}
 " }}}
 filetype off
+set encoding=utf-8
+scriptencoding utf-8
 " Plugins {{{
 call plug#begin()
 " File finder
@@ -161,11 +163,11 @@ set cpo+=$
 set fillchars=vert:│,fold:┈
 
 set updatetime=1000
-set encoding=utf-8
-scriptencoding utf-8
 
 set diffopt-=internal
-set diffopt+=algorithm:patience,indent-heuristic
+if v:version > 800
+    set diffopt+=algorithm:patience,indent-heuristic
+endif
 
 set tags+=./.git/tags
 
