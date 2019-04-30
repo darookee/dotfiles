@@ -165,6 +165,7 @@ set fillchars=vert:│,fold:┈
 set updatetime=1000
 
 set diffopt-=internal
+set diffopt+=hiddenoff,iwhiteall
 if v:version > 800
     set diffopt+=algorithm:patience,indent-heuristic
 endif
