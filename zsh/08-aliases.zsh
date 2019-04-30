@@ -140,6 +140,10 @@ alias xkcdpw="shuf -n4 /usr/share/dict/words | sed \"s/'s$//\" | tr '[:upper:]' 
 if (( $+commands[neomutt] )); then
     alias mutt=neomutt
 fi
+if (( $+commands[exa] )); then
+    alias ll="exa -l"
+    alias la="exa -la"
+fi
 # }}}
 
 # vim:ft=zsh:fdm=marker
