@@ -36,7 +36,8 @@ Xcursor.theme: Human
 *letterSpace:           0
 
 !rofi
-rofi.modi:          run,ssh,window
+rofi.combi-modi:    run,ssh,window
+rofi.modi:          combi
 rofi.opacity:       95
 rofi.width:         50
 rofi.lines:         15
