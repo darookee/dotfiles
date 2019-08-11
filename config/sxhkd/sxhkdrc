@@ -22,12 +22,12 @@ super + alt + w
     bspc node -c
 
 # Desktops
-super + {1-9}
-    bspc desktop -f ^{1-9}
+super + {1-4}
+    bspc desktop -f ^{1-4}
 
 # Move to Desktop
-super + alt + {1-9}
-    bspc node focused -d ^{1-9}
+super + alt + {1-4}
+    bspc node focused -d ^{1-4}
 
 # cycle nodes and desktops
 {alt,super} + {_,shift} + Tab
