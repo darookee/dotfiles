@@ -4,15 +4,16 @@
 #
 
 # Load zgen {{{
-#
-[ -d "${ZDOTDIR:-$HOME}/.zgen" ] || mkdir ${ZDOTDIR:-$HOME}/.zgen
 
-if [[ ! -s "${ZDOTDIR:-$HOME}/.zgen/zgen.zsh" ]]; then
-    curl -fLo ${ZDOTDIR:-$HOME}/.zgen/zgen.zsh https://raw.githubusercontent.com/tarjoilija/zgen/master/zgen.zsh
-    chmod +x ${ZDOTDIR:-$HOME}/.zgen/zgen.zsh
+export ZGEN_HOME=${ZDOTDIR:-$HOME}/.zgen
+[ -d "${ZGEN_HOME}" ] || mkdir ${ZGEN_HOME}
+
+if [[ ! -s "${ZGEN_HOME}/zgen.zsh" ]]; then
+    curl -fLo ${ZGEN_HOME}/zgen.zsh https://raw.githubusercontent.com/tarjoilija/zgen/master/zgen.zsh
+    chmod +x ${ZGEN_HOME}/zgen.zsh
 fi
 
-source "${ZDOTDIR:-$HOME}/.zgen/zgen.zsh"
+source "${ZGEN_HOME}/zgen.zsh"
 
 if ! zgen saved; then
     zgen load zsh-users/zsh-history-substring-search
