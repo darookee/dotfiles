@@ -147,6 +147,7 @@ nnoremap <silent> _s :set spell!<CR>
 
 set backspace=indent,eol,start
 set smarttab
+set swb=useopen,vsplit
 
 set formatoptions=tcql1jn
 
