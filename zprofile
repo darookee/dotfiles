@@ -84,6 +84,11 @@ export FX
 export FG
 export BG
 # }}}
+#
+
+if [[ -e "${HOME}/.vault_password" ]]; then
+    export ANSIBLE_VAULT_PASSWORD_FILE=${HOME}/.vault_password
+fi
 
 # Include zprofile.local
 [[ -e ${HOME}/.zprofile.local ]] && source ${HOME}/.zprofile.local

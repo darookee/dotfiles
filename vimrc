@@ -38,6 +38,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tobyS/vmustache'
 Plug 'tobyS/pdv'
 Plug 'tobyS/php-accessors.vim'
+Plug 'b4b4r07/vim-ansible-vault'
 Plug 'sheerun/vim-polyglot'
 Plug 'dense-analysis/ale'
 
