@@ -101,6 +101,12 @@ function get_weather() {
 }
 
 function get_mailcount() {
+    # disable mailcount between 10:00 and 12:00, and 14:00 and 17:00
+    currenttime=$(date +%H:%M)
+    if [[ "$currenttime" > "10:00" && "$currenttime" < "12:00" ]] || [[ "$currenttime" > "13:00" && "$currenttime" < "17:00" ]]; then
+        return
+    fi
+
     maildir="${1-$HOME/.mail/INBOX/new}"
 
     if [ -e "$maildir" ]; then
