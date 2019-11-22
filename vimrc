@@ -583,8 +583,10 @@ augroup highlights
 augroup END
 
 function! AddCustomHighlights()
-    hi StatusLine ctermfg=0 ctermbg=8 cterm=none guibg=#1B1E21
-    hi StatusLineNC ctermfg=0 ctermbg=8 cterm=none guibg=#204050
+    hi Normal ctermbg=NONE guibg=NONE
+
+    hi StatusLine ctermfg=0 ctermbg=NONE cterm=NONE guibg=NONE
+    hi StatusLineNC ctermfg=0 ctermbg=8 cterm=NONE guibg=#204050
 
     hi StatuslineDim ctermfg=8 ctermbg=0 guibg=#10161A
     hi StatuslineHighlighted ctermfg=7 ctermbg=0 guibg=#556270 guifg=#C7F464
