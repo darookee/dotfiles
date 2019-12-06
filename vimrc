@@ -25,10 +25,7 @@ Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'romainl/vim-qf'
 
 " Colors
-Plug 'andreypopp/vim-colors-plain'
-Plug 'abnt713/vim-hashpunk'
-Plug 'smallwat3r/vim-mono_sw'
-Plug 'TroyFletcher/vim-colors-synthwave'
+Plug 'aonemd/kuroi.vim'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -90,7 +87,7 @@ if exists('+termguicolors')
     set t_ut=
 endif
 set background=dark
-colorscheme mono_sw
+colorscheme kuroi
 " }}}
 " Settings {{{
 filetype plugin indent on
