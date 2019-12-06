@@ -137,7 +137,7 @@ set wildignore+=*/.git/**/*,*/.hg/**/*,*/.svn/**/*
 set wildignore+=*/min/*,*/vendor/*,*/node_modules/*,*/bower_components/*
 set wildignore+=*.tar.*
 set wildignorecase
-set wildmode=full
+set wildmode=list:lastused,longest:full,full
 
 set completeopt-=preview
 
