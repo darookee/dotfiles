@@ -20,7 +20,7 @@ scriptencoding utf-8
 call plug#begin()
 " File finder
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'nixprime/cpsm', { 'do': 'env PY3=OFF ./install.sh' }
+Plug 'nixprime/cpsm', { 'do': './install.sh' }
 Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'romainl/vim-qf'
 
