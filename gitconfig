@@ -57,4 +57,10 @@
     textconv = js-beautify --css
     cachetextconv = true
 [diff]
-	algorithm = patience
+    algorithm = patience
+[pager]
+    log = /usr/bin/diffr | less -R
+    diff = /usr/bin/diffr | less -R
+    show = /usr/bin/diffr | less -R
+[gpg]
+    program = gpg2
