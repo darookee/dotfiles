@@ -221,8 +221,8 @@ augroup highlights
 
     autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/ containedin=ALL
 
-    autocmd WinEnter * setlocal cursorline
-    autocmd WinLeave * setlocal nocursorline
+    autocmd WinEnter * setlocal cursorline number
+    autocmd WinLeave * setlocal nocursorline nonumber
 
     autocmd ColorScheme * call s:AddCustomHighlights()
     autocmd VimEnter * call s:AddCustomHighlights()
