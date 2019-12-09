@@ -1,4 +1,3 @@
-" ~darookee/.vimrc
 " Plug {{{
 if has('vim_starting') " Do stuff on startup {{{
 " Download vim-plug if not exists {{{
@@ -54,7 +53,7 @@ set list
 set listchars=tab:»·,eol:↲,nbsp:␣,extends:…
 
 " undo
-set undodir=./undo
+set undodir=~/.config/nvim/undo
 set undofile
 set noswapfile
 
