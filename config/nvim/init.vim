@@ -215,6 +215,63 @@ else
 endif
 " }}}
 " }}}
+" Statusline {{{
+fun! SetStatus()
+    for l:nr in range(1, winnr('$'))
+        call setwinvar(l:nr, '&statusline', '%!Statusline('.l:nr.')')
+    endfor
+endfun
+
+fun! Statusline(winnr)
+
+    fun! AddPart(active, higroup, content)
+        return '%#Statusline'.(a:active?'Active':'Inactive').a:higroup.'# '.a:content.' %*'
+    endfun
+
+    let l:stat = ''
+
+    let l:active = winnr() == a:winnr
+    let l:buffer = winbufnr(a:winnr)
+
+    let l:modified = getbufvar(l:buffer, '&modified')
+    let l:readonly = getbufvar(l:buffer, '&ro')
+    let l:ftype = getbufvar(l:buffer, '&ft')
+    let l:encoding = getbufvar(l:buffer, '&enc')
+    let l:type = getbufvar(l:buffer, '&buftype')
+    let l:fname = bufname(l:buffer)
+    let l:filepath = fnamemodify(l:fname, ':p')
+    let l:ftime = getftime(l:filepath)
+    let l:lineends = search('\s\+$', 'nw')
+
+    let l:stat .= AddPart(l:active, 'Status', l:active ? '❗' : '❕')
+
+    let l:stat .= l:active?AddPart(l:active, 'Info', ' %3l/%L:'.(col('.')/100 >= 1?'%v':'%2v')):''
+
+    let l:stat .= '%<'
+    let l:stat .= l:readonly?AddPart(l:active, 'Warning', '🔒'):''
+    let l:stat .= AddPart(l:active, 'Important', '%f')
+    let l:stat .= l:modified?AddPart(l:active, 'Info', '💾'):''
+    let l:stat .= l:active?AddPart(l:active, 'Info', '🕛'.strftime('%F %H:%M', l:ftime)):''
+
+    if l:active
+        " right side
+        let l:stat .= '%='
+
+        let l:stat .= &paste?AddPart(l:active, 'CriticalInfo', '📋'):''
+        let l:stat .= l:lineends !=? 0 ? AddPart(l:active, 'Warning', '‼'):''
+
+        let l:stat .= AddPart(l:active, 'Info', l:ftype.':'.l:encoding)
+    endif
+
+    return l:stat
+endfun
+
+augroup status
+    au!
+    au VimEnter,WinEnter,BufWinEnter,BufUnload * call SetStatus()
+    au Filetype qf call SetStatus()
+augroup END
+" }}}
 " Highlights {{{
 augroup highlights
     au!
@@ -245,6 +302,11 @@ fun! s:AddCustomHighlights()
     call matchadd('OverLength', '\%81v', 100)
 
     hi HighlightedyankRegion cterm=reverse gui=reverse
+
+    hi StatuslineActiveImportant ctermfg=7 ctermbg=0 guibg=#556270 guifg=#C7F464
+    hi StatuslineInactiveImportant ctermfg=6 ctermbg=1
+    hi link StatuslineActiveStatus StatuslineActiveImportant
+    hi link StatuslineInactiveStatus StatusLineInactiveImportant
 endfun
 
 " }}}
