@@ -24,6 +24,9 @@ Plug 'cohama/lexima.vim'
 Plug 'ggVGc/vim-fuzzysearch'
 Plug 'mbbill/undotree'
 
+Plug 'kana/vim-textobj-user'
+Plug 'Julian/vim-textobj-variable-segment'
+
 " files
 Plug 'justinmk/vim-dirvish'
 Plug 'kristijanhusak/vim-dirvish-git'
