@@ -150,6 +150,9 @@ nnoremap <space> za
 " Remove trailing whitespace
 nnoremap ,W :%s/\s\+$//<CR>:let @/=''<CR>:nohl<CR>
 
+" highlight last paste
+nnoremap <expr> gp '`['.strpart(getregtype(), 0, 1).'`]'
+
 " run current line in shell and replace with output
 nnoremap Q !!$SHELL<CR>
 
