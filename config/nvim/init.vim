@@ -1,3 +1,4 @@
+scriptencoding utf-8
 " Plug {{{
 if has('vim_starting') " Do stuff on startup {{{
 " Download vim-plug if not exists {{{
@@ -66,6 +67,7 @@ set tabstop=4
 set shiftwidth=4
 
 " search
+set ignorecase
 set smartcase
 set gdefault
 
@@ -90,7 +92,7 @@ set nospell spelllang=de,en
 nnoremap <silent> ,s :set spell!<CR>
 
 " behavior
-set swb=useopen,vsplit
+set switchbuf=useopen,vsplit
 set diffopt+=algorithm:patience,indent-heuristic
 set tags+=./.git/tags
 set hidden
