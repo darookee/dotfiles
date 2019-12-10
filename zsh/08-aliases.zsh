@@ -29,6 +29,10 @@ alias grep="grep $GREP_OPTIONS"
 unset GREP_OPTIONS
 unset VCS_FOLDERS
 unfunction grep-flag-available
+
+alias rg="rg -S"
+alias sift="sift -S"
+alias ag="ag -S"
 # }}}
 # Files over network {{{
 if (( $+commands[curl]  )); then
