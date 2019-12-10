@@ -7,12 +7,12 @@ function get_cpu_temp() {
         temp=$(cat /sys/class/thermal/thermal_zone0/temp|awk '{ printf("%.0f", $1/1000) }')
         if [ -n "$temp" ]; then
             if [ "$temp" -gt 39 ]; then
-                echo -n " #[fg=colour13]$temp°C"
+                echo -n "🌡 #[fg=colour13]$temp°C"
             else
-                echo -n " $temp°C"
+                echo -n "🌡 $temp°C"
             fi
         else
-            echo -n " #[fg=colour15]-°C"
+            echo -n "🌡 #[fg=colour15]-°C"
         fi
     fi
 }
@@ -123,12 +123,11 @@ function get_battery() {
         capacity=$(cat ${batpath}/capacity)
         state=$(cat ${batpath}/status)
         if [ "Charging" = "${state}" ]; then
-            echo -n "#[fg=colour11] #[fg=colour15]"
+            echo -n "#[fg=colour11]🔌 #[fg=colour15]"
         fi
-        [[ "$capacity" -lt 30 ]] && echo -n "#[fg=colour13]  #[fg=colour15]"
-        [[ "$capacity" -lt 50 && "$capacity" -gt 30 ]] && echo -n "  "
-        [[ "$capacity" -lt 70 && "$capacity" -gt 50 ]] && echo -n "  "
-        [[ "$capacity" -gt 90 ]] && echo -n "  "
+        echo -n "🔋"
+        [[ "$capacity" -lt 30 ]] && echo -n "#[fg=colour13]{$capacity}%#[fg=colour15]"
+        [[ "$capacity" -gt 30 ]] && echo -n "${capacity}%"
     fi
 }
 
@@ -136,7 +135,7 @@ function get_wifi() {
     if hash wpa_cli 2>/dev/null; then
         ssid=$(wpa_cli status ${1}|grep \^ssid|cut -d\= -f2|cut -c1-12)
         if [ ! -z "$ssid" ]; then
-            echo "#[fg=colour10]  #[fg=colour15]${ssid}"
+            echo "#[fg=colour10]📶  #[fg=colour15]${ssid}"
         fi
     fi
 }
@@ -147,10 +146,10 @@ function get_volume() {
 
         echo -n "#[fg=colour11]"
         if [[ "${state}" == "off" ]]; then
-            echo -n ""
+            echo -n "🔇"
         else
             vol=$(amixer get Master|grep "o: P"|cut -d\  -f6|tr -dc '0-9')
-            [[ ${vol} -ge 50 ]] && echo -n " " || echo -n " "
+            [[ ${vol} -ge 50 ]] && echo -n "🔊 " || echo -n "🔉 "
         fi
     fi
 }
@@ -171,7 +170,6 @@ battery=$(get_battery)
 wifi=$(get_wifi)
 volume=$(get_volume)
 
-weather=$(get_weather)
 
 date=$(date +"%a, %Y-%m-%d (%V)")
 time=$(date +"%H:%M")
@@ -182,11 +180,11 @@ if [ ! -z "${local_status}" ]; then
     echo -n "#[bg=colour3]#[fg=colour8] ${local_status} "
 fi
 if [ ! -z "${mail_count}" ]; then
-    echo -n "#[bg=colour13]#[fg=colour15] 📫 ${mail_count} "
+    echo -n "#[bg=colour13]#[fg=colour15] 📬 ${mail_count} "
 fi
 echo -n "#[bg=colour59,fg=colour12] | "
-# echo -n "#[bg=colour236,fg=colour174] ❤#[fg=colour188] ${cpu_temp} #[fg=colour188][${cpu_percent}]#[fg=colour245,bg=colour236]#[fg=colour188][${mem_percent}]"
-echo -n "#[bg=colour59,fg=colour13]💓#[fg=colour15]${cpu_temp} #[fg=colour15][${cpu_load}][${mem_percent}]#[fg=colour12] | "
+# echo -n "#[bg=colour236,fg=colour174]💓#[fg=colour188] ${cpu_temp} #[fg=colour188][${cpu_percent}]#[fg=colour245,bg=colour236]#[fg=colour188][${mem_percent}]"
+echo -n "#[bg=colour59,fg=colour13]💓#[fg=colour15]${cpu_temp} #[fg=colour15]${cpu_load}#[fg=colour12] | 🎰 #[fg=colour15]${mem_percent}#[fg=colour12] | "
 if [ ! -z "${mpc}" ]; then
     echo -n "#[fg=colour11]♪ #[fg=colour15]${mpc}#[fg=colour12] | "
 else
@@ -199,13 +197,10 @@ fi
 if [ ! -z "${volume}" ]; then
     echo -n "#[fg=colour15]${volume}#[fg=colour12] | "
 fi
-if [ ! -z "${weather}" ]; then
-    echo -n "${weather}#[fg=colour12] | "
-fi
 if [ ! -z "${battery}" ]; then
     echo -n "#[fg=colour15]${battery}#[fg=colour12]| "
 fi
-echo -n "#[fg=colour12]🕛 ${date} #[fg=colour7]${time} "
+echo -n "#[fg=colour12]📆 ${date} #[fg=colour7]🕛 ${time} "
 
 
 
