@@ -373,5 +373,52 @@ command! -bang -nargs=1 -complete=file QFilter call s:FilterQuickfixList(<bang>0
 " Commands {{{
 command! Remove :call delete(@%)
 " }}}
+" Autocommands {{{
+augroup FiletypeSettings
+    au!
+    " what does this do?
+    "au FileType css,scss,less setlocal iskeyword+=-
+    au BufNewFile,BufRead COMMIT_EDITMSG setlocal spell
+
+    au FileType text,markdown setlocal nonumber spell
+
+    if executable('prettier')
+        autocmd FileType javascript setlocal formatprg=prettier\ --stdin\ --single-quote\ --trailing-comma\ es5\ --tab-width\ 4
+    endif
+
+    if executable('jq')
+        autocmd FileType json setlocal formatprg=jq\ .
+    endif
+
+    if executable('sqlformat')
+        autocmd FileType sql setlocal formatprg=sqlformat\ --reindent\ -
+    endif
+
+    if executable('remark')
+        autocmd FileType markdown setlocal formatprg=remark\ --no-color\ --silent
+    endif
+
+    au Filetype qf setlocal nonumber nolist
+augroup END
+
+augroup Marks
+    au!
+    au BufLeave *.css,*.scss,*.less normal! mC
+    au BufLeave *.html,*.tpl normal! mH
+    au BufLeave *.js normal! mJ
+    au BufLeave *.php normal! mP
+augroup END
+" }}}
+" Text-Objects {{{
+for g:objchar in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', '`' ]
+    execute 'xnoremap i' . g:objchar . ' :<C-u>normal! T' . g:objchar . 'vt' . g:objchar . '<CR>'
+    execute 'onoremap i' . g:objchar . ' :normal vi' . g:objchar . '<CR>'
+    execute 'xnoremap a' . g:objchar . ' :<C-u>normal! F' . g:objchar . 'vf' . g:objchar . '<CR>'
+    execute 'onoremap a' . g:objchar . ' :normal va' . g:objchar . '<CR>'
+endfor
+" }}}
+if filereadable(expand('~/.vimrc.local'))
+    source ~/.vimrc.local
+endif
 
 " vim:fdm=marker
