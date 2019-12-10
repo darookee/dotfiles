@@ -11,8 +11,6 @@ function get_cpu_temp() {
             else
                 echo -n "🌡 $temp°C#[fg=colour12] | "
             fi
-        else
-            echo -n "🌡 #[fg=colour15]-°C[fg=colour12] | "
         fi
     fi
 }
