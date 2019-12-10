@@ -181,8 +181,6 @@ let g:ale_lint_delay = 1000
 let g:ale_lint_on_enter = 0
 let g:ale_lint_on_insert_leave = 1
 let g:ale_php_phpcs_standard = 'Symfony'
-let g:ale_statusline_format = ['‼%d', '‽%d', '']
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 " }}}
 " cohama/lexima.vim {{{
 call lexima#add_rule({
