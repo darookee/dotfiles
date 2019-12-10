@@ -6,7 +6,6 @@ function get_cpu_temp() {
     if [ -r "/sys/class/thermal/thermal_zone0/temp" ]; then
         temp=$(cat /sys/class/thermal/thermal_zone0/temp|awk '{ printf("%.0f", $1/1000) }')
         if [ -n "$temp" ]; then
-            echo -n "🌡"
             if [ "$temp" -gt 39 ]; then
                 echo -n "#[fg=colour13]$temp°C"
             else
