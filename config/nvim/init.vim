@@ -248,7 +248,7 @@ fun! Statusline(winnr)
 
     let l:stat .= AddPart(l:active, 'Status', l:active ? '❗' : '❕')
 
-    let l:stat .= l:active?AddPart(l:active, 'Info', ' %3l/%L:'.(col('.')/100 >= 1?'%v':'%2v')):''
+    let l:stat .= l:active?AddPart(l:active, 'Info', ' %4l /%4L:'.(col('.')/100 >= 1?'%v':'%2v')):''
 
     let l:stat .= '%<'
     let l:stat .= l:readonly?AddPart(l:active, 'Warning', '🔒'):''
@@ -263,7 +263,15 @@ fun! Statusline(winnr)
         let l:stat .= &paste?AddPart(l:active, 'CriticalInfo', '📋'):''
         let l:stat .= l:lineends !=? 0 ? AddPart(l:active, 'Warning', '‼'):''
 
-        let l:stat .= AddPart(l:active, 'Info', l:ftype.':'.l:encoding)
+        let l:stat .= AddPart(l:active, 'Info', l:ftype.(l:encoding == 'utf-8' ? '' : ' ('.l:encoding.')'))
+
+        if exists(':ALELint')
+            let l:ale_counts = ale#statusline#Count(bufnr(''))
+            let l:ale_all_errors = l:ale_counts.error + l:ale_counts.style_error
+            let l:ale_all_non_errors = l:ale_counts.total - l:ale_all_errors
+
+            let l:stat .= AddPart(l:active, 'Info', l:ale_counts.total == 0 ? '%#StatuslineActiveClear#👍%*' : '%#StatuslineActiveWarning#'.l:ale_all_non_errors.'⚠%* %#StatuslineActiveError#'.l:ale_all_errors.'🛑%*')
+        endif
     endif
 
     return l:stat
@@ -310,6 +318,9 @@ fun! s:AddCustomHighlights()
     hi StatuslineInactiveImportant ctermfg=6 ctermbg=1
     hi link StatuslineActiveStatus StatuslineActiveImportant
     hi link StatuslineInactiveStatus StatusLineInactiveImportant
+    hi StatuslineActiveClear ctermfg=193 ctermbg=65 guifg=#d7ffaf guibg=#5F875F
+    hi StatuslineActiveError ctermfg=168 ctermbg=52 guifg=#d75f87 guibg=#5f0000
+    hi StatuslineActiveWarning ctermfg=237 ctermbg=172 guifg=#373b41 guibg=#d78700
 endfun
 
 " }}}
