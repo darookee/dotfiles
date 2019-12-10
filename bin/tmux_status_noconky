@@ -184,7 +184,7 @@ if [ ! -z "${mail_count}" ]; then
 fi
 echo -n "#[bg=colour59,fg=colour12] | "
 # echo -n "#[bg=colour236,fg=colour174]💓#[fg=colour188] ${cpu_temp} #[fg=colour188][${cpu_percent}]#[fg=colour245,bg=colour236]#[fg=colour188][${mem_percent}]"
-echo -n "#[bg=colour59,fg=colour13]💓#[fg=colour15]${cpu_temp} #[fg=colour15]${cpu_load}#[fg=colour12] | 🎰 #[fg=colour15]${mem_percent}#[fg=colour12] | "
+echo -n "#[bg=colour59,fg=colour13]#[fg=colour15]${cpu_temp}#[fg=colour15]💓 ${cpu_load}#[fg=colour12] | 🎰 #[fg=colour15]${mem_percent}#[fg=colour12] | "
 if [ ! -z "${mpc}" ]; then
     echo -n "#[fg=colour11]♪ #[fg=colour15]${mpc}#[fg=colour12] | "
 else
