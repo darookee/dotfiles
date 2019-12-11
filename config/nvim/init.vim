@@ -411,7 +411,10 @@ augroup FiletypeSettings
         autocmd FileType markdown setlocal formatprg=remark\ --no-color\ --silent
     endif
 
-    au Filetype qf setlocal nonumber nolist
+    " exit vim when last window is quickfix
+    au BufEnter * nested if &filetype == 'qf' && winbufnr(2) == -1 | q! | endif
+    " don't use numbers and list chars in quickfix
+    au Filetype qf setlocal nonumber nolist nobuflisted
 augroup END
 
 augroup Marks
