@@ -1,9 +1,0 @@
-" Simplenote (needs ~/.simplenoterc) {{{
-" source simplenoterc when it exists
-let s:simplenoterc = expand($HOME . '/.simplenoterc')
-if filereadable(s:simplenoterc)
-    exec ':so ' . s:simplenoterc
-endif
-" }}}
-
-" vim:fdm=marker ft=vim
