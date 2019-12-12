@@ -1,6 +1,6 @@
 # compile zcompdump to speed up startup
 {
-    zcompdump=${ZSH_HOME}/zcompdump
+    zcompdump=${ZSH_HOME}/zcompdump-${ZSH_VERSION}
     if [[ -s "${zcompdump}" && (! -s "${zcompdump}.zwc" || "${zcompdump}" -nt "${zcompdump}.zwc" ) ]]; then
         zcompile "${zcompdump}"
     fi
