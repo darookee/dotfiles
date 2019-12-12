@@ -1,9 +1,0 @@
-#!/bin/bash
-
-/usr/bin/php -l -n -d display_errors=1 -d error_log= -d error_reporting=E_ALL $@|awk -F'( in|on line )' '{gsub(/^[ \t]+/, "", $2); gsub(/[ \t]+$/, "", $2); print $2 ":" $3 ":1: " $1}'|grep -v "::"
-
-# if there is an ./app folder in this project, assume it's symfony2
-# and do the phpcs with the symfony standard
-if [ -d "app" ]; then
-    /home/darookee/.bin.untracked/phpcs -n --standard=Symfony2 --no-colors --report=emacs $@
-fi
