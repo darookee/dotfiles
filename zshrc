@@ -151,6 +151,7 @@ zstyle ':completion::complete:*' use-cache on
 
 zstyle ':completion:*' menu select=2
 zstyle ':completion:*::::' completer _expand _complete _match _ignored _approximate
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # match case insenitive
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
