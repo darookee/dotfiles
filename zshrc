@@ -28,13 +28,15 @@ source $ZPLG_HOME/bin/zplugin.zsh
 zplugin light zsh-users/zsh-autosuggestions
 zplugin light zsh-users/zsh-history-substring-search
 zplugin light zdharma/fast-syntax-highlighting
-zplugin load zdharma/history-search-multi-word
+zplugin light zdharma/history-search-multi-word
 
-zplugin ice pick"async.zsh" src"pure.zsh"
+zplugin ice pick'async.zsh' src'pure.zsh'
 zplugin light sindresorhus/pure
 
 zplugin ice as"completion"
 zplugin snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
+
+zplugin cdclear -q
 # }}}
 # keys {{{
 typeset -A key
