@@ -18,6 +18,7 @@ path-prepend "${HOME}/.bin.untracked"
 path-prepend "${HOME}/.bin.docker"
 path-prepend "${HOME}/.local/bin"
 path-prepend "${HOME}/.config/composer/vendor/bin"
+[[ ! -z "$GOPATH" ]] && path-prepend "${GOPATH}/bin"
 
 unfunction path-prepend
 
