@@ -1,0 +1,36 @@
+text/html; html-to-text; copiousoutput;
+#text/html; html2text.py - utf8; copiousoutput;
+## ugly
+#text/html; lynx -stdin -force_html -dump; copiousoutput;
+## pandoc needs haskell, which seems to be a problem for gentoo
+#text/html; pandoc --from=html --to=markdown; copiousoutput;
+## breaks on some html content
+#text/html; reverse_markdown %s; copiousoutput;
+
+application/pdf; pdftotext %s -; copiousoutput; print=lpr %s
+
+application/vnd.ms-excel; head -n10 %s; copiousoutput
+
+application/x-gzip; ~/.mutt/scripts/octet-filter %s; copiousoutput
+application/x-gunzip; ~/.mutt/scripts/octet-filter %s; copiousoutput
+application/x-bzip2; ~/.mutt/scripts/octet-filter %s; copiousoutput
+application/octet-stream; ~/.mutt/scripts/octet-filter %s; copiousoutput
+application/x-diff-gzip; zcat %s; copiousoutput
+application/x-cpio; cpio -tvF --quiet %s; copiousoutput
+application/x-gtar; tar tvf %s; copiousoutput
+application/x-tar; tar tvf %s; copiousoutput
+application/x-tar-gz; tar tvfz %s; copiousoutput
+application/gzip; tar tvfz %s; copiousoutput
+application/x-rar-compressed; rar v %s; copiousoutput
+application/x-zip-compressed; unzip -v %s; copiousoutput
+application/zip; unzip -v %s; copiousoutput
+
+image/*; img2txt %s; copiousoutput
+
+text/directory; ~/.mutt/scripts/vcard-filter; copiousoutput
+text/x-vcard; ~/.mutt/scripts/vcard-filter; copiousoutput
+
+application/ms-tnef; tnef -C ~/attachments/ --save-body -w %s
+
+text/calendar; mutt-ics; copiousoutput
+application/ics; mutt-ics; copiousoutput

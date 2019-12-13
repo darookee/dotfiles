@@ -1,0 +1,173 @@
+# muttrc
+
+# Keybindings {{{
+bind index i            noop
+bind index g            noop
+bind index gg           first-entry
+bind index G            last-entry
+bind index K            previous-entry
+bind index J            next-entry
+bind index <space>      collapse-thread
+
+bind index,pager R      group-reply
+bind index,pager \#     noop
+
+bind pager k            previous-line
+bind pager j            next-line
+bind pager g            noop
+bind pager gg           top
+bind pager G            bottom
+bind pager N            search-opposite
+bind pager K            previous-entry
+bind pager J            next-entry
+
+bind editor <Tab>       complete-query
+bind editor ^T          complete
+
+bind index,pager \eX vfolder-from-query
+bind index,pager X change-vfolder
+
+macro index I   "<change-folder>!<enter>"   "go to Inbox"
+macro index a "<limit>all\n" "show all messages (undo limit)"
+
+# Archive messages
+macro generic A     "<tag-prefix><save-message>=Archives<enter><sync-mailbox>"      "Archive message"
+macro index,pager A "<tag-prefix><save-message>=Archives<enter>"                    "Archive message"
+macro index \ca     "<change-folder>=Archives<tab><tab>"                            "Go to some Archive.* folder"
+
+# Delete but don't sync (so we can undelete)
+macro generic D "<tag-prefix><delete-message>"
+macro index,pager D "<tag-prefix><delete-message>"
+# }}}
+# Directories and commands {{{
+set alias_file       = ~/.mutt/alias         # alias file
+set header_cache     = ~/.mutt/cache/headers # where to store headers
+set message_cachedir = ~/.mutt/cache/bodies  # where to store bodies
+set certificate_file = ~/.mutt/certificates  # where to store certs
+set mailcap_path     = ~/.mutt/mailcap       # entrys for filetypes
+set tmpdir           = ~/.mutt/temp          # where to keep temp files
+
+set editor           = "$EDITOR +/^$ +nohl +normal!o"     # use vim and skip to first blank line
+
+unset confirmappend
+set quit
+set delete
+# }}}
+# Formats {{{
+set date_format     = "%a %d %b %Y %H:%M"
+set index_format    = "%-11@date@ %@pgp@%@att@%@new@ %-25.25Fp %3M %?H?%H&📧? %-25.70s %>  %5c 💾 "
+set pager_format    = "───[ %Z%S (%2N) ]───[ %d ]───[ %L ]───[ %1s ]───%>────( %c/%X )───[ Folder: %b ]───( %C/%m )───"
+#set alias_format    = "%4n %t %-20a  %r"
+set status_chars    = "*%A"
+set status_format   = "%?r?%r? %P of %f %?l?%l? (%?n?%n\/?%m)%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%> (%s/%S) %?b?- %b folders? "
+set attribution     = "\n[%(%Y-%m-%d %H:%M)] %n:\n"
+set quote_regexp    = "^([ \t ]*[|>:}#])+"
+set folder_format   = "%N %f %> %3n/%5m "
+set forward_format  = "%a: %s"
+
+# index-format-hooks
+index-format-hook date "~d<1d"  "🕐 %[%H:%M]"
+index-format-hook date "~d<1m"  "📆 %[%a, %d]"
+index-format-hook date "~d<1y"  "📅 %[%d %b]"
+index-format-hook date "~A"     "📅 %[%d.%m.%Y]"
+
+index-format-hook pgp "~g"      "🔏"
+index-format-hook pgp "~G"      "🔐"
+index-format-hook pgp "~A"      "👤"
+
+index-format-hook att "~T"      "📌"
+index-format-hook att "~k"      "🔑"
+index-format-hook att "~X >0"   "📎"
+index-format-hook att "~A"      "  "
+
+index-format-hook new "~N"      "📩"
+index-format-hook new "~O"      "📜"
+index-format-hook new "~Q"      "📤"
+index-format-hook new "~A"      "  "
+
+# spam
+spam "X-Spam-Status: Yes"       "🔥"
+spam "X-Spam-Status: No"        "📧"
+set spam_separator=""
+# }}}
+# Sorting {{{
+set sort              = threads
+set sort_aux          = reverse-last-date
+
+folder-hook . 'set sort_aux=reverse-last-date'
+
+set uncollapse_jump                                 # don't collapse on an unread message
+# }}}
+# Writing {{{
+set send_charset="utf-8"
+
+# attachment
+set abort_noattach = ask-yes
+set abort_noattach_regex = "\\<(anhängen|angehängt|anhang|anhänge|hängt an|anbei)\\>"
+# }}}
+# Reading {{{
+set skip_quoted_offset  = 3
+set mbox_type           = Maildir
+# }}}
+# Replying {{{
+set sort_re                                         # thread based on regex
+set reply_regexp = "^((re|aw|sv)(\[[0-9]+\])*:[ \t]*)*"
+set reply_with_xorig
+set fast_reply                           # skip to compose when replying
+set edit_headers                         # show headers when composing
+set include                              # include message in replies
+# }}}
+# Show attachments inline {{{
+unattachments *
+attachments +A */.*
+attachments +A image/.*
+attachments +A application/octet-stream
+attachments +A application/vnd.*
+attachments +A application/ics
+attachments +I text/plain
+attachments +I text/html
+attachments +I application/ics
+attachments +I text/calendar
+attachments +I text/directory
+attachments +I text/x-vcard
+attachments +I image/.*
+
+auto_view text/html
+auto_view application/zip
+auto_view text/x-vcard
+auto_view text/directory
+auto_view text/calendar
+auto_view application/ics
+
+alternative_order text/calendar multipart/mixed multipart/related text/plain text/enriched text/html
+mime_lookup application/octet-stream
+# }}}
+# Headers to show {{{
+ignore *                                 # ignore all headers
+unignore from: to: cc: bcc: date: subject: X-Clacks-Overhead: X-42:   # show only these
+hdr_order X-42: X-Clacks-Overhead: from: to: cc: bcc: date: subject:  # and in this order
+# }}}
+# S/MIME {{{
+set crypt_verify_sig="yes"
+set crypt_timestamp="yes"
+# }}}
+# PGP {{{
+set crypt_use_gpgme = yes
+set crypt_opportunistic_encrypt = yes
+# }}}
+# Printing {{{
+set print="yes"
+set print_split
+# }}}
+# Colors {{{
+source ~/.mutt/muttrc.colors
+# }}}
+#
+# Include other muttrc.*
+source ~/.mutt/muttrc.local
+
+# set this here so all accounts get the same headers set
+my_hdr X-42: DON'T PANIC
+my_hdr X-Clacks-Overhead: GNU Terry Pratchett
+
+# vim: ft=muttrc fdm=marker
