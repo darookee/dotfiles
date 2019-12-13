@@ -144,7 +144,29 @@ unsetopt correct_all
 setopt correct
 setopt no_clobber
 setopt no_rm_star_silent
+# }}}
+# completion {{{
+zstyle ':completion:*' cache-path '${ZSH_HOME}/.zcompcache'
+zstyle ':completion::complete:*' use-cache on
 
+zstyle ':completion:*' menu select=2
+zstyle ':completion:*::::' completer _expand _complete _match _ignored _approximate
+
+# match case insenitive
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:matches' group 'yes'
+zstyle ':completion:*:options' description 'yes'
+zstyle ':completion:*:options' auto-description '%d'
+zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+zstyle ':completion:*' verbose yes
+
+# complete ssh/rsync hosts from ssh-config
+zstyle -e ':completion:*:*:*' hosts 'reply=(${=${${${${(@M)${(f)"$(cat ~/.ssh/config{,.d/*} 2>/dev/null)"}:#Host *}#Host }:#*\**}:#*\?*}} )'
+# and users are static
+zstyle -e ':completion:*:*:*' users 'reply=($(whoami) root)'
 # }}}
 # aliases {{{
 
@@ -362,8 +384,9 @@ _ark () {
 }
 # }}}
 # init {{{
-autoload -U compinit
+autoload -Uz compinit
 compinit -d ${ZSH_HOME}/zcompdump-${ZSH_VERSION}
+zplugin cdreplay -q
 # }}}
 # prompt {{{
 _rprompt () {
