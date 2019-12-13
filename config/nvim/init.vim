@@ -25,6 +25,7 @@ Plug 'cohama/lexima.vim'
 Plug 'ggVGc/vim-fuzzysearch'
 Plug 'mbbill/undotree'
 
+" textobjects
 Plug 'kana/vim-textobj-user'
 Plug 'Julian/vim-textobj-variable-segment'
 
@@ -186,6 +187,19 @@ let g:ale_lint_on_enter = 0
 let g:ale_lint_on_insert_leave = 1
 let g:ale_php_phpcs_standard = 'Symfony'
 " }}}
+" airblade/gitgutter {{{
+if executable('rg')
+    let g:gitgutter_grep_command = 'rg -S'
+elseif executable('sift')
+    let g:gitgutter_grep_command = 'sift -S'
+elseif executable('ag')
+    let g:gitgutter_grep_command = 'ag -S'
+elseif executable('ack')
+    let g:gitgutter_grep_command = 'ack -i'
+else
+    let g:gitgutter_grep_command = 'grep -i'
+endif
+" }}}
 " cohama/lexima.vim {{{
 call lexima#add_rule({
             \ 'char': '%',
@@ -208,18 +222,8 @@ let g:fuzzysearch_match_spaces = 1
 
 nmap ,/ :FuzzySearch<CR>
 " }}}
-" airblade/gitgutter {{{
-if executable('rg')
-    let g:gitgutter_grep_command = 'rg -S'
-elseif executable('sift')
-    let g:gitgutter_grep_command = 'sift -S'
-elseif executable('ag')
-    let g:gitgutter_grep_command = 'ag -S'
-elseif executable('ack')
-    let g:gitgutter_grep_command = 'ack -i'
-else
-    let g:gitgutter_grep_command = 'grep -i'
-endif
+" mbbill/undotree {{{
+nnoremap <F5> :UndotreeToggle<CR>
 " }}}
 " }}}
 " Statusline {{{
