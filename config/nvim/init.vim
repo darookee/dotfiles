@@ -29,6 +29,9 @@ Plug 'mbbill/undotree'
 Plug 'kana/vim-textobj-user'
 Plug 'Julian/vim-textobj-variable-segment'
 
+" snippets
+Plug 'SirVer/ultisnips'
+
 " files
 Plug 'justinmk/vim-dirvish'
 
@@ -224,6 +227,9 @@ nmap ,/ :FuzzySearch<CR>
 " }}}
 " mbbill/undotree {{{
 nnoremap <F5> :UndotreeToggle<CR>
+" }}}
+" SirVer/ultisnips {{{
+let g:UltiSnipsSnippetDirectories=['UltiSnips', 'local.snippets']
 " }}}
 " }}}
 " Statusline {{{
