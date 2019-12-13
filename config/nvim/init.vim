@@ -30,7 +30,6 @@ Plug 'Julian/vim-textobj-variable-segment'
 
 " files
 Plug 'justinmk/vim-dirvish'
-Plug 'kristijanhusak/vim-dirvish-git'
 
 " filetype support
 Plug 'thiagoalmeidasa/vim-ansible-vault'
