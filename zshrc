@@ -386,6 +386,10 @@ _ark () {
 # init {{{
 autoload -Uz compinit
 compinit -d ${ZSH_HOME}/zcompdump-${ZSH_VERSION}
+
+# add completion for ark
+compdef _ark ark
+
 zplugin cdreplay -q
 # }}}
 # prompt {{{
