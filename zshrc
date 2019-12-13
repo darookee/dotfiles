@@ -33,9 +33,6 @@ zplugin light zdharma/history-search-multi-word
 zplugin ice pick'async.zsh' src'pure.zsh'
 zplugin light sindresorhus/pure
 
-zplugin ice as"completion"
-zplugin snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
-
 zplugin cdclear -q
 # }}}
 # keys {{{
