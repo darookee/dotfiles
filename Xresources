@@ -52,6 +52,7 @@ rofi.bw:            2
 rofi.padding:       5
 rofi.yoffset:       55
 rofi.terminal:      st
+rofi.theme:         ~/.local/share/rofi/themes/c64.rasi
 
 ! effective at startup
 st.termname:  screen-256color
