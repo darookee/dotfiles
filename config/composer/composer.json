@@ -1,15 +1,15 @@
 {
     "minimum-stability": "dev",
     "require": {
-        "squizlabs/php_codesniffer": "^3.2",
-        "escapestudios/symfony2-coding-standard": "^3.2",
-        "phpmd/phpmd": "^2.6",
-        "sebastian/phpcpd": "^4.0",
-        "phpunit/phpunit": "^7.1",
-        "pheromone/phpcs-security-audit": "dev-master",
-        "wp-coding-standards/wpcs": "dev-master",
-        "dealerdirect/phpcodesniffer-composer-installer": "dev-master",
-        "wimg/php-compatibility": "dev-master",
-        "object-calisthenics/phpcs-calisthenics-rules": "dev-master"
+        "squizlabs/php_codesniffer": "@stable",
+        "escapestudios/symfony2-coding-standard": "@stable",
+        "phpmd/phpmd": "@stable",
+        "sebastian/phpcpd": "@stable",
+        "phpunit/phpunit": "@stable",
+        "pheromone/phpcs-security-audit": "@stable",
+        "wp-coding-standards/wpcs": "@stable",
+        "dealerdirect/phpcodesniffer-composer-installer": "@stable",
+        "phpcompatibility/php-compatibility": "@stable",
+        "object-calisthenics/phpcs-calisthenics-rules": "@stable"
     }
 }
