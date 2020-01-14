@@ -14,7 +14,7 @@ compton -cb &
 unclutter --timeout 1 -b
 xautolock -time 5 -locker ~/.bin/locker &
 xflux -l 52.4 -g 10.5 -r 1 -nofork &
-st zsh --login -c "~/.bin/tmx X" &
+kitty &
 
 if command -v flashfocus > /dev/null 2>&1; then
     exec_always --no-startup-id flashfocus
