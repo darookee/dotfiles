@@ -8,6 +8,9 @@ if [[ -n "$TMUX" ]]; then
     export TERM="screen-256color"
 fi
 
+export COMPOSER_HOME=${HOME}/.config/composer
+export GOPATH=${HOME}/.go
+
 # PATH
 function path-prepend {
     [[ -d "$1" ]] && path[1,0]=($1)
@@ -17,7 +20,7 @@ path-prepend "${HOME}/.bin"
 path-prepend "${HOME}/.bin.untracked"
 path-prepend "${HOME}/.bin.docker"
 path-prepend "${HOME}/.local/bin"
-path-prepend "${HOME}/.config/composer/vendor/bin"
+[[ ! -z "$COMPOSER_HOME" ]] && path-prepend "${COMPOSER_HOME}/vendor/bin"
 [[ ! -z "$GOPATH" ]] && path-prepend "${GOPATH}/bin"
 
 unfunction path-prepend
