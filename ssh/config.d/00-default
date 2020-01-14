@@ -7,6 +7,7 @@ Host *
     ControlPath ~/.ssh/control/master-%r@%h:%p
     ControlPersist yes
     ControlMaster auto
+    AddKeysToAgent no
     ForwardAgent no
     ConnectTimeout 30
     VisualHostKey yes
