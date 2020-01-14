@@ -28,6 +28,7 @@ Plug 'mbbill/undotree'
 " textobjects
 Plug 'kana/vim-textobj-user'
 Plug 'Julian/vim-textobj-variable-segment'
+Plug 'tpope/vim-surround'
 
 " snippets
 Plug 'SirVer/ultisnips'
