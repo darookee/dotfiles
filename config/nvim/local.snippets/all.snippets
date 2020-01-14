@@ -45,6 +45,12 @@ snip += box[3]`
 $0
 endsnippet
 
+snippet -- "A snippet box" b
+-------- 8< --------
+${1:${VISUAL:Code}}
+-------- 8< --------
+endsnippet
+
 snippet fold "Insert a vim fold marker" b
 `!p snip.rv = get_comment_format()[0]` ${1:Fold description} `!p snip.rv = foldmarker()[0]`${2:1} `!p snip.rv = get_comment_format()[2]`
 endsnippet
