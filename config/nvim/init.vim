@@ -24,6 +24,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'cohama/lexima.vim'
 Plug 'ggVGc/vim-fuzzysearch'
 Plug 'mbbill/undotree'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
 
 " textobjects
 Plug 'kana/vim-textobj-user'
@@ -228,6 +230,19 @@ nmap ,/ :FuzzySearch<CR>
 " }}}
 " mbbill/undotree {{{
 nnoremap <F5> :UndotreeToggle<CR>
+" }}}
+" jungegunn/fzf.vim {{{
+nnoremap <C-p> :Files<CR>
+nnoremap _<C-p> :Buffers<CR>
+nnoremap <C-l> :Lines<CR>
+nnoremap <C-t> :Tags<CR>
+
+" Jump to open buffer when available
+let g:fzf_buffers_jump = 1
+
+" Add preview windows to file command
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 " }}}
 " SirVer/ultisnips {{{
 let g:UltiSnipsSnippetDirectories=['UltiSnips', 'local.snippets']
