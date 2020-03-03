@@ -237,8 +237,8 @@ nnoremap <F5> :UndotreeToggle<CR>
 " jungegunn/fzf.vim {{{
 nnoremap <C-p> :Files<CR>
 nnoremap _<C-p> :Buffers<CR>
-nnoremap <C-l> :Lines<CR>
-nnoremap <C-t> :Tags<CR>
+nnoremap _<C-l> :Lines<CR>
+nnoremap _<C-t> :Tags<CR>
 
 " Jump to open buffer when available
 let g:fzf_buffers_jump = 1
