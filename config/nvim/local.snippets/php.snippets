@@ -71,6 +71,14 @@ public function set${1/\w+\s*/\u$0/}(${4:${2/(void|string|int|integer|double|flo
 }
 endsnippet
 
+snippet comment "Add comment" b
+/**
+ * ${0:${VISUAL:undocumented function}}
+ *
+ * @return ${1:void}
+ */
+endsnippet
+
 snippet pub "Public function" b
 /**
  * ${3:undocumented function}
@@ -237,7 +245,7 @@ $0
 endsnippet
 
 # PHPUnit snippets
-snippet testcase "class XYZTest extends \PHPUnit_Framework_TestCase { ... }"
+snippet testcase "class XYZTest extends \PHPUnit_Framework_TestCase { ... }" b
 <?php
 
 namespace `!p
@@ -260,7 +268,7 @@ snip.rv = re.match(r'.*(?=\.)', fn).group()
 }
 endsnippet
 
-snippet testcase6 "class XYZTest extends TestCase { ... }"
+snippet testcase6 "class XYZTest extends TestCase { ... }" b
 <?php
 
 namespace `!p
@@ -283,6 +291,24 @@ snip.rv = re.match(r'.*(?=\.)', fn).group()
 		${0:${VISUAL}}
 	}
 }
+endsnippet
+
+snippet vd "var dump" b
+var_dump(${0:${VISUAL}});
+endsnippet
+
+snippet vdd "var dump and die" b
+var_dump(${0:${VISUAL}});
+die();
+endsnippet
+
+snippet dd "doctrine debug dump and die" b
+\Doctrine\Common\Util\Debug::dump(${0:${VISUAL}}, /* maxDepth */ 3, /* stripTags */ true, /* echo */ true);
+endsnippet
+
+snippet ddd "doctrine debug dump and die" b
+\Doctrine\Common\Util\Debug::dump(${0:${VISUAL}}, /* maxDepth */ 3, /* stripTags */ true, /* echo */ true);
+die();
 endsnippet
 
 # :vim:ft=snippets:
