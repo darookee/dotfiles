@@ -47,12 +47,13 @@ Plug 'machakann/vim-highlightedyank'
 
 " colors
 Plug 'aonemd/kuroi.vim'
+Plug 'davidosomething/vim-colors-meh'
 
 call plug#end()
 " }}}
 " Colors {{{
 set termguicolors
-colorscheme kuroi
+colorscheme meh
 " }}}
 " Config {{{
 set number
