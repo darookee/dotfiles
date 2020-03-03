@@ -186,11 +186,12 @@ vnoremap _= :!column -t -o" "<CR>gv=
 " }}}
 " Plugins {{{
 " dense-analysis/ale {{{
+let g:ale_set_signs = 0
 let g:ale_open_list = 0
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
 let g:ale_lint_on_text_changed = 'normal'
-let g:ale_lint_delay = 1000
+let g:ale_lint_delay = 0
 let g:ale_lint_on_enter = 0
 let g:ale_lint_on_insert_leave = 1
 let g:ale_php_phpcs_standard = 'Symfony'
@@ -361,6 +362,17 @@ fun! s:AddCustomHighlights()
     hi StatuslineActiveClear ctermfg=193 ctermbg=65 guifg=#d7ffaf guibg=#5F875F
     hi StatuslineActiveError ctermfg=168 ctermbg=52 guifg=#d75f87 guibg=#5f0000
     hi StatuslineActiveWarning ctermfg=237 ctermbg=172 guifg=#373b41 guibg=#d78700
+
+    " Ale
+    if &background == 'light'
+        hi! ALEInfoLine guifg=#808000 guibg=#ffff00
+        hi! ALEWarningLine guifg=#808000 guibg=#ffff00
+        hi! ALEErrorLine guifg=#ff0000 guibg=#ffcccc
+    else
+        hi! ALEInfoLine guifg=#ffff00 guibg=#555500
+        hi! ALEWarningLine guifg=#ffff00 guibg=#555500
+        hi! ALEErrorLine guifg=#ff0000 guibg=#550000
+    endif
 endfun
 
 " }}}
