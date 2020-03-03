@@ -26,6 +26,7 @@ Plug 'ggVGc/vim-fuzzysearch'
 Plug 'mbbill/undotree'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
+Plug 'Vimjas/vim-python-pep8-indent'
 
 " textobjects
 Plug 'kana/vim-textobj-user'
