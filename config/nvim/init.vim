@@ -243,6 +243,14 @@ nnoremap _<C-t> :Tags<CR>
 " Jump to open buffer when available
 let g:fzf_buffers_jump = 1
 
+if executable('rg')
+    let $FZF_DEFAULT_COMMAND = 'rg --files'
+elseif executable('sift')
+    let $FZF_DEFAULT_COMMAND = 'sift --targets'
+elseif executable('ag')
+    let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+endif
+
 " Add preview windows to file command
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
