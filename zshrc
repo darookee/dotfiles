@@ -18,7 +18,7 @@ ZPLGM[ZCOMPDUMP_PATH]=${ZSH_HOME}/zcompdump
 # }}}
 # zplugin {{{
 if [[ ! -f $ZPLG_HOME/bin/zplugin.zsh ]]; then
-    git clone https://github.com/psprint/zplugin $ZPLG_HOME/bin
+    git clone https://github.com/zdharma/zinit.git $ZPLG_HOME/bin
     zcompile $ZPLG_HOME/bin/zplugin.zsh
 fi
 
