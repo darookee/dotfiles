@@ -12,28 +12,28 @@ HIST_STAMPS="yyyy-mm-dd"
 DIRSTACKSIZE=20
 
 typeset -A ZPLGM
-ZPLG_HOME=${ZSH_HOME}/zplugin
+ZPLG_HOME=${ZSH_HOME}/zinit
 ZPLGM[HOME_DIR]=$ZPLG_HOME
 ZPLGM[ZCOMPDUMP_PATH]=${ZSH_HOME}/zcompdump
 # }}}
-# zplugin {{{
-if [[ ! -f $ZPLG_HOME/bin/zplugin.zsh ]]; then
+# zinit {{{
+if [[ ! -f $ZPLG_HOME/bin/zinit.zsh ]]; then
     git clone https://github.com/zdharma/zinit.git $ZPLG_HOME/bin
-    zcompile $ZPLG_HOME/bin/zplugin.zsh
+    zcompile $ZPLG_HOME/bin/zinit.zsh
 fi
 
-source $ZPLG_HOME/bin/zplugin.zsh
+source $ZPLG_HOME/bin/zinit.zsh
 # }}}
 # plugins {{{
-zplugin light zsh-users/zsh-autosuggestions
-zplugin light zsh-users/zsh-history-substring-search
-zplugin light zdharma/fast-syntax-highlighting
-zplugin light zdharma/history-search-multi-word
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-history-substring-search
+zinit light zdharma/fast-syntax-highlighting
+zinit light zdharma/history-search-multi-word
 
-zplugin ice pick'async.zsh' src'pure.zsh'
-zplugin light sindresorhus/pure
+zinit ice pick'async.zsh' src'pure.zsh'
+zinit light sindresorhus/pure
 
-zplugin cdclear -q
+zinit cdclear -q
 # }}}
 # keys {{{
 typeset -A key
@@ -391,7 +391,7 @@ compinit -d ${ZSH_HOME}/zcompdump-${ZSH_VERSION}
 # add completion for ark
 compdef _ark ark
 
-zplugin cdreplay -q
+zinit cdreplay -q
 # }}}
 # prompt {{{
 _rprompt () {
