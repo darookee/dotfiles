@@ -243,7 +243,9 @@ nnoremap _<C-t> :Tags<CR>
 " Jump to open buffer when available
 let g:fzf_buffers_jump = 1
 
-if executable('rg')
+if executable('fd')
+    let $FZF_DEFAULT_COMMAND = 'fd'
+elseif executable('rg')
     let $FZF_DEFAULT_COMMAND = 'rg --files'
 elseif executable('sift')
     let $FZF_DEFAULT_COMMAND = 'sift --targets'
