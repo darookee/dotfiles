@@ -41,6 +41,7 @@ Plug 'justinmk/vim-dirvish'
 
 " filetype support
 Plug 'thiagoalmeidasa/vim-ansible-vault'
+Plug 'nelsyeung/twig.vim'
 
 " visuals
 Plug 'machakann/vim-highlightedyank'
@@ -215,7 +216,7 @@ call lexima#add_rule({
             \ 'at': '{\%#',
             \ 'input': '% ',
             \ 'input_after': ' %',
-            \ 'filetype': ['html.twig', 'twig']
+            \ 'filetype': ['html.twig', 'twig', 'html.twig.js.css']
             \ })
 
 call lexima#add_rule({
@@ -223,7 +224,7 @@ call lexima#add_rule({
             \ 'at': '{\%#',
             \ 'input': '{ ',
             \ 'input_after': ' }',
-            \ 'filetype': ['html.twig', 'twig']
+            \ 'filetype': ['html.twig', 'twig', 'html.twig.js.css']
             \ })
 " }}}
 " ggVGc/vim-fuzzysearch {{{
