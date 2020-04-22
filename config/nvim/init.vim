@@ -245,7 +245,7 @@ nnoremap _<C-t> :Tags<CR>
 let g:fzf_buffers_jump = 1
 
 if executable('fd')
-    let $FZF_DEFAULT_COMMAND = 'fd'
+    let $FZF_DEFAULT_COMMAND = 'fd --hidden --follow --exclude ".git" --exclude "node_modules" --type f'
 elseif executable('rg')
     let $FZF_DEFAULT_COMMAND = 'rg --files'
 elseif executable('sift')
