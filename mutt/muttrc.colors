@@ -58,5 +58,7 @@ color body          color7              color8    '-*-8<-*-'
 # }}}
 #
 
+source ~/.mutt/powerline
+
 #
 # vim: ft=muttrc fdm=marker
