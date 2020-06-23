@@ -26,7 +26,7 @@ function get_ip() {
         exit
     fi
 
-    echo -n "#[fg=colour10]🌏 #[fg=colour15]"
+    echo -n "#[fg=colour10]  #[fg=colour15]"
 
     [[ -f $cachefile ]] || curl -s ifconfig.me > $cachefile
 
@@ -134,7 +134,7 @@ function get_wifi() {
     if hash wpa_cli 2>/dev/null; then
         ssid=$(wpa_cli status ${1}|grep \^ssid|cut -d\= -f2|cut -c1-12)
         if [ ! -z "$ssid" ]; then
-            echo "#[fg=colour10]📶  #[fg=colour15]${ssid}"
+            echo "#[fg=colour10]直 #[fg=colour15]${ssid}"
         fi
     fi
 }
@@ -179,11 +179,11 @@ if [ ! -z "${local_status}" ]; then
     echo -n "#[bg=colour3]#[fg=colour8] ${local_status} "
 fi
 if [ ! -z "${mail_count}" ]; then
-    echo -n "#[bg=colour13]#[fg=colour15] 📬 ${mail_count} "
+    echo -n "#[bg=colour13]#[fg=colour15] ﯍ ${mail_count} "
 fi
 echo -n "#[bg=colour59,fg=colour12] | "
 # echo -n "#[bg=colour236,fg=colour174]💓#[fg=colour188] ${cpu_temp} #[fg=colour188][${cpu_percent}]#[fg=colour245,bg=colour236]#[fg=colour188][${mem_percent}]"
-echo -n "#[bg=colour59,fg=colour13]#[fg=colour15]${cpu_temp}#[fg=colour15]💓 ${cpu_load}#[fg=colour12] | 🎰 #[fg=colour15]${mem_percent}#[fg=colour12] | "
+echo -n "#[bg=colour59,fg=colour13]#[fg=colour15]${cpu_temp}#[fg=colour5] #[fg=colour15] ${cpu_load}#[fg=colour12] | #[fg=colour11] #[fg=colour15]${mem_percent}#[fg=colour12] | "
 if [ ! -z "${mpc}" ]; then
     echo -n "#[fg=colour11]♪ #[fg=colour15]${mpc}#[fg=colour12] | "
 else
@@ -191,7 +191,7 @@ else
     if [ ! -z "${wifi}" ]; then
         echo -n "${wifi}#[fg=colour12] | "
     fi
-    echo -n "#[fg=colour10]💾 #[fg=colour15]${space_home}#[fg=colour12] | "
+    echo -n "#[fg=colour10] #[fg=colour15]${space_home}#[fg=colour12] | "
 fi
 if [ ! -z "${volume}" ]; then
     echo -n "#[fg=colour15]${volume}#[fg=colour12] | "
@@ -199,7 +199,7 @@ fi
 if [ ! -z "${battery}" ]; then
     echo -n "#[fg=colour15]${battery}#[fg=colour12]| "
 fi
-echo -n "#[fg=colour12]📆 ${date} #[fg=colour7]🕛 ${time} "
+echo -n "#[fg=colour12]  ${date}#[fg=colour7] ${time} "
 
 
 
