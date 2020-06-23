@@ -1,5 +1,4 @@
 # Colors {{{
-color indicator     brightcolor5        default
 
 color index         green               default   '~N'
 color index         green               default   '~O'
