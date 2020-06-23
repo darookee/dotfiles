@@ -87,7 +87,11 @@ index-format-hook new "~A"      "  "
 
 # spam
 spam "X-Spam-Status: Yes"       "🔥"
+spam "X-Spam-Flag: YES"         "🔥"
+spam "X-Fuglu-Spamstatus: YES"  "🔥"
 spam "X-Spam-Status: No"        "📧"
+spam "X-Spam-Flag: NO"          "📧"
+spam "X-Fuglu-Spamstatus: NO"   "📧"
 set spam_separator=""
 # }}}
 # Sorting {{{
