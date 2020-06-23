@@ -292,22 +292,22 @@ fun! Statusline(winnr)
     let l:lineends = search('\s\+$', 'nw')
 
     let l:stat .= '%<'
-    let l:stat .= AddPart(l:active, 'Status', l:active ? '❗' : '❕')
+    let l:stat .= AddPart(l:active, 'Status', l:active ? '' : '')
 
     if l:ftype !=? 'qf'
         let l:stat .= l:active?AddPart(l:active, 'Info', ' %3l/%-2.4L:'.(col('.')/100 >= 1?'%-2v':'%-3v')):''
 
-        let l:stat .= l:readonly?AddPart(l:active, 'Warning', '🔒'):''
+        let l:stat .= l:readonly?AddPart(l:active, 'Warning', ''):''
         let l:stat .= AddPart(l:active, 'Important', '%f')
-        let l:stat .= l:modified?AddPart(l:active, 'Info', '💾'):''
-        let l:stat .= l:active?AddPart(l:active, 'Info', '🕛'.strftime('%F %H:%M', l:ftime)):''
+        let l:stat .= l:modified?AddPart(l:active, 'Info', ''):''
+        let l:stat .= l:active?AddPart(l:active, 'Info', ' '.strftime('%F %H:%M', l:ftime)):''
 
         if l:active
             " right side
             let l:stat .= '%='
 
-            let l:stat .= &paste?AddPart(l:active, 'CriticalInfo', '📋'):''
-            let l:stat .= l:lineends !=? 0 ? AddPart(l:active, 'Warning', '‼'):''
+            let l:stat .= &paste?AddPart(l:active, 'CriticalInfo', ''):''  
+            let l:stat .= l:lineends !=? 0 ? AddPart(l:active, 'Warning', 'ﭭ'):''
 
             let l:stat .= AddPart(l:active, 'Info', l:ftype.(l:encoding ==? 'utf-8' ? '' : ' ('.l:encoding.')'))
 
@@ -316,7 +316,7 @@ fun! Statusline(winnr)
                 let l:ale_all_errors = l:ale_counts.error + l:ale_counts.style_error
                 let l:ale_all_non_errors = l:ale_counts.total - l:ale_all_errors
 
-                let l:stat .= AddPart(l:active, 'Info', l:ale_counts.total == 0 ? '%#StatuslineActiveClear#👍%*' : '%#StatuslineActiveWarning#'.l:ale_all_non_errors.'⚠%* %#StatuslineActiveError#'.l:ale_all_errors.'🛑%*')
+                let l:stat .= AddPart(l:active, 'Info', l:ale_counts.total == 0 ? '%#StatuslineActiveClear#  %*' : '%#StatuslineActiveWarning# '.l:ale_all_non_errors.'  %* %#StatuslineActiveError# '.l:ale_all_errors.'  %*')
             endif
 
             " TODO: get correct branch and state
