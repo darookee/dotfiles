@@ -105,6 +105,7 @@ set switchbuf=useopen,vsplit
 set diffopt+=algorithm:patience,indent-heuristic
 set tags+=./.git/tags
 set hidden
+set guicursor=
 
 " Grep {{{
 command! -nargs=+ -complete=file_in_path -bar Grep silent! grep! <args> | cwindow 3 | redraw!
