@@ -5,8 +5,8 @@ bind index i            noop
 bind index g            noop
 bind index gg           first-entry
 bind index G            last-entry
-bind index K            previous-entry
-bind index J            next-entry
+bind index k            previous-entry
+bind index j            next-entry
 bind index <space>      collapse-thread
 
 bind index,pager R      group-reply
@@ -36,8 +36,15 @@ macro index,pager A "<tag-prefix><save-message>=Archives<enter>"                
 macro index \ca     "<change-folder>=Archives<tab><tab>"                            "Go to some Archive.* folder"
 
 # Delete but don't sync (so we can undelete)
-macro generic D "<tag-prefix><delete-message>"
-macro index,pager D "<tag-prefix><delete-message>"
+macro generic D "<tag-prefix><delete-message>" "Delete message without syncing mailbox"
+macro index,pager D "<tag-prefix><delete-message>" "Delete message without syncing mailbox"
+
+# get message informations
+macro index,pager S "<pipe-message> ripmime -i - -d ~/Documents/attachments && rm ~/Documents/attachments/textfile*<enter>" "Save all non-text attachments using ripmime"
+macro index,pager \cu "<pipe-message> urlscan -c -d<enter>" "call urlscan to extract URLs out of a message"
+
+# sync mails
+macro index,pager O "<shell-escape>offlineimap -q -a darookee<enter>" "Run offlineimap"
 # }}}
 # Directories and commands {{{
 set alias_file       = ~/.mutt/alias         # alias file
@@ -52,6 +59,7 @@ set editor           = "$EDITOR +/^$ +nohl +startinsert"     # use vim and skip 
 unset confirmappend
 set quit
 set delete
+unset wait_key
 # }}}
 # Formats {{{
 set date_format     = "%a %d %b %Y %H:%M"
