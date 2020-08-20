@@ -1,0 +1,6 @@
+[time]
+disabled = false
+format = "🕙 %T"
+
+[username]
+style_user = "bright-blue"
