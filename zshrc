@@ -30,8 +30,10 @@ zinit light zsh-users/zsh-history-substring-search
 zinit light zdharma/fast-syntax-highlighting
 zinit light zdharma/history-search-multi-word
 
-zinit ice pick'async.zsh' src'pure.zsh'
-zinit light sindresorhus/pure
+if [[ ! -x $commands[starship] ]]; then
+    zinit ice pick'async.zsh' src'pure.zsh'
+    zinit light sindresorhus/pure
+fi
 
 zinit cdclear -q
 # }}}
@@ -394,11 +396,17 @@ compdef _ark ark
 zinit cdreplay -q
 # }}}
 # prompt {{{
-_rprompt () {
-    print -n "%F{242}%D{%F} %F{white}%D{%H:%M}%f"
-}
+if (( $+commands[starship] )); then
+    if [[ -x $commands[starship] ]]; then
+        eval "$(starship init zsh)"
+    fi
+else
+    _rprompt () {
+        print -n "%F{242}%D{%F} %F{white}%D{%H:%M}%f"
+    }
 
-RPROMPT='$(_rprompt)'
+    RPROMPT='$(_rprompt)'
+fi
 # }}}
 #
 # vim:fdm=marker ft=zsh
