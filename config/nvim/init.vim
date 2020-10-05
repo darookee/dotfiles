@@ -48,13 +48,13 @@ Plug 'machakann/vim-highlightedyank'
 
 " colors
 Plug 'aonemd/kuroi.vim'
-Plug 'davidosomething/vim-colors-meh'
+Plug 'skbolton/embark'
 
 call plug#end()
 " }}}
 " Colors {{{
 set termguicolors
-colorscheme meh
+colors embark
 " }}}
 " Config {{{
 set number
