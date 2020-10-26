@@ -322,6 +322,7 @@ ark () {
                 *.tgz)       tar tvzf $2      ;;
                 *.zip)       unzip -l $2      ;;
                 *.7z)        7z l $2          ;;
+                *.arj)       arj l $2         ;;
                 *)           echo "Cannot list contents of '$2' with >ark<" ;;
             esac ;;
 
@@ -338,6 +339,7 @@ ark () {
                 *.zip)       unzip $2         ;;
                 *.Z)         uncompress $2    ;;
                 *.7z)        7z x $2          ;;
+                *.arj)       arj e $2         ;;
                 *)           echo "Cannot unpack '$2' with >ark<" ;;
             esac ;;
 
@@ -352,6 +354,7 @@ ark () {
                 *.rar)      shift; rar a -m5 -r $@; rar k $1    ;;
                 *.zip)      shift; zip -9r $@                   ;;
                 *.7z)       shift; 7z a -mx9 $@                 ;;
+                *.arj)      shift; arj a $@                     ;;
                 *)          echo "Unsupported archive type"     ;;
             esac ;;
 
