@@ -172,6 +172,10 @@ zstyle -e ':completion:*:*:*' hosts 'reply=(${=${${${${(@M)${(f)"$(cat ~/.ssh/co
 # and users are static
 zstyle -e ':completion:*:*:*' users 'reply=($(whoami) root)'
 # }}}
+# plugin settings {{{
+# zsh autosuggest
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+# }}}
 # aliases {{{
 
 # directories
