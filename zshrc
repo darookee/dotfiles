@@ -29,7 +29,6 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-history-substring-search
 zinit light zdharma/fast-syntax-highlighting
 zinit light zdharma/history-search-multi-word
-zinit light Aloxaf/fzf-tab
 
 if [[ ! -x $commands[starship] ]]; then
     zinit ice pick'async.zsh' src'pure.zsh'
@@ -397,6 +396,8 @@ _ark () {
 # init {{{
 autoload -Uz compinit
 compinit -d ${ZSH_HOME}/zcompdump-${ZSH_VERSION}
+
+zinit light Aloxaf/fzf-tab
 
 # add completion for ark
 compdef _ark ark
