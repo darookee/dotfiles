@@ -296,9 +296,10 @@ if (( $+commands[neomutt] )); then # use neomutt instead of mutt
 fi
 
 if (( $+commands[exa] )); then # use exa instead of ls
-    alias ls="exa"
-    alias la="exa -la"
-    alias ll="exa -l"
+    alias ls="exa --git"
+    alias la="exa -laag --git"
+    alias ll="exa -lg --git"
+    alias lt="exa -T --git"
 fi
 
 if (( $+commands[nvim] )); then
