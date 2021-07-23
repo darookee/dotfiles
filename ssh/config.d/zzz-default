@@ -3,8 +3,9 @@ HashKnownHosts yes
 Host *
     IdentitiesOnly yes
     IdentityFile ~/.ssh/id_rsa
+    IdentityFile ~/.ssh/id_ed25519
     TCPKeepAlive yes
-    ControlPath ~/.ssh/control/master-%r@%h:%p
+    ControlPath ~/.ssh/control/%C
     ControlPersist yes
     ControlMaster auto
     AddKeysToAgent no
