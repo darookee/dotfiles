@@ -24,9 +24,10 @@ Plug 'airblade/vim-gitgutter'
 Plug 'cohama/lexima.vim'
 Plug 'ggVGc/vim-fuzzysearch'
 Plug 'mbbill/undotree'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'Vimjas/vim-python-pep8-indent'
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'  }
 
 " textobjects
 Plug 'kana/vim-textobj-user'
@@ -42,19 +43,40 @@ Plug 'justinmk/vim-dirvish'
 " filetype support
 Plug 'thiagoalmeidasa/vim-ansible-vault'
 Plug 'nelsyeung/twig.vim'
+Plug 'docteurklein/php-getter-setter.vim'
+
+" Include Phpactor
+" Plug '/home/darookee/.config/composer/vendor/phpactor/phpactor'
+
+" Require ncm2 and this plugin
+" Plug 'ncm2/ncm2'
+" Plug 'roxma/nvim-yarp'
+" Plug 'phpactor/ncm2-phpactor'
 
 " visuals
 Plug 'machakann/vim-highlightedyank'
+Plug 'camspiers/lens.vim'
+" Plug 'famiu/feline.nvim'
 
 " colors
 Plug 'aonemd/kuroi.vim'
+Plug 'nikolvs/vim-sunbather'
+Plug 'https://gitlab.com/rj-white/vim-colors-paramountblue'
+Plug 'aditya-azad/candle-grey'
 Plug 'skbolton/embark'
+Plug 'srcery-colors/srcery-vim'
+Plug 'wuelnerdotexe/vim-enfocado'
+" Plug 'noahfrederick/vim-noctu'
+" Plug 'jeffkreeftmeijer/vim-dim'
 
 call plug#end()
 " }}}
 " Colors {{{
 set termguicolors
-colors embark
+"colors sunbather
+" colors embark
+"colors srcery
+colors enfocado
 " }}}
 " Config {{{
 set number
@@ -244,6 +266,7 @@ nnoremap _<C-t> :Tags<CR>
 
 " Jump to open buffer when available
 let g:fzf_buffers_jump = 1
+let g:fzf_layout = { 'down':  '40%' }
 
 if executable('fd')
     let $FZF_DEFAULT_COMMAND = 'fd --hidden --follow --exclude ".git" --exclude "node_modules" --type f'
@@ -259,8 +282,12 @@ endif
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 " }}}
+" Shougo/deoplete.nvim {{{
+let g:deoplete#enable_at_startup = 1
+" }}}
 " SirVer/ultisnips {{{
-let g:UltiSnipsSnippetDirectories=['UltiSnips', 'local.snippets']
+let g:UltiSnipsSnippetDirectories = ['UltiSnips', 'local.snippets']
+let g:ultisnips_php_scalar_types = 1
 " }}}
 " }}}
 " Statusline {{{
@@ -432,6 +459,30 @@ fun! s:FilterQuickfixList(bang, pattern)
 endfun
 
 command! -bang -nargs=1 -complete=file QFilter call s:FilterQuickfixList(<bang>0, <q-args>)
+" }}}
+" disable syntax highlighting in big files {{{
+function DisableSyntaxTreesitter()
+    echo("Big file, disabling syntax, treesitter and folding")
+    if exists(':TSBufDisable')
+        exec 'TSBufDisable autotag'
+        exec 'TSBufDisable highlight'
+    endif
+
+    set foldmethod=manual
+    syntax clear
+    syntax off    " hmmm, which one to use?
+    filetype off
+    set noundofile
+    set noswapfile
+    set noloadplugins
+endfunction
+
+augroup BigFileDisable
+    autocmd!
+    " autocmd BufWinEnter * if getfsize(expand("%")) > 512 * 1024 | exec DisableSyntaxTreesitter() | endif
+    autocmd BufReadPre,FileReadPre * if getfsize(expand("%")) > 512 * 1024 | exec DisableSyntaxTreesitter() | endif
+
+augroup END
 " }}}
 " }}}
 " Commands {{{
