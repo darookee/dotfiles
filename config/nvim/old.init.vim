@@ -201,7 +201,7 @@ endfun
 cnoremap %% <C-R>=expand('%:h').'/'<CR>
 
 " sudo write files
-cnoremap w!! w !sudo tee > /dev/null %
+cnoremap w!! w :term !sudo tee % > /dev/null
 " }}}
 " VISUAL {{{
 " Align columns
