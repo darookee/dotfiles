@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/env python3
 import re, os, sys
 
 def get_authinfo(accountName):
@@ -29,4 +29,4 @@ if len(sys.argv) != 0:
     if sys.argv[1] == 'print':
         r = get_authinfo(sys.argv[2])
         if r:
-            print r.group(3)
+            print(r.group(3))
