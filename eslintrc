@@ -1,3 +1,5 @@
+---
+extends: 'eslint:recommended'
 rules:
   indent:
     - 1
@@ -54,6 +56,15 @@ rules:
 env:
   browser: true
   jquery: true
-extends: 'eslint:recommended'
+  amd: true
+  es2020: true
+parser: '/home/darookee/.npm/lib/node_modules/babel-eslint'
+parserOptions:
+  ecmaVersion: 6
+  sourceType: 'script'
+  allowImportExportEverywhere: true
+  codeFrame: false
+  ecmaFeatures:
+    modules: true
 
 # vim:ft=yaml
