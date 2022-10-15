@@ -150,7 +150,6 @@ setopt no_clobber
 setopt no_rm_star_silent
 # }}}
 # completion {{{
-zstyle ':completion:*' cache-path '${ZSH_HOME}/.zcompcache'
 zstyle ':completion::complete:*' use-cache on
 
 zstyle ':completion:*' menu select=2
