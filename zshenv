@@ -10,6 +10,7 @@ fi
 
 export COMPOSER_HOME=${HOME}/.config/composer
 export GOPATH=${HOME}/.go
+export NPM_PACKAGES=${HOME}/.npm
 
 # PATH
 function path-prepend {
@@ -20,8 +21,9 @@ path-prepend "${HOME}/.bin"
 path-prepend "${HOME}/.bin.untracked"
 path-prepend "${HOME}/.bin.docker"
 path-prepend "${HOME}/.local/bin"
-[[ ! -z "$COMPOSER_HOME" ]] && path-prepend "${COMPOSER_HOME}/vendor/bin"
+[[ ! -z "$NPM_PACKAGES" ]] && path-prepend "${NPM_PACKAGES}/bin"
 [[ ! -z "$GOPATH" ]] && path-prepend "${GOPATH}/bin"
+[[ ! -z "$COMPOSER_HOME" ]] && path-prepend "${COMPOSER_HOME}/vendor/bin"
 
 unfunction path-prepend
 
