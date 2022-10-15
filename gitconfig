@@ -4,6 +4,7 @@
     fileMode = false
 [init]
     templatedir = ~/.git_template
+    defaultBranch = main
 [color]
     ui = auto
 [color "branch"]
@@ -26,6 +27,7 @@
     followTags = true
 [merge]
     ff = only
+    conflictstyle = diff3
 [rebase]
     stat = true
     autoStash = true
