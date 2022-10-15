@@ -31,8 +31,8 @@ macro index I   "<change-folder>!<enter>"   "go to Inbox"
 macro index a "<limit>all\n" "show all messages (undo limit)"
 
 # Archive messages
-macro generic A     "<tag-prefix><save-message>=Archives<enter><sync-mailbox>"      "Archive message"
-macro index,pager A "<tag-prefix><save-message>=Archives<enter>"                    "Archive message"
+macro generic A     "<tag-prefix><save-message>=Archives<enter><sync-mailbox>" "Archive message"
+macro index,pager A "<tag-prefix><save-message>=Archives<enter><sync-mailbox>" "Archive message"
 macro index \ca     "<change-folder>=Archives<tab><tab>"                            "Go to some Archive.* folder"
 
 # Delete but don't sync (so we can undelete)
