@@ -19,7 +19,7 @@ function get_cpu_temp() {
 function get_ip() {
     cachefile="${TMPDIR}/tmux.cache.ip"
 
-    ping -c 1 mail.darookee.net > /dev/null 2>&1
+    ping -c 1 -4 mail.darookee.net > /dev/null 2>&1
 
     if [ $? -ne 0 ]; then
         echo "#[fg=colour9]🌑"
