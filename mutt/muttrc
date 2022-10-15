@@ -120,6 +120,7 @@ set abort_noattach_regex = "\\<(anhängen|angehängt|anhang|anhänge|hängt an|a
 # Reading {{{
 set skip_quoted_offset  = 3
 set mbox_type           = Maildir
+unset markers
 # }}}
 # Replying {{{
 set sort_re                                         # thread based on regex
