@@ -308,6 +308,13 @@ if (( $+commands[nvim] )); then
     alias vim="nvim"
 fi
 
+# use z.sh if zoxide does not exist
+if (( $+commands[zoxide] )); then
+    # TODO: there is a better way...
+else
+    [[ -r "/usr/share/z/z.sh"  ]] && source /usr/share/z/z.sh
+fi
+
 # }}}
 # functions {{{
 # ark - wrapper for multiple archiving tools
@@ -398,6 +405,14 @@ _ark () {
 # init {{{
 autoload -Uz compinit
 compinit -d ${ZSH_HOME}/zcompdump-${ZSH_VERSION}
+# use zoxide if z.sh does not exist
+if [[ ! -r "/usr/share/z/z.sh"  ]]; then
+    if (( $+commands[zoxide] )); then
+        if [[ -x $commands[zoxide] ]]; then
+            eval "$(zoxide init zsh)"
+        fi
+    fi
+fi
 
 zinit light Aloxaf/fzf-tab
 
