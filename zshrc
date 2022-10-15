@@ -29,6 +29,8 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-history-substring-search
 zinit light zdharma/fast-syntax-highlighting
 zinit light zdharma/history-search-multi-word
+zinit ice lucid wait'0'
+zinit light joshskidmore/zsh-fzf-history-search
 
 if [[ ! -x $commands[starship] ]]; then
     zinit ice pick'async.zsh' src'pure.zsh'
