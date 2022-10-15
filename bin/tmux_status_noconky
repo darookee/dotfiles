@@ -131,29 +131,18 @@ function get_battery() {
 }
 
 function get_wifi() {
-    if hash wpa_cli 2>/dev/null; then
-        ssid=$(wpa_cli status ${1}|grep \^ssid|cut -d\= -f2|cut -c1-12)
-        if [ ! -z "$ssid" ]; then
-            echo "#[fg=colour10]直 #[fg=colour15]${ssid}"
-        fi
-    fi
+    echo ""
 }
 
 function get_volume() {
-    if hash amixer 2>/dev/null; then
-        state=$(amixer get Master|grep "o: P"|cut -d\  -f8|tr -dc 'onf')
-
-        echo -n "#[fg=colour11]"
-        if [[ "${state}" == "off" ]]; then
-            echo -n "🔇"
-        else
-            vol=$(amixer get Master|grep "o: P"|cut -d\  -f6|tr -dc '0-9')
-            [[ ${vol} -ge 50 ]] && echo -n "🔊 " || echo -n "🔉 "
-        fi
-    fi
+    echo ""
 }
 
-local_status=$(~/.bin.untracked/get_local_status.sh)
+local_status=""
+
+if [ -x ~/.bin.untracked/get_local_status.sh ]; then
+    local_status=$(~/.bin.untracked/get_local_status.sh)
+fi
 mail_count=$(get_mailcount ~/.mail/darookee/INBOX/new)
 
 cpu_temp=$(get_cpu_temp)
