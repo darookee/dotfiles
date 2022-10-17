@@ -11,24 +11,15 @@ do -- base config
     basic.keymaps()
 end
 
--- TODO: LSP
 do -- LSP & Diagnostics
-    local opts = { noremap=true, silent=true }
+    keymap('<leader>e', vim.diagnostic.open_float)
+    keymap('<leader>d', vim.diagnostic.goto_prev)
+    keymap('<leader>f', vim.diagnostic.goto_next)
+    keymap('<leader>q', vim.diagnostic.setloclist)
 
-    keymap('<space>e', vim.diagnostic.open_float)
-    keymap('[d', vim.diagnostic.goto_prev)
-    keymap(']d', vim.diagnostic.goto_next)
-    keymap('<space>q', vim.diagnostic.setloclist)
-
-    -- Use an on_attach function to only map the following keys
-    -- after the language server attaches to the current buffer
     local on_attach = function(client, bufnr)
-            -- Enable completion triggered by <c-x><c-o>
             vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-            -- Mappings.
-            -- See `:help vim.lsp.*` for documentation on any of the below functions
-            local bufopts = { noremap=true, silent=true, buffer=bufnr }
             keymap('gD', vim.lsp.buf.declaration)
             keymap('gd', vim.lsp.buf.definition)
             keymap('K', vim.lsp.buf.hover)
@@ -47,7 +38,6 @@ do -- LSP & Diagnostics
     end
 
     local lsp_flags = {
-            -- This is the default in Nvim 0.7+
             debounce_text_changes = 150,
     }
 
