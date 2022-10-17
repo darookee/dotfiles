@@ -1,12 +1,1 @@
-vim/bundle/*
-vim/undodir/*
-vim/colors/*
-vim/spell/*
-vim/ftplugin/*
-vim/plugged/*
-vim/after/*
-vim/autoload/plug.vim*
-vim/.netrwhist
-vim/tmp
-antigen
 *.local
