@@ -5,7 +5,6 @@ return {
         opt.termguicolors = true
         opt.cursorline = true
 
-        opt.undodir = "undo"
         opt.undofile = true
         opt.swapfile = false
 
