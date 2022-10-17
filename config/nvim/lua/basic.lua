@@ -56,6 +56,7 @@ return {
         keymap('<C-j>', '<C-w>j')
 
         keymap('<leader>pq', function() package.loaded.plugins = nil require('plugins').sync_all() end)
+        keymap('<leader>t', function() require("twilight").toggle() end)
 
         -- custom textobjects
         local objects = { "_", ".", ":", ",", ";", "<bar>", "/", "<bslash>", "*", "+", "%", "`" }

@@ -67,6 +67,7 @@ local PKGS = {
     "melkster/modicator.nvim";
     "lcheylus/overlength.nvim";
     "sunjon/shade.nvim";
+    "folke/twilight.nvim";
 
     -- textobjects
     "kana/vim-textobj-user";
