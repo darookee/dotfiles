@@ -1,15 +1,19 @@
 {
     "minimum-stability": "dev",
     "require": {
-        "squizlabs/php_codesniffer": "@stable",
-        "escapestudios/symfony2-coding-standard": "@stable",
-        "phpmd/phpmd": "@stable",
-        "sebastian/phpcpd": "@stable",
-        "phpunit/phpunit": "@stable",
-        "pheromone/phpcs-security-audit": "@stable",
-        "wp-coding-standards/wpcs": "@stable",
-        "dealerdirect/phpcodesniffer-composer-installer": "@stable",
-        "phpcompatibility/php-compatibility": "@stable",
-        "object-calisthenics/phpcs-calisthenics-rules": "@stable"
+        "phpstan/phpstan": "1.9.x-dev",
+        "phpmd/phpmd": "dev-master",
+        "phpstan/phpstan-doctrine": "1.3.x-dev",
+        "phpstan/phpstan-symfony": "1.2.x-dev",
+        "slevomat/coding-standard": "8.x-dev",
+        "squizlabs/php_codesniffer": "^3.1",
+        "escapestudios/symfony2-coding-standard": "3.x-dev",
+        "friendsoftwig/twigcs": "dev-main",
+        "pheromone/phpcs-security-audit": "^1.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     }
 }
