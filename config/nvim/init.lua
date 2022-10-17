@@ -128,6 +128,8 @@ do -- Tools
 
     require('spaceless').setup()
 
+    require('shade').setup()
+
     opt.runtimepath:append('~/.local/share/nvim/site/pac/paqs/start/vim-textobj-user/')
     opt.runtimepath:append('~/.local/share/nvim/site/pac/paqs/start/vim-textobj-variable-segment/')
     opt.runtimepath:append('~/.local/share/nvim/site/pac/paqs/start/vim-ansible-vault/')
