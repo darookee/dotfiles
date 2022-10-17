@@ -84,11 +84,6 @@ do -- Telescope
     keymap('<leader><C-m>', telescope.extensions.media_files.media_files)
 end
 
-do -- Carbon
-    require('carbon').setup {}
-    keymap('-', ':Fcarbon<enter>')
-end
-
 do -- Tools
     require('impatient')
 
@@ -137,11 +132,12 @@ do -- Tools
     opt.runtimepath:append('~/.local/share/nvim/site/pac/paqs/start/vim-textobj-variable-segment/')
     opt.runtimepath:append('~/.local/share/nvim/site/pac/paqs/start/vim-ansible-vault/')
     opt.runtimepath:append('~/.local/share/nvim/site/pack/paqs/start/vim-sandwich/')
+    opt.runtimepath:append('~/.local/share/nvim/site/pack/paqs/start/vim-dirvish/')
 end
 
 do -- wildmenu
     local wilder = require('wilder')
- 
+
     wilder.setup {
         modes = {':', '/', '?'}
     }

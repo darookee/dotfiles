@@ -51,7 +51,7 @@ local PKGS = {
     "lewis6991/spaceless.nvim";
 
     -- 'netrw'
-    "SidOfc/carbon.nvim";
+    "justinmk/vim-dirvish";
 
     -- wildmenu
     "gelguy/wilder.nvim";
