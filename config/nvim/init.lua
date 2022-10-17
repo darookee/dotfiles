@@ -67,13 +67,25 @@ do -- Telescope
     local telescope = require 'telescope'
     local builtin = require 'telescope.builtin'
 
-    telescope.load_extension 'media_files'
     telescope.setup {
         defaults = {
             layout_config = { prompt_position = 'top' },
             sorting_strategy = 'ascending',
         },
+        extensions = {
+            repo = {
+                list = {
+                    search_dirs = {
+                        "~/Dev",
+                        "~/lib",
+                    }
+                }
+            }
+        }
     }
+
+    telescope.load_extension 'media_files'
+    telescope.load_extension 'repo'
 
     keymap('<leader>/', builtin.current_buffer_fuzzy_find)
     keymap('<C-p>', builtin.find_files)
@@ -82,6 +94,7 @@ do -- Telescope
     keymap('<leader><C-g>', function() builtin.live_grep({grep_open_files = true}) end)
     keymap('<leader><C-p>', builtin.buffers)
     keymap('<leader><C-m>', telescope.extensions.media_files.media_files)
+    keymap('<leader><C-r>', telescope.extensions.repo.list)
 end
 
 do -- Tools

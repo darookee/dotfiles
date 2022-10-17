@@ -15,6 +15,7 @@ local PKGS = {
     -- telescope
     { "nvim-telescope/telescope.nvim", branch= "0.1.x" };
     "nvim-telescope/telescope-media-files.nvim";
+    "cljoly/telescope-repo.nvim";
 
     -- parenthesis highlighting
     { "p00f/nvim-ts-rainbow", after="nvim-treesitter" };
