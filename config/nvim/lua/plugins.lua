@@ -8,6 +8,7 @@ local PKGS = {
 
     "neovim/nvim-lspconfig";
     "jose-elias-alvarez/null-ls.nvim";
+    "j-hui/fidget.nvim";
 
     -- dependencies
     "nvim-lua/popup.nvim";

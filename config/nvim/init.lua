@@ -52,6 +52,9 @@ do -- LSP & Diagnostics
     --     }
     -- end
 
+    -- fidget
+    require('fidget').setup()
+
     -- null-ls
     local nullls = require('null-ls')
     local nullutils = require('null-ls.utils')
