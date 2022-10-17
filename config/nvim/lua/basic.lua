@@ -49,7 +49,7 @@ return {
         keymap('<space>', 'za')
         keymap('%%', '<C-R>=expand("%:h")."/"<CR>', 'c')
         keymap('<leader>=', ':!column -t -o" "<CR>gv=', 'v')
-        keymap('gp', '`[".strpart(getregtype(), 0, 1)."`]')
+        keymap('gp', "'`[' . strpart(getregtype(), 0, 1) . '`]'", 'n', { expr = true })
         keymap('<C-h>', '<C-w>h')
         keymap('<C-k>', '<C-w>k')
         keymap('<C-l>', '<C-w>l')
@@ -60,6 +60,9 @@ return {
 
         keymap('<leader>ff', function() vim.lsp.buf.format(nil, 10000) end)
         keymap('<leader>fc', function() vim.lsp.buf.code_action() end)
+
+        -- remove trailing spaces
+        keymap(',W', function() vim.cmd("silent exe %s/\\v\\s+$//e'") end)
 
         -- custom textobjects
         local objects = { "_", ".", ":", ",", ";", "<bar>", "/", "<bslash>", "*", "+", "%", "`" }
