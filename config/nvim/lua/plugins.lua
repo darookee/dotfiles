@@ -36,7 +36,7 @@ local PKGS = {
     "numToStr/Comment.nvim";
 
     -- Ansible
-    "arouene/vim-ansible-vault";
+    "b4b4r07/vim-ansible-vault";
 
     -- 'sandwich'
     "machakann/vim-sandwich";
