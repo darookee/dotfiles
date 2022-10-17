@@ -62,7 +62,7 @@ return {
         keymap('<leader>fc', function() vim.lsp.buf.code_action() end)
 
         -- remove trailing spaces
-        keymap(',W', function() vim.cmd("silent exe %s/\\v\\s+$//e'") end)
+        keymap(',W', ':%s/\\v\\s+$//e<CR>')
 
         -- custom textobjects
         local objects = { "_", ".", ":", ",", ";", "<bar>", "/", "<bslash>", "*", "+", "%", "`" }
