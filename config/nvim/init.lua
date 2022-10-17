@@ -17,111 +17,83 @@ do -- LSP & Diagnostics
     keymap('<leader>f', vim.diagnostic.goto_next)
     keymap('<leader>q', vim.diagnostic.setloclist)
 
-    local on_attach = function(client, bufnr)
-            vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-            keymap('gD', vim.lsp.buf.declaration)
-            keymap('gd', vim.lsp.buf.definition)
-            keymap('K', vim.lsp.buf.hover)
-            keymap('gi', vim.lsp.buf.implementation)
-            keymap('<C-k>', vim.lsp.buf.signature_help)
-            keymap('<space>wa', vim.lsp.buf.add_workspace_folder)
-            keymap('<space>wr', vim.lsp.buf.remove_workspace_folder)
-            keymap('<space>wl', function()
-                    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-            end)
-            keymap('<space>D', vim.lsp.buf.type_definition)
-            keymap('<space>rn', vim.lsp.buf.rename)
-            keymap('<space>ca', vim.lsp.buf.code_action)
-            keymap('gr', vim.lsp.buf.references)
-            keymap('<space>f', function() vim.lsp.buf.format { async = true } end)
-    end
-
-    local lsp_flags = {
-            debounce_text_changes = 150,
-    }
-
-    -- local lspconfig = require('lspconfig')
-    -- local servers = { 'php', 'python' }
-
-    -- for _, ls in ipairs(servers) do
-    --     lspconfig[ls].setup {
-    --         capabilities = require('cmp_nvim_lsp').update_capabilities(lsp.protocol.make_client_capabilities()),
-    --         on_attach = on_attach,
-    --         flags = lsp_flags,
-    --     }
-    -- end
-
-    -- fidget
-    require('fidget').setup()
-
     -- null-ls
     local nullls = require('null-ls')
     local nullutils = require('null-ls.utils')
     local nullbuiltin = require('null-ls.builtins')
 
     local nullsources = {
-        -- nullbuiltin.code_actions.eslint,
-
         -- code-actions
+        nullbuiltin.code_actions.eslint,
         nullbuiltin.code_actions.gitsigns,
-        -- nullbuiltin.code_actions.shellcheck,
 
         -- diagnostics
-        -- nullbuiltin.diagnostics.ansiblelint,
-        -- nullbuiltin.diagnostics.commitlint,
-        -- nullbuiltin.diagnostics.eslint,
-        -- nullbuiltin.diagnostics.hadolint,
-        -- nullbuiltin.diagnostics.jshint,
-        -- nullbuiltin.diagnostics.jsonlint,
-        -- nullbuiltin.diagnostics.markdownlint,
-        -- nullbuiltin.diagnostics.php,
-        -- nullbuiltin.diagnostics.phpcs,
-        -- nullbuiltin.diagnostics.phpmd,
-        nullbuiltin.diagnostics.phpstan,
-        -- nullbuiltin.diagnostics.shellcheck,
-        -- nullbuiltin.diagnostics.standardjs,
-        -- nullbuiltin.diagnostics.stylelint,
-        -- nullbuiltin.diagnostics.textlint,
-        -- nullbuiltin.diagnostics.tidy,
+        nullbuiltin.diagnostics.ansiblelint,
+        nullbuiltin.diagnostics.eslint,
+        nullbuiltin.diagnostics.hadolint,
+        nullbuiltin.diagnostics.php,
+        nullbuiltin.diagnostics.phpcs.with {
+            condition = function (utils)
+                return utils.root_has_file {'phpcs.xml.dist'} or utils.root_has_file {'app/phpcs.xml.dist'}
+            end,
+            extra_args = {
+                "--standard=phpcs.xml.dist"
+            },
+            prefer_local = "vendor/bin",
+            cwd = function (params)
+                return vim.loop.fs_stat(params.root.."/app") and "app"
+            end,
+        },
+        nullbuiltin.diagnostics.phpmd.with {
+            condition = function (utils)
+                return utils.root_has_file {'phpmd.xml'} or utils.root_has_file {'app/phpmd.xml'}
+            end,
+            extra_args = {
+                "phpmd.xml"
+            },
+            prefer_local = "vendor/bin",
+            cwd = function (params)
+                return vim.loop.fs_stat(params.root.."/app") and "app"
+            end,
+        },
+        nullbuiltin.diagnostics.phpstan.with {
+            condition = function (utils)
+                return utils.root_has_file {'phpstan.neon'} or utils.root_has_file {'app/phpstan.neon'}
+            end,
+            prefer_local = "vendor/bin",
+            cwd = function (params)
+                return vim.loop.fs_stat(params.root.."/app") and "app"
+            end,
+        },
+        nullbuiltin.diagnostics.sqlfluff,
+        nullbuiltin.diagnostics.stylelint,
+        nullbuiltin.diagnostics.tidy,
         nullbuiltin.diagnostics.todo_comments,
         nullbuiltin.diagnostics.trail_space,
         nullbuiltin.diagnostics.twigcs,
         nullbuiltin.diagnostics.yamllint,
-        -- nullbuiltin.diagnostics.zsh,
+        nullbuiltin.diagnostics.zsh,
 
         -- formatting
-        -- nullbuiltin.formatting.beautysh,
         nullbuiltin.formatting.blade_formatter,
-        -- nullbuiltin.formatting.eslint,
-        -- nullbuiltin.formatting.fixjson,
-        -- nullbuiltin.formatting.jq,
-        -- nullbuiltin.formatting.json_tool,
-        -- nullbuiltin.formatting.markdownlint,
-        -- nullbuiltin.formatting.markdown_toc,
-        -- nullbuiltin.formatting.mdformat,
+        nullbuiltin.formatting.eslint,
+        nullbuiltin.formatting.fixjson,
+        nullbuiltin.formatting.jq,
         nullbuiltin.formatting.phpcbf,
-        -- nullbuiltin.formatting.prettier,
-        -- nullbuiltin.formatting.shellharden,
-        -- nullbuiltin.formatting.shfmt,
-        -- nullbuiltin.formatting.sqlfluff,
-        -- nullbuiltin.formatting.sqlformat,
-        -- nullbuiltin.formatting.sql_formatter,
-        -- nullbuiltin.formatting.standardjs,
-        -- nullbuiltin.formatting.stylelint,
-        -- nullbuiltin.formatting.textlint,
-        -- nullbuiltin.formatting.tidy,
-        -- nullbuiltin.formatting.xmllint,
-        -- nullbuiltin.formatting.yamlfmt,
-
-        -- hover
-        nullbuiltin.hover.dictionary,
+        nullbuiltin.formatting.shfmt,
+        nullbuiltin.formatting.sqlfluff,
+        nullbuiltin.formatting.stylelint,
+        nullbuiltin.formatting.tidy,
+        nullbuiltin.formatting.xmllint,
     }
 
     nullls.setup {
         save_after_format = false,
         sources = nullsources,
     }
+
+    -- fidget
+    require('fidget').setup()
 end
 
 do -- Telescope
