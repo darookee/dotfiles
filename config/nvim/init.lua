@@ -180,6 +180,7 @@ do -- Tools
 
     opt.runtimepath:append('~/.local/share/nvim/site/pac/paqs/start/vim-textobj-user/')
     opt.runtimepath:append('~/.local/share/nvim/site/pac/paqs/start/vim-textobj-variable-segment/')
+    opt.runtimepath:append('~/.local/share/nvim/site/pac/paqs/start/ansible-vim/')
     opt.runtimepath:append('~/.local/share/nvim/site/pac/paqs/start/vim-ansible-vault/')
     opt.runtimepath:append('~/.local/share/nvim/site/pack/paqs/start/vim-sandwich/')
     opt.runtimepath:append('~/.local/share/nvim/site/pack/paqs/start/vim-dirvish/')
