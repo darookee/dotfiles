@@ -6,7 +6,8 @@ local PKGS = {
     -- tools
     "Darazaki/indent-o-matic";
 
-    -- "neovim/nvim-lspconfig";
+    "neovim/nvim-lspconfig";
+    "jose-elias-alvarez/null-ls.nvim";
 
     -- dependencies
     "nvim-lua/popup.nvim";

@@ -61,6 +61,74 @@ do -- LSP & Diagnostics
     --         flags = lsp_flags,
     --     }
     -- end
+
+    -- null-ls
+    local nullls = require('null-ls')
+    local nullutils = require('null-ls.utils')
+    local nullbuiltin = require('null-ls.builtins')
+
+    local nullsources = {
+        -- nullbuiltin.code_actions.eslint,
+
+        -- code-actions
+        nullbuiltin.code_actions.gitsigns,
+        -- nullbuiltin.code_actions.shellcheck,
+
+        -- diagnostics
+        -- nullbuiltin.diagnostics.ansiblelint,
+        -- nullbuiltin.diagnostics.commitlint,
+        -- nullbuiltin.diagnostics.eslint,
+        -- nullbuiltin.diagnostics.hadolint,
+        -- nullbuiltin.diagnostics.jshint,
+        -- nullbuiltin.diagnostics.jsonlint,
+        -- nullbuiltin.diagnostics.markdownlint,
+        -- nullbuiltin.diagnostics.php,
+        -- nullbuiltin.diagnostics.phpcs,
+        -- nullbuiltin.diagnostics.phpmd,
+        nullbuiltin.diagnostics.phpstan,
+        -- nullbuiltin.diagnostics.shellcheck,
+        -- nullbuiltin.diagnostics.standardjs,
+        -- nullbuiltin.diagnostics.stylelint,
+        -- nullbuiltin.diagnostics.textlint,
+        -- nullbuiltin.diagnostics.tidy,
+        nullbuiltin.diagnostics.todo_comments,
+        nullbuiltin.diagnostics.trail_space,
+        nullbuiltin.diagnostics.twigcs,
+        nullbuiltin.diagnostics.yamllint,
+        -- nullbuiltin.diagnostics.zsh,
+
+        -- formatting
+        -- nullbuiltin.formatting.beautysh,
+        nullbuiltin.formatting.blade_formatter,
+        -- nullbuiltin.formatting.eslint,
+        -- nullbuiltin.formatting.fixjson,
+        -- nullbuiltin.formatting.jq,
+        -- nullbuiltin.formatting.json_tool,
+        -- nullbuiltin.formatting.markdownlint,
+        -- nullbuiltin.formatting.markdown_toc,
+        -- nullbuiltin.formatting.mdformat,
+        nullbuiltin.formatting.phpcbf,
+        -- nullbuiltin.formatting.prettier,
+        -- nullbuiltin.formatting.shellharden,
+        -- nullbuiltin.formatting.shfmt,
+        -- nullbuiltin.formatting.sqlfluff,
+        -- nullbuiltin.formatting.sqlformat,
+        -- nullbuiltin.formatting.sql_formatter,
+        -- nullbuiltin.formatting.standardjs,
+        -- nullbuiltin.formatting.stylelint,
+        -- nullbuiltin.formatting.textlint,
+        -- nullbuiltin.formatting.tidy,
+        -- nullbuiltin.formatting.xmllint,
+        -- nullbuiltin.formatting.yamlfmt,
+
+        -- hover
+        nullbuiltin.hover.dictionary,
+    }
+
+    nullls.setup {
+        save_after_format = false,
+        sources = nullsources,
+    }
 end
 
 do -- Telescope

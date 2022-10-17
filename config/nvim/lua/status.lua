@@ -259,6 +259,70 @@ local ScrollBar ={
     hl = { fg = "blue", bg = "bright_bg" },
 }
 
+local LSPActive = {
+    condition = conditions.lsp_attached,
+    update = {'LspAttach', 'LspDetach'},
+
+    -- You can keep it simple,
+    -- provider = " [LSP]",
+
+    -- Or complicate things a bit and get the servers names
+    provider  = function()
+        local names = {}
+        for i, server in pairs(vim.lsp.buf_get_clients(0)) do
+            table.insert(names, server.name)
+        end
+        return " [" .. table.concat(names, " ") .. "]"
+    end,
+    hl = { fg = "green", bold = true },
+}
+
+local Diagnostics = {
+
+    condition = conditions.has_diagnostics,
+
+    init = function(self)
+        self.errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+        self.warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
+        self.hints = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
+        self.info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
+    end,
+
+    update = { "DiagnosticChanged", "BufEnter" },
+
+    {
+        provider = "![",
+    },
+    {
+        provider = function(self)
+            -- 0 is just another output, we can decide to print it or not!
+            return self.errors > 0 and (self.errors .. " ")
+        end,
+        hl = { fg = "diag_error" },
+    },
+    {
+        provider = function(self)
+            return self.warnings > 0 and (self.warnings .. " ")
+        end,
+        hl = { fg = "diag_warn" },
+    },
+    {
+        provider = function(self)
+            return self.info > 0 and (self.info .. " ")
+        end,
+        hl = { fg = "diag_info" },
+    },
+    {
+        provider = function(self)
+            return self.hints > 0 and (self.hints)
+        end,
+        hl = { fg = "diag_hint" },
+    },
+    {
+        provider = "]",
+    },
+}
+
 local WorkDir = {
     provider = function(self)
         self.icon = (vim.fn.haslocaldir(0) == 1 and "l" or "g") .. " " .. " "
@@ -306,13 +370,11 @@ local HelpFileName = {
 }
 
 local DefaultStatusline = {
-    ViMode, Space, 
+    ViMode, Space,
     Ruler, Space, ScrollBar, Space,
     FileNameBlock, Space, FileType, Space,
     Align,
-    -- Diagnostics, Align,
-    -- Navic, DAPMessages, Align,
-    -- LSPActive, Space, LSPMessages, Space, UltTest, Space, 
+    LSPActive, Space, Diagnostics, Space,
     WorkDir, Space, Git
 }
 

@@ -58,6 +58,9 @@ return {
         keymap('<leader>pq', function() package.loaded.plugins = nil require('plugins').sync_all() end)
         keymap('<leader>t', function() require("twilight").toggle() end)
 
+        keymap('<leader>ff', function() vim.lsp.buf.format(nil, 10000) end)
+        keymap('<leader>fc', function() vim.lsp.buf.code_action() end)
+
         -- custom textobjects
         local objects = { "_", ".", ":", ",", ";", "<bar>", "/", "<bslash>", "*", "+", "%", "`" }
         for _, object in ipairs(objects) do
