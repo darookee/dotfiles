@@ -55,7 +55,7 @@ local PKGS = {
     "lewis6991/spaceless.nvim";
 
     -- 'netrw'
-    "justinmk/vim-dirvish";
+    "nvim-telescope/telescope-file-browser.nvim";
 
     -- wildmenu
     "gelguy/wilder.nvim";

@@ -99,6 +99,7 @@ end
 do -- Telescope
     local telescope = require 'telescope'
     local builtin = require 'telescope.builtin'
+    local fb_actions = require('telescope').extensions.file_browser.actions
 
     telescope.setup {
         defaults = {
@@ -106,6 +107,14 @@ do -- Telescope
             sorting_strategy = 'ascending',
         },
         extensions = {
+            file_browser = {
+                hijack_netrw = true,
+                mappings = {
+                    ["i"] = {
+                        ["-"] = fb_actions.goto_parent_dir,
+                    }
+                }
+            },
             repo = {
                 list = {
                     search_dirs = {
@@ -119,6 +128,7 @@ do -- Telescope
 
     telescope.load_extension 'media_files'
     telescope.load_extension 'repo'
+    telescope.load_extension 'file_browser'
 
     keymap('<leader>/', builtin.current_buffer_fuzzy_find)
     keymap('<C-p>', builtin.find_files)
@@ -128,6 +138,7 @@ do -- Telescope
     keymap('<leader><C-p>', builtin.buffers)
     keymap('<leader><C-m>', telescope.extensions.media_files.media_files)
     keymap('<leader><C-r>', telescope.extensions.repo.list)
+    keymap('-', function() telescope.extensions.file_browser.file_browser { cwd = '%:h' } end)
 end
 
 do -- Tools
@@ -183,7 +194,6 @@ do -- Tools
     opt.runtimepath:append('~/.local/share/nvim/site/pac/paqs/start/ansible-vim/')
     opt.runtimepath:append('~/.local/share/nvim/site/pac/paqs/start/vim-ansible-vault/')
     opt.runtimepath:append('~/.local/share/nvim/site/pack/paqs/start/vim-sandwich/')
-    opt.runtimepath:append('~/.local/share/nvim/site/pack/paqs/start/vim-dirvish/')
 end
 
 do -- wildmenu
