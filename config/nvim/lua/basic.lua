@@ -42,6 +42,7 @@ return {
     keymaps = function()
         local _utils = require('utils')
         local keymap = _utils.keymap
+        local augroup = _utils.augroup
 
         vim.g.mapleader = '_'
         opt.pastetoggle = "<F10>"
@@ -72,5 +73,10 @@ return {
             keymap('a'..object, ':<C-u>normal! F'..object..'vf'..object..'<CR>', 'x')
             keymap('a'..object, ':normal! va'..object..'<CR>', 'o')
         end
+
+        -- reset position
+        augroup('Reload', {
+            BufReadPost = { command = 'if line("\'\\\"") > 1 && line("\'\\\"") <= line("$") | exe "normal! g\'\\\"zz" | endif' },
+        })
     end,
 }
