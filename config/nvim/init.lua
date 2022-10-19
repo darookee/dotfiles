@@ -50,9 +50,11 @@ do -- LSP & Diagnostics
             condition = function (utils)
                 return utils.root_has_file {'phpmd.xml'} or utils.root_has_file {'app/phpmd.xml'}
             end,
-            extra_args = {
-                "phpmd.xml"
-            },
+            extra_args = function (params)
+                local nullutils = require('null-ls.utils').make_conditional_utils()
+
+                return { params.root.."/phpmd.xml" }
+            end,
             prefer_local = "vendor/bin",
             cwd = function (params)
                 return vim.loop.fs_stat(params.root.."/app") and "app"
