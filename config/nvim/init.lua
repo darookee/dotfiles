@@ -43,7 +43,7 @@ do -- LSP & Diagnostics
             end,
             prefer_local = "vendor/bin",
             cwd = function (params)
-                return vim.loop.fs_stat(params.root.."/app") and "app"
+                return vim.loop.fs_stat(params.root.."/app") and params.root.."/app"
             end,
         },
         nullbuiltin.diagnostics.phpmd.with {
@@ -53,11 +53,11 @@ do -- LSP & Diagnostics
             extra_args = function (params)
                 local nullutils = require('null-ls.utils').make_conditional_utils()
 
-                return { params.root.."/phpmd.xml" }
+                return { params.cwd.."/phpmd.xml" }
             end,
             prefer_local = "vendor/bin",
             cwd = function (params)
-                return vim.loop.fs_stat(params.root.."/app") and "app"
+                return vim.loop.fs_stat(params.root.."/app") and params.root.."/app"
             end,
         },
         nullbuiltin.diagnostics.phpstan.with {
@@ -66,7 +66,7 @@ do -- LSP & Diagnostics
             end,
             prefer_local = "vendor/bin",
             cwd = function (params)
-                return vim.loop.fs_stat(params.root.."/app") and "app"
+                return vim.loop.fs_stat(params.root.."/app") and params.root.."/app"
             end,
         },
         nullbuiltin.diagnostics.sqlfluff,
