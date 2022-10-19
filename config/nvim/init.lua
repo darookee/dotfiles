@@ -36,19 +36,8 @@ do -- LSP & Diagnostics
                 local phpcsconfigs = { "phpcs.xml.dist", "phpcs.xml", ".phpcs.xml.dist", ".phpcs.xml" }
 
                 for _, file in ipairs(phpcsconfigs) do
-                    return utils.root_has_file {file} or utils.root_has_file {'app/'..file}
-                end
-            end,
-            extra_args = function (params)
-                local nullutils = require('null-ls.utils').make_conditional_utils()
-                local dirs = { '', 'app/' }
-                local phpcsconfigs = { "phpcs.xml.dist", "phpcs.xml", ".phpcs.xml.dist", ".phpcs.xml" }
-
-                for __, dir in ipairs(dirs) do
-                    for _, file in ipairs(phpcsconfigs) do
-                        if nullutils.root_has_file {dir..file} then
-                            return { dir..file }
-                        end
+                    if utils.root_has_file {file} or utils.root_has_file {'app/'..file} then
+                        return true
                     end
                 end
             end,
