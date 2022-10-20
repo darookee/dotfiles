@@ -17,6 +17,7 @@ return {
             extends = "…"
         }
 
+        opt.gdefault = true
         opt.ignorecase = true
         opt.smartcase = true
 
