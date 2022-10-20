@@ -19,56 +19,26 @@ local colors = {
     git_del = utils.get_highlight("diffRemoved").fg,
     git_add = utils.get_highlight("diffAdded").fg,
     git_change = utils.get_highlight("diffChanged").fg,
+
+    n = utils.get_highlight('CursorLineNr').fg,
+    i = utils.get_highlight('Question').fg,
+    t = utils.get_highlight('Question').fg,
+    v = utils.get_highlight('Type').fg,
+    s = utils.get_highlight('Keyword').fg,
+    r = utils.get_highlight('Title').fg,
+    c = utils.get_highlight('Constant').fg,
 }
 
 local Align = { provider = "%=" }
 local Space = { provider = " " }
 
 local ViMode = {
-    static = {
-        mode_names = { -- change the strings if you like it vvvvverbose!
-            n = "N",
-            no = "N?",
-            nov = "N?",
-            noV = "N?",
-            ["no\22"] = "N?",
-            niI = "Ni",
-            niR = "Nr",
-            niV = "Nv",
-            nt = "Nt",
-            v = "V",
-            vs = "Vs",
-            V = "V_",
-            Vs = "Vs",
-            ["\22"] = "^V",
-            ["\22s"] = "^V",
-            s = "S",
-            S = "S_",
-            ["\19"] = "^S",
-            i = "I",
-            ic = "Ic",
-            ix = "Ix",
-            R = "R",
-            Rc = "Rc",
-            Rx = "Rx",
-            Rv = "Rv",
-            Rvc = "Rv",
-            Rvx = "Rv",
-            c = "C",
-            cv = "Ex",
-            r = "...",
-            rm = "M",
-            ["r?"] = "?",
-            ["!"] = "!",
-            t = "T",
-        },
-    },
     provider = function(self)
-        return "%2(" .. self.mode_names[vim.fn.mode(1)] .. "%)"
+        return "%2(" .. vim.fn.mode(1) .. "%)"
     end,
 
     hl = function(self)
-        local color = self:mode_color() -- here!
+        local color = self:mode_color()
         return { fg = color, bold = true }
     end,
 }
@@ -120,17 +90,23 @@ local FileName = {
 
 local FileFlags = {
     {
-        condition = function()
-            return vim.bo.modified
+        provider = function()
+            if vim.bo.modified then
+                return "[+]"
+            else
+                return "   "
+            end
         end,
-        provider = "[+]",
         hl = { fg = "green" },
     },
     {
-        condition = function()
-            return not vim.bo.modifiable or vim.bo.readonly
+        provider = function()
+            if not vim.bo.modifiable or vim.bo.readonly then
+                return ""
+            else
+                return " "
+            end
         end,
-        provider = "",
         hl = { fg = "orange" },
     },
 }
@@ -199,7 +175,11 @@ local FileType = {
     provider = function()
         return string.upper(vim.bo.filetype)
     end,
-    hl = { fg = utils.get_highlight("Type").fg, bold = true },
+
+    hl = function(self)
+        local color = self:mode_color()
+        return { fg = color, bold = true }
+    end,
 }
 
 local FileEncoding = {
@@ -370,9 +350,9 @@ local HelpFileName = {
 }
 
 local DefaultStatusline = {
-    ViMode, Space,
+    FileType, Space,
+    FileNameBlock, Space,
     Ruler, Space, ScrollBar, Space,
-    FileNameBlock, Space, FileType, Space,
     Align,
     LSPActive, Space, Diagnostics, Space,
     WorkDir, Space, Git
@@ -380,7 +360,8 @@ local DefaultStatusline = {
 
 local InactiveStatusline = {
     condition = conditions.is_not_active,
-    FileType, Space, FileNameBlock, Align,
+    FileType, Space,
+    FileNameBlock, Align,
 }
 
 local SpecialStatusline = {
@@ -412,20 +393,21 @@ local StatusLines = {
 
     static = {
         mode_colors_map = {
-            n = "red",
-            i = "green",
-            v = "cyan",
-            V = "cyan",
-            ["\22"] = "cyan",
-            c = "orange",
-            s = "purple",
-            S = "purple",
-            ["\19"] = "purple",
-            R = "orange",
-            r = "orange",
-            ["!"] = "red",
-            t = "green",
+            n = colors.n,
+            i = colors.i,
+            v = colors.v,
+            V = colors.v,
+            ["\22"] = colors.v,
+            c = colors.c,
+            s = colors.s,
+            S = colors.s,
+            ["\19"] = colors.s,
+            R = colors.r,
+            r = colors.r,
+            ["!"] = colors.c,
+            t = colors.t,
         },
+
         mode_color = function(self)
             local mode = conditions.is_active() and vim.fn.mode() or "n"
             return self.mode_colors_map[mode]
