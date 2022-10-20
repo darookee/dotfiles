@@ -342,20 +342,20 @@ end
 
 do -- git
     require('gitsigns').setup {
-        numhl = true,
-        linehl = false,
+        numhl = false,
+        linehl = true,
         word_diff = true,
         current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
         current_line_blame_opts = {
             virt_text = true,
             virt_text_pos = 'right_align', -- 'eol' | 'overlay' | 'right_align'
-            delay = 1000,
-            ignore_whitespace = false,
+            delay = 500,
+            ignore_whitespace = true,
         },
-        current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+        current_line_blame_formatter = '<author>, <abbrev_sha>, <author_time:%Y-%m-%d> - <summary>',
         on_attach = function (bufnr)
             local gs = package.loaded.gitsigns
-            keymap('<leader>gb', function() gs.blame_line{full=true} end)
+            keymap('<leader>gb', function() gs.blame_line { full=true } end)
         end
     }
 end
