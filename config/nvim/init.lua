@@ -361,7 +361,7 @@ do -- git
 end
 
 do -- Appearance
-    cmd('colorscheme duskfox')
+    cmd('colorscheme nightfox')
 
     -- show trailing whitespace
     fn.matchadd('errorMsg', [[\s\+$]])
