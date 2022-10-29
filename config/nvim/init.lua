@@ -62,6 +62,7 @@ do -- LSP & Diagnostics
                 return utils.root_has_file {'phpstan.neon'} or utils.root_has_file {'app/phpstan.neon'}
             end,
             prefer_local = "vendor/bin",
+            extra_args = { '--memory-limit=-1' },
             cwd = function (params)
                 return vim.loop.fs_stat(params.root.."/app") and params.root.."/app"
             end,
