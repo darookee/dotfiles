@@ -154,7 +154,7 @@ do -- Tools
 
     require('better_escape').setup {
         mapping = {"jk", "jj"},
-        timeout = vim.o.timeoutlen,
+        timeout = o.timeoutlen,
         clear_empty_lines = false
     }
 
@@ -287,6 +287,7 @@ do -- Treesitter
         "lua",
         "vim",
         "sql",
+        "go",
         "vue",
         "gitignore",
         "python",
