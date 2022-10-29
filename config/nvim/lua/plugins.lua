@@ -4,9 +4,7 @@ local PKGS = {
     "lewis6991/impatient.nvim";
 
     -- tools
-    "Darazaki/indent-o-matic";
 
-    "neovim/nvim-lspconfig";
     "jose-elias-alvarez/null-ls.nvim";
     "j-hui/fidget.nvim";
 
@@ -18,14 +16,12 @@ local PKGS = {
     { "nvim-telescope/telescope.nvim", branch= "0.1.x" };
     "nvim-telescope/telescope-media-files.nvim";
     "cljoly/telescope-repo.nvim";
+    "nvim-telescope/telescope-file-browser.nvim";
 
     -- parenthesis highlighting
-    { "p00f/nvim-ts-rainbow", after="nvim-treesitter" };
     -- Autoclose tags
     { "windwp/nvim-ts-autotag", after="nvim-treesitter" };
     -- Context based commenting
-    { "JoosepAlviste/nvim-ts-context-commentstring", after="nvim-treesitter" };
-
     -- Syntax highlighting
     { "nvim-treesitter/nvim-treesitter", run = function() cmd 'TSUpdate' end };
 
@@ -46,16 +42,12 @@ local PKGS = {
     -- "AckslD/nvim-trevJ.lua";
 
     -- colors
-    "norcalli/nvim-colorizer.lua";
 
     -- git
     "lewis6991/gitsigns.nvim";
 
     -- whitespace
     "lewis6991/spaceless.nvim";
-
-    -- 'netrw'
-    "nvim-telescope/telescope-file-browser.nvim";
 
     -- wildmenu
     "gelguy/wilder.nvim";
@@ -70,8 +62,6 @@ local PKGS = {
     "yamatsum/nvim-cursorline";
     "melkster/modicator.nvim";
     "lcheylus/overlength.nvim";
-    "sunjon/shade.nvim";
-    "folke/twilight.nvim";
 
     -- textobjects
     "kana/vim-textobj-user";

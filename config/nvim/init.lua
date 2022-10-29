@@ -148,17 +148,7 @@ end
 do -- Tools
     require('impatient')
 
-    require('indent-o-matic').setup {
-        standard_widths = { 2, 4 },
-    }
 
-    -- require('trevj').setup {
-    --     on_attach = function (bufnr)
-    --         keymap('S', require('trevj').format_at_cursor)
-    --     end
-    -- }
-
-    require('colorizer').setup()
 
     require('Comment').setup()
 
@@ -170,7 +160,7 @@ do -- Tools
 
     require('nvim-cursorline').setup {
         cursorline = {
-            enable = true,
+            enable = false,
             timeout = 500,
             number = false,
         },
@@ -181,7 +171,9 @@ do -- Tools
         }
     }
 
-    require('modicator').setup()
+    require('modicator').setup {
+        cursorline = true,
+    }
 
     require('indent_blankline').setup {
         show_current_context = true,
@@ -189,14 +181,17 @@ do -- Tools
 
     require('spaceless').setup()
 
-    require('shade').setup()
 
-    require('twilight').setup()
 
+    -- textobject-user
     opt.runtimepath:append('~/.local/share/nvim/site/pac/paqs/start/vim-textobj-user/')
     opt.runtimepath:append('~/.local/share/nvim/site/pac/paqs/start/vim-textobj-variable-segment/')
+
+    -- ansible
     opt.runtimepath:append('~/.local/share/nvim/site/pac/paqs/start/ansible-vim/')
     opt.runtimepath:append('~/.local/share/nvim/site/pac/paqs/start/vim-ansible-vault/')
+
+    -- sandwich
     opt.runtimepath:append('~/.local/share/nvim/site/pack/paqs/start/vim-sandwich/')
 end
 
@@ -323,14 +318,6 @@ do -- Treesitter
         },
         autotag = {
             enable = true,
-        },
-        rainbow = {
-            enable = true,
-            extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-            max_file_lines = nil, -- Do not enable for files with more than n lines, int
-        },
-        context_commentstring = {
-            enable = true
         },
     }
 
