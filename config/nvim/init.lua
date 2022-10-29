@@ -4,6 +4,8 @@ local _utils = require('utils')
 local augroup = _utils.augroup
 local keymap = _utils.keymap
 
+local debug = env.NVIM_DEBUG ~= nil
+
 do -- base config
     local basic = require('basic')
 
@@ -12,11 +14,6 @@ do -- base config
 end
 
 do -- LSP & Diagnostics
-    keymap('<leader>e', vim.diagnostic.open_float)
-    keymap('<leader>d', vim.diagnostic.goto_prev)
-    keymap('<leader>f', vim.diagnostic.goto_next)
-    keymap('<leader>q', vim.diagnostic.setloclist)
-
     -- null-ls
     local nullls = require('null-ls')
     local nullbuiltin = require('null-ls.builtins')
@@ -92,6 +89,7 @@ do -- LSP & Diagnostics
     }
 
     nullls.setup {
+        debug = debug,
         save_after_format = false,
         sources = nullsources,
     }

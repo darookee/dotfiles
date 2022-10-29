@@ -5,7 +5,15 @@ return {
         opt.termguicolors = true
         opt.cursorline = true
 
-        opt.undofile = true
+        if fn.has('persistent_undo') then
+            local target_path = fn.expand('~/.local/share/nvim/undo')
+            if fn.isdirectory(target_path) < 1 then
+                notify('Creating undo directory')
+                fn.mkdir(target_path, 'p')
+            end
+            o.undodir = target_path
+            opt.undofile = true
+        end
         opt.swapfile = false
 
         opt.scrolloff = 5
@@ -20,10 +28,14 @@ return {
         opt.gdefault = true
         opt.ignorecase = true
         opt.smartcase = true
+        opt.showmatch = true
 
         opt.expandtab = true
         opt.shiftwidth = 4
         opt.tabstop = 4
+
+        opt.smartindent = true
+        opt.autoindent = true
 
         opt.laststatus = 2
 
@@ -38,6 +50,13 @@ return {
             "*/node_modules/*",
             "*.tar.*",
         }
+
+        opt.foldopen = opt.foldopen + 'search'
+
+        opt.encoding = 'utf-8'
+        opt.fileencoding = 'utf-8'
+
+        opt.secure = true
     end,
 
     keymaps = function()
@@ -65,6 +84,12 @@ return {
 
         -- remove trailing spaces
         keymap(',W', ':%s/\\v\\s+$//e<CR>')
+
+        -- lsp
+        keymap('<leader>e', vim.diagnostic.open_float)
+        keymap('<leader>d', vim.diagnostic.goto_prev)
+        keymap('<leader>f', vim.diagnostic.goto_next)
+        keymap('<leader>q', vim.diagnostic.setloclist)
 
         -- custom textobjects
         local objects = { "_", ".", ":", ",", ";", "<bar>", "/", "<bslash>", "*", "+", "%", "`" }
