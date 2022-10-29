@@ -53,8 +53,9 @@ set message_cachedir = ~/.mutt/cache/bodies  # where to store bodies
 set certificate_file = ~/.mutt/certificates  # where to store certs
 set mailcap_path     = ~/.mutt/mailcap       # entrys for filetypes
 set tmpdir           = ~/.mutt/temp          # where to keep temp files
+set mailcap_path     = ~/.mutt/mailcap       # mailcap file
 
-set editor           = "$EDITOR +/^$ +nohl +startinsert"     # use vim and skip to first blank line
+set editor           = "$EDITOR +/^$ +'set ft=mail' +nohl +startinsert"     # use vim and skip to first blank line
 
 unset confirmappend
 set quit
