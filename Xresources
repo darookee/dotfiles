@@ -35,27 +35,6 @@ Xcursor.theme: Human
 
 *letterSpace:           0
 
-!rofi
-rofi.combi-modi:    run,ssh,window,calc:~/.bin/rofi_show_calc.sh
-rofi.modi:          combi
-rofi.matching:      fuzzy
-rofi.opacity:       90
-rofi.sort:          true
-rofi.width:         30
-rofi.lines:         15
-rofi.columns:       1
-rofi.font:          dejavu sans mono 10
-rofi.color-enabled: true
-rofi.color-window: #1f1d1f, #1f1d1f, #1f1d1f
-rofi.color-normal: #1f1d1f, #ffffff, #1f1d1f, #cc1081, #ffffff
-rofi.color-active: #1f1d1f, #cc1081, #1f1d1f, #cc1081, #c0c0c0
-rofi.color-urgent: #484448, #cc1081, #484448, #f365ba, #ffffff
-rofi.bw:            2
-rofi.padding:       5
-rofi.yoffset:       5
-rofi.terminal:      kitty
-rofi.theme:         ~/.local/share/rofi/themes/Indego.rasi
-
 ! effective at startup
 st.termname:  screen-256color
 st.shell:     /bin/tmux

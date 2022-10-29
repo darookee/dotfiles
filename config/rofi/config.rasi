@@ -1,0 +1,18 @@
+configuration {
+    combi-modi: "run,ssh,window,calc:~/.bin/rofi_show_calc.sh";
+    modi:"combi";
+    matching:"fuzzy";
+    opacity: 90;
+    sort:true;
+    width: 30;
+    lines: 15;
+    columns: 1;
+    font:"dejavu sans mono 10";
+    show-icons: true;
+    bw: 2;
+    padding: 5;
+    yoffset: 5;
+    terminal:"kitty";
+}
+
+@theme "~/.local/share/rofi/themes/blue.rasi"
