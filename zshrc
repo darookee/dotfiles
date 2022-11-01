@@ -11,18 +11,23 @@ HIST_STAMPS="yyyy-mm-dd"
 # stacks
 DIRSTACKSIZE=20
 
+typeset -A ZI
+ZI[BIN_DIR]="${ZSH_HOME}/.zi/bin"
+
 typeset -A ZPLGM
 ZPLG_HOME=${ZSH_HOME}/zinit
 ZPLGM[HOME_DIR]=$ZPLG_HOME
 ZPLGM[ZCOMPDUMP_PATH]=${ZSH_HOME}/zcompdump
 # }}}
+
 # zinit {{{
-if [[ ! -f $ZPLG_HOME/bin/zinit.zsh ]]; then
-    git clone https://github.com/zdharma/zinit.git $ZPLG_HOME/bin
+if [[ ! -f ${ZI[BIN_DIR]}/zi.zsh ]]; then
+    git clone https://github.com/z-shell/zi.git ${ZI[BIN_DIR]}
     zcompile $ZPLG_HOME/bin/zinit.zsh
+    zcompile "${ZI[BIN_DIR]}/zi.zsh"
 fi
 
-source $ZPLG_HOME/bin/zinit.zsh
+source "${ZI[BIN_DIR]}/zi.zsh"
 # }}}
 # plugins {{{
 zinit light zsh-users/zsh-autosuggestions
@@ -409,7 +414,7 @@ compinit -d ${ZSH_HOME}/zcompdump-${ZSH_VERSION}
 if [[ ! -r "/usr/share/z/z.sh"  ]]; then
     if (( $+commands[zoxide] )); then
         if [[ -x $commands[zoxide] ]]; then
-            eval "$(zoxide init zsh)"
+            eval "$(zoxide init zsh --cmd cd)"
         fi
     fi
 fi
