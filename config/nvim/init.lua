@@ -89,6 +89,68 @@ do -- LSP & Diagnostics
         nullbuiltin.formatting.xmllint,
     }
 
+    local lspconfig_on_attach = function(client, bufnr)
+        require'lsp_signature'.on_attach({
+            bind = true, -- This is mandatory, otherwise border config won't get registered.
+            handler_opts = {
+                border = "double"
+            },
+            hint_prefix = ' '
+        }, bufnr)
+
+        -- Enable completion triggered by <c-x><c-o>
+        api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+        if client.server_capabilities.documentHighlightProvider then
+            api.nvim_create_augroup("lsp_document_highlight", { clear = true })
+            api.nvim_clear_autocmds { buffer = bufnr, group = "lsp_document_highlight" }
+            api.nvim_create_autocmd("CursorHold", {
+                callback = lsp.buf.document_highlight,
+                buffer = bufnr,
+                group = "lsp_document_highlight",
+                desc = "Document Highlight",
+            })
+            api.nvim_create_autocmd("CursorMoved", {
+                callback = lsp.buf.clear_references,
+                buffer = bufnr,
+                group = "lsp_document_highlight",
+                desc = "Clear All the References",
+            })
+        end
+    end
+
+    local lspconfig_root_dir = function()
+        local cwd = fn.getcwd()
+
+        if (loop.fs_stat(cwd.."/vendor")) then
+            return cwd
+        end
+
+        if (loop.fs_stat(cwd.."/app")) then
+            return cwd.."/app"
+        end
+
+        return cwd
+    end
+
+    local lspconfig_capabilities = lsp.protocol.make_client_capabilities()
+
+    local lspconfig_servers = { 'bashls', 'pyright', 'html', 'cssls', 'tsserver', 'jsonls', 'dockerls', 'ansiblels', 'phpactor', 'sumneko_lua', 'marksman' }
+
+    local lspconfig = require('lspconfig')
+
+    -- Call setup
+    for _, lsp in ipairs(lspconfig_servers) do
+        lspconfig[lsp].setup {
+            on_attach = lspconfig_on_attach,
+            root_dir = lspconfig_root_dir,
+            capabilities = lspconfig_capabilities,
+            flags = {
+                debounce_text_changes = 150,
+            }
+        }
+    end
+
     nullls.setup {
         debug = debug,
         save_after_format = false,

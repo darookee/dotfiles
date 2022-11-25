@@ -91,6 +91,11 @@ return {
         keymap('<leader>f', vim.diagnostic.goto_next)
         keymap('<leader>q', vim.diagnostic.setloclist)
 
+        keymap('<leader>.=', function() vim.lsp.buf.format { async = true } end)
+
+        keymap('<leader>gd', vim.lsp.buf.definition)
+        keymap('<leader><leader>', vim.lsp.buf.hover)
+
         -- custom textobjects
         local objects = { "_", ".", ":", ",", ";", "<bar>", "/", "<bslash>", "*", "+", "%", "`" }
         for _, object in ipairs(objects) do

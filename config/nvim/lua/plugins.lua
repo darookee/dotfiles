@@ -5,6 +5,8 @@ local PKGS = {
 
     -- tools
 
+    "neovim/nvim-lspconfig";
+    { "ray-x/lsp_signature.nvim", after="nvim-lspconfig" };
     "jose-elias-alvarez/null-ls.nvim";
     "j-hui/fidget.nvim";
 
