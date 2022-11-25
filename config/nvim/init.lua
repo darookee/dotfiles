@@ -379,7 +379,7 @@ do -- Treesitter
             end,
         },
         indent = {
-            enable = true,
+            enable = false,
         },
         autotag = {
             enable = true,
