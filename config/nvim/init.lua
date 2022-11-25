@@ -244,6 +244,7 @@ do -- Tools
     require('spaceless').setup()
 
 
+    require("scrollbar").setup()
 
     -- textobject-user
     opt.runtimepath:append('~/.local/share/nvim/site/pac/paqs/start/vim-textobj-user/')
