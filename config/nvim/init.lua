@@ -357,6 +357,7 @@ do -- Treesitter
         "bash",
         "php",
         "phpdoc",
+        "regex",
         "json",
         "yaml",
         "twig",
