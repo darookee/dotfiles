@@ -16,9 +16,9 @@ local PKGS = {
 
     -- telescope
     { "nvim-telescope/telescope.nvim", branch= "0.1.x" };
-    "nvim-telescope/telescope-media-files.nvim";
-    "cljoly/telescope-repo.nvim";
-    "nvim-telescope/telescope-file-browser.nvim";
+    { "nvim-telescope/telescope-media-files.nvim", after="telescope.nvim" };
+    { "cljoly/telescope-repo.nvim", after="telescope.nvim" };
+    { "nvim-telescope/telescope-file-browser.nvim", after="telescope.nvim" };
 
     -- parenthesis highlighting
     -- Autoclose tags

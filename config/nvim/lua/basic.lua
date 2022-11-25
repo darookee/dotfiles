@@ -34,8 +34,8 @@ return {
         opt.shiftwidth = 4
         opt.tabstop = 4
 
-        opt.smartindent = true
         opt.autoindent = true
+        opt.smartindent = true
 
         opt.laststatus = 2
 
@@ -57,6 +57,8 @@ return {
         opt.fileencoding = 'utf-8'
 
         opt.secure = true
+
+        opt.completeopt = { "menu", "menuone", "noselect", "noinsert" }
     end,
 
     keymaps = function()
@@ -84,6 +86,9 @@ return {
 
         -- remove trailing spaces
         keymap(',W', ':%s/\\v\\s+$//e<CR>')
+
+        -- split line on cursor
+        keymap('S', ':s/\\(.\\{-}\\)\\(\\s*\\)\\(\\%#\\)\\(\\s*\\)\\(.*\\)/\\1\\r\\3\\5<CR>')
 
         -- lsp
         keymap('<leader>e', vim.diagnostic.open_float)
