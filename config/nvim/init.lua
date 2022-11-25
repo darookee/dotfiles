@@ -399,16 +399,17 @@ do -- git
         current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
         current_line_blame_opts = {
             virt_text = true,
-            virt_text_pos = 'right_align', -- 'eol' | 'overlay' | 'right_align'
+            virt_text_pos = 'eol',
             delay = 500,
             ignore_whitespace = true,
         },
-        current_line_blame_formatter = '<author>, <abbrev_sha>, <author_time:%Y-%m-%d> - <summary>',
+        current_line_blame_formatter = ' <author>, <abbrev_sha>, <author_time:%Y-%m-%d> - <summary>',
         on_attach = function (bufnr)
             local gs = package.loaded.gitsigns
             keymap('<leader>gb', function() gs.blame_line { full=true } end)
         end
     }
+    require("scrollbar.handlers.gitsigns").setup()
 end
 
 do -- Appearance
@@ -421,6 +422,8 @@ do -- Appearance
         grace_length = 5,
         highlight_to_eol = false,
     }
+
+    api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { fg = "#ba793e" })
 
     local line = require('heirline')
     line.load_colors(require('status').colors)
