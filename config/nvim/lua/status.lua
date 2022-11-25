@@ -77,7 +77,7 @@ local FileName = {
         end
     end,
 
-    utils.make_flexible_component(2, {
+    { flexible=2, {
         provider = function(self)
             return self.lfilename
         end,
@@ -85,7 +85,7 @@ local FileName = {
         provider = function(self)
             return vim.fn.pathshorten(self.lfilename)
         end,
-    }),
+    }},
 }
 
 local FileFlags = {
@@ -311,7 +311,7 @@ local WorkDir = {
     end,
     hl = { fg = "blue", bold = true },
 
-    utils.make_flexible_component(1, {
+    { flexible=1, {
         -- evaluates to the full-lenth path
         provider = function(self)
             local trail = self.cwd:sub(-1) == "/" and "" or "/"
@@ -327,7 +327,7 @@ local WorkDir = {
     }, {
         -- evaluates to "", hiding the component
         provider = "",
-    }),
+    }},
 }
 
 local Spell = {
