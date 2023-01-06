@@ -5,7 +5,7 @@ fi
 
 # TERM
 if [[ -n "$TMUX" ]]; then
-    export TERM="screen-256color"
+    export TERM="tmux-256color"
 fi
 
 export COMPOSER_HOME=${HOME}/.config/composer
