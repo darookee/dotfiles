@@ -1,86 +1,33 @@
 #!/bin/bash
 
-export MPD_HOST=192.168.0.15
-
-function get_cpu_temp() {
-    if [ -r "/sys/class/thermal/thermal_zone0/temp" ]; then
-        temp=$(cat /sys/class/thermal/thermal_zone0/temp|awk '{ printf("%.0f", $1/1000) }')
-        if [ -n "$temp" ]; then
-            if [ "$temp" -gt 39 ]; then
-                echo -n "#[fg=colour13]$temp°C"
-            else
-                echo -n "$temp°C"
-            fi
-            echo -n "#[fg=colour12] | "
-        fi
-    fi
-}
-
 function get_ip() {
     cachefile="${TMPDIR}/tmux.cache.ip"
 
-    ping -c 1 -4 mail.darookee.net > /dev/null 2>&1
+    ping -n -q -c 1 -4 1.1.1.1 > /dev/null 2>&1
 
     if [ $? -ne 0 ]; then
-        echo "#[fg=colour9]🌑"
+        echo "#[fg=colour9]"
+        rm $cachefile
         exit
     fi
 
-    echo -n "#[fg=colour10]  #[fg=colour15]"
+    echo -n "#[fg=colour14] #[fg=colour15]"
 
-    [[ -f $cachefile ]] || curl -s ifconfig.me > $cachefile
+    [[ -f $cachefile ]] || curl -s https://ifconfig.me > $cachefile
 
     {
         filemtime=`stat -c %Y $cachefile`
         currtime=`date +%s`
         diff=$(( (currtime - filemtime) ))
 
-        [[ "$diff" -lt "60" ]] || curl -s ipv4.ipchimp.net > $cachefile
+        [[ "$diff" -lt "3600" ]] || curl -s ipv4.ipchimp.net > $cachefile
     } &
 
     cat $cachefile
 }
 
 function get_weather_raw() {
-
-    ## created by gnomeye 2012-01-05
-    ## modified by darookee 2015-02-03
-    ## Yahoo! needs OAUTH now
-    ## Using external tool
-
-    hash get_weather.sh > /dev/null || exit 1
-
-    default="#[fg=colour2]✔#[fg=colour15]"
-    sun="#[fg=colour3]☀#[fg=colour15]"
-    snow="#[fg=colour6]❄#[fg=colour15]"
-    rain="#[fg=colour7]☂#[fg=colour15]"
-    cloud="#[fg=colour15]☁#[fg=colour15]"
-
-    weather=$(~/.bin/get_weather.sh)
-
-    condition=${weather%;*}
-    temperatur=${weather#*;}
-
-    metrdisplay="°C"
-
-    case "$condition" in
-        *Sun*|*sun*)
-            emoji="$sun"
-            ;;
-        *Snow*|*snow*)
-            emoji="$snow"
-            ;;
-        *storm*|*Storm*|*Rain*|*rain*|*Shower*|*shower*|*Drizzle*|*drizzle*)
-            emoji="$rain"
-            ;;
-        *Cloud*|*cloud*)
-            emoji="$cloud"
-            ;;
-        *)
-            emoji="$default"
-    esac
-
-    printf "${emoji} ${temperatur}${metrdisplay}"
+    curl -s https://wttr.in/?format=1
 }
 
 function get_weather() {
@@ -93,19 +40,13 @@ function get_weather() {
         currtime=`date +%s`
         diff=$(( (currtime - filemtime) ))
 
-        [[ "$diff" -lt "1800" ]] || get_weather_raw > $cachefile
+        [[ "$diff" -lt "10800" ]] || get_weather_raw > $cachefile
     } &
 
     cat $cachefile
 }
 
 function get_mailcount() {
-    # disable mailcount between 10:00 and 12:00, and 14:00 and 17:00
-    currenttime=$(date +%H:%M)
-    if [[ "$currenttime" > "10:00" && "$currenttime" < "12:00" ]] || [[ "$currenttime" > "13:00" && "$currenttime" < "17:00" ]]; then
-        return
-    fi
-
     maildir="${1-$HOME/.mail/INBOX/new}"
 
     if [ -e "$maildir" ]; then
@@ -115,80 +56,42 @@ function get_mailcount() {
 
 }
 
-function get_battery() {
-    batpath="/sys/class/power_supply/BAT0"
-
-    if [ -d ${batpath} ]; then
-        capacity=$(cat ${batpath}/capacity)
-        state=$(cat ${batpath}/status)
-        if [ "Charging" = "${state}" ]; then
-            echo -n "#[fg=colour11]🔌 #[fg=colour15]"
-        fi
-        echo -n "🔋"
-        [[ "$capacity" -lt 30 ]] && echo -n "#[fg=colour13]{$capacity}%#[fg=colour15]"
-        [[ "$capacity" -gt 30 ]] && echo -n "${capacity}%"
-    fi
-}
-
-function get_wifi() {
-    echo ""
-}
-
-function get_volume() {
-    echo ""
-}
-
 local_status=""
 
 if [ -x ~/.bin.untracked/get_local_status.sh ]; then
     local_status=$(~/.bin.untracked/get_local_status.sh)
 fi
+
 mail_count=$(get_mailcount ~/.mail/darookee/INBOX/new)
 
-cpu_temp=$(get_cpu_temp)
-cpu_percent=$(grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {printf("%.0f%%", usage) }')
-mem_percent=$(free | grep Mem | awk '{printf("%.0f%%", $4/$2 * 100.0)}')
-cpu_load=$(uptime|cut -d, -f5|sed 's/ //')
+cpu_load=$(LC_NUMERIC=de_DE uptime|cut -d, -f5|sed 's/ //')
+mem_percent=$(free | grep Mem | awk '{printf("%.0f%%", $3/$2 * 100.0)}')
+space_home=$(df -h $HOME|grep "[0-9]"|awk '{ print $4 }')
 
 cur_ip=$(get_ip)
 
-space_home=$(df -h $HOME|grep "[0-9]"|awk '{ print $4 }')
-
-battery=$(get_battery)
-wifi=$(get_wifi)
-volume=$(get_volume)
-
-
+weather=$(get_weather)
 date=$(date +"%a, %Y-%m-%d (%V)")
 time=$(date +"%H:%M")
-
-# MPDPi not working
 
 if [ ! -z "${local_status}" ]; then
     echo -n "#[bg=colour3]#[fg=colour8] ${local_status} "
 fi
+
 if [ ! -z "${mail_count}" ]; then
-    echo -n "#[bg=colour13]#[fg=colour15] ﯍ ${mail_count} "
+    echo -n "#[bg=colour3]#[fg=colour1] #[fg=colour16]﯍ ${mail_count} "
 fi
-echo -n "#[bg=colour59,fg=colour12] | "
-# echo -n "#[bg=colour236,fg=colour174]💓#[fg=colour188] ${cpu_temp} #[fg=colour188][${cpu_percent}]#[fg=colour245,bg=colour236]#[fg=colour188][${mem_percent}]"
-echo -n "#[bg=colour59,fg=colour13]#[fg=colour15]${cpu_temp}#[fg=colour5] #[fg=colour15] ${cpu_load}#[fg=colour12] | #[fg=colour11] #[fg=colour15]${mem_percent}#[fg=colour12] | "
-if [ ! -z "${mpc}" ]; then
-    echo -n "#[fg=colour11]♪ #[fg=colour15]${mpc}#[fg=colour12] | "
-else
-    echo -n "#[fg=colour15]${cur_ip}#[fg=colour12] | "
-    if [ ! -z "${wifi}" ]; then
-        echo -n "${wifi}#[fg=colour12] | "
-    fi
-    echo -n "#[fg=colour10] #[fg=colour15]${space_home}#[fg=colour12] | "
-fi
-if [ ! -z "${volume}" ]; then
-    echo -n "#[fg=colour15]${volume}#[fg=colour12] | "
-fi
-if [ ! -z "${battery}" ]; then
-    echo -n "#[fg=colour15]${battery}#[fg=colour12]| "
-fi
-echo -n "#[fg=colour12]  ${date}#[fg=colour7] ${time} "
 
+echo -n "#[bg=colour59,fg=colour12] "
 
+echo -n "#[bg=colour59]"
 
+echo -n "#[fg=colour9] #[fg=colour15]${cpu_load}#[fg=colour12] | "
+echo -n "#[fg=colour10] #[fg=colour15]${mem_percent}#[fg=colour12] | "
+
+echo -n "#[fg=colour11] #[fg=colour15]${space_home}#[fg=colour12] | "
+echo -n "#[fg=colour15]${cur_ip}#[fg=colour12] "
+
+echo -n "#[bg=colour0,fg=colour15] ${weather} "
+
+echo -n "#[bg=colour13,fg=colour15] #[bg=colour13,fg=colour11] ${date}#[fg=colour7] ${time} "
