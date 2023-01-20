@@ -70,7 +70,6 @@ space_home=$(df -h $HOME|grep "[0-9]"|awk '{ print $4 }')
 
 cur_ip=$(get_ip)
 
-weather=$(get_weather)
 date=$(date +"%a, %Y-%m-%d (%V)")
 time=$(date +"%H:%M")
 
@@ -92,6 +91,5 @@ echo -n "#[fg=colour10] #[fg=colour15]${mem_percent}#[fg=colour12] | "
 echo -n "#[fg=colour11] #[fg=colour15]${space_home}#[fg=colour12] | "
 echo -n "#[fg=colour15]${cur_ip}#[fg=colour12] "
 
-echo -n "#[bg=colour0,fg=colour15] ${weather} "
 
 echo -n "#[bg=colour13,fg=colour15] #[bg=colour13,fg=colour11] ${date}#[fg=colour7] ${time} "
