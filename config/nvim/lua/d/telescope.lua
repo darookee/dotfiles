@@ -26,7 +26,7 @@ local bind_keys = function()
 
     -- TODO: these should probably only be loaded when the extension is enabled...?
     keymap('<leader><C-m>', telescope.extensions.media_files.media_files)
-    keymap('-', function() telescope.extensions.file_browser.file_browser { cwd = '%:h', path = '%:h', cwd_to_path = true, grouped = true, use_fd = true, hidden = true} end)
+    keymap('-', function() telescope.extensions.file_browser.file_browser { path = vim.fn.expand('%:p:h') } end)
 end
 
 D = {
@@ -36,6 +36,11 @@ D = {
                 prompt_prefix = '  ',
                 layout_config = { prompt_position = 'top' },
                 sorting_strategy = 'ascending',
+                mappings = {
+                    ["i"] = {
+                       ["<esc>"] = "close",
+                    },
+                },
             },
             extensions = {
                 file_browser = {
