@@ -20,7 +20,7 @@ D = {
             opts
         )
 
-        require'd.basic'
+        require'd.basic'.setup()
         require'd.colors'.setup(conf.colors)
         require'd.status'.setup()
 

@@ -1,9 +1,16 @@
 local D
 
+local bind_keys = function()
+    local keymap = require'utils'.keymap
+    local gs = package.loaded.gitsigns
+
+    keymap('<leader>gb', function() gs.blame_line { full=true } end)
+    keymap('<leader>gd', gs.toggle_deleted)
+    keymap('<leader>gf', gs.diffthis)
+end
+
 D = {
     setup = function()
-        local keymap = require'utils'.keymap
-
         require'gitsigns'.setup {
             numhl = false,
             linehl = true,
@@ -16,10 +23,7 @@ D = {
                 ignore_whitespace = true,
             },
             current_line_blame_formatter = ' <author>, <abbrev_sha>, <author_time:%Y-%m-%d> - <summary>',
-            on_attach = function ()
-                local gs = package.loaded.gitsigns
-                keymap('<leader>gb', function() gs.blame_line { full=true } end)
-            end
+            on_attach = bind_keys
         }
     end
 }

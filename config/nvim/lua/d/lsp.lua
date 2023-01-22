@@ -6,6 +6,26 @@ local fn = vim.fn
 local loop = vim.loop
 local lsp = vim.lsp
 local tbl_deep_extend = vim.tbl_deep_extend
+local diagnostic = vim.diagnostic
+
+local bind_keys = function()
+    local keymap = require'utils'.keymap
+
+    keymap('<leader>ff', function() lsp.buf.format(nil, 10000) end)
+    keymap('<leader>fc', function() lsp.buf.code_action() end)
+
+    keymap('<leader>e', diagnostic.open_float)
+    keymap('<leader>d', diagnostic.goto_prev)
+    keymap('<leader>f', diagnostic.goto_next)
+    keymap('<leader>q', diagnostic.setloclist)
+
+    keymap('<leader>.=', function() lsp.buf.format { async = true } end)
+
+    -- keymap('<leader>gD', lsp.buf.declaration)
+    -- keymap('<leader>gd', lsp.buf.definition)
+    keymap('<leader><leader>', lsp.buf.hover)
+    -- keymap('<leader>gi', lsp.buf.implementation)
+end
 
 local nullbuiltin = require'null-ls.builtins'
 
@@ -144,6 +164,8 @@ D = {
                 spinner = "dots"
             }
         }
+
+        bind_keys()
     end
 }
 
