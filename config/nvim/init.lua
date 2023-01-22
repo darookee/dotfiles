@@ -1,23 +1,26 @@
 local stat = vim.loop.fs_stat
 
-require'd'
+-- helper functions
+local nulllscwd = function(params)
+    return stat(params.root.."/app") and params.root.."/app"
+end
 
-do -- LSP and CMP
-    local nulllscwd = function(params)
-        return stat(params.root.."/app") and params.root.."/app"
-    end
-
-    local nulllscondition = function(utils, files)
-        for _, file in ipairs(files) do
-            if utils.root_has_file {file} or utils.root_has_file {'app/'..file} then
-                return true
-            end
+local nulllscondition = function(utils, files)
+    for _, file in ipairs(files) do
+        if utils.root_has_file {file} or utils.root_has_file {'app/'..file} then
+            return true
         end
-
-        return false
     end
 
-    require'd.lsp'.setup {
+    return false
+end
+
+-- config
+local config = {
+    colors = {
+        scheme = 'neobones',
+    },
+    lsp = {
         lspServers = { 'phpactor', 'gopls', 'jdtls' },
         nulllsServers = {
             require'null-ls.builtins'.diagnostics.phpcs.with {
@@ -46,23 +49,21 @@ do -- LSP and CMP
                 cwd = nulllscwd,
             },
         },
-    }
-
-    require'd.luasnip'.setup { snippetPath = '~/.config/nvim/snippets' }
-end
-
-do -- syntax and editing
-    require'd.treesitter'.setup {
+    },
+    luasnip = {
+        snippetPath = '~/.config/nvim/snippets'
+    },
+    treesitter = {
         langs = { "go", "vue" },
-    }
-end
-
-do -- files and the rest
-    require'd.telescope'.setup {
+    },
+    telescope = {
         extensions = {
             'media_files',
             'file_browser',
             'fzf',
         },
-    }
-end
+    },
+}
+
+-- setup
+require'd'.setup(config)
