@@ -1,431 +1,68 @@
-setmetatable(_G, { __index = vim })
+local stat = vim.loop.fs_stat
 
-local _utils = require('utils')
-local augroup = _utils.augroup
-local keymap = _utils.keymap
+require'd'
 
-local debug = env.NVIM_DEBUG ~= nil
+do -- LSP and CMP
+    local nulllscwd = function(params)
+        return stat(params.root.."/app") and params.root.."/app"
+    end
 
-do -- base config
-    local basic = require('basic')
+    local nulllscondition = function(utils, files)
+        for _, file in ipairs(files) do
+            if utils.root_has_file {file} or utils.root_has_file {'app/'..file} then
+                return true
+            end
+        end
 
-    basic.options()
-    basic.keymaps()
-end
+        return false
+    end
 
-do -- LSP & Diagnostics
-    -- null-ls
-    local nullls = require('null-ls')
-    local nullbuiltin = require('null-ls.builtins')
-
-    local nullsources = {
-        -- code-actions
-        nullbuiltin.code_actions.eslint,
-        nullbuiltin.code_actions.gitsigns,
-
-        -- diagnostics
-        nullbuiltin.diagnostics.ansiblelint,
-        nullbuiltin.diagnostics.eslint,
-        nullbuiltin.diagnostics.hadolint,
-        nullbuiltin.diagnostics.php,
-        nullbuiltin.diagnostics.phpcs.with {
-            condition = function (utils)
-                local phpcsconfigs = { "phpcs.xml.dist", "phpcs.xml", ".phpcs.xml.dist", ".phpcs.xml" }
-
-                for _, file in ipairs(phpcsconfigs) do
-                    if utils.root_has_file {file} or utils.root_has_file {'app/'..file} then
-                        return true
-                    end
-                end
-            end,
-            prefer_local = "vendor/bin",
-            cwd = function (params)
-                return vim.loop.fs_stat(params.root.."/app") and params.root.."/app"
-            end,
-        },
-        nullbuiltin.diagnostics.phpmd.with {
-            condition = function (utils)
-                return utils.root_has_file {'phpmd.xml'} or utils.root_has_file {'app/phpmd.xml'}
-            end,
-            extra_args = function (params)
-                local nullutils = require('null-ls.utils').make_conditional_utils()
-
-                return { params.cwd.."/phpmd.xml" }
-            end,
-            prefer_local = "vendor/bin",
-            cwd = function (params)
-                return vim.loop.fs_stat(params.root.."/app") and params.root.."/app"
-            end,
-        },
-        nullbuiltin.diagnostics.phpstan.with {
-            condition = function (utils)
-                return utils.root_has_file {'phpstan.neon'} or utils.root_has_file {'app/phpstan.neon'}
-            end,
-            prefer_local = "vendor/bin",
-            extra_args = { '--memory-limit=-1' },
-            cwd = function (params)
-                return vim.loop.fs_stat(params.root.."/app") and params.root.."/app"
-            end,
-        },
-        nullbuiltin.diagnostics.sqlfluff,
-        nullbuiltin.diagnostics.stylelint,
-        nullbuiltin.diagnostics.tidy,
-        nullbuiltin.diagnostics.todo_comments,
-        nullbuiltin.diagnostics.trail_space,
-        nullbuiltin.diagnostics.twigcs,
-        nullbuiltin.diagnostics.yamllint,
-        nullbuiltin.diagnostics.zsh,
-
-        -- formatting
-        nullbuiltin.formatting.blade_formatter,
-        nullbuiltin.formatting.eslint,
-        nullbuiltin.formatting.fixjson,
-        nullbuiltin.formatting.jq,
-        nullbuiltin.formatting.phpcbf,
-        nullbuiltin.formatting.shfmt,
-        nullbuiltin.formatting.sqlfluff,
-        nullbuiltin.formatting.stylelint,
-        nullbuiltin.formatting.tidy,
-        nullbuiltin.formatting.xmllint,
-    }
-
-    local lspconfig_on_attach = function(client, bufnr)
-        require'lsp_signature'.on_attach({
-            bind = true, -- This is mandatory, otherwise border config won't get registered.
-            handler_opts = {
-                border = "double"
+    require'd.lsp'.setup {
+        lspServers = { 'phpactor', 'gopls', 'jdtls' },
+        nulllsServers = {
+            require'null-ls.builtins'.diagnostics.phpcs.with {
+                condition = function (utils)
+                    return nulllscondition(utils, { "phpcs.xml.dist", "phpcs.xml", ".phpcs.xml.dist", ".phpcs.xml" })
+                end,
+                prefer_local = "vendor/bin",
+                cwd = nulllscwd,
             },
-            hint_prefix = ' '
-        }, bufnr)
-
-        -- Enable completion triggered by <c-x><c-o>
-        api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-        if client.server_capabilities.documentHighlightProvider then
-            api.nvim_create_augroup("lsp_document_highlight", { clear = true })
-            api.nvim_clear_autocmds { buffer = bufnr, group = "lsp_document_highlight" }
-            api.nvim_create_autocmd("CursorHold", {
-                callback = lsp.buf.document_highlight,
-                buffer = bufnr,
-                group = "lsp_document_highlight",
-                desc = "Document Highlight",
-            })
-            api.nvim_create_autocmd("CursorMoved", {
-                callback = lsp.buf.clear_references,
-                buffer = bufnr,
-                group = "lsp_document_highlight",
-                desc = "Clear All the References",
-            })
-        end
-    end
-
-    local lspconfig_root_dir = function()
-        local cwd = fn.getcwd()
-
-        if (loop.fs_stat(cwd.."/vendor")) then
-            return cwd
-        end
-
-        if (loop.fs_stat(cwd.."/app")) then
-            return cwd.."/app"
-        end
-
-        return cwd
-    end
-
-    local lspconfig_capabilities = lsp.protocol.make_client_capabilities()
-
-    local lspconfig_servers = { 'bashls', 'pyright', 'html', 'cssls', 'tsserver', 'jsonls', 'dockerls', 'ansiblels', 'phpactor', 'sumneko_lua', 'marksman' }
-
-    local lspconfig = require('lspconfig')
-
-    -- Call setup
-    for _, lsp in ipairs(lspconfig_servers) do
-        lspconfig[lsp].setup {
-            on_attach = lspconfig_on_attach,
-            root_dir = lspconfig_root_dir,
-            capabilities = lspconfig_capabilities,
-            flags = {
-                debounce_text_changes = 150,
-            }
-        }
-    end
-
-    nullls.setup {
-        debug = debug,
-        save_after_format = false,
-        sources = nullsources,
+            require'null-ls.builtins'.diagnostics.phpmd.with {
+                condition = function (utils)
+                    return nulllscondition(utils, { "phpmd.xml" })
+                end,
+                extra_args = function (params)
+                    return { params.cwd.."/phpmd.xml" }
+                end,
+                prefer_local = "vendor/bin",
+                cwd = nulllscwd,
+            },
+            require'null-ls.builtins'.diagnostics.phpstan.with {
+                condition = function (utils)
+                    return nulllscondition(utils, { "phpstan.neon" })
+                end,
+                prefer_local = "vendor/bin",
+                extra_args = { '--memory-limit=-1' },
+                cwd = nulllscwd,
+            },
+        },
     }
 
-    -- fidget
-    require('fidget').setup()
+    require'd.luasnip'.setup { snippetPath = '~/.config/nvim/snippets' }
 end
 
-do -- Telescope
-    local telescope = require 'telescope'
-    local builtin = require 'telescope.builtin'
-    local fb_actions = require('telescope').extensions.file_browser.actions
+do -- syntax and editing
+    require'd.treesitter'.setup {
+        langs = { "go", "vue" },
+    }
+end
 
-    telescope.setup {
-        defaults = {
-            layout_config = { prompt_position = 'top' },
-            sorting_strategy = 'ascending',
-        },
+do -- files and the rest
+    require'd.telescope'.setup {
         extensions = {
-            file_browser = {
-                hijack_netrw = true,
-                mappings = {
-                    ["i"] = {
-                        ["-"] = fb_actions.goto_parent_dir,
-                    }
-                }
-            },
-            repo = {
-                list = {
-                    search_dirs = {
-                        "~/Dev",
-                        "~/lib",
-                    }
-                }
-            }
-        }
-    }
-
-    telescope.load_extension 'media_files'
-    telescope.load_extension 'repo'
-    telescope.load_extension 'file_browser'
-
-    keymap('<leader>/', builtin.current_buffer_fuzzy_find)
-    keymap('<C-p>', builtin.find_files)
-    keymap('K', builtin.grep_string)
-    keymap('<leader><C-g>', builtin.live_grep)
-    keymap('<leader><C-d>', builtin.diagnostics)
-    keymap('<leader><C-k>', function() builtin.live_grep {grep_open_files = true} end)
-    keymap('<leader><C-p>', builtin.buffers)
-    keymap('<leader><C-m>', telescope.extensions.media_files.media_files)
-    keymap('<leader><C-r>', telescope.extensions.repo.list)
-    keymap('-', function() telescope.extensions.file_browser.file_browser { cwd = '%:h' } end)
-end
-
-do -- Tools
-    require('impatient')
-
-
-
-    require('Comment').setup()
-
-    require('better_escape').setup {
-        mapping = {"jk", "jj"},
-        timeout = o.timeoutlen,
-        clear_empty_lines = false
-    }
-
-    require('nvim-cursorline').setup {
-        cursorline = {
-            enable = false,
-            timeout = 500,
-            number = false,
-        },
-        cursorword = {
-            enable = true,
-            min_length = 3,
-            hl = { underline = true },
-        }
-    }
-
-    require('modicator').setup {
-        cursorline = true,
-    }
-
-    require('indent_blankline').setup {
-        show_current_context = true,
-    }
-
-    require('spaceless').setup()
-
-
-    require("scrollbar").setup()
-
-    -- textobject-user
-    opt.runtimepath:append('~/.local/share/nvim/site/pac/paqs/start/vim-textobj-user/')
-    opt.runtimepath:append('~/.local/share/nvim/site/pac/paqs/start/vim-textobj-variable-segment/')
-
-    -- ansible
-    opt.runtimepath:append('~/.local/share/nvim/site/pac/paqs/start/ansible-vim/')
-    opt.runtimepath:append('~/.local/share/nvim/site/pac/paqs/start/vim-ansible-vault/')
-
-    -- sandwich
-    opt.runtimepath:append('~/.local/share/nvim/site/pack/paqs/start/vim-sandwich/')
-end
-
-do -- wildmenu
-    local wilder = require('wilder')
-
-    wilder.setup {
-        modes = {':', '/', '?'}
-    }
-
-    wilder.set_option('pipeline', {
-        wilder.branch(
-
-            wilder.python_file_finder_pipeline({
-                file_command = {'fd', '-tf'},
-                dir_command = {'fd', '-td'},
-            }),
-
-            wilder.substitute_pipeline({
-                pipeline = wilder.python_search_pipeline({
-                    skip_cmdtype_check = 1,
-                    pattern = wilder.python_fuzzy_pattern({
-                        start_at_boundary = 0,
-                    }),
-                }),
-            }),
-
-            wilder.cmdline_pipeline({
-                fuzzy = 2,
-            }),
-
-            {
-                wilder.check(function(ctx, x) return x == '' end),
-                wilder.history(),
-            },
-
-            wilder.python_search_pipeline({
-                pattern = wilder.python_fuzzy_pattern({
-                    start_at_boundary = 0,
-                }),
-            })
-        ),
-    })
-
-    local highlighters = {
-        wilder.pcre2_highlighter(),
-    }
-
-    local popupmenu_renderer = wilder.popupmenu_renderer(
-        wilder.popupmenu_border_theme({
-            border = 'rounded',
-            empty_message = wilder.popupmenu_empty_message_with_spinner(),
-            highlighter = highlighters,
-            left = {
-                ' ',
-                wilder.popupmenu_devicons(),
-                wilder.popupmenu_buffer_flags({
-                    flags = ' a + ',
-                    icons = {['+'] = '', a = '', h = ''},
-                }),
-            },
-            right = {
-                ' ',
-                wilder.popupmenu_scrollbar(),
-            },
-        })
-    )
-
-    local wildmenu_renderer = wilder.wildmenu_renderer({
-        highlighter = highlighters,
-        separator = ' · ',
-        left = {' ', wilder.wildmenu_spinner(), ' '},
-        right = {' ', wilder.wildmenu_index()},
-    })
-
-    wilder.set_option('renderer', wilder.renderer_mux({
-        [':'] = popupmenu_renderer,
-        ['/'] = wildmenu_renderer,
-        substitute = wildmenu_renderer,
-    }))
-end
-
-do -- Treesitter
-    -- TODO: fold?!
-    -- opt.foldmethod = 'expr'
-    -- opt.foldexpr = 'nvim_treesitter#foldexpr()'
-
-    local langs = {
-        "dockerfile",
-        "javascript",
-        "markdown",
-        "markdown_inline",
-        "lua",
-        "vim",
-        "sql",
-        "go",
-        "vue",
-        "gitignore",
-        "python",
-        "bash",
-        "php",
-        "phpdoc",
-        "regex",
-        "json",
-        "yaml",
-        "twig",
-        "html",
-        "css",
-        "scss"
-    }
-
-    require('nvim-treesitter.configs').setup {
-        ensure_installed = langs,
-        highlight = {
-            enable = true,
-            disable = function(lang, buf)
-                local max_filesize = 100 * 1024 -- 100 KB
-                local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-                if ok and stats and stats.size > max_filesize then
-                    return true
-                end
-            end,
-        },
-        indent = {
-            enable = false,
-        },
-        autotag = {
-            enable = true,
+            'media_files',
+            'file_browser',
+            'fzf',
         },
     }
-
-    require('nvim-autopairs').setup {
-        check_ts = true
-    }
-end
-
-do -- git
-    require('gitsigns').setup {
-        numhl = false,
-        linehl = true,
-        word_diff = true,
-        current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
-        current_line_blame_opts = {
-            virt_text = true,
-            virt_text_pos = 'eol',
-            delay = 500,
-            ignore_whitespace = true,
-        },
-        current_line_blame_formatter = ' <author>, <abbrev_sha>, <author_time:%Y-%m-%d> - <summary>',
-        on_attach = function (bufnr)
-            local gs = package.loaded.gitsigns
-            keymap('<leader>gb', function() gs.blame_line { full=true } end)
-        end
-    }
-    require("scrollbar.handlers.gitsigns").setup()
-end
-
-do -- Appearance
-    cmd('colorscheme nightfox')
-
-    -- show trailing whitespace
-    fn.matchadd('errorMsg', [[\s\+$]])
-
-    require('overlength').setup {
-        grace_length = 5,
-        highlight_to_eol = false,
-    }
-
-    api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { fg = "#ba793e" })
-
-    local line = require('heirline')
-    line.load_colors(require('status').colors)
-    line.setup(require('status').statusline)
 end

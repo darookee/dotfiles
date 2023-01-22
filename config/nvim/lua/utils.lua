@@ -1,20 +1,32 @@
+local api = vim.api
+local keymap = vim.keymap
+local tbl_extend = vim.tbl_extend
+
 return {
-    command = vim.api.nvim_create_user_command,
+    command = api.nvim_create_user_command,
 
     keymap = function(lhs, rhs, mode, opts)
         local options = { noremap = true }
         if opts then
-            options = vim.tbl_extend("force", options, opts)
+            options = tbl_extend("force", options, opts)
         end
 
-        vim.keymap.set(mode or 'n', lhs, rhs, options)
+        keymap.set(mode or 'n', lhs, rhs, options)
     end,
 
     augroup = function(name, autocmds)
-        local group = vim.api.nvim_create_augroup(name, {})
+        local group = api.nvim_create_augroup(name, {})
         for event, cmd in pairs(autocmds) do
             cmd.group = group
-            vim.api.nvim_create_autocmd(event, cmd)
+            api.nvim_create_autocmd(event, cmd)
         end
+    end,
+
+    hilink = function(source, target)
+        api.nvim_set_hl(0, source, { link = target })
+    end,
+
+    hiset = function(name, options)
+        api.nvim_set_hl(0, name, options)
     end,
 }
