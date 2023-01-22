@@ -7,9 +7,8 @@ local g = vim.g
 local lsp = vim.lsp
 local diagnostic = vim.diagnostic
 
-local _utils = require('utils')
-local keymap = _utils.keymap
-local augroup = _utils.augroup
+local keymap = require'utils'.keymap
+local augroup = require'utils'.augroup
 
 -- options
 wo.number = true

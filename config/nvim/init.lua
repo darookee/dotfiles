@@ -1,8 +1,6 @@
-local stat = vim.loop.fs_stat
-
 -- helper functions
 local nulllscwd = function(params)
-    return stat(params.root.."/app") and params.root.."/app"
+    return vim.loop.fs_stat(params.root.."/app") and params.root.."/app"
 end
 
 local nulllscondition = function(utils, files)
