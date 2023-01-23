@@ -2,18 +2,18 @@ local D
 
 D = {
     setup = function()
-        local wilder = require'wilder'
+        local wilder = require 'wilder'
 
         wilder.setup {
-            modes = {':', '/', '?'}
+            modes = { ':', '/', '?' }
         }
 
         wilder.set_option('pipeline', {
             wilder.branch(
 
                 wilder.python_file_finder_pipeline({
-                    file_command = {'fd', '-tf'},
-                    dir_command = {'fd', '-td'},
+                    file_command = { 'fd', '-tf' },
+                    dir_command = { 'fd', '-td' },
                 }),
 
                 wilder.substitute_pipeline({
@@ -56,7 +56,7 @@ D = {
                     wilder.popupmenu_devicons(),
                     wilder.popupmenu_buffer_flags({
                         flags = ' a + ',
-                        icons = {['+'] = '', a = '', h = ''},
+                        icons = { ['+'] = '', a = '', h = '' },
                     }),
                 },
                 right = {
@@ -69,8 +69,8 @@ D = {
         local wildmenu_renderer = wilder.wildmenu_renderer({
             highlighter = highlighters,
             separator = ' · ',
-            left = {' ', wilder.wildmenu_spinner(), ' '},
-            right = {' ', wilder.wildmenu_index()},
+            left = { ' ', wilder.wildmenu_spinner(), ' ' },
+            right = { ' ', wilder.wildmenu_index() },
         })
 
         wilder.set_option('renderer', wilder.renderer_mux({

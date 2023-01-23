@@ -10,8 +10,8 @@ local plugins = {
     -- "Darazaki/indent-o-matic";
 
     "neovim/nvim-lspconfig";
-    { "ray-x/lsp_signature.nvim", after="nvim-lspconfig" };
-    { "mfussenegger/nvim-jdtls", after="nvim-lspconfig" };
+    { "ray-x/lsp_signature.nvim", after = "nvim-lspconfig" };
+    { "mfussenegger/nvim-jdtls", after = "nvim-lspconfig" };
     "jose-elias-alvarez/null-ls.nvim";
     "j-hui/fidget.nvim";
 
@@ -20,11 +20,12 @@ local plugins = {
     "nvim-lua/plenary.nvim";
 
     -- telescope
-    { "nvim-telescope/telescope.nvim", branch= "0.1.x" };
-    { "nvim-telescope/telescope-media-files.nvim", after="telescope.nvim" };
-    { "cljoly/telescope-repo.nvim", after="telescope.nvim" };
-    { "nvim-telescope/telescope-file-browser.nvim", after="telescope.nvim" };
-    { "nvim-telescope/telescope-fzf-native.nvim", after="telescope.nvim", run="cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build" };
+    { "nvim-telescope/telescope.nvim", branch = "0.1.x" };
+    { "nvim-telescope/telescope-media-files.nvim", after = "telescope.nvim" };
+    { "cljoly/telescope-repo.nvim", after = "telescope.nvim" };
+    { "nvim-telescope/telescope-file-browser.nvim", after = "telescope.nvim" };
+    { "nvim-telescope/telescope-fzf-native.nvim", after = "telescope.nvim",
+        run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build" };
 
     -- { "nvim-telescope/telescope-ui-select.nvim", after="telescope.nvim" };
     -- "MunifTanjim/nui.nvim",
@@ -34,11 +35,11 @@ local plugins = {
     -- parenthesis highlighting
     -- { "p00f/nvim-ts-rainbow", after="nvim-treesitter" };
     -- Autoclose tags
-    { "windwp/nvim-ts-autotag", after="nvim-treesitter" };
+    { "windwp/nvim-ts-autotag", after = "nvim-treesitter" };
     -- { "m-demare/hlargs.nvim", after="nvim-treesitter" };
     -- Context based commenting
     -- { "JoosepAlviste/nvim-ts-context-commentstring", after="nvim-treesitter" };
-    { "nvim-treesitter/playground", after="nvim-treesitter" };
+    { "nvim-treesitter/playground", after = "nvim-treesitter" };
     -- Syntax highlighting
     { "nvim-treesitter/nvim-treesitter", run = function() cmd 'TSUpdate' end };
 
@@ -70,7 +71,7 @@ local plugins = {
     "gbprod/php-enhanced-treesitter.nvim";
 
     -- whitespace
-    { "lewis6991/spaceless.nvim", pin=true };
+    { "lewis6991/spaceless.nvim", pin = true };
 
     -- wildmenu
     "gelguy/wilder.nvim";
@@ -98,12 +99,12 @@ local plugins = {
     "L3MON4D3/LuaSnip";
 
     -- cmp
-	{ "hrsh7th/nvim-cmp", after="L3MON4D3/LuaSnip" };
-    { "saadparwaiz1/cmp_luasnip", after="L3MON4D3/LuaSnip" };
-	{ "hrsh7th/cmp-nvim-lsp", after="hrsh7th/nvim-cmp" };
-	{ "hrsh7th/cmp-buffer", after="hrsh7th/nvim-cmp" };
-	{ "hrsh7th/cmp-path", after="hrsh7th/nvim-cmp" };
-	{ "hrsh7th/cmp-cmdline", after="hrsh7th/nvim-cmp" };
+    { "hrsh7th/nvim-cmp", after = "L3MON4D3/LuaSnip" };
+    { "saadparwaiz1/cmp_luasnip", after = "L3MON4D3/LuaSnip" };
+    { "hrsh7th/cmp-nvim-lsp", after = "hrsh7th/nvim-cmp" };
+    { "hrsh7th/cmp-buffer", after = "hrsh7th/nvim-cmp" };
+    { "hrsh7th/cmp-path", after = "hrsh7th/nvim-cmp" };
+    { "hrsh7th/cmp-cmdline", after = "hrsh7th/nvim-cmp" };
 
     -- themes
     -- "EdenEast/nightfox.nvim";

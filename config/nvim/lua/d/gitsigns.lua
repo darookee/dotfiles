@@ -1,17 +1,17 @@
 local D
 
 local bind_keys = function()
-    local keymap = require'utils'.keymap
+    local keymap = require 'utils'.keymap
     local gs = package.loaded.gitsigns
 
-    keymap('<leader>gb', function() gs.blame_line { full=true } end)
+    keymap('<leader>gb', function() gs.blame_line { full = true } end)
     keymap('<leader>gd', gs.toggle_deleted)
     keymap('<leader>gf', gs.diffthis)
 end
 
 D = {
     setup = function()
-        require'gitsigns'.setup {
+        require 'gitsigns'.setup {
             numhl = false,
             linehl = true,
             word_diff = true,

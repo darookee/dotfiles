@@ -14,7 +14,7 @@ local setup_options = function()
     opt.termguicolors = true
     opt.cursorline = true
 
-    if fn.has'persistent_undo' then
+    if fn.has 'persistent_undo' then
         local target_path = fn.expand('~/.local/share/nvim/undo')
         if fn.isdirectory(target_path) < 1 then
             notify('Creating undo directory')
@@ -76,7 +76,7 @@ local setup_options = function()
 end
 
 local bind_keys = function()
-    local keymap = require'utils'.keymap
+    local keymap = require 'utils'.keymap
 
     keymap('<space>', 'za')
     keymap('%%', '<C-R>=expand("%:h")."/"<CR>', 'c')
@@ -102,11 +102,11 @@ local bind_keys = function()
         keymap('a' .. object, ':normal! va' .. object .. '<CR>', 'o')
     end
 
-    keymap('<leader>pq', function() package.loaded.plugins = nil require'd.plugins'.sync_all() end)
+    keymap('<leader>pq', function() package.loaded.plugins = nil require 'd.plugins'.sync_all() end)
 end
 
 local setup_augroups = function()
-    local augroup = require'utils'.augroup
+    local augroup = require 'utils'.augroup
 
     -- reset position
     augroup('reload', {
@@ -122,13 +122,13 @@ D = {
         bind_keys()
         setup_augroups()
 
-        require'notify'.setup {
+        require 'notify'.setup {
             render = 'compact',
             stages = 'fade_in_slide_out',
             timeout = 3000,
         }
 
-        vim.notify = require'notify'
+        vim.notify = require 'notify'
     end
 }
 

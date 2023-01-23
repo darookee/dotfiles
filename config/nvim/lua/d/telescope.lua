@@ -5,7 +5,7 @@ local builtin = require 'telescope.builtin'
 local fb_actions = require('telescope').extensions.file_browser.actions
 
 local bind_keys = function()
-    local keymap = require'utils'.keymap
+    local keymap = require 'utils'.keymap
 
     keymap('<leader><C-r>', builtin.resume)
 
@@ -15,7 +15,7 @@ local bind_keys = function()
     keymap('<leader>/', builtin.current_buffer_fuzzy_find)
     keymap('K', builtin.grep_string)
     keymap('<leader><C-g>', builtin.live_grep)
-    keymap('<leader><C-k>', function() builtin.live_grep {grep_open_files = true} end)
+    keymap('<leader><C-k>', function() builtin.live_grep { grep_open_files = true } end)
 
 
     keymap('<leader><C-d>', builtin.diagnostics)
@@ -38,7 +38,7 @@ D = {
                 sorting_strategy = 'ascending',
                 mappings = {
                     ["i"] = {
-                       ["<esc>"] = "close",
+                        ["<esc>"] = "close",
                     },
                 },
             },

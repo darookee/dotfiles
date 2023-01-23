@@ -5,11 +5,11 @@ local env = vim.env
 local fn = vim.fn
 local loop = vim.loop
 local lsp = vim.lsp
-local tbl_deep_extend = vim.tbl_deep_extend
 local diagnostic = vim.diagnostic
+-- local tbl_deep_extend = vim.tbl_deep_extend
 
 local bind_keys = function()
-    local keymap = require'utils'.keymap
+    local keymap = require 'utils'.keymap
 
     keymap('<leader>ff', function() lsp.buf.format(nil, 10000) end)
     keymap('<leader>fc', function() lsp.buf.code_action() end)
@@ -27,7 +27,7 @@ end
 
 -- null-ls
 local lspconfig_on_attach = function(client, bufnr)
-    require'lsp_signature'.on_attach {
+    require 'lsp_signature'.on_attach {
         bind = true, -- This is mandatory, otherwise border config won't get registered.
         handler_opts = {
             border = "rounded"
@@ -63,20 +63,20 @@ end
 local lspconfig_root_dir = function()
     local cwd = fn.getcwd()
 
-    if (loop.fs_stat(cwd.."/vendor")) then
+    if (loop.fs_stat(cwd .. "/vendor")) then
         return cwd
     end
 
-    if (loop.fs_stat(cwd.."/app")) then
-        return cwd.."/app"
+    if (loop.fs_stat(cwd .. "/app")) then
+        return cwd .. "/app"
     end
 
     return cwd
 end
 
-local lspconfig_capabilities = require'cmp_nvim_lsp'.default_capabilities(lsp.protocol.make_client_capabilities())
+local lspconfig_capabilities = require 'cmp_nvim_lsp'.default_capabilities(lsp.protocol.make_client_capabilities())
 
-local lspconfig = require'lspconfig'
+local lspconfig = require 'lspconfig'
 
 D = {
     setup = function(opts)
@@ -100,7 +100,7 @@ D = {
         end
 
         if opts.disableNullls ~= true then
-            require'null-ls'.setup {
+            require 'null-ls'.setup {
                 debug = debug,
                 save_after_format = false,
                 sources = opts.nulllsServers,
@@ -108,7 +108,7 @@ D = {
         end
 
         -- fidget
-        require'fidget'.setup {
+        require 'fidget'.setup {
             text = {
                 spinner = "dots"
             }

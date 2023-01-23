@@ -2,7 +2,7 @@ local D
 
 D = {
     setup = function()
-        require'heirline'.setup { statusline = require'd.heirline'.statusline }
+        require 'heirline'.setup { statusline = require 'd.heirline'.statusline }
     end
 }
 

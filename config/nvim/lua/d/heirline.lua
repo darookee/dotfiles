@@ -1,5 +1,5 @@
-local conditions = require'heirline.conditions'
-local utils = require'heirline.utils'
+local conditions = require 'heirline.conditions'
+local utils = require 'heirline.utils'
 
 local api = vim.api
 local fn = vim.fn
@@ -54,7 +54,7 @@ local FileIcon = {
     init = function(self)
         local filename = self.filename
         local extension = fn.fnamemodify(filename, ":e")
-        self.icon, self.icon_color = require'nvim-web-devicons'.get_icon_color(filename, extension, { default = true })
+        self.icon, self.icon_color = require 'nvim-web-devicons'.get_icon_color(filename, extension, { default = true })
     end,
     provider = function(self)
         return self.icon and (self.icon)
@@ -74,11 +74,11 @@ local FileName = {
     hl = function()
         if bo.modified then
             -- use `force` because we need to override the child's hl foreground
-            return { fg = utils.get_highlight(highlightGroupMap.fileName).fg, bold = true, force=true }
+            return { fg = utils.get_highlight(highlightGroupMap.fileName).fg, bold = true, force = true }
         end
     end,
 
-    { flexible=2, {
+    { flexible = 2, {
         provider = function(self)
             return self.lfilename
         end,
@@ -86,7 +86,7 @@ local FileName = {
         provider = function(self)
             return fn.pathshorten(self.lfilename)
         end,
-    }},
+    } },
 }
 
 local FileFlags = {
@@ -121,7 +121,7 @@ FileNameBlock = utils.insert(FileNameBlock,
     FileIcon, Space,
     FileName, Space,
     FileFlags,
-    { provider = '%<'}
+    { provider = '%<' }
 )
 
 local Git = {
@@ -136,7 +136,7 @@ local Git = {
         return { fg = utils.get_highlight(highlightGroupMap.git).fg }
     end,
 
-    {   -- git branch name
+    { -- git branch name
         provider = function(self)
             return " " .. self.status_dict.head
         end,
@@ -217,7 +217,7 @@ local FileSize = {
         local fsize = fn.getfsize(api.nvim_buf_get_name(0))
         fsize = (fsize < 0 and 0) or fsize
         if fsize < 1024 then
-            return fsize..suffix[1]
+            return fsize .. suffix[1]
         end
         local i = math.floor((math.log(fsize) / math.log(1024)))
         return string.format("%.2g%s", fsize / math.pow(1024, i), suffix[i + 1])
@@ -240,7 +240,7 @@ local Ruler = {
     provider = "%7(%l/%3L%):%2c",
 }
 
-local ScrollBar ={
+local ScrollBar = {
     static = {
         sbar = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' }
     },
@@ -257,20 +257,20 @@ local ScrollBar ={
 
 local LSPActive = {
     condition = conditions.lsp_attached,
-    update = {'LspAttach', 'LspDetach'},
+    update = { 'LspAttach', 'LspDetach' },
 
     -- You can keep it simple,
     -- provider = " [LSP]",
 
     -- Or complicate things a bit and get the servers names
-    provider  = function()
+    provider = function()
         local names = {}
         for i, server in pairs(lsp.buf_get_clients(0)) do
             table.insert(names, server.name)
         end
         return " [" .. table.concat(names, " ") .. "]"
     end,
-    hl = function()
+    hl       = function()
         return { fg = utils.get_highlight(highlightGroupMap.lspActive).fg, bold = true }
     end,
 }
@@ -339,7 +339,7 @@ local WorkDir = {
         return { fg = utils.get_highlight(highlightGroupMap.workDir).fg, bold = true }
     end,
 
-    { flexible=1, {
+    { flexible = 1, {
         -- evaluates to the full-lenth path
         provider = function(self)
             local trail = self.cwd:sub(-1) == "/" and "" or "/"
@@ -355,7 +355,7 @@ local WorkDir = {
     }, {
         -- evaluates to "", hiding the component
         provider = "",
-    }},
+    } },
 }
 
 local Spell = {
@@ -450,4 +450,3 @@ local StatusLines = {
 return {
     statusline = StatusLines
 }
-

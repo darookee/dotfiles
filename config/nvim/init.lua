@@ -1,11 +1,11 @@
 -- helper functions
 local nulllscwd = function(params)
-    return vim.loop.fs_stat(params.root.."/app") and params.root.."/app"
+    return vim.loop.fs_stat(params.root .. "/app") and params.root .. "/app"
 end
 
 local nulllscondition = function(utils, files)
     for _, file in ipairs(files) do
-        if utils.root_has_file {file} or utils.root_has_file {'app/'..file} then
+        if utils.root_has_file { file } or utils.root_has_file { 'app/' .. file } then
             return true
         end
     end
@@ -115,4 +115,4 @@ local config = {
 }
 
 -- setup
-require'd'.setup(config)
+require 'd'.setup(config)

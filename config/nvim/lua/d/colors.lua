@@ -4,9 +4,9 @@ local cmd = vim.cmd
 local fn = vim.fn
 local highlight = vim.highlight
 
-local augroup = require'utils'.augroup
-local hilink = require'utils'.hilink
-local hiset = require'utils'.hiset
+local augroup = require 'utils'.augroup
+local hilink = require 'utils'.hilink
+local hiset = require 'utils'.hiset
 
 local update_cursorword_color = function()
     local utils = require('heirline.utils');
@@ -50,7 +50,7 @@ local setup_augroup = function()
 end
 
 local colorscheme = function(scheme)
-    cmd('colorscheme '..scheme)
+    cmd('colorscheme ' .. scheme)
 end
 
 D = {

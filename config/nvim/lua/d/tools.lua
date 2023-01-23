@@ -3,17 +3,17 @@ local D
 local init_misc_plugins = function()
     local o = vim.o
 
-    require'impatient'
+    require 'impatient'
 
-    require'Comment'.setup()
+    require 'Comment'.setup()
 
-    require'better_escape'.setup {
-        mapping = {"jk", "jj"},
+    require 'better_escape'.setup {
+        mapping = { "jk", "jj" },
         timeout = o.timeoutlen,
         clear_empty_lines = false
     }
 
-    require'nvim-cursorline'.setup {
+    require 'nvim-cursorline'.setup {
         cursorline = {
             enable = false,
             timeout = 500,
@@ -27,23 +27,23 @@ local init_misc_plugins = function()
         }
     }
 
-    require'modicator'.setup {
+    require 'modicator'.setup {
         cursorline = true,
     }
 
-    require'indent_blankline'.setup {
+    require 'indent_blankline'.setup {
         show_current_context = true,
     }
 
-    require'spaceless'.setup()
+    require 'spaceless'.setup()
 
-    require'scrollbar'.setup({
+    require 'scrollbar'.setup({
         handlers = {
             gitsigns = true,
         },
     })
 
-    require'overlength'.setup {
+    require 'overlength'.setup {
         grace_length = 5,
         highlight_to_eol = false,
     }
