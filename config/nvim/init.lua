@@ -32,6 +32,7 @@ local config = {
             'ansiblels',
             'sumneko_lua',
             'marksman',
+            'phpactor',
             'tsserver',
             'sqlls',
             'yamlls',
