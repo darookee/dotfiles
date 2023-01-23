@@ -28,7 +28,7 @@ local plugins = {
 
     -- { "nvim-telescope/telescope-ui-select.nvim", after="telescope.nvim" };
     -- "MunifTanjim/nui.nvim",
-    -- "rcarriga/nvim-notify",
+    "rcarriga/nvim-notify";
     -- { "folke/noice.nvim", after="MunifTanjim/nui.nvim" },
 
     -- parenthesis highlighting

@@ -121,6 +121,14 @@ D = {
         setup_options()
         bind_keys()
         setup_augroups()
+
+        require'notify'.setup {
+            render = 'compact',
+            stages = 'fade_in_slide_out',
+            timeout = 3000,
+        }
+
+        vim.notify = require'notify'
     end
 }
 
