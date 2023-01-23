@@ -13,40 +13,91 @@ local nulllscondition = function(utils, files)
     return false
 end
 
+local nullDiagnostics = require 'null-ls.builtins'.diagnostics
+local nullFormatting = require 'null-ls.builtins'.formatting
+
 -- config
 local config = {
     colors = {
         scheme = 'neobones',
     },
     lsp = {
-        lspServers = { 'phpactor', 'gopls', 'jdtls' },
+        lspServers = {
+            'bashls',
+            'pyright',
+            'html',
+            'cssls',
+            'jsonls',
+            'dockerls',
+            'ansiblels',
+            'sumneko_lua',
+            'marksman',
+            'tsserver',
+            'sqlls',
+            'yamlls',
+            'vimls',
+            'openscad_ls',
+            'gopls',
+            'jdtls',
+        },
+        disableNullls = false,
         nulllsServers = {
-            require'null-ls.builtins'.diagnostics.phpcs.with {
-                condition = function (utils)
+            -- diagnostics
+            nullDiagnostics.hadolint,
+            nullDiagnostics.phpcs.with {
+                condition = function(utils)
                     return nulllscondition(utils, { "phpcs.xml.dist", "phpcs.xml", ".phpcs.xml.dist", ".phpcs.xml" })
                 end,
                 prefer_local = "vendor/bin",
                 cwd = nulllscwd,
             },
-            require'null-ls.builtins'.diagnostics.phpmd.with {
-                condition = function (utils)
+            nullDiagnostics.phpmd.with {
+                condition = function(utils)
                     return nulllscondition(utils, { "phpmd.xml" })
                 end,
-                extra_args = function (params)
-                    return { params.cwd.."/phpmd.xml" }
+                extra_args = function(params)
+                    return { params.cwd .. "/phpmd.xml" }
                 end,
                 prefer_local = "vendor/bin",
                 cwd = nulllscwd,
             },
-            require'null-ls.builtins'.diagnostics.phpstan.with {
-                condition = function (utils)
-                    return nulllscondition(utils, { "phpstan.neon" })
+            nullDiagnostics.php,
+            nullDiagnostics.stylelint,
+            nullDiagnostics.tidy,
+            nullDiagnostics.trail_space,
+            nullDiagnostics.twigcs,
+            nullDiagnostics.zsh,
+
+            -- formatting
+            nullFormatting.blade_formatter,
+            nullFormatting.eslint,
+            nullFormatting.fixjson,
+            nullFormatting.jq,
+            nullFormatting.phpcbf.with {
+                condition = function(utils)
+                    return nulllscondition(utils, { "phpcs.xml.dist", "phpcs.xml", ".phpcs.xml.dist", ".phpcs.xml" })
                 end,
                 prefer_local = "vendor/bin",
-                extra_args = { '--memory-limit=-1' },
                 cwd = nulllscwd,
             },
+            nullFormatting.shfmt,
+            nullFormatting.stylelint,
+            nullFormatting.tidy,
+            nullFormatting.xmllint,
         },
+        settings = {
+            yamlls = {
+                yaml = {
+                    schemas = {
+                        ['https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json'] = '.gitlab-ci.yml',
+                        ['https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json'] = 'docker-compose*.yml',
+                    }
+                }
+            },
+            openscad_ls = {
+                single_file_support = true,
+            },
+        }
     },
     luasnip = {
         snippetPath = '~/.config/nvim/snippets'

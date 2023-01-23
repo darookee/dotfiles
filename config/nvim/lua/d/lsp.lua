@@ -19,65 +19,11 @@ local bind_keys = function()
     keymap('<leader>f', diagnostic.goto_next)
     keymap('<leader>q', diagnostic.setloclist)
 
-    keymap('<leader>.=', function() lsp.buf.format { async = true } end)
-
     -- keymap('<leader>gD', lsp.buf.declaration)
     -- keymap('<leader>gd', lsp.buf.definition)
     keymap('<leader><leader>', lsp.buf.hover)
     -- keymap('<leader>gi', lsp.buf.implementation)
 end
-
-local nullbuiltin = require'null-ls.builtins'
-
-local defaultConfig = {
-    nulllsServers = {
-        -- code-actions
-        nullbuiltin.code_actions.eslint,
-        nullbuiltin.code_actions.gitsigns,
-
-        -- diagnostics
-        nullbuiltin.diagnostics.ansiblelint,
-        nullbuiltin.diagnostics.eslint,
-        nullbuiltin.diagnostics.hadolint,
-        nullbuiltin.diagnostics.php,
-        nullbuiltin.diagnostics.phpstan,
-        nullbuiltin.diagnostics.phpmd,
-        nullbuiltin.diagnostics.phpcs,
-        nullbuiltin.diagnostics.sqlfluff,
-        nullbuiltin.diagnostics.stylelint,
-        nullbuiltin.diagnostics.tidy,
-        nullbuiltin.diagnostics.todo_comments,
-        nullbuiltin.diagnostics.trail_space,
-        nullbuiltin.diagnostics.twigcs,
-        nullbuiltin.diagnostics.yamllint,
-        nullbuiltin.diagnostics.zsh,
-
-        -- formatting
-        nullbuiltin.formatting.blade_formatter,
-        nullbuiltin.formatting.eslint,
-        nullbuiltin.formatting.fixjson,
-        nullbuiltin.formatting.jq,
-        nullbuiltin.formatting.phpcbf,
-        nullbuiltin.formatting.shfmt,
-        nullbuiltin.formatting.sqlfluff,
-        nullbuiltin.formatting.stylelint,
-        nullbuiltin.formatting.tidy,
-        nullbuiltin.formatting.xmllint,
-    },
-
-    lspServers = {
-        'bashls',
-        'pyright',
-        'html',
-        'cssls',
-        'tsserver',
-        'jsonls',
-        'dockerls',
-        'ansiblels',
-        'sumneko_lua',
-        'marksman',
-    }
-}
 
 -- null-ls
 local lspconfig_on_attach = function(client, bufnr)
@@ -135,14 +81,9 @@ local lspconfig = require'lspconfig'
 D = {
     setup = function(opts)
         local debug = env.NVIM_DEBUG ~= nil
-        local conf = tbl_deep_extend(
-            'force',
-            defaultConfig,
-            opts
-        )
 
-        for _, lserver in ipairs(conf.lspServers) do
-            lspconfig[lserver].setup {
+        for _, lserver in ipairs(opts.lspServers) do
+            local cConfig = {
                 on_attach = lspconfig_on_attach,
                 root_dir = lspconfig_root_dir,
                 capabilities = lspconfig_capabilities,
@@ -150,13 +91,21 @@ D = {
                     debounce_text_changes = 150,
                 }
             }
+
+            if opts.settings[lserver] ~= nil then
+                cConfig.settings = opts.settings[lserver]
+            end
+
+            lspconfig[lserver].setup(cConfig)
         end
 
-        require'null-ls'.setup {
-            debug = debug,
-            save_after_format = false,
-            sources = conf.nulllsServers,
-        }
+        if opts.disableNullls ~= true then
+            require'null-ls'.setup {
+                debug = debug,
+                save_after_format = false,
+                sources = opts.nulllsServers,
+            }
+        end
 
         -- fidget
         require'fidget'.setup {
