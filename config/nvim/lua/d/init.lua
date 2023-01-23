@@ -1,24 +1,7 @@
 local D
 
-local tbl_deep_extend = vim.tbl_deep_extend
-
-local defaultConfig = {
-    colors = {
-        scheme = 'quiet',
-    },
-    lsp = {},
-    luasnip = {},
-    treesitter = {},
-    telescope = {},
-}
-
 D = {
-    setup = function(opts)
-        local conf = tbl_deep_extend(
-            'force',
-            defaultConfig,
-            opts
-        )
+    setup = function(conf)
 
         require'd.basic'.setup()
         require'd.colors'.setup(conf.colors)
