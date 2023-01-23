@@ -2,7 +2,6 @@ local D
 
 local api = vim.api
 local loop = vim.loop
-local tbl_deep_extend = vim.tbl_deep_extend
 
 -- TODO: fold?!
 -- opt.foldmethod = 'expr'
@@ -35,7 +34,10 @@ local defaultConfig = {
 
 D = {
     setup = function(opts)
-        local conf = tbl_deep_extend('force', defaultConfig, opts)
+        local conf = {
+            langs = vim.list_extend(defaultConfig.langs, opts.langs),
+        }
+
         require('nvim-treesitter.configs').setup {
             ensure_installed = conf.langs,
             highlight = {
