@@ -40,7 +40,7 @@ local lspconfig_on_attach = function(client, bufnr)
     }
 
     -- Enable completion triggered by <c-x><c-o>
-    api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.lsp.omnifunc')
+    api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     if client.server_capabilities.documentHighlightProvider then
         api.nvim_create_augroup("lsp_document_highlight", { clear = true })
