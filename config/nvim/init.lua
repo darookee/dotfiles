@@ -88,15 +88,22 @@ local config = {
         },
         settings = {
             yamlls = {
-                yaml = {
-                    schemas = {
-                        ['https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json'] = '.gitlab-ci.yml',
-                        ['https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json'] = 'docker-compose*.yml',
-                    }
-                }
+                settings = {
+                    yaml = {
+                        schemas = {
+                            ['https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json'] = '.gitlab-ci.yml',
+                            ['https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json'] = 'docker-compose*.yml',
+                        }
+                    },
+                },
             },
             openscad_ls = {
-                single_file_support = true,
+                swttings = {
+                    single_file_support = true,
+                },
+            },
+            html = {
+                filetypes = { "html", "html.twig", "html.twig.js", "html.twig.css", "html.twig.js.css", "smarty", "smarty.html" },
             },
         }
     },

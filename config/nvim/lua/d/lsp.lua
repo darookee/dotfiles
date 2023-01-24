@@ -6,7 +6,7 @@ local fn = vim.fn
 local loop = vim.loop
 local lsp = vim.lsp
 local diagnostic = vim.diagnostic
--- local tbl_deep_extend = vim.tbl_deep_extend
+local tbl_deep_extend = vim.tbl_deep_extend
 
 local bind_keys = function()
     local keymap = require 'utils'.keymap
@@ -93,7 +93,7 @@ D = {
             }
 
             if opts.settings[lserver] ~= nil then
-                cConfig.settings = opts.settings[lserver]
+                cConfig = tbl_deep_extend('force', cConfig, opts.settings[lserver])
             end
 
             lspconfig[lserver].setup(cConfig)
