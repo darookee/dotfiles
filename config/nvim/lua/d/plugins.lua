@@ -105,6 +105,7 @@ local plugins = {
     { "hrsh7th/cmp-buffer", after = "hrsh7th/nvim-cmp" };
     { "hrsh7th/cmp-path", after = "hrsh7th/nvim-cmp" };
     { "hrsh7th/cmp-cmdline", after = "hrsh7th/nvim-cmp" };
+    { "onsails/lspkind.nvim", after = "hrsh7th/nvim-cmp" };
 
     -- themes
     -- "EdenEast/nightfox.nvim";
