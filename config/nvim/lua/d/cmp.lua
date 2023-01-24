@@ -45,24 +45,20 @@ D = {
             formatting = {
                 format = require 'lspkind'.cmp_format {
                     mode = 'symbol_text',
-                    before = function (entry, vim_item)
-                        vim_item.menu = ({
-                            spell = "[Spell]",
-                            buffer = "[Buffer]",
-                            calc = "[Calc]",
-                            emoji = "[Emoji]",
-                            nvim_lsp = "[LSP]",
-                            path = "[Path]",
-                            look = "[Look]",
-                            treesitter = "[treesitter]",
-                            luasnip = "[LuaSnip]",
-                            nvim_lua = "[Lua]",
-                            latex_symbols = "[Latex]",
-                            cmp_tabnine = "[Tab9]"
-                        })[entry.source.name]
-
-                        return vim_item
-                    end,
+                    menu = ({
+                        spell = "[Spell]",
+                        buffer = "[Buffer]",
+                        calc = "[Calc]",
+                        emoji = "[Emoji]",
+                        nvim_lsp = "[LSP]",
+                        path = "[Path]",
+                        look = "[Look]",
+                        treesitter = "[treesitter]",
+                        luasnip = "[LuaSnip]",
+                        nvim_lua = "[Lua]",
+                        latex_symbols = "[Latex]",
+                        cmp_tabnine = "[Tab9]"
+                    }),
                 }
             }
         })
