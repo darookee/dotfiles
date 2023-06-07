@@ -6,12 +6,12 @@ function get_ip() {
     ping -n -q -c 1 -4 1.1.1.1 > /dev/null 2>&1
 
     if [ $? -ne 0 ]; then
-        echo "#[fg=colour9]"
+        echo -n "#[fg=colour9] "
         rm $cachefile
         exit
     fi
 
-    echo -n "#[fg=colour14] #[fg=colour15]"
+    echo -n "#[fg=colour14]  #[fg=colour15]"
 
     [[ -f $cachefile ]] || curl -s https://ifconfig.me > $cachefile
 
@@ -78,18 +78,20 @@ if [ ! -z "${local_status}" ]; then
 fi
 
 if [ ! -z "${mail_count}" ]; then
-    echo -n "#[bg=colour3]#[fg=colour1] #[fg=colour16]﯍ ${mail_count} "
+    echo -n "#[fg=colour3]#[bg=colour3]#[fg=colour1] 󰶍 #[fg=colour16]﯍ ${mail_count} "
+fi
+
+if [ -z "${mail_count}" ]; then
+    echo -n "#[fg=colour59]"
 fi
 
 echo -n "#[bg=colour59,fg=colour12] "
 
-echo -n "#[bg=colour59]"
+echo -n "#[fg=colour9]  #[fg=colour15]${cpu_load}#[fg=colour12] | "
+echo -n "#[fg=colour10]󰍛  #[fg=colour15]${mem_percent}#[fg=colour12] | "
 
-echo -n "#[fg=colour9] #[fg=colour15]${cpu_load}#[fg=colour12] | "
-echo -n "#[fg=colour10] #[fg=colour15]${mem_percent}#[fg=colour12] | "
-
-echo -n "#[fg=colour11] #[fg=colour15]${space_home}#[fg=colour12] | "
+echo -n "#[fg=colour11]  #[fg=colour15]${space_home}#[fg=colour12] | "
 echo -n "#[fg=colour15]${cur_ip}#[fg=colour12] "
 
 
-echo -n "#[bg=colour13,fg=colour15] #[bg=colour13,fg=colour11] ${date}#[fg=colour7] ${time} "
+echo -n "#[bg=colour13,fg=colour15] 󰃰 #[bg=colour13,fg=colour11] ${date}#[fg=colour7] ${time} "
