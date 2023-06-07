@@ -66,3 +66,7 @@
     show = /usr/bin/diffr | less -R
 [gpg]
     program = gpg2
+[commit]
+	gpgsign = true
+[includeIf "gitdir/i:~/Dev/Kunden/**"]
+    path = ~/Dev/Kunden/.gitconfig
