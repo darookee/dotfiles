@@ -63,6 +63,7 @@ set delete
 unset wait_key
 # }}}
 # Formats {{{
+# this will all be overwritten in ./powerline
 set date_format     = "%a %d %b %Y %H:%M"
 set index_format    = "%-15@date@ %@pgp@%@att@%@new@ %-25.25Fp %3M %?H?%H&📧? %-25.70s %>  %5c 💾 "
 set pager_format    = "───[ %Z%S (%2N) ]───[ %d ]───[ %L ]───[ %1s ]───%>────( %c/%X )───[ Folder: %b ]───( %C/%m )───"
