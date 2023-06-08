@@ -1,17 +1,46 @@
 #!/bin/bash
 
+function color() {
+    fg=${1}
+    bg=${2}
+
+    if [ ! -z "${TMUX}" ]; then
+        echo -n "#["
+        if [ ! -z ${fg} ]; then
+            echo -n "fg=colour${fg}"
+        fi
+        if [ ! -z ${fg} ] && [ ! -z ${bg} ]; then
+            echo -n ","
+        fi
+        if [ ! -z ${bg} ]; then
+            echo -n "bg=colour${bg}"
+        fi
+        echo -n "]"
+    else
+        if [ ! -z ${fg} ]; then
+            # fg
+            printf '\033[38;5;%dm' $fg
+        fi
+
+        if [ ! -z ${bg} ]; then
+            # bg
+            printf '\033[48;5;%dm' $bg
+        fi
+    fi
+}
+
 function get_ip() {
     cachefile="${TMPDIR}/tmux.cache.ip"
 
     ping -n -q -c 1 -4 1.1.1.1 > /dev/null 2>&1
 
     if [ $? -ne 0 ]; then
-        echo -n "#[fg=colour9] "
+        echo -n "$(color 9) "
         rm $cachefile
         exit
     fi
 
-    echo -n "#[fg=colour14]  #[fg=colour15]"
+    echo -n "$(color 14)  $(color 15)"
 
     [[ -f $cachefile ]] || curl -s https://ifconfig.me > $cachefile
 
@@ -70,28 +99,30 @@ space_home=$(df -h $HOME|grep "[0-9]"|awk '{ print $4 }')
 
 cur_ip=$(get_ip)
 
+# weather=$(get_weather)
 date=$(date +"%a, %Y-%m-%d (%V)")
 time=$(date +"%H:%M")
 
 if [ ! -z "${local_status}" ]; then
-    echo -n "#[bg=colour3]#[fg=colour8] ${local_status} "
+    echo -n "$(color 8 3) ${local_status} "
 fi
 
 if [ ! -z "${mail_count}" ]; then
-    echo -n "#[fg=colour3]#[bg=colour3]#[fg=colour1] 󰶍 #[fg=colour16]﯍ ${mail_count} "
+    echo -n "$(color 3)$(color 1 3) 󰶍 $(color 16) ${mail_count} "
 fi
 
 if [ -z "${mail_count}" ]; then
-    echo -n "#[fg=colour59]"
+    echo -n "$(color 59)"
 fi
 
-echo -n "#[bg=colour59,fg=colour12] "
+echo -n "$(color 12 59) "
 
-echo -n "#[fg=colour9]  #[fg=colour15]${cpu_load}#[fg=colour12] | "
-echo -n "#[fg=colour10]󰍛  #[fg=colour15]${mem_percent}#[fg=colour12] | "
+echo -n "$(color 9)  $(color 15)${cpu_load}$(color 12) | "
+echo -n "$(color 10)󰍛  $(color 15)${mem_percent}$(color 12) | "
 
-echo -n "#[fg=colour11]  #[fg=colour15]${space_home}#[fg=colour12] | "
-echo -n "#[fg=colour15]${cur_ip}#[fg=colour12] "
+echo -n "$(color 11)  $(color 15)${space_home}$(color 12) | "
+echo -n "$(color 15)${cur_ip}$(color 12) "
 
+# echo -n "$(color 15 0) ${weather} "
 
-echo -n "#[bg=colour13,fg=colour15] 󰃰 #[bg=colour13,fg=colour11] ${date}#[fg=colour7] ${time} "
+echo -n "$(color 15 13) 󰃰 $(color 11 13) ${date}$(color 7) ${time} "
