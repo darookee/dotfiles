@@ -190,6 +190,10 @@ alias la='ls --color=auto --time-style=long-iso -lah'
 alias ll='ls --time-style=long-iso -lh'
 alias mkdir='mkdir -pv'
 
+if (( $+commands[ssh] )); then
+    alias ssh='TERM=xterm-256color ssh'
+fi
+
 # grep
 grep-flag-available(){
 echo | grep $1 "" >/dev/null 2>&1
