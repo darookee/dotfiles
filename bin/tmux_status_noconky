@@ -1,5 +1,13 @@
 #!/bin/bash
 
+if [ -z "${TMPDIR}" ]; then
+    export TMPDIR="${PWD}/.tmp"
+fi
+
+if [ -z "${TERM}" ]; then
+    export TERM="xterm-256colors"
+fi
+
 function color() {
     fg=${1}
     bg=${2}
