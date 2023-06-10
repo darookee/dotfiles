@@ -45,14 +45,14 @@ return {
     warn_about_missing_glyphs = false,
     allow_square_glyphs_to_overflow_width = 'Always',
     font_size = 8,
-    font = wezterm.font('DaddyTimeMono', { weight = 'Regular', stretch = 'Normal' }),
+    font = wezterm.font('CascadiaCode', { weight = 'Regular', stretch = 'Normal' }),
     font_rules = {
         {
             intensity = 'Bold',
             italic = true,
             font = wezterm.font {
-                family = 'SourceCodeVF',
-                weight = 'Black',
+                family = 'CascadiaCode',
+                weight = 'Bold',
                 style = 'Italic',
             },
         },
@@ -60,8 +60,8 @@ return {
             intensity = 'Bold',
             italic = false,
             font = wezterm.font {
-                family = 'SourceCodeVF',
-                weight = 'Black',
+                family = 'CascadiaCode',
+                weight = 'Bold',
                 style = 'Normal',
             },
         },
@@ -69,7 +69,7 @@ return {
             intensity = 'Normal',
             italic = true,
             font = wezterm.font {
-                family = 'SourceCodeVF',
+                family = 'CascadiaCode',
                 weight = 'Regular',
                 style = 'Italic',
             },
