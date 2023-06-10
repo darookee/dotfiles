@@ -78,10 +78,10 @@ return {
 
     window_background_opacity = 0.8,
 
-	inactive_pane_hsb = {
-		brightness = 0.5,
+    inactive_pane_hsb = {
+        brightness = 0.5,
         saturation = 0.6,
-	},
+    },
 
     -- colors
     color_scheme = 'Kaolin Dark',
