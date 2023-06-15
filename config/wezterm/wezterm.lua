@@ -178,7 +178,7 @@ return {
         {
             key = 'l',
             mods = 'LEADER',
-            action = wezterm.action.ActivatePaneDirection 'Next',
+            action = wezterm.action.ActivatePaneDirection 'Right',
         },
         {
             key = 'k',
@@ -188,7 +188,7 @@ return {
         {
             key = 'j',
             mods = 'LEADER',
-            action = wezterm.action.ActivatePaneDirection 'Down',
+            action = wezterm.action.ActivatePaneDirection 'Next',
         },
         -- resize panes
         {
