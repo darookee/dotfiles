@@ -121,8 +121,14 @@ return {
     },
 
     -- mimic tmux keybindings using leader
-    leader = { key = 'k', mods = 'CTRL' },
+    leader = { key = 'b', mods = 'CTRL' },
     keys = {
+        -- send leader to tmux
+        {
+            key = 'b',
+            mods = 'LEADER|CTRL',
+            action = wezterm.action.SendKey { key = 'b', mods = 'CTRL' },
+        },
         -- select pane and tab
         {
             key = 's',
