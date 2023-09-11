@@ -11,6 +11,7 @@ fi
 export COMPOSER_HOME=${HOME}/.config/composer
 export GOPATH=${HOME}/.go
 export NPM_PACKAGES=${HOME}/.npm
+export NLTK_DATA=${HOME}/.nltk
 
 # PATH
 function path-prepend {
