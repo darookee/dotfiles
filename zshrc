@@ -1,3 +1,14 @@
+# benchmarking {{{
+PROFILE_STARTUP=false
+
+if [[ "$PROFILE_STARTUP" == true ]]; then
+  zmodload zsh/zprof
+  PS4=$'%D{%M%S%.} %N:%i> '
+  exec 3>&2 2>$HOME/startlog.$$
+  setopt xtrace prompt_subst
+fi
+# }}}
+
 # variables {{{
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:=~/.cache}
 export ZSH_HOME=${XDG_CACHE_HOME}/zsh
@@ -488,3 +499,10 @@ if [ -f ~/.fzf.zsh ]; then
         }
     fi
 fi
+
+# endbenchmarking {{{
+if [[ "$PROFILE_STARTUP" == true ]]; then
+  unsetopt xtrace
+  exec 2>&3 3>&-; zprof > ~/zshprofile$(date +'%s')
+fi
+# }}}
