@@ -48,7 +48,7 @@ function get_ip() {
         exit
     fi
 
-    echo -n "$(color 14)  $(color 15)"
+    echo -n "$(color 14)󰇧  $(color 15)"
 
     [[ -f $cachefile ]] || curl -s https://ifconfig.me > $cachefile
 
