@@ -2,9 +2,6 @@ HashKnownHosts yes
 
 Host *
     IdentitiesOnly yes
-    IdentityFile ~/.ssh/id_git
-    IdentityFile ~/.ssh/id_rsa
-    IdentityFile ~/.ssh/id_ed25519
     TCPKeepAlive yes
     ControlPath ~/.ssh/control/%C
     ControlPersist yes
