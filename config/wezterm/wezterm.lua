@@ -152,8 +152,17 @@ return {
         -- tabs
         {
             key = "c",
+            mods = "LEADER|SHIFT",
+            action = wezterm.action.SpawnCommandInNewWindow {
+                cwd = "~"
+            },
+        },
+        {
+            key = "c",
             mods = "LEADER",
-            action = wezterm.action.SpawnTab 'CurrentPaneDomain',
+            action = wezterm.action.SpawnCommandInNewTab {
+                cwd = "~"
+            },
         },
         -- splits
         {
