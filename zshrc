@@ -32,26 +32,27 @@ ZI[ZCOMPDUMP_PATH]=${ZSH_HOME}/zcompdump
 # zinit {{{
 if [[ ! -f ${ZI[BIN_DIR]}/zi.zsh ]]; then
     git clone https://github.com/z-shell/zi.git ${ZI[BIN_DIR]}
-    zcompile $ZPLG_HOME/bin/zinit.zsh
     zcompile "${ZI[BIN_DIR]}/zi.zsh"
 fi
 
 source "${ZI[BIN_DIR]}/zi.zsh"
 # }}}
 # plugins {{{
-zinit light zsh-users/zsh-autosuggestions
-zinit light zsh-users/zsh-history-substring-search
-zinit light zdharma/fast-syntax-highlighting
-zinit light zdharma/history-search-multi-word
-zinit ice lucid wait'0'
-zinit light joshskidmore/zsh-fzf-history-search
+zi ice wait lucid atload'!_zsh_autosuggest_start'
+zi light zsh-users/zsh-autosuggestions
+zi ice wait lucid
+zi light zsh-users/zsh-history-substring-search
+zi ice wait lucid
+zi light zdharma/fast-syntax-highlighting
+zi ice wait lucid
+zi light zdharma/history-search-multi-word
+zi ice wait lucid
+zi light joshskidmore/zsh-fzf-history-search
 
 if [[ ! -x $commands[starship] ]]; then
     zinit ice pick'async.zsh' src'pure.zsh'
     zinit light sindresorhus/pure
 fi
-
-zinit cdclear -q
 # }}}
 # keys {{{
 typeset -A key
@@ -422,7 +423,8 @@ _ark () {
 # }}}
 # init {{{
 autoload -Uz compinit
-compinit -d ${ZSH_HOME}/zcompdump-${ZSH_VERSION}
+compinit -d ${ZPLGM[ZCOMPDUMP_PATH]}
+zi cdreplay -q
 # use zoxide if z.sh does not exist
 if [[ ! -r "/usr/share/z/z.sh"  ]]; then
     if (( $+commands[zoxide] )); then
