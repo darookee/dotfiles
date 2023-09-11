@@ -334,10 +334,12 @@ if (( $+commands[nvim] )); then
     alias vim="nvim"
 fi
 
+if (( $+commands[dog] )); then # use dog instead of dig
+    alias dig="dog"
+fi
+
 # use z.sh if zoxide does not exist
-if (( $+commands[zoxide] )); then
-    # TODO: there is a better way...
-else
+if (( ! $+commands[zoxide] )); then
     [[ -r "/usr/share/z/z.sh"  ]] && source /usr/share/z/z.sh
 fi
 
