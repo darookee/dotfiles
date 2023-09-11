@@ -204,22 +204,38 @@ return {
         {
             key = 'H',
             mods = 'LEADER',
-            action = wezterm.action.AdjustPaneSize { 'Left', 5 },
+            action = wezterm.action.ActivateKeyTable {
+                name = 'resize_panes',
+                one_shot = false,
+                timeout_milliseconds = 750,
+            },
         },
         {
             key = 'J',
             mods = 'LEADER',
-            action = wezterm.action.AdjustPaneSize { 'Down', 5 },
+            action = wezterm.action.ActivateKeyTable {
+                name = 'resize_panes',
+                one_shot = false,
+                timeout_milliseconds = 750,
+            },
         },
         {
             key = 'K',
             mods = 'LEADER',
-            action = wezterm.action.AdjustPaneSize { 'Up', 5 }
+            action = wezterm.action.ActivateKeyTable {
+                name = 'resize_panes',
+                one_shot = false,
+                timeout_milliseconds = 750,
+            },
         },
         {
             key = 'L',
             mods = 'LEADER',
-            action = wezterm.action.AdjustPaneSize { 'Right', 5 },
+            action = wezterm.action.ActivateKeyTable {
+                name = 'resize_panes',
+                one_shot = false,
+                timeout_milliseconds = 750,
+            },
         },
         -- close panes
         {
@@ -252,6 +268,49 @@ return {
             key = ']',
             mods = 'LEADER',
             action = wezterm.action.RotatePanes 'Clockwise',
+        },
+    },
+    key_tables = {
+        resize_panes = {
+            -- resize panes
+            {
+                key = 'H',
+                mods = 'SHIFT',
+                action = wezterm.action.AdjustPaneSize { 'Left', 5 },
+            },
+            {
+                key = 'J',
+                mods = 'SHIFT',
+                action = wezterm.action.AdjustPaneSize { 'Down', 5 },
+            },
+            {
+                key = 'K',
+                mods = 'SHIFT',
+                action = wezterm.action.AdjustPaneSize { 'Up', 5 }
+            },
+            {
+                key = 'L',
+                mods = 'SHIFT',
+                action = wezterm.action.AdjustPaneSize { 'Right', 5 },
+            },
+        },
+        cycle_panes = {
+            {
+                key = 'h',
+                action = wezterm.action.ActivatePaneDirection 'Left',
+            },
+            {
+                key = 'l',
+                action = wezterm.action.ActivatePaneDirection 'Right',
+            },
+            {
+                key = 'k',
+                action = wezterm.action.ActivatePaneDirection 'Prev',
+            },
+            {
+                key = 'j',
+                action = wezterm.action.ActivatePaneDirection 'Next',
+            },
         },
     },
 }
