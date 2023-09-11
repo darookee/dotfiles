@@ -10,11 +10,12 @@ wezterm.on("update-right-status", function(window)
 
     window:set_right_status(stdout)
 
-	local leader = "   "
+    local leader = "   "
     if window:leader_is_active() then
         leader = " L "
     end
-	window:set_left_status(leader)
+
+    window:set_left_status(leader)
 end)
 
 -- maximize window on startup
