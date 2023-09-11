@@ -242,7 +242,7 @@ local Ruler = {
 
 local ScrollBar = {
     static = {
-        sbar = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' }
+        sbar = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' }
     },
     provider = function(self)
         local curr_line = api.nvim_win_get_cursor(0)[1]
@@ -385,8 +385,9 @@ local DefaultStatusline = {
     FileType, Space,
     FileNameBlock, Space,
     Ruler, Space, ScrollBar, Space,
+    Diagnostics, Space,
     Align,
-    LSPActive, Space, Diagnostics, Space,
+    LSPActive, Space,
     WorkDir, Space, Git
 }
 
