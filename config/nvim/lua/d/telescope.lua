@@ -41,6 +41,13 @@ D = {
                         ["<esc>"] = "close",
                     },
                 },
+                path_display = {
+                    shorten = {
+                        len = 8, exclude = {1, -1}
+                    },
+                    truncate = true,
+                },
+                dynamic_preview_title = true,
             },
             extensions = {
                 file_browser = {
