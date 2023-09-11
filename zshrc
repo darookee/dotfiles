@@ -23,12 +23,10 @@ HIST_STAMPS="yyyy-mm-dd"
 DIRSTACKSIZE=20
 
 typeset -A ZI
-ZI[BIN_DIR]="${ZSH_HOME}/.zi/bin"
-
-typeset -A ZPLGM
-ZPLG_HOME=${ZSH_HOME}/zinit
-ZPLGM[HOME_DIR]=$ZPLG_HOME
-ZPLGM[ZCOMPDUMP_PATH]=${ZSH_HOME}/zcompdump
+ZI[HOME_DIR]=${ZSH_HOME}/.zi/
+ZI[BIN_DIR]="${ZI[HOME_DIR]}bin"
+ZI[HOME_DIR]=$ZPLG_HOME
+ZI[ZCOMPDUMP_PATH]=${ZSH_HOME}/zcompdump
 # }}}
 
 # zinit {{{
