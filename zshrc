@@ -316,10 +316,17 @@ if (( $+commands[neomutt] )); then # use neomutt instead of mutt
 fi
 
 if (( $+commands[exa] )); then # use exa instead of ls
-    alias ls="exa --git"
-    alias la="exa -laag --git"
-    alias ll="exa -lg --git"
-    alias lt="exa -T --git"
+    alias ls="exa --git --icons"
+    alias la="exa -laag --git --icons"
+    alias ll="exa -lg --git --icons"
+    alias lt="exa -T --git --icons"
+fi
+
+if (( $+commands[eza] )); then # use eza instead of ls or exa
+    alias ls="eza --git --icons"
+    alias la="eza -laag --git --icons"
+    alias ll="eza -lg --git --icons"
+    alias lt="eza -T --git --icons"
 fi
 
 if (( $+commands[nvim] )); then
