@@ -1,9 +1,15 @@
 -- helper functions
+local nullDiagnostics = require 'null-ls.builtins'.diagnostics
+local nullFormatting = require 'null-ls.builtins'.formatting
+local nullUtils = require 'null-ls.utils'
+
 local nulllscwd = function(params)
     return vim.loop.fs_stat(params.root .. "/app") and params.root .. "/app"
 end
 
-local nulllscondition = function(utils, files)
+local nulllscondition = function(files)
+    local utils = nullUtils.make_conditional_utils()
+
     for _, file in ipairs(files) do
         if utils.root_has_file { file } or utils.root_has_file { 'app/' .. file } then
             return true
@@ -13,8 +19,20 @@ local nulllscondition = function(utils, files)
     return false
 end
 
-local nullDiagnostics = require 'null-ls.builtins'.diagnostics
-local nullFormatting = require 'null-ls.builtins'.formatting
+local nulllsfileroot = function(files)
+    local utils = nullUtils.make_conditional_utils()
+
+    for _, file in ipairs(files) do
+        if utils.root_has_file { file } then
+            return { nullUtils.get_root() .. '/' .. file }
+        end
+        if utils.root_has_file { 'app/' .. file } then
+            return { nullUtils.get_root() .. '/app/' .. file }
+        end
+    end
+
+    return false
+end
 
 -- config
 local config = {
@@ -40,24 +58,26 @@ local config = {
             'openscad_ls',
             'gopls',
             'jdtls',
+            'tflint',
+            'terraformls'
         },
         disableNullls = false,
         nulllsServers = {
             -- diagnostics
             nullDiagnostics.hadolint,
             nullDiagnostics.phpcs.with {
-                condition = function(utils)
-                    return nulllscondition(utils, { "phpcs.xml.dist", "phpcs.xml", ".phpcs.xml.dist", ".phpcs.xml" })
+                condition = function()
+                    return nulllscondition { "phpcs.xml.dist", "phpcs.xml", ".phpcs.xml.dist", ".phpcs.xml" }
                 end,
                 prefer_local = "vendor/bin",
                 cwd = nulllscwd,
             },
             nullDiagnostics.phpmd.with {
-                condition = function(utils)
-                    return nulllscondition(utils, { "phpmd.xml" })
+                condition = function()
+                    return nulllscondition { "phpmd.xml", "phpmd.dist.xml" }
                 end,
-                extra_args = function(params)
-                    return { params.cwd .. "/phpmd.xml" }
+                extra_args = function()
+                    return nulllsfileroot { "phpmd.xml", "phpmd.dist.xml" }
                 end,
                 prefer_local = "vendor/bin",
                 cwd = nulllscwd,
@@ -75,8 +95,8 @@ local config = {
             nullFormatting.fixjson,
             nullFormatting.jq,
             nullFormatting.phpcbf.with {
-                condition = function(utils)
-                    return nulllscondition(utils, { "phpcs.xml.dist", "phpcs.xml", ".phpcs.xml.dist", ".phpcs.xml" })
+                condition = function()
+                    return nulllscondition { "phpcs.xml.dist", "phpcs.xml", ".phpcs.xml.dist", ".phpcs.xml" }
                 end,
                 prefer_local = "vendor/bin",
                 cwd = nulllscwd,
