@@ -324,10 +324,11 @@ if (( $+commands[exa] )); then # use exa instead of ls
 fi
 
 if (( $+commands[eza] )); then # use eza instead of ls or exa
-    alias ls="eza --git --icons"
-    alias la="eza -laag --git --icons"
-    alias ll="eza -lg --git --icons"
-    alias lt="eza -T --git --icons"
+    alias ls="eza --icons -la --no-user --no-time --no-permissions --no-filesize"
+    alias lg="eza --icons -la --no-user --no-time --no-permissions --no-filesize --git"
+    alias la="eza --icons -laag --git"
+    alias ll="eza --icons -lag --git"
+    alias lt="eza --icons -T"
 fi
 
 if (( $+commands[nvim] )); then
