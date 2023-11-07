@@ -349,6 +349,49 @@ if (( ! $+commands[zoxide] )); then
     [[ -r "/usr/share/z/z.sh"  ]] && source /usr/share/z/z.sh
 fi
 
+if [ -f ~/.fzf.zsh ]; then
+    source ~/.fzf.zsh
+
+    export FZF_DEFAULT_OPTS="
+    --layout=reverse
+    --info=inline
+    --height=80%
+    --multi
+    --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'
+    --color='hl:148,hl+:154,pointer:032,marker:010,bg+:237,gutter:008'
+    --bind '?:toggle-preview'
+    --bind 'ctrl-a:select-all'
+    "
+
+    if (( $+commands[ag] )); then
+        export FZF_DEFAULT_COMMAND="ag -g ''"
+    fi
+
+    if (( $+commands[sift] )); then
+        export FZF_DEFAULT_COMMAND="sift --targets"
+        _fzf_compgen_path() {
+            sift --targets . "$1"
+        }
+    fi
+
+    if (( $+commands[rg] )); then
+        export FZF_DEFAULT_COMMAND="rg --files"
+        _fzf_compgen_path() {
+            rg --files . "$1"
+        }
+    fi
+
+    if (( $+commands[fd] )); then
+        export FZF_DEFAULT_COMMAND="fd --hidden --follow --exclude '.git' --exclude 'node_modules'"
+        _fzf_compgen_path() {
+            fd . "$1"
+        }
+        _fzf_compgen_dir() {
+            fd --type d . "$1"
+        }
+    fi
+fi
+
 # }}}
 # functions {{{
 # ark - wrapper for multiple archiving tools
@@ -439,7 +482,6 @@ _ark () {
 # init {{{
 autoload -Uz compinit
 compinit -d ${ZPLGM[ZCOMPDUMP_PATH]}
-zi cdreplay -q
 # use zoxide if z.sh does not exist
 if [[ ! -r "/usr/share/z/z.sh"  ]]; then
     if (( $+commands[zoxide] )); then
@@ -471,49 +513,6 @@ fi
 # }}}
 #
 # vim:fdm=marker ft=zsh
-
-if [ -f ~/.fzf.zsh ]; then
-    source ~/.fzf.zsh
-
-    export FZF_DEFAULT_OPTS="
-    --layout=reverse
-    --info=inline
-    --height=80%
-    --multi
-    --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'
-    --color='hl:148,hl+:154,pointer:032,marker:010,bg+:237,gutter:008'
-    --bind '?:toggle-preview'
-    --bind 'ctrl-a:select-all'
-    "
-
-    if (( $+commands[ag] )); then
-        export FZF_DEFAULT_COMMAND="ag -g ''"
-    fi
-
-    if (( $+commands[sift] )); then
-        export FZF_DEFAULT_COMMAND="sift --targets"
-        _fzf_compgen_path() {
-            sift --targets . "$1"
-        }
-    fi
-
-    if (( $+commands[rg] )); then
-        export FZF_DEFAULT_COMMAND="rg --files"
-        _fzf_compgen_path() {
-            rg --files . "$1"
-        }
-    fi
-
-    if (( $+commands[fd] )); then
-        export FZF_DEFAULT_COMMAND="fd --hidden --follow --exclude '.git' --exclude 'node_modules'"
-        _fzf_compgen_path() {
-            fd . "$1"
-        }
-        _fzf_compgen_dir() {
-            fd --type d . "$1"
-        }
-    fi
-fi
 
 # endbenchmarking {{{
 if [[ "$PROFILE_STARTUP" == true ]]; then
