@@ -15,4 +15,4 @@ configuration {
     terminal:"kitty";
 }
 
-@theme "~/.local/share/rofi/themes/blue.rasi"
+@theme "/usr/share/rofi/themes/android_notification.rasi"
