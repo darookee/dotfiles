@@ -340,6 +340,10 @@ if (( $+commands[dog] )); then # use dog instead of dig
     alias dig="dog"
 fi
 
+if (( $+commands[xclip] )); then # use dog instead of dig
+    alias clip="xclip -sel clip"
+fi
+
 # use z.sh if zoxide does not exist
 if (( ! $+commands[zoxide] )); then
     [[ -r "/usr/share/z/z.sh"  ]] && source /usr/share/z/z.sh
