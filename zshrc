@@ -278,6 +278,7 @@ if (( $+commands[git] )); then
 
     # push
     alias gp='git push'
+    alias gpo='git push -o ci.skip'
 
     # remote
     alias gR='git remote'
